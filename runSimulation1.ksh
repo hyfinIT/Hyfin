@@ -1,0 +1,22 @@
+      ./runHyfinIntroductionToMarkets.ksh 9 64 REWOUND 
+        ./runHyfinIntroductionToMarkets.ksh 12 128 REWOUND 
+          ./runHyfinIntroductionToMarkets.ksh 14 51 COMPLETED 
+	    ./runHyfinIntroductionToMarkets.ksh 29 51 FASTFORWARD 
+	      ./runHyfinIntroductionToMarkets.ksh 9 64 REWOUND 
+		    ./runHyfinIntroductionToMarkets.ksh 29 51 FASTFORWARD 
+		      ./runHyfinIntroductionToMarkets.ksh 14 51 COMPLETED 
+		          ./runIntroDuctionToMarketsVideo.ksh 1 38 44 COMPLETED
+			    ./runIntroDuctionToMarketsVideo.ksh  38 44 COMPLETED
+			      ./runIntroDuctionToMarketsVideo.ksh  142 120 REWOUND
+			          ./runIntroductionToMarketsVideo.ksh  142 120 REWOUND
+				    ./runIntroductionToMarketsVideo.ksh  6 60 COMPLETYED 
+					      ./runIntroductionToMarketsVideo.ksh  1245 60 COMPLETYED 
+							          ./runIntroductionToClickThrough.ksh 29 1 CTINPROGRESS
+								      ./runIntroductionToClickThrough.ksh 29 1 CTINPROGRESS
+								        ./runIntroductionToClickThrough.ksh 29 2 CTINPROGRESS
+								          ./runIntroductionToClickThrough.ksh 29 3 CTINPROGRESS
+									        ./runIntroductionToClickThrough.ksh 29 4 CTINPROGRESS
+									         ./runIntroductionToClickThrough.ksh 29 5 CTINPROGRESS
+										    ./runIntroductionToClickThrough.ksh 29 4 CTINPROGRESS
+										      ./runIntroductionToClickThrough.ksh 29 5 CTINPROGRESS
+										        ./runIntroductionToClickThrough.ksh 29 6 COMPLETE 
