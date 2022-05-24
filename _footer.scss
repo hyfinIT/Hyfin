@@ -1,0 +1,42 @@
+/* ==========================================================================
+   #FOOTER
+   ========================================================================== */
+.footer {
+   background: #1b1b3c url(images/bg-gradient.svg) top center no-repeat;
+   color: #fff;
+   font-size: 14px;
+   line-height: 24px;
+   padding: 31px 0px 28px 0px;
+
+   @media (max-width: 767px) {
+      padding: 20px 0px;
+   }
+}
+
+.footer__d-flex {
+
+   @media (max-width: 767px) {
+      flex-wrap: wrap;
+   }
+}
+
+.footer__social {
+   margin: 8px 0px 0px auto;
+   list-style: none;
+   padding: 0px;
+   display: flex;
+
+   @media (max-width: 767px) {
+      margin: 0px 0px 12px 0px;
+      width: 100%;
+      order: -1;
+   }
+
+   li {
+      margin-left: 15px;
+
+      @media (max-width: 767px) {
+         margin: 0px 15px 0px 0px;
+      }
+   }
+}
