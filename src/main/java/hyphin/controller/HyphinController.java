@@ -47,7 +47,7 @@ public class HyphinController {
 
     @PostMapping("/addUsers")
     public void addUsers() {
-        User user = new User(1, "MVP");
+        //User user = new User(1, "MVP");
         //userRepo.save(user);
     }
 

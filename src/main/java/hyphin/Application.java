@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import java.io.FileNotFoundException;
 
 @SpringBootApplication
@@ -25,7 +24,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception
     {
-        User user = new User(1, "MVP");
+        User user = new User(1, "MVP","Abhi","Sats","abhisanj@gmail.com");
         userRepo.save(user);
     }
 
