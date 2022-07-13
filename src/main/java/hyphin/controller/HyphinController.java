@@ -2,8 +2,8 @@ package hyphin.controller;
 
 import hyphin.model.User;
 import hyphin.repository.UserRepo;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
@@ -28,13 +28,13 @@ public class HyphinController {
     @Autowired
     UserRepo userRepo;
 
-    @Value("jdbcUrl")
+    @Value("spring.datasource.url")
     private String jdbcUrl;
 
-    @Value("username")
+    @Value("spring.datasource.username")
     private String username;
 
-    @Value("password")
+    @Value("spring.datasource.password")
     private String password;
 
     public RestTemplate getRestTemplate() {
@@ -48,7 +48,7 @@ public class HyphinController {
     @PostMapping("/addUsers")
     public void addUsers() {
         User user = new User(1, "MVP");
-        userRepo.save(user);
+        //userRepo.save(user);
     }
 
      private HttpHeaders setHeaders() throws IOException {
