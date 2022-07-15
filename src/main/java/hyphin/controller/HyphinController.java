@@ -47,8 +47,8 @@ public class HyphinController {
 
     @PostMapping("/addUsers")
     public void addUsers() {
-        //User user = new User(1, "MVP");
-        //userRepo.save(user);
+        User user = new User(1,"MVP","Abhi","Sats","abhisanj@gmail.com");
+        userRepo.save(user);
     }
 
      private HttpHeaders setHeaders() throws IOException {

@@ -8,16 +8,14 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "UIDTABLE")
+@Table(name = "UIDTABLE", schema="PUBLIC", catalog = "HYFIN")
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    int id;
+    int uid;
     String clientType;
     String firstName;
     String surName;
     String email;
-
 }
