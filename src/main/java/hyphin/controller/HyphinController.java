@@ -3,6 +3,7 @@ package hyphin.controller;
 import hyphin.model.Login;
 import hyphin.model.User;
 import hyphin.repository.UserRepo;
+import hyphin.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,9 @@ public class HyphinController {
 
     @Autowired
     UserRepo userRepo;
+
+    @Autowired
+    UserService userService;
 
     @Value("spring.datasource.url")
     private String jdbcUrl;
@@ -83,20 +87,33 @@ public class HyphinController {
     }
 
     @PostMapping("/Login")
-    public void loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult) {
+    public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
-
+        User user = userService.findByUserNamePassword(login.getEmail(),login.getPassword());
+        if (user != null) {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("1");
+            return mav;
+       }
+         else {
+            ModelAndView mav = new ModelAndView();
+            mav.setViewName("LoginFailure");
+            return mav;
+        }
     }
 
     @PostMapping("/Register")
-    public void registerUsers(@ModelAttribute("register") User user, BindingResult bindingResult)
+    public ModelAndView registerUsers(@ModelAttribute("register") User user, BindingResult bindingResult)
     {
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
        userRepo.save(user);
+       ModelAndView mav = new ModelAndView();
+       mav.setViewName("start");
+       return mav;
     }
 }
