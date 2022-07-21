@@ -48,6 +48,12 @@ public class HyphinController {
         return new User();
     }
 
+    @ModelAttribute(value = "login")
+    public Login newLogin()
+    {
+        return new Login();
+    }
+
     @GetMapping("/")
     public ModelAndView viewHome() {
         ModelAndView mav = new ModelAndView();
