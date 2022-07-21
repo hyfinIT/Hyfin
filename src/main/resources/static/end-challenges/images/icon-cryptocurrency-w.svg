@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 26.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 66 64" style="enable-background:new 0 0 66 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#1B1B3C;stroke-width:1.535;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#FFFFFF;stroke-width:1.535;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<circle class="st0" cx="32.9" cy="59.1" r="2.4"/>
+<circle class="st0" cx="48.3" cy="56.8" r="2.4"/>
+<circle class="st0" cx="17.6" cy="56.8" r="2.4"/>
+<circle class="st0" cx="60.1" cy="32.1" r="2.4"/>
+<circle class="st0" cx="57.8" cy="47.4" r="2.4"/>
+<circle class="st0" cx="57.8" cy="16.7" r="2.4"/>
+<polyline class="st0" points="57.8,45 57.8,40.3 48.3,40.3 "/>
+<circle class="st0" cx="5.9" cy="32.1" r="2.4"/>
+<circle class="st0" cx="8.2" cy="47.4" r="2.4"/>
+<circle class="st0" cx="8.2" cy="16.7" r="2.4"/>
+<polyline class="st0" points="8.2,19.1 8.2,23.8 17.6,23.8 "/>
+<path class="st0" d="M37.7,47.4h7.1c2,0,3.5-1.5,3.5-3.5V32.2h9.5"/>
+<polyline class="st0" points="45.9,56.8 41.2,56.8 41.2,47.4 "/>
+<path class="st0" d="M28.2,16.7h-7c-2,0-3.5,1.5-3.5,3.5v11.7H8.2"/>
+<polyline class="st0" points="57.8,19.1 57.8,23.8 48.3,23.8 "/>
+<path class="st0" d="M17.6,36.8v7.1c0,2,1.5,3.5,3.5,3.5h11.7v9.5"/>
+<polyline class="st0" points="8.2,45 8.2,40.3 17.6,40.3 "/>
+<polyline class="st0" points="20,56.8 24.7,56.8 24.7,47.4 "/>
+<circle class="st0" cx="32.9" cy="4.9" r="2.4"/>
+<circle class="st0" cx="17.6" cy="7.2" r="2.4"/>
+<circle class="st0" cx="48.3" cy="7.2" r="2.4"/>
+<polyline class="st0" points="20,7.2 24.7,7.2 24.7,16.7 "/>
+<path class="st0" d="M48.3,27.3v-7.1c0-2-1.5-3.5-3.5-3.5H33.1V7.2"/>
+<polyline class="st0" points="45.9,7.2 41.2,7.2 41.2,16.7 "/>
+<path class="st1" d="M29.4,32.1h5.9c1.3,0,2.4,1,2.4,2.4c0,1.3-1,2.4-2.4,2.4h-7.1"/>
+<path class="st1" d="M28.2,27.3h7.1c1.3,0,2.4,1,2.4,2.4s-1,2.4-2.4,2.4"/>
+<line class="st1" x1="32.9" y1="23.8" x2="32.9" y2="27.3"/>
+<line class="st1" x1="32.9" y1="36.8" x2="32.9" y2="40.3"/>
+<line class="st1" x1="29.4" y1="27.3" x2="29.4" y2="36.8"/>
+</svg>

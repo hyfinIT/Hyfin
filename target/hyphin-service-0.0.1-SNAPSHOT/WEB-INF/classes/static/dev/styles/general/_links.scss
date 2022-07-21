@@ -1,0 +1,14 @@
+/* ==========================================================================
+   #LINKS
+   ========================================================================== */
+a {
+  color: #1B1B3E;
+  text-decoration: none;
+  transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+
+  &:hover {
+    color: #1B1B3E;
+  }
+}

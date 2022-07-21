@@ -1,0 +1,92 @@
+/* ==========================================================================
+   #HEADING
+   ========================================================================== */
+h1, 
+h2, 
+h3, 
+h4, 
+h5, 
+h6 {
+  font-size: 30px;
+  line-height: 1.11;
+  font-weight: bold;
+  padding: 0px;
+  margin: 0px 0px 20px 0px;
+  letter-spacing: -3px;
+
+  .light {
+    font-weight: 300;
+  }
+}
+
+h1 {
+  font-size: 80px;
+
+  @media (max-width: 1199px) {
+    font-size: 65px;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 42px;
+  }
+}
+
+h2 {
+  font-size: 80px;
+
+  @media (max-width: 1199px) {
+    font-size: 65px;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 42px;
+  }
+}
+
+h3 {
+  font-size: 80px;
+
+  @media (max-width: 1199px) {
+    font-size: 65px;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 42px;
+  }
+}
+
+h4 {
+  font-size: 60px;
+
+  @media (max-width: 1199px) {
+    font-size: 48px;
+  }
+
+  @media (max-width: 991px) {
+    font-size: 36px;
+  }
+
+  @media (max-width: 767px) {
+    font-size: 32px;
+  }
+}
+
+h5 {
+  font-size: 30px;
+}
+
+h6 {
+  font-size: 26px;
+}

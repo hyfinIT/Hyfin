@@ -1,5 +1,6 @@
 package hyphin.controller;
 
+import hyphin.model.Login;
 import hyphin.model.User;
 import hyphin.repository.UserRepo;
 import org.apache.logging.log4j.LogManager;
@@ -8,9 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.http.converter.FormHttpMessageConverter;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.*;
 
@@ -37,31 +42,55 @@ public class HyphinController {
     @Value("spring.datasource.password")
     private String password;
 
-    public RestTemplate getRestTemplate() {
-        restTemplate = new RestTemplate();
-        restTemplate.getMessageConverters().add(new FormHttpMessageConverter());
-        FormHttpMessageConverter converter = new FormHttpMessageConverter();
-        restTemplate.getMessageConverters().add(converter);
-        return restTemplate;
+    @ModelAttribute(value = "register")
+    public User newUser()
+    {
+        return new User();
     }
 
-    @PostMapping("/addUsers")
-    public void addUsers() {
-        User user = new User(1,"MVP","Abhi","Sats","abhisanj@gmail.com");
-        userRepo.save(user);
+    @GetMapping("/")
+    public ModelAndView viewHome() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("start");
+        return mav;
     }
 
-     private HttpHeaders setHeaders() throws IOException {
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        //if(getOauth() != null) {
-          //  headers.set("authorization", "Bearer " + getOauth().substring(1, getOauth().length() - 1));
-        //}
-        return headers;
+    @GetMapping("/faqs")
+    public ModelAndView viewFaqs() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("faqs");
+        return mav;
     }
 
+    @GetMapping("/1")
+    public ModelAndView viewCourses() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("1");
+        return mav;
+    }
 
+    @GetMapping("/glossary")
+    public ModelAndView viewGlossary() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("glossary");
+        return mav;
+    }
 
+    @PostMapping("/Login")
+    public void loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult) {
 
+        if(bindingResult.hasErrors()){
+            System.out.println("There was a error "+bindingResult);
+        }
+
+    }
+
+    @PostMapping("/Register")
+    public void registerUsers(@ModelAttribute("register") User user, BindingResult bindingResult)
+    {
+        if(bindingResult.hasErrors()){
+            System.out.println("There was a error "+bindingResult);
+        }
+       userRepo.save(user);
+    }
 }

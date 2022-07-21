@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Template 10</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <!-- Link Main CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+</head>
+    <body class="hf-bg-solid">
+    <div class="hf-wrap">
+        <!-- Header Start -->
+        <header class="hf-header">
+            <div class="hf-logo-wrap">
+                <div class="hf-logo">
+                    <img src="./assets/images/hyfin-logo.svg" alt="">
+                </div>
+                <div class="hf-current-screen">
+                    <span class="hf-current-screen-title">End Challenge</span>
+                </div>
+            </div>
+            <div class="hf-main-menu-wrap">
+                <ul class="hf-main-menu">
+                    <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="../1.html">Courses</a></li>
+                    <li class="hf-menu-item hf-menu-item-help"><a href="../faqs.html">FAQs</a></li>
+                    <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
+                </ul>
+                <div class="hf-header-icons">
+                    <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
+                    <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                    <div class="hf-hicon-menu">
+                        <div class="hf-menu-btn" id="hf-menu-trigger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+    <main class="hf-main">
+        <div class="hf-main-inner">
+            <!-- Carousel Wrap Start -->
+            <div class="hf-carousel-wrap summary">
+                <!-- Carousel Start -->
+                <div class="hf-carousel">
+                    <div class="summary__min-height">
+                        <div class="summary__content">
+                            <div class="summary__title">Summary</div>
+                            <div class="summary__image">
+                                <img src="assets/images/summary-image.svg" alt="Summary" />
+                            </div>
+                            <div class="summary__description">You failed to set any risk management and as a result, you lost a chunk of margin.  Try again?</div>
+                        </div>
+                    </div>
+                    <div class="your-account__action">
+                        <a href="#"><span>Back to the course</span></a>
+                        <a href="#"><span>Trade again</span></a>
+                    </div>
+                </div>
+                <!-- Carousel End -->
+                <!-- Carousel frames start -->
+                <span class="hf-carousel-frame-tl"></span>
+                <span class="hf-carousel-frame-tr"></span>
+                <span class="hf-carousel-frame-bl"></span>
+                <span class="hf-carousel-frame-br"></span>
+                <!-- Carousel frames end -->
+            </div>
+            <!-- Carousel Wrap End -->
+        </div>
+    </main>
+    <!-- Footer Start -->
+    <footer class="hf-footer">
+        <div class="hf-footer-inner">
+            <p class="hp-copy">Copyright © 2022 Hyfin. All Rights Reserved</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Left Panel Start -->
+    <div class="hf-left-menu-wrap">
+        <button class="hf-lm-close">
+            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+        </button>
+    </div>
+    <!-- Left Panel End -->
+</div>
+<script src="./assets/lib/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/script.js?ver=1.1"></script>
+<script src="./assets/js/custom.js?ver=1.1"></script>
+<!-- Swiper JS -->
+<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".swiper", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        autoHeight: true,
+        allowTouchMove: false,
+        keyboard: {
+            enabled: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".hf-carousel-next",
+            prevEl: ".hf-carousel-prev",
+        },
+    });
+</script>
+</body>
+</html>
