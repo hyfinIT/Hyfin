@@ -19,7 +19,9 @@ public class CustomUserRepository implements UserRepository {
     private UserRepository userRepository;
 
     public User save(User user) {
-        user.setUid(1);
+
+        //TO-DO - get it from a sequence.
+        user.setUid((int) Math.random());
         userRepository.save(user);
         return user;
     }
