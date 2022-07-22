@@ -1,18 +1,24 @@
 package hyphin.service;
 
 import hyphin.model.User;
-import hyphin.repository.UserRepo;
+import hyphin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService{
     @Autowired
-    private UserRepo userRepo;
+    private UserRepository userRepository;
 
-    public User findByUserNamePassword(String userName, String password) {
-        User user = userRepo.findByUserNamePassword(userName,password);
-        return user;
+    public User findByUserNameAndPassword(String userName, String password) {
+        List<User> users = (List<User>) userRepository.findAll();
+        for (User user : users) {
+            if(user != null && user.getEmail() != null && user.getEmail().equalsIgnoreCase(userName) && user.getPassword() != null && user.getPassword().equals(password))
+                return user;
+        }
+        return null;
     }
 
 }

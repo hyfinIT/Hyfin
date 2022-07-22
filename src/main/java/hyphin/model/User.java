@@ -14,6 +14,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.TABLE)
     int uid;
     String clientType;
     String firstName;

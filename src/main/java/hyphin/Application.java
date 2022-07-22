@@ -1,7 +1,7 @@
 package hyphin;
 
 import hyphin.model.User;
-import hyphin.repository.UserRepo;
+import hyphin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -11,10 +11,10 @@ import java.io.FileNotFoundException;
 @SpringBootApplication
 public class Application implements CommandLineRunner {
     @Autowired
-    UserRepo userRepo;
+    UserRepository userRepository;
 
-    public Application(UserRepo userRepo) {
-        this.userRepo = userRepo;
+    public Application(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     public static void main(String[] args) throws FileNotFoundException {
@@ -25,7 +25,7 @@ public class Application implements CommandLineRunner {
     public void run(String... args) throws Exception
     {
         User user = new User(1,"MVP","Abhi","Sats","abhisanj@gmail.com","abc");
-        userRepo.save(user);
+        userRepository.save(user);
     }
 
 

@@ -2,23 +2,16 @@ package hyphin.controller;
 
 import hyphin.model.Login;
 import hyphin.model.User;
-import hyphin.repository.UserRepo;
+import hyphin.repository.CustomUserRepository;
+import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.*;
-import org.springframework.http.converter.FormHttpMessageConverter;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
-import java.util.*;
 
 
 /**
@@ -32,19 +25,10 @@ public class HyphinController {
     private RestTemplate restTemplate;
 
     @Autowired
-    UserRepo userRepo;
+    CustomUserRepository customUserRepository;
 
     @Autowired
     UserService userService;
-
-    @Value("spring.datasource.url")
-    private String jdbcUrl;
-
-    @Value("spring.datasource.username")
-    private String username;
-
-    @Value("spring.datasource.password")
-    private String password;
 
     @ModelAttribute(value = "register")
     public User newUser()
@@ -86,13 +70,15 @@ public class HyphinController {
         return mav;
     }
 
+
+
     @PostMapping("/Login")
     public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
-        User user = userService.findByUserNamePassword(login.getEmail(),login.getPassword());
+        User user = userService.findByUserNameAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
             ModelAndView mav = new ModelAndView();
             mav.setViewName("1");
@@ -111,7 +97,7 @@ public class HyphinController {
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
-       userRepo.save(user);
+        customUserRepository.save(user);
        ModelAndView mav = new ModelAndView();
        mav.setViewName("start");
        return mav;
