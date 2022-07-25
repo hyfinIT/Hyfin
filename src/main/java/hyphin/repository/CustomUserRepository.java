@@ -1,6 +1,7 @@
 package hyphin.repository;
 
 import hyphin.model.User;
+import hyphin.model.UserAudit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
@@ -21,10 +22,24 @@ public class CustomUserRepository implements UserRepository {
     public User save(User user) {
 
         //TO-DO - get it from a sequence.
-        user.setUid((int) Math.random());
+        if(userRepository.findMax() == 0) {
+            user.setUid(1);
+        }
+        else {
+            user.setUid(userRepository.findMax() +1);
+        }
         userRepository.save(user);
         return user;
     }
+
+    public UserAudit save(UserAudit userAudit) {
+
+        //TO-DO - get it from a sequence.
+        userRepository.save(userAudit);
+        return userAudit;
+   }
+
+
 
     // Delegate other methods here ...
 
@@ -50,6 +65,11 @@ public class CustomUserRepository implements UserRepository {
 
     @Override
     public long count() {
+        return 0;
+    }
+
+    @Override
+    public int findMax() {
         return 0;
     }
 

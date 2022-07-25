@@ -2,7 +2,9 @@ package hyphin.controller;
 
 import hyphin.model.Login;
 import hyphin.model.User;
+import hyphin.model.UserAudit;
 import hyphin.repository.CustomUserRepository;
+import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,6 +13,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 
 /**
@@ -23,6 +28,9 @@ public class LoginController {
 
     @Autowired
     CustomUserRepository customUserRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     UserService userService;
@@ -39,15 +47,22 @@ public class LoginController {
         return new Login();
     }
 
+    @ModelAttribute(value = "video")
+    public Login newVideo()
+    {
+        return new Login();
+    }
+
 
     @PostMapping("/Login")
-    public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult) {
+    public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult,HttpSession session) {
 
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
         User user = userService.findByUserNameAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
+            session.setAttribute("User-entity",user);
             ModelAndView mav = new ModelAndView();
             mav.setViewName("1");
             return mav;
@@ -57,6 +72,31 @@ public class LoginController {
             mav.setViewName("LoginFailure");
             return mav;
         }
+    }
+
+    @PostMapping("/video")
+    public ModelAndView auditUsers(@ModelAttribute("video") Login login, BindingResult bindingResult,HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setUid(user.getUid());
+        userAudit.setActivityType("CLICK");
+        userAudit.setMediaType("VIDEO");
+        userAudit.setDateTime(LocalDate.now().toString());
+        userAudit.setGlossaryTerm(null);
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAudit.setElementId(null);
+        userAudit.setElementPosition(null);
+        userAudit.setElementStatus(null);
+        userAudit.setLearningJourney(null);
+        userAudit.setLearningJourneyId(null);
+        userAudit.setModuleId(null);
+        userAudit.setModuleProgressPosition(null);
+        userAudit.setModule(null);
+        userRepository.save(userAudit);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("9");
+        return mav;
     }
 
     @PostMapping("/Register")
