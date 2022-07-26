@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * Created by Abhishek Satsangi on 27/06/2022
  */
@@ -81,7 +83,7 @@ public class LoginController {
         userAudit.setUid(user.getUid());
         userAudit.setActivityType("CLICK");
         userAudit.setMediaType("VIDEO");
-        userAudit.setDateTime(jdf.format(LocalDate.now()));
+        userAudit.setDateTime(jdf.format(new Date()));
         userAudit.setGlossaryTerm(null);
         userAudit.setDifficulty(null);
         userAudit.setCompletionTime(null);
