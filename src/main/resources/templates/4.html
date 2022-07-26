@@ -56,26 +56,27 @@
                         <a class="hf-bc-item hf-bc-item-current" href="#">FX CFD</a>
                     </div>
                     <h1>FX CFD</h1>
-                    <form class="hf-form hf-video-form" name="video-form" id="video-form" role="form" th:action="@{/Video}" method="POST">
+
                     <ul class="hf-tp4-nav hf-accordion">
                         <li>
                             <a href="" class="hf-accordion-title">
                                 <span class="hf-tp4-nav-text">Market</span>
                             </a>
-
+                            <form class="hf-form hf-video-form" name="video-form" id="video-form" role="form" th:action="@{/Video}" method="POST">
                             <div class="hf-accordion-panel">
                             <div class="hf-icons-group">
-                                <a class="hf-bb-icon hf-green" href="9.html">
-                                    <span class="hf-icon hf-icon-video"> onclick="video-form.submit()</span>
+                                <a class="hf-bb-icon hf-green">
+                                    <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
                                 </a>
                                 <a class="hf-bb-icon hf-orange" href="5_8.html">
-                                    <span class="hf-icon hf-icon-cursor"></span>
+                                    <div class="hf-icon hf-icon-cursor"></div>
                                 </a>
                                 <a class="hf-bb-icon hf-grey" href="10.html">
-                                    <span class="hf-icon hf-icon-game-play"></span>
+                                    <div class="hf-icon hf-icon-game-play"></div>
                                 </a>
                             </div>
                             </div>
+                            </form>
                         </li>
                         <li class="hf-inactive">
                             <a href="" class="hf-accordion-title">
@@ -101,8 +102,7 @@
                             </a>
                         </li>
                     </ul>
-                    </form>
-                </div>
+                 </div>
             </div>
         </div>
     </main>

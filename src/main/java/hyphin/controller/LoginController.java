@@ -15,9 +15,8 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-
-
 /**
  * Created by Abhishek Satsangi on 27/06/2022
  */
@@ -74,14 +73,15 @@ public class LoginController {
         }
     }
 
-    @PostMapping("/video")
-    public ModelAndView auditUsers(@ModelAttribute("video") Login login, BindingResult bindingResult,HttpSession session) {
+    @PostMapping("/Video")
+    public ModelAndView auditUsers(HttpSession session) {
+        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setUid(user.getUid());
         userAudit.setActivityType("CLICK");
         userAudit.setMediaType("VIDEO");
-        userAudit.setDateTime(LocalDate.now().toString());
+        userAudit.setDateTime(jdf.format(LocalDate.now()));
         userAudit.setGlossaryTerm(null);
         userAudit.setDifficulty(null);
         userAudit.setCompletionTime(null);
