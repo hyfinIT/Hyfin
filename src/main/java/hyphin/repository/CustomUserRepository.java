@@ -19,22 +19,31 @@ public class CustomUserRepository implements UserRepository {
     @Qualifier("userRepository") // inject Spring implementation here
     private UserRepository userRepository;
 
+    @Override
     public User save(User user) {
 
         //TO-DO - get it from a sequence.
-        if(userRepository.findMax() == 0) {
+        if(findMax() == 0) {
             user.setUid(1);
         }
         else {
-            user.setUid(userRepository.findMax() +1);
+            user.setUid(findMax() +1);
         }
         userRepository.save(user);
         return user;
     }
 
+    @Override
     public UserAudit save(UserAudit userAudit) {
 
         //TO-DO - get it from a sequence.
+        if(findMaxUserAudit() == 0) {
+            userAudit.setId(1);
+        }
+
+        else {
+            userAudit.setId(findMaxUserAudit() +1);
+        }
         userRepository.save(userAudit);
         return userAudit;
    }
@@ -68,9 +77,14 @@ public class CustomUserRepository implements UserRepository {
         return 0;
     }
 
-    @Override
     public int findMax() {
-        return 0;
+        return userRepository.findMax();
+    }
+
+
+
+    public int findMaxUserAudit() {
+        return userRepository.findMaxUserAudit();
     }
 
     @Override

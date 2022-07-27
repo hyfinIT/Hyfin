@@ -7,10 +7,16 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
+
     UserAudit save(UserAudit userAudit);
 
     @Query("SELECT max(uid) FROM User")
     int findMax();
+
+    @Query("SELECT max(id) FROM UserAudit")
+    int findMaxUserAudit();
+
+    User save(User user);
 
 }
 

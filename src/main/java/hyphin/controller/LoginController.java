@@ -11,12 +11,9 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Date;
 
 /**
@@ -76,12 +73,13 @@ public class LoginController {
     }
 
     @PostMapping("/Video")
-    public ModelAndView auditUsers(HttpSession session) {
+    public ModelAndView auditVideos(HttpSession session) {
         SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
+        userAudit.setId(userRepository.findMaxUserAudit());
         userAudit.setUid(user.getUid());
-        userAudit.setActivityType("CLICK");
+        userAudit.setActivityType("PLAY VIDEO");
         userAudit.setMediaType("VIDEO");
         userAudit.setDateTime(jdf.format(new Date()));
         userAudit.setGlossaryTerm(null);
@@ -95,9 +93,91 @@ public class LoginController {
         userAudit.setModuleId(null);
         userAudit.setModuleProgressPosition(null);
         userAudit.setModule(null);
-        userRepository.save(userAudit);
+        customUserRepository.save(userAudit);
         ModelAndView mav = new ModelAndView();
         mav.setViewName("9");
+        return mav;
+    }
+
+
+    @PostMapping("/ClickThrough")
+    public ModelAndView auditClickThroughs(HttpSession session) {
+        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setId(userRepository.findMaxUserAudit());
+        userAudit.setUid(user.getUid());
+        userAudit.setActivityType("CLICK");
+        userAudit.setMediaType("CLICKTHROUGH");
+        userAudit.setDateTime(jdf.format(new Date()));
+        userAudit.setGlossaryTerm(null);
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAudit.setElementId(null);
+        userAudit.setElementPosition(null);
+        userAudit.setElementStatus(null);
+        userAudit.setLearningJourney(null);
+        userAudit.setLearningJourneyId(null);
+        userAudit.setModuleId(null);
+        userAudit.setModuleProgressPosition(null);
+        userAudit.setModule(null);
+        customUserRepository.save(userAudit);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("5_8");
+        return mav;
+    }
+
+    @PostMapping("/Games")
+    public ModelAndView auditGames(HttpSession session) {
+        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setId(userRepository.findMaxUserAudit());
+        userAudit.setUid(user.getUid());
+        userAudit.setActivityType("CLICK");
+        userAudit.setMediaType("INMODULEGAME");
+        userAudit.setDateTime(jdf.format(new Date()));
+        userAudit.setGlossaryTerm(null);
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAudit.setElementId(null);
+        userAudit.setElementPosition(null);
+        userAudit.setElementStatus(null);
+        userAudit.setLearningJourney(null);
+        userAudit.setLearningJourneyId(null);
+        userAudit.setModuleId(null);
+        userAudit.setModuleProgressPosition(null);
+        userAudit.setModule(null);
+        customUserRepository.save(userAudit);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("5_8");
+        return mav;
+    }
+
+    @PostMapping("/PrevOrNext")
+    public ModelAndView auditPrevOrNext(HttpSession session) {
+        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setId(userRepository.findMaxUserAudit());
+        userAudit.setUid(user.getUid());
+        userAudit.setActivityType("NEXT");
+        userAudit.setMediaType("CLICKTHROUGH");
+        userAudit.setDateTime(jdf.format(new Date()));
+        userAudit.setGlossaryTerm(null);
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAudit.setElementId(null);
+        userAudit.setElementPosition(null);
+        userAudit.setElementStatus(null);
+        userAudit.setLearningJourney(null);
+        userAudit.setLearningJourneyId(null);
+        userAudit.setModuleId(null);
+        userAudit.setModuleProgressPosition(null);
+        userAudit.setModule(null);
+        customUserRepository.save(userAudit);
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("5_8");
         return mav;
     }
 

@@ -16,6 +16,7 @@ import javax.persistence.Table;
 
 public class UserAudit {
     @Id
+    int id;
     int uid;
     String activityType;
     String dateTime;
