@@ -16,31 +16,28 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("SELECT max(id) FROM UserAudit")
     int findMaxUserAudit();
 
-    @Query("select MODULEID from LEARNINGJOURNEYS where MODULEPOSITION = '1' and CLASSIFICATION = 'MVP'")
+    @Query("select moduleId from LearningJourneys where modulePosition = '1' and classification = 'MVP'")
     String findModuleID();
 
-    @Query("select MODULENAME from MODULES where MODULEID = ?1")
+    @Query("select moduleName from Modules where moduleId = ?1")
     String findModuleName(String moduleID);
 
-    @Query("select ELEMENTID from MODULES where MODULEID = ?1 and ELEMENTPOSITION = ?2")
+    @Query("select elementId from Modules where moduleId = ?1 and elementPosition = ?2")
     String findElementID(String moduleID,String elementPosition);
 
-    @Query("select elementtype from ELEMENTS where elementid = ?1")
+    @Query("select elementType from Elements where elementID = ?1")
     String findElementType(String elementID);
 
-    @Query("select medialocation from ELEMENTS where elementid = ?1")
+    @Query("select mediaLocation from Elements where elementID = ?1")
     String findMedialocation(String elementID);
 
-    @Query("select elementStatus from ELEMENTS where elementid = ?1")
-    String findElementStatus(String elementID);
-
-    @Query("select LEARNINGJOURNEYID from LEARNINGJOURNEYS where MODULEPOSITION = '1' and CLASSIFICATION = 'MVP'")
+    @Query("select learningJourneyId from LearningJourneys where modulePosition = '1' and classification = 'MVP'")
     String findLearningJourneyId();
 
-    @Query("select LEARNINGJOURNEYNAME from LEARNINGJOURNEYS where MODULEPOSITION = '1' and CLASSIFICATION = 'MVP'")
+    @Query("select learningJourneyName from LearningJourneys where modulePosition = '1' and classification = 'MVP'")
     String findLearningJourneyName();
 
-    @Query("select GLOSSARYTERM from GLOSSARY where MODULEID = ?1 and LEARNINGJOURNEY = ?2")
+    @Query("select glossaryTerm from GlossaryTerm where moduleId = ?1 and learningJourney = ?2")
     String findGlossaryTerm(String moduleId,String learningJourney);
 
 
