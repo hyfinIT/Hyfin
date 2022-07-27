@@ -24,8 +24,7 @@ public class Application implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception
     {
-        User user = new User(1,"MVP","Abhi","Sats","abhisanj@gmail.com","abc");
-        userRepository.save(user);
+
     }
 
 

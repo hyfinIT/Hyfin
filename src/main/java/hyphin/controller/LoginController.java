@@ -6,6 +6,7 @@ import hyphin.model.UserAudit;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
+import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,137 +62,66 @@ public class LoginController {
         User user = userService.findByUserNameAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
             session.setAttribute("User-entity",user);
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("1");
-            return mav;
+            return redirectTo("1");
         }
         else {
-            ModelAndView mav = new ModelAndView();
-            mav.setViewName("LoginFailure");
-            return mav;
+            return redirectTo("LoginFailure");
         }
     }
 
     @PostMapping("/Video")
     public ModelAndView auditVideos(HttpSession session) {
-        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setId(userRepository.findMaxUserAudit());
-        userAudit.setUid(user.getUid());
-        userAudit.setActivityType("PLAY VIDEO");
-        userAudit.setMediaType("VIDEO");
-        userAudit.setDateTime(jdf.format(new Date()));
-        userAudit.setGlossaryTerm(null);
-        userAudit.setDifficulty(null);
-        userAudit.setCompletionTime(null);
-        userAudit.setElementId(null);
-        userAudit.setElementPosition(null);
-        userAudit.setElementStatus(null);
-        userAudit.setLearningJourney(null);
-        userAudit.setLearningJourneyId(null);
-        userAudit.setModuleId(null);
-        userAudit.setModuleProgressPosition(null);
-        userAudit.setModule(null);
-        customUserRepository.save(userAudit);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("9");
-        return mav;
+        userAudit.setActivityType("VIDEO");
+        customUserRepository.save(userAudit,user);
+        return redirectTo("9");
     }
 
 
     @PostMapping("/ClickThrough")
     public ModelAndView auditClickThroughs(HttpSession session) {
-        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setId(userRepository.findMaxUserAudit());
-        userAudit.setUid(user.getUid());
-        userAudit.setActivityType("CLICK");
-        userAudit.setMediaType("CLICKTHROUGH");
-        userAudit.setDateTime(jdf.format(new Date()));
-        userAudit.setGlossaryTerm(null);
-        userAudit.setDifficulty(null);
-        userAudit.setCompletionTime(null);
-        userAudit.setElementId(null);
-        userAudit.setElementPosition(null);
-        userAudit.setElementStatus(null);
-        userAudit.setLearningJourney(null);
-        userAudit.setLearningJourneyId(null);
-        userAudit.setModuleId(null);
-        userAudit.setModuleProgressPosition(null);
-        userAudit.setModule(null);
-        customUserRepository.save(userAudit);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("5_8");
-        return mav;
+        userAudit.setActivityType("CLICKTHROUGH");
+        customUserRepository.save(userAudit,user);
+        return redirectTo("5_8");
     }
 
     @PostMapping("/Games")
     public ModelAndView auditGames(HttpSession session) {
-        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setId(userRepository.findMaxUserAudit());
-        userAudit.setUid(user.getUid());
-        userAudit.setActivityType("CLICK");
-        userAudit.setMediaType("INMODULEGAME");
-        userAudit.setDateTime(jdf.format(new Date()));
-        userAudit.setGlossaryTerm(null);
-        userAudit.setDifficulty(null);
-        userAudit.setCompletionTime(null);
-        userAudit.setElementId(null);
-        userAudit.setElementPosition(null);
-        userAudit.setElementStatus(null);
-        userAudit.setLearningJourney(null);
-        userAudit.setLearningJourneyId(null);
-        userAudit.setModuleId(null);
-        userAudit.setModuleProgressPosition(null);
-        userAudit.setModule(null);
-        customUserRepository.save(userAudit);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("5_8");
-        return mav;
+        userAudit.setActivityType("IN MODULE GAME");
+        customUserRepository.save(userAudit,user);
+        return redirectTo("5_8");
     }
 
     @PostMapping("/PrevOrNext")
     public ModelAndView auditPrevOrNext(HttpSession session) {
-        SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setId(userRepository.findMaxUserAudit());
-        userAudit.setUid(user.getUid());
-        userAudit.setActivityType("NEXT");
-        userAudit.setMediaType("CLICKTHROUGH");
-        userAudit.setDateTime(jdf.format(new Date()));
-        userAudit.setGlossaryTerm(null);
-        userAudit.setDifficulty(null);
-        userAudit.setCompletionTime(null);
-        userAudit.setElementId(null);
-        userAudit.setElementPosition(null);
-        userAudit.setElementStatus(null);
-        userAudit.setLearningJourney(null);
-        userAudit.setLearningJourneyId(null);
-        userAudit.setModuleId(userRepository.findModuleID());
-        userAudit.setModuleProgressPosition(null);
-        userAudit.setModule(null);
-        customUserRepository.save(userAudit);
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("5_8");
-        return mav;
+        userAudit.setActivityType("CLICKTHROUGH");
+        customUserRepository.save(userAudit,user);
+        return redirectTo("5_8");
     }
 
     @PostMapping("/Register")
     public ModelAndView registerUsers(@ModelAttribute("register") User user, BindingResult bindingResult)
     {
         if(bindingResult.hasErrors()){
-            System.out.println("There was a error "+bindingResult);
+            LOGGER.log(Level.ERROR,"There was a form binding error " + bindingResult);
         }
         customUserRepository.save(user);
+        return redirectTo("RegistrationSuccess");
+    }
+
+    public ModelAndView redirectTo(String pageTo) {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("RegistrationSuccess");
+        mav.setViewName(pageTo);
         return mav;
     }
+
 }
 
 
