@@ -8,6 +8,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
 
+    User save(User user);
+
     UserAudit save(UserAudit userAudit,User user);
 
     @Query("SELECT max(uid) FROM User")
@@ -37,12 +39,9 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     @Query("select learningJourneyName from LearningJourneys where modulePosition = '1' and classification = 'MVP'")
     String findLearningJourneyName();
 
-    @Query("select glossaryTerm from GlossaryTerm where moduleId = ?1 and learningJourney = ?2")
+    @Query("select glossaryTerm from Glossary where moduleId = ?1 and learningJourney = ?2")
     String findGlossaryTerm(String moduleId,String learningJourney);
 
-
-
-    User save(User user);
 
 }
 

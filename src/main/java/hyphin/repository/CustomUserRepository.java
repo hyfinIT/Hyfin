@@ -20,14 +20,11 @@ public abstract class CustomUserRepository implements UserRepository {
 
     @Override
     public User save(User user) {
-
         user.setClientType("MVP");
-        if(findMax() == 0) {
+        if(findMax() == 0)
             user.setUid(1);
-        }
-        else {
+        else
             user.setUid(findMax() +1);
-        }
         user.setDateTime(jdf.format(new Date()));
         userRepository.save(user);
         return user;
@@ -35,15 +32,11 @@ public abstract class CustomUserRepository implements UserRepository {
 
     @Override
     public UserAudit save(UserAudit userAudit,User user) {
-
         //TO-DO - get it from a sequence.
-        if(findMaxUserAudit() == 0) {
+        if(findMaxUserAudit() == 0)
             userAudit.setId(1);
-        }
-
-        else {
+        else
             userAudit.setId(findMaxUserAudit() +1);
-        }
         userAudit.setUid(user.getUid());
         userAudit.setLearningJourney(userRepository.findLearningJourneyName());
         userAudit.setLearningJourney(userRepository.findLearningJourneyId());
