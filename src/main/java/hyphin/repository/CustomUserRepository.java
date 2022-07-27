@@ -10,11 +10,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Repository("customUserRepository")
-public class CustomUserRepository implements UserRepository {
+public abstract class CustomUserRepository implements UserRepository {
 
+    private static final SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     @Autowired
     @Qualifier("userRepository") // inject Spring implementation here
     private UserRepository userRepository;
@@ -22,19 +25,20 @@ public class CustomUserRepository implements UserRepository {
     @Override
     public User save(User user) {
 
-        //TO-DO - get it from a sequence.
+        user.setClientType("MVP");
         if(findMax() == 0) {
             user.setUid(1);
         }
         else {
             user.setUid(findMax() +1);
         }
+        user.setDateTime(jdf.format(new Date()));
         userRepository.save(user);
         return user;
     }
 
     @Override
-    public UserAudit save(UserAudit userAudit) {
+    public UserAudit save(UserAudit userAudit,User user) {
 
         //TO-DO - get it from a sequence.
         if(findMaxUserAudit() == 0) {
@@ -44,7 +48,21 @@ public class CustomUserRepository implements UserRepository {
         else {
             userAudit.setId(findMaxUserAudit() +1);
         }
-        userRepository.save(userAudit);
+        userAudit.setUid(user.getUid());
+        userAudit.setLearningJourney(userRepository.findLearningJourneyName());
+        userAudit.setLearningJourney(userRepository.findLearningJourneyId());
+        userAudit.setModuleId(userRepository.findModuleID());
+        userAudit.setModule(userRepository.findModuleName(userAudit.getModuleId()));
+        userAudit.setElementStatus(userAudit.getElementId());
+        userAudit.setElementPosition(userAudit.getElementId());
+        userAudit.setGlossaryTerm(userRepository.findGlossaryTerm(userAudit.getModuleId(),userAudit.getLearningJourney()));
+        userAudit.setMediaType(userRepository.findElementType(userAudit.getModuleId()));
+        userAudit.setActivityType(userRepository.findElementType(userAudit.getModuleId()));
+        userAudit.setDateTime(jdf.format(new Date()));
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAudit.setModuleProgressPosition(null);
+        userRepository.save(userAudit,user);
         return userAudit;
    }
 
@@ -77,14 +95,22 @@ public class CustomUserRepository implements UserRepository {
         return 0;
     }
 
+    @Override
     public int findMax() {
         return userRepository.findMax();
     }
 
-
-
+    @Override
     public int findMaxUserAudit() {
         return userRepository.findMaxUserAudit();
+    }
+
+    public String findModuleID() {
+        return userRepository.findModuleID();
+    }
+
+    public String findElementID() {
+        return userRepository.findElementID(findModuleID());
     }
 
     @Override

@@ -172,7 +172,7 @@ public class LoginController {
         userAudit.setElementStatus(null);
         userAudit.setLearningJourney(null);
         userAudit.setLearningJourneyId(null);
-        userAudit.setModuleId(null);
+        userAudit.setModuleId(userRepository.findModuleID());
         userAudit.setModuleProgressPosition(null);
         userAudit.setModule(null);
         customUserRepository.save(userAudit);

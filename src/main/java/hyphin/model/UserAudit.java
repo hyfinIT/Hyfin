@@ -26,7 +26,7 @@ public class UserAudit {
     String module;
     String learningJourney;
     String learningJourneyId;
-    String moduleId;
+    int moduleId;
     String elementId;
     String elementStatus;
     String completionTime;

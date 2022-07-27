@@ -20,4 +20,5 @@ public class User {
     String surName;
     String email;
     String password;
+    String dateTime;
 }
