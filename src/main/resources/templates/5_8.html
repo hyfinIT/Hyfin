@@ -340,9 +340,11 @@
             </div>
             <!-- Click-Thru Wrap End -->
             <!-- Click-Thru Nav Start -->
-            <form class="hf-form hf-video-form" name="prev-next-form" id="prev-next-form" role="form" th:action="@{/PrevOrNext}" method="POST">
-            <div class="hf-ct-nav">
+            <form class="hf-ct-nav" name="prev-next-form" id="prev-next-form" role="form" th:action="@{/ClickThrough}" method="POST">
+            <div class="hf-form-row hf-fr-submit">
                 <button class="hf-ct-prev hf-button hf-button-left"><span>Prev</span></button>
+            </div>
+            <div class="hf-form-row hf-fr-submit">
                 <button class="hf-ct-next hf-button hf-button-right"><span>Next</span></button>
             </div>
             </form>
