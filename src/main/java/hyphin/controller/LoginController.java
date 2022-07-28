@@ -3,6 +3,7 @@ package hyphin.controller;
 import hyphin.model.Login;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
+import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
@@ -27,6 +28,9 @@ public class LoginController {
 
     @Autowired
     CustomUserRepository customUserRepository;
+
+    @Autowired
+    CustomUserAuditRepository customAuditUserRepository;
 
     @Autowired
     UserRepository userRepository;
@@ -74,7 +78,8 @@ public class LoginController {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("VIDEO");
-        customUserRepository.save(userAudit,user);
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"VIDEO"));
+        customAuditUserRepository.save(userAudit,user);
         return redirectTo("9");
     }
 
@@ -84,7 +89,8 @@ public class LoginController {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("CLICKTHROUGH");
-        customUserRepository.save(userAudit,user);
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8");
     }
 
@@ -93,7 +99,8 @@ public class LoginController {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("IN MODULE GAME");
-        customUserRepository.save(userAudit,user);
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"IN MODULE GAME"));
+        customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8");
     }
 
@@ -102,7 +109,7 @@ public class LoginController {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("CLICKTHROUGH");
-        customUserRepository.save(userAudit,user);
+        customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8");
     }
 
