@@ -43,7 +43,7 @@ public class HyphinController {
     @GetMapping("/")
     public ModelAndView viewHome() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("start");
+        mav.setViewName("index");
         return mav;
     }
 
@@ -51,6 +51,34 @@ public class HyphinController {
     public ModelAndView viewFaqs() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("faqs");
+        return mav;
+    }
+
+    @GetMapping("/start")
+    public ModelAndView viewStart() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("start");
+        return mav;
+    }
+
+    @GetMapping("/cookies")
+    public ModelAndView viewCookies() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("cookies");
+        return mav;
+    }
+
+    @GetMapping("/terms")
+    public ModelAndView viewTerms() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("terms");
+        return mav;
+    }
+
+    @GetMapping("/privacy")
+    public ModelAndView viewPrivacy() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("privacy");
         return mav;
     }
 
