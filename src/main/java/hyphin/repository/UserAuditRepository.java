@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserAuditRepository extends JpaRepository<UserAudit,Integer> {
 
-    @Query("SELECT max(id) FROM UserAudit")
+    @Query("SELECT coalesce(max(id),0) FROM UserAudit")
     int findMaxUserAudit();
 
     @Query("select moduleId from LearningJourneys where modulePosition = '1' and classification = 'MVP'")

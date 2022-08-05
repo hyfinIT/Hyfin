@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User,Integer> {
 
-    @Query("SELECT max(uid) FROM User")
+    @Query("SELECT coalesce(max(uid),0) FROM User")
     int findMax();
 
 

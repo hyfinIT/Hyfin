@@ -29,6 +29,7 @@ public class CustomUserAuditRepository implements UserAuditRepository {
             userAudit.setId(1);
         else
             userAudit.setId(findMaxUserAudit() +1);
+        if(user != null)
         userAudit.setUid(user.getUid());
         userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
         userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
