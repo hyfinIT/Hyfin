@@ -86,12 +86,55 @@ public class LoginController {
 
     @PostMapping("/ClickThrough")
     public ModelAndView auditClickThroughs(HttpSession session) {
+
+
+                User user = (User) session.getAttribute("User-entity");
+                UserAudit userAudit = new UserAudit();
+                userAudit.setActivityType("CLICKTHROUGH");
+                userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "CLICKTHROUGH"));
+                customAuditUserRepository.save(userAudit, user);
+                return redirectTo("5_8");
+
+    }
+
+    @PostMapping("/ClickThrough1")
+    public ModelAndView auditClickThrough1(HttpSession session) {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("CLICKTHROUGH");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
         customAuditUserRepository.save(userAudit,user);
-        return redirectTo("5_8");
+        return redirectTo("5_8_1");
+    }
+
+    @PostMapping("/ClickThrough2")
+    public ModelAndView auditClickThrough2(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_2");
+    }
+
+    @PostMapping("/ClickThrough3")
+    public ModelAndView auditClickThrough3(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_3");
+    }
+
+    @PostMapping("/ClickThrough4")
+    public ModelAndView auditClickThrough4(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_4");
     }
 
     @PostMapping("/Games")
