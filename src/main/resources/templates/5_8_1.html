@@ -327,12 +327,14 @@
       </div>
       <!-- Click-Thru Wrap End -->
       <!-- Click-Thru Nav Start -->
-      <form class="hf-ct-nav" name="prev-next-form1" id="prev-next-form1" role="form" th:action="@{/ClickThrough2}" method="POST">
-        <div input type="submit" class="hf-form-row hf-fr-submit"onclick="document.getElementById('prev-next-form1').submit()">
-          <button class="hf-ct-prev hf-button hf-button-left"><span>Prev</span></button>
+      <form class="hf-ct-prev hf-button hf-button-left" name="prev-next-form1" id="prev-next-form1" role="form" th:action="@{/ClickThroughPrev1}" method="POST">
+        <div input type="submit" onclick="document.getElementById('prev-next-form1').submit()">
+          <button class="hf-ct-prev hf-button hf-button-left"> <span>Prev</span></button>
         </div>
-        <div input type="submit" class="hf-form-row hf-fr-submit"onclick="document.getElementById('prev-next-form1').submit()">
-          <button class="hf-ct-next hf-button hf-button-right"><span>Next</span></button>
+      </form>
+      <form class="hf-ct-next hf-button hf-button-right" name="prev-next-form2" id="prev-next-form2" role="form" th:action="@{/ClickThroughNext1}" method="POST">
+        <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
+          <button class="hf-ct-next hf-button hf-button-far-right"><span>Next</span></button>
         </div>
       </form>
       <!-- Click-Thru Nav End -->

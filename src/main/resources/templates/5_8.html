@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:text-align="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -340,16 +340,17 @@
             </div>
             <!-- Click-Thru Wrap End -->
             <!-- Click-Thru Nav Start -->
-          <form class="hf-ct-nav" name="prev-next-form" id="prev-next-form" role="form" th:action="@{/ClickThrough1}" method="POST">
-                <div input type="submit" class="hf-form-row hf-fr-submit"onclick="document.getElementById('prev-next-form').submit()">
-                    <button class="hf-ct-prev hf-button hf-button-left"><span>Prev</span></button>
+            <form class="hf-ct-prev hf-button hf-button-left" name="prev-next-form1" id="prev-next-form1" role="form" th:action="@{/ClickThroughPrev1}" method="POST">
+                <div input type="submit" onclick="document.getElementById('prev-next-form1').submit()">
+                    <button class="hf-ct-prev hf-button hf-button-left"> <span>Prev</span></button>
                 </div>
-                <div input type="submit" class="hf-form-row hf-fr-submit"onclick="document.getElementById('prev-next-form').submit()">
-                    <button class="hf-ct-next hf-button hf-button-right"><span>Next</span></button>
+            </form>
+            <form class="hf-ct-next hf-button hf-button-right" name="prev-next-form2" id="prev-next-form2" role="form" th:action="@{/ClickThroughNext1}" method="POST">
+                <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
+                    <button class="hf-ct-next hf-button hf-button-far-right"><span>Next</span></button>
                 </div>
-           </form>
-
-            <!-- Click-Thru Nav End -->
+            </form>
+      <!-- Click-Thru Nav End -->
         </div>
     </main>
     <!-- Left Panel Start -->

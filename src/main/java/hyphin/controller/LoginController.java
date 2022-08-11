@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 /**
@@ -59,7 +61,6 @@ public class LoginController {
 
     @PostMapping("/Login")
     public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult,HttpSession session) {
-
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
@@ -75,73 +76,463 @@ public class LoginController {
 
     @PostMapping("/Video")
     public ModelAndView auditVideos(HttpSession session) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("VIDEO");
+        userAudit.setModuleId(customAuditUserRepository.findModuleID());
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"VIDEO"));
         customAuditUserRepository.save(userAudit,user);
+        System.out.println(dtf.format(LocalDateTime.now()));
         return redirectTo("9");
+
     }
 
 
     @PostMapping("/ClickThrough")
     public ModelAndView auditClickThroughs(HttpSession session) {
-
-
-                User user = (User) session.getAttribute("User-entity");
-                UserAudit userAudit = new UserAudit();
-                userAudit.setActivityType("CLICKTHROUGH");
-                userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "CLICKTHROUGH"));
-                customAuditUserRepository.save(userAudit, user);
-                return redirectTo("5_8");
-
+           DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+           LocalDateTime now = LocalDateTime.now();
+           System.out.println(dtf.format(now));
+           User user = (User) session.getAttribute("User-entity");
+           UserAudit userAudit = new UserAudit();
+           userAudit.setActivityType("CLICKTHROUGH");
+           userAudit.setElementStatus("CLICKTHROUGH STARTED");
+           userAudit.setModuleProgressPosition("INCOMPLETE, 18 PAGES LEFT");
+           userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "CLICKTHROUGH"));
+           customAuditUserRepository.save(userAudit, user);
+           LocalDateTime now1 = LocalDateTime.now();
+           System.out.println(dtf.format(now1));
+           return redirectTo("5_8");
     }
 
-    @PostMapping("/ClickThrough1")
-    public ModelAndView auditClickThrough1(HttpSession session) {
+    @PostMapping("/ClickThroughNext1")
+    public ModelAndView auditClickThroughNext1(HttpSession session) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
+
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementStatus("ON PAGE 1 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 17 PAGES LEFT");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
         customAuditUserRepository.save(userAudit,user);
+        LocalDateTime now1 = LocalDateTime.now();
+        System.out.println(dtf.format(now1));
         return redirectTo("5_8_1");
     }
 
-    @PostMapping("/ClickThrough2")
-    public ModelAndView auditClickThrough2(HttpSession session) {
+    @PostMapping("/ClickThroughPrev1")
+    public ModelAndView auditClickThroughPrev1(HttpSession session) {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        System.out.println(dtf.format(now));
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementStatus("ON PAGE 1 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 17 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        LocalDateTime now1 = LocalDateTime.now();
+        System.out.println(dtf.format(now1));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("4");
+    }
+
+
+    @PostMapping("/ClickThroughNext2")
+    public ModelAndView auditClickThroughNext2(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 2 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 16 PAGES LEFT");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
         customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8_2");
     }
 
-    @PostMapping("/ClickThrough3")
-    public ModelAndView auditClickThrough3(HttpSession session) {
+    @PostMapping("/ClickThroughPrev2")
+    public ModelAndView auditClickThroughPrev2(HttpSession session) {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementStatus("ON PAGE 2 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 16 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8");
+    }
+
+    @PostMapping("/ClickThroughNext3")
+    public ModelAndView auditClickThroughNext3(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 3 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 15 PAGES LEFT");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
         customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8_3");
     }
 
-    @PostMapping("/ClickThrough4")
-    public ModelAndView auditClickThrough4(HttpSession session) {
+    @PostMapping("/ClickThroughPrev3")
+    public ModelAndView auditClickThroughPrev3(HttpSession session) {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("CLICKTHROUGH");
+        userAudit.setElementStatus("ON PAGE 3 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 15 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_1");
+    }
+
+    @PostMapping("/ClickThroughNext4")
+    public ModelAndView auditClickThroughNext4(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 4 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 14 PAGES LEFT");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
         customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8_4");
     }
 
+    @PostMapping("/ClickThroughPrev4")
+    public ModelAndView auditClickThroughPrev4(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 4 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 14 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_2");
+    }
+
+    @PostMapping("/ClickThroughNext5")
+    public ModelAndView auditClickThroughNext5(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 5 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 13 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_5");
+    }
+
+    @PostMapping("/ClickThroughPrev5")
+    public ModelAndView auditClickThroughPrev5(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 5 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 13 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_3");
+    }
+
+    @PostMapping("/ClickThroughNext6")
+    public ModelAndView auditClickThroughNext6(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 6 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 12 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_6");
+    }
+
+    @PostMapping("/ClickThroughPrev6")
+    public ModelAndView auditClickThroughPrev6(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 6 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 12 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_4");
+    }
+
+    @PostMapping("/ClickThroughNext7")
+    public ModelAndView auditClickThroughNext7(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 7 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 11 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_7");
+    }
+
+    @PostMapping("/ClickThroughPrev7")
+    public ModelAndView auditClickThroughPrev7(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 7 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 11 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_5");
+    }
+
+    @PostMapping("/ClickThroughNext8")
+    public ModelAndView auditClickThroughNext8(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 8 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 10 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_8");
+    }
+
+    @PostMapping("/ClickThroughPrev8")
+    public ModelAndView auditClickThroughPrev8(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 8 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 10 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_6");
+    }
+
+
+    @PostMapping("/ClickThroughNext9")
+    public ModelAndView auditClickThroughNext9(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 9 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 9 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_9");
+    }
+
+    @PostMapping("/ClickThroughPrev9")
+    public ModelAndView auditClickThroughPrev9(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 9 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 9 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_7");
+    }
+
+    @PostMapping("/ClickThroughNext10")
+    public ModelAndView auditClickThroughNext10(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 10 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 8 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_10");
+    }
+
+    @PostMapping("/ClickThroughPrev10")
+    public ModelAndView auditClickThroughPrev10(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 10 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 8 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_8");
+    }
+
+    @PostMapping("/ClickThroughNext11")
+    public ModelAndView auditClickThroughNext11(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 11 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 7 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_11");
+    }
+
+    @PostMapping("/ClickThroughPrev11")
+    public ModelAndView auditClickThroughPrev11(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 11 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 7 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_9");
+    }
+
+    @PostMapping("/ClickThroughNext12")
+    public ModelAndView auditClickThroughNext12(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 12 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 6 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_12");
+    }
+
+    @PostMapping("/ClickThroughPrev12")
+    public ModelAndView auditClickThroughPrev12(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 12 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 6 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_10");
+    }
+
+    @PostMapping("/ClickThroughNext13")
+    public ModelAndView auditClickThroughNext13(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 13 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 5 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_13");
+    }
+
+    @PostMapping("/ClickThroughPrev13")
+    public ModelAndView auditClickThroughPrev13(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 13 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 5 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_11");
+    }
+
+    @PostMapping("/ClickThroughNext14")
+    public ModelAndView auditClickThroughNext14(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 14 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 4 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_14");
+    }
+
+    @PostMapping("/ClickThroughPrev14")
+    public ModelAndView auditClickThroughPrev14(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 14 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 4 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_12");
+    }
+
+    @PostMapping("/ClickThroughNext15")
+    public ModelAndView auditClickThroughNext15(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 15 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 3 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_15");
+    }
+
+    @PostMapping("/ClickThroughPrev15")
+    public ModelAndView auditClickThroughPrev15(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 15 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 3 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_13");
+    }
+
+    @PostMapping("/ClickThroughNext16")
+    public ModelAndView auditClickThroughNext16(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 16 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 2 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_16");
+    }
+
+    @PostMapping("/ClickThroughPrev16")
+    public ModelAndView auditClickThroughPrev16(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 16 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 2 PAGES LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_14");
+    }
+
+    @PostMapping("/ClickThroughNext17")
+    public ModelAndView auditClickThroughNext17(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 17 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 1 PAGE LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_17");
+    }
+
+    @PostMapping("/ClickThroughPrev17")
+    public ModelAndView auditClickThroughPrev17(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 17 OUT OF 18");
+        userAudit.setModuleProgressPosition("INCOMPLETE, 1 PAGE LEFT");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_15");
+    }
+
+    @PostMapping("/ClickThroughNext18")
+    public ModelAndView auditClickThroughNext18(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 18 OUT OF 18");
+        userAudit.setModuleProgressPosition("COMPLETE, ALL DONE!");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_18");
+    }
+
+    @PostMapping("/ClickThroughPrev18")
+    public ModelAndView auditClickThroughPrev18(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 18 OUT OF 18");
+        userAudit.setModuleProgressPosition("COMPLETE, ALL DONE!");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_16");
+    }
+
+    @PostMapping("/ClickThroughPrev19")
+    public ModelAndView auditClickThroughPrev19(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 18 OUT OF 18");
+        userAudit.setModuleProgressPosition("COMPLETE, ALL DONE!");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit,user);
+        return redirectTo("5_8_17");
+    }
+
+
+
     @PostMapping("/Games")
     public ModelAndView auditGames(HttpSession session) {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("IN MODULE GAME");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"IN MODULE GAME"));
         customAuditUserRepository.save(userAudit,user);
         return redirectTo("5_8");

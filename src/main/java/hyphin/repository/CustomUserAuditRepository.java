@@ -35,15 +35,13 @@ public class CustomUserAuditRepository implements UserAuditRepository {
         userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
         userAudit.setModuleId(userAuditRepository.findModuleID());
         userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
-        userAudit.setElementStatus(userAudit.getElementId());
         userAudit.setElementPosition(userAudit.getElementId());
         userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(),userAudit.getLearningJourney()));
-        userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getModuleId()));
-        userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getModuleId()));
+        userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
+        userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
         userAudit.setDateTime(jdf.format(new Date()));
         userAudit.setDifficulty(null);
         userAudit.setCompletionTime(null);
-        userAudit.setModuleProgressPosition(null);
         userAuditRepository.saveAndFlush(userAudit);
         return userAudit;
     }

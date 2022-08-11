@@ -14,7 +14,7 @@
       right: 0;
       left: 50%;
       bottom: 0;
-      background: #1b1b3c url(images/bg-gradient.svg) top center no-repeat;
+      background: #1b1b3c url(../../../assets/images/bg-gradient.svg) top center no-repeat;
 
       @media (max-width: 767px) {
          display: none;
@@ -113,7 +113,7 @@
       min-width: 100%;
       padding: 0px 14px 50px 14px;
       margin: 0px -14px;
-      background: #1b1b3c url(images/bg-gradient.svg) top center no-repeat;
+      background: #1b1b3c url(../../../assets/images/bg-gradient.svg) top center no-repeat;
    }
 }
 
@@ -194,7 +194,7 @@
    position: absolute;
    top: 0;
    left: 0;
-   background: url(images/callout-3-orange-inverted-top-left.svg) top left no-repeat;
+   background: url(../../../assets/images/callout-3-orange-inverted-top-left.svg) top left no-repeat;
 }
 
 .featured-feature__top-center {
@@ -204,7 +204,7 @@
    top: 0;
    right: 40px;
    left: 40px;
-   background: url(images/callout-3-orange-inverted-top-horizontal.svg) top left repeat-x;
+   background: url(../../../assets/images/callout-3-orange-inverted-top-horizontal.svg) top left repeat-x;
 }
 
 .featured-feature__top-right {
@@ -214,7 +214,7 @@
    position: absolute;
    top: 0;
    right: 0;
-   background: url(images/callout-3-orange-inverted-top-right.svg) top left no-repeat;
+   background: url(../../../assets/images/callout-3-orange-inverted-top-right.svg) top left no-repeat;
 }
 
 .featured-feature__center-left {
@@ -224,7 +224,7 @@
    top: 32px;
    bottom: 32px;
    left: 0;
-   background: url(images/callout-3-orange-inverted-left-vertical.svg) top left repeat-y;
+   background: url(../../../assets/images/callout-3-orange-inverted-left-vertical.svg) top left repeat-y;
 }
 
 .featured-feature__center-right {
@@ -234,7 +234,7 @@
    top: 32px;
    bottom: 32px;
    right: 0;
-   background: url(images/callout-3-orange-inverted-right-vertical.svg) top right repeat-y;
+   background: url(../../../assets/images/callout-3-orange-inverted-right-vertical.svg) top right repeat-y;
 }
 
 .featured-feature__bottom-left {
@@ -244,7 +244,7 @@
    position: absolute;
    bottom: 0;
    left: 0;
-   background: url(images/callout-3-orange-inverted-bottom-left.svg) bottom left no-repeat;
+   background: url(../../../assets/images/callout-3-orange-inverted-bottom-left.svg) bottom left no-repeat;
 }
 
 .featured-feature__bottom-center {
@@ -254,7 +254,7 @@
    bottom: 0;
    right: 40px;
    left: 40px;
-   background: url(images/callout-3-orange-inverted-bottom-horizontal.svg) bottom left repeat-x;
+   background: url(../../../assets/images/callout-3-orange-inverted-bottom-horizontal.svg) bottom left repeat-x;
 }
 
 .featured-feature__bottom-right {
@@ -264,7 +264,7 @@
    position: absolute;
    bottom: 0;
    right: 0;
-   background: url(images/callout-3-orange-inverted-bottom-right.svg) bottom left no-repeat;
+   background: url(../../../assets/images/callout-3-orange-inverted-bottom-right.svg) bottom left no-repeat;
 }
 
 .featured-feature--blue {
@@ -274,35 +274,35 @@
    }
 
    .featured-feature__top-left {
-      background: url(images/callout-3-blue-inverted-top-left.svg) top left no-repeat;
+      background: url(../../../assets/images/callout-3-blue-inverted-top-left.svg) top left no-repeat;
    }  
 
    .featured-feature__top-center {
-      background: url(images/callout-3-blue-inverted-top-horizontal.svg) top left repeat-x;
+      background: url(../../../assets/images/callout-3-blue-inverted-top-horizontal.svg) top left repeat-x;
    }
 
    .featured-feature__top-right {
-      background: url(images/callout-3-blue-inverted-top-right.svg) top left no-repeat;
+      background: url(../../../assets/images/callout-3-blue-inverted-top-right.svg) top left no-repeat;
    }
 
    .featured-feature__center-left {
-      background: url(images/callout-3-blue-inverted-left-vertical.svg) top left repeat-y;
+      background: url(../../../assets/images/callout-3-blue-inverted-left-vertical.svg) top left repeat-y;
    }
 
    .featured-feature__center-right {
-      background: url(images/callout-3-blue-inverted-right-vertical.svg) top right repeat-y;
+      background: url(../../../assets/images/callout-3-blue-inverted-right-vertical.svg) top right repeat-y;
    }
 
    .featured-feature__bottom-left {
-      background: url(images/callout-3-blue-inverted-bottom-left.svg) bottom left no-repeat;
+      background: url(../../../assets/images/callout-3-blue-inverted-bottom-left.svg) bottom left no-repeat;
    }
 
    .featured-feature__bottom-center {
-      background: url(images/callout-3-blue-inverted-bottom-horizontal.svg) bottom left repeat-x;
+      background: url(../../../assets/images/callout-3-blue-inverted-bottom-horizontal.svg) bottom left repeat-x;
    }
 
    .featured-feature__bottom-right {
-      background: url(images/callout-3-blue-inverted-bottom-right.svg) bottom left no-repeat;
+      background: url(../../../assets/images/callout-3-blue-inverted-bottom-right.svg) bottom left no-repeat;
    }
 }
 

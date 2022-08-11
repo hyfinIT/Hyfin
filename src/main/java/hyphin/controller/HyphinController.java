@@ -47,6 +47,13 @@ public class HyphinController {
         return mav;
     }
 
+    @GetMapping("/index")
+    public ModelAndView viewIndex() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("index");
+        return mav;
+    }
+
     @GetMapping("/faqs")
     public ModelAndView viewFaqs() {
         ModelAndView mav = new ModelAndView();
