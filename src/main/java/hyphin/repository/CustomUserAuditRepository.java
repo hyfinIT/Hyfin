@@ -1,5 +1,6 @@
 package hyphin.repository;
 
+import hyphin.model.GameQuestions;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,11 +117,17 @@ public class CustomUserAuditRepository implements UserAuditRepository {
 
     @Override
     public String findGlossaryTerm(String moduleId, String learningJourney) {
-        return userAuditRepository.findGlossaryTerm(moduleId,learningJourney);
+        return userAuditRepository.findGlossaryTerm(moduleId, learningJourney);
+    }
+
+
+    @Override
+    public List<GameQuestions> findGameQuestions(String elementId) {
+        return userAuditRepository.findGameQuestions(elementId);
     }
 
     public String findElementID() {
-        return userAuditRepository.findElementID(findModuleID(),userAuditRepository.findElementType(findModuleID()));
+        return userAuditRepository.findElementID(findModuleID(), userAuditRepository.findElementType(findModuleID()));
     }
 
     @Override

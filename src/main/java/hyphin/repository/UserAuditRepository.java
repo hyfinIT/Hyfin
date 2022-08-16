@@ -1,13 +1,16 @@
 package hyphin.repository;
 
+import hyphin.model.GameQuestions;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
-public interface UserAuditRepository extends JpaRepository<UserAudit,Integer> {
+public interface UserAuditRepository extends JpaRepository<UserAudit, Integer> {
 
     @Query("SELECT coalesce(max(id),0) FROM UserAudit")
     int findMaxUserAudit();
@@ -19,13 +22,16 @@ public interface UserAuditRepository extends JpaRepository<UserAudit,Integer> {
     String findModuleName(String moduleID);
 
     @Query("select elementId from Modules where moduleId = ?1 and elementType = ?2")
-    String findElementID(String moduleID,String elementType);
+    String findElementID(String moduleID, String elementType);
 
     @Query("select elementType from Elements where elementID = ?1")
     String findElementType(String elementID);
 
     @Query("select mediaLocation from Elements where elementID = ?1")
     String findMedialocation(String elementID);
+
+    @Query(value = "SELECT * FROM HYFIN.PUBLIC.GameQuestions WHERE elementID = ?1", nativeQuery = true)
+    List<GameQuestions> findGameQuestions(String elementID);
 
     @Query("select learningJourneyId from LearningJourneys where modulePosition = '1' and classification = 'MVP'")
     String findLearningJourneyId();
@@ -34,7 +40,7 @@ public interface UserAuditRepository extends JpaRepository<UserAudit,Integer> {
     String findLearningJourneyName();
 
     @Query("select glossaryTerm from Glossary where moduleId = ?1 and learningJourney = ?2")
-    String findGlossaryTerm(String moduleId,String learningJourney);
+    String findGlossaryTerm(String moduleId, String learningJourney);
 
 
 }

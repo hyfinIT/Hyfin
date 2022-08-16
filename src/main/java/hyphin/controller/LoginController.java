@@ -1,24 +1,28 @@
 package hyphin.controller;
 
+import hyphin.model.GameQuestions;
 import hyphin.model.Login;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
+import hyphin.repository.GamesRepository;
 import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
 import javax.servlet.http.HttpSession;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Created by Abhishek Satsangi on 27/06/2022
@@ -38,11 +42,13 @@ public class LoginController {
     UserRepository userRepository;
 
     @Autowired
+    GamesRepository gamesRepository;
+
+    @Autowired
     UserService userService;
 
     @ModelAttribute(value = "register")
-    public User newUser()
-    {
+    public User newUser() {
         return new User();
     }
 
@@ -64,6 +70,7 @@ public class LoginController {
         if(bindingResult.hasErrors()){
             System.out.println("There was a error "+bindingResult);
         }
+
         User user = userService.findByUserNameAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
             session.setAttribute("User-entity",user);
@@ -528,14 +535,30 @@ public class LoginController {
     }
 
 
-
     @PostMapping("/Games")
-    public ModelAndView auditGames(HttpSession session) {
+    public ModelAndView auditGames(HttpSession session, Model model) {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
-        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(),"IN MODULE GAME"));
-        customAuditUserRepository.save(userAudit,user);
-        return redirectTo("5_8");
+        userAudit.setActivityType("IN MODULE GAME");
+        userAudit.setElementStatus("GAME MODULE STARTED");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
+        List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
+        GameQuestions gameQuestion = findRandomQuestion(gameQuestionsList);
+        model.addAttribute("Question", gameQuestion);
+        model.addAttribute("QuestionText", gameQuestion.getQuestionText());
+        model.addAttribute("QuestionPolyMorph", gameQuestion.getQuestionPolyMorph());
+        model.addAttribute("AnswerOption01", gameQuestion.getAnswerOption01());
+        model.addAttribute("AnswerOption02", gameQuestion.getAnswerOption02());
+        model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
+        //customAuditUserRepository.save(userAudit,gameQuestion);
+        return redirectTo("10");
+    }
+
+    private GameQuestions findRandomQuestion(List<GameQuestions> gameQuestionsList) {
+        int randomElementIndex
+                = ThreadLocalRandom.current().nextInt(gameQuestionsList.size()) % gameQuestionsList.size();
+        GameQuestions gameQuestion = gameQuestionsList.get(randomElementIndex);
+        return gameQuestion;
     }
 
     @PostMapping("/PrevOrNext")
@@ -543,7 +566,7 @@ public class LoginController {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("CLICKTHROUGH");
-        customAuditUserRepository.save(userAudit,user);
+        customAuditUserRepository.save(userAudit, user);
         return redirectTo("5_8");
     }
 
