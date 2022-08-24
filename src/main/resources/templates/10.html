@@ -57,36 +57,29 @@
                             <!-- Carousel Item 1 Start -->
                             <div class="swiper-slide">
                                 <div class="hf-quiz">
-                                    <th class="hf-quiz-question">
+                                    <h3 th class="hf-quiz-question"/>
                                     <th th:text="${QuestionText}"></th>
                                     <th th:text="${QuestionPolyMorph}"></th>
                                     <div class="hf-quiz-options">
                                         <ul class="hf-selectable-options">
-                                            <li class="hf-flag-cyprus"><span><th
-                                                    th:text="${AnswerOption01}"></th></span></li>
-                                            >
-                                            <li class="hf-flag-congo"><span><th
-                                                    th:text="${AnswerOption02}"></th> </span></li>
-                                            <li class="hf-flag-china"><span><th th:text="${AnswerCorrect}"></th> </span>
-                                            </li>
+                                            <li th:id="AnswerOption01" th:field="*{AnswerOption01}"
+                                                th:onclick="'submitAnswer(\''+${AnswerOption01}+ '\');'"
+                                                name="AnswerOption01" class="hf-flag-cyprus"><span><th
+                                                    th:text="${AnswerOption01}"></th> </span></li>
+                                            <li th:id="AnswerOption02" th:field="*{AnswerOption02}"
+                                                th:onclick="'submitAnswer(\''+${AnswerOption02}+ '\');'"
+                                                name="AnswerOption02" class="hf-flag-congo"><span><th
+                                                    th:text="${AnswerOption02}"></th></span></li>
+                                            <li th:id="AnswerCorrect" th:field="*{AnswerCorrect}"
+                                                th:onclick="'submitAnswer(\''+${AnswerCorrect}+ '\');'"
+                                                name="AnswerCorrect" class="hf-flag-china"><span><th
+                                                    th:text="${AnswerCorrect}"></th></span></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <!-- Carousel Item 1 End -->
                             <!-- Carousel Item 1 Start -->
-                            <div class="swiper-slide">
-                                <div class="hf-quiz">
-                                    <h3 class="hf-quiz-question">Which country has the currency mnemonic CNY?</h3>
-                                    <div class="hf-quiz-options">
-                                        <ul class="hf-selectable-options">
-                                            <li class="hf-flag-cyprus"><span>Cyprus</span></li>
-                                            <li class="hf-flag-congo"><span>Democratic Republic of the Congo</span></li>
-                                            <li class="hf-flag-china"><span>China</span></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
                             <!-- Carousel Item 1 End -->
                             <!-- Carousel Item 2 Start -->
                             <div class="swiper-slide">
@@ -97,31 +90,45 @@
                                         <div class="hf-graph-img">
                                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 483 276">
                                                 <g data-name="Group 7">
-                                                    <text data-name="100 80 60 40 20 0" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
-                                                        <tspan x="17.038" y="15">100</tspan><tspan x="24.526" y="56">80</tspan><tspan x="25.012" y="97">60</tspan><tspan x="25.066" y="138">40</tspan><tspan x="24.85" y="179">20</tspan><tspan x="34.93" y="220">0</tspan>
+                                                    <text data-name="100 80 60 40 20 0" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
+                                                        <tspan x="17.038" y="15">100</tspan>
+                                                        <tspan x="24.526" y="56">80</tspan>
+                                                        <tspan x="25.012" y="97">60</tspan>
+                                                        <tspan x="25.066" y="138">40</tspan>
+                                                        <tspan x="24.85" y="179">20</tspan>
+                                                        <tspan x="34.93" y="220">0</tspan>
                                                     </text>
-                                                    <text transform="translate(106 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(106 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x="3.646" y="15">FEB</tspan>
                                                     </text>
-                                                    <text transform="translate(50 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(50 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x="3.574" y="15">JAN</tspan>
                                                     </text>
-                                                    <text transform="translate(162 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(162 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x=".334" y="15">MAR</tspan>
                                                     </text>
-                                                    <text transform="translate(218 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(218 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x="2.278" y="15">APR</tspan>
                                                     </text>
-                                                    <text transform="translate(274 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(274 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x="1.153" y="15">MAY</tspan>
                                                     </text>
-                                                    <text transform="translate(330 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(330 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x="3.07" y="15">JUN</tspan>
                                                     </text>
-                                                    <text transform="translate(387 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(387 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x="4.888" y="15">JUL</tspan>
                                                     </text>
-                                                    <text transform="translate(443 232)" fill="#d2d2d9" font-size="18" font-family="CeraPro-Regular, Cera Pro">
+                                                    <text transform="translate(443 232)" fill="#d2d2d9" font-size="18"
+                                                          font-family="CeraPro-Regular, Cera Pro">
                                                         <tspan x=".343" y="15">AUG</tspan>
                                                     </text>
                                                     <path data-name="Fill 167" d="M56 5h423V4H56z" fill="#41425e"/>
@@ -130,23 +137,57 @@
                                                     <path data-name="Fill 170" d="M56 131h423v-1H56z" fill="#41425e"/>
                                                     <path data-name="Fill 171" d="M56 173v-1h423v1H56" fill="#41425e"/>
                                                     <path data-name="Fill 172" d="M56 214h423v-1H56z" fill="#41425e"/>
-                                                    <path data-name="Fill 1387" d="M177.947 129.607 118.838 161 59 129.221l1.221-3.281 58.617 31.13 59.346-31.516 58.86 43.842 58.474-73.99L355.676 42l59.3 44.4L473.4 42.652l1.6 3.04-60.026 44.95-59.154-44.297L297.522 98.1 237.541 174z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1426" d="M184 128c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1427" d="M177 138c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1428" d="M243 172c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1429" d="M236 182c-4.963 0-9-4.712-9-10.5s4.037-10.5 9-10.5 9 4.709 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.022-5.778 6.737s2.592 6.744 5.778 6.744 5.778-3.025 5.778-6.744-2.592-6.737-5.778-6.737z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1422" d="M66 128c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1423" d="M60 138c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1424" d="M125 159c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.909-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1425" d="M118 170c-4.963 0-9-4.712-9-10.5s4.037-10.5 9-10.5 9 4.709 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.022-5.778 6.737s2.592 6.744 5.778 6.744 5.778-3.025 5.778-6.744-2.592-6.737-5.778-6.737z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1430" d="M303 97c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.911-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1431" d="M296 108c-4.963 0-9-4.71-9-10.5s4.037-10.5 9-10.5 9 4.71 9 10.5-4.037 10.5-9 10.5zm0-17.246c-3.186 0-5.778 3.026-5.778 6.746s2.592 6.746 5.778 6.746 5.778-3.026 5.778-6.745-2.592-6.747-5.778-6.747z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1432" d="M361 45c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1433" d="M356 54c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1434" d="M421 88c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1435" d="M415 99c-4.963 0-9-4.71-9-10.5s4.037-10.5 9-10.5 9 4.71 9 10.5-4.037 10.5-9 10.5zm0-17.246c-3.186 0-5.778 3.026-5.778 6.746s2.592 6.746 5.778 6.746 5.778-3.026 5.778-6.745-2.592-6.747-5.778-6.747z" fill="#ff6900"/>
-                                                    <path data-name="Fill 1436" d="M480 45c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.911-8 6.5-8 6.5 3.582 6.5 8" fill="#1d1f40"/>
-                                                    <path data-name="Fill 1437" d="M474 54c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z" fill="#ff6900"/>
+                                                    <path data-name="Fill 1387"
+                                                          d="M177.947 129.607 118.838 161 59 129.221l1.221-3.281 58.617 31.13 59.346-31.516 58.86 43.842 58.474-73.99L355.676 42l59.3 44.4L473.4 42.652l1.6 3.04-60.026 44.95-59.154-44.297L297.522 98.1 237.541 174z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1426"
+                                                          d="M184 128c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1427"
+                                                          d="M177 138c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1428"
+                                                          d="M243 172c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1429"
+                                                          d="M236 182c-4.963 0-9-4.712-9-10.5s4.037-10.5 9-10.5 9 4.709 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.022-5.778 6.737s2.592 6.744 5.778 6.744 5.778-3.025 5.778-6.744-2.592-6.737-5.778-6.737z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1422"
+                                                          d="M66 128c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1423"
+                                                          d="M60 138c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1424"
+                                                          d="M125 159c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.909-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1425"
+                                                          d="M118 170c-4.963 0-9-4.712-9-10.5s4.037-10.5 9-10.5 9 4.709 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.022-5.778 6.737s2.592 6.744 5.778 6.744 5.778-3.025 5.778-6.744-2.592-6.737-5.778-6.737z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1430"
+                                                          d="M303 97c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.911-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1431"
+                                                          d="M296 108c-4.963 0-9-4.71-9-10.5s4.037-10.5 9-10.5 9 4.71 9 10.5-4.037 10.5-9 10.5zm0-17.246c-3.186 0-5.778 3.026-5.778 6.746s2.592 6.746 5.778 6.746 5.778-3.026 5.778-6.745-2.592-6.747-5.778-6.747z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1432"
+                                                          d="M361 45c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1433"
+                                                          d="M356 54c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1434"
+                                                          d="M421 88c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.91-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1435"
+                                                          d="M415 99c-4.963 0-9-4.71-9-10.5s4.037-10.5 9-10.5 9 4.71 9 10.5-4.037 10.5-9 10.5zm0-17.246c-3.186 0-5.778 3.026-5.778 6.746s2.592 6.746 5.778 6.746 5.778-3.026 5.778-6.745-2.592-6.747-5.778-6.747z"
+                                                          fill="#ff6900"/>
+                                                    <path data-name="Fill 1436"
+                                                          d="M480 45c0 4.418-2.91 8-6.5 8s-6.5-3.582-6.5-8 2.911-8 6.5-8 6.5 3.582 6.5 8"
+                                                          fill="#1d1f40"/>
+                                                    <path data-name="Fill 1437"
+                                                          d="M474 54c-4.963 0-9-4.709-9-10.5s4.037-10.5 9-10.5 9 4.712 9 10.5-4.037 10.5-9 10.5zm0-17.241c-3.186 0-5.778 3.025-5.778 6.744s2.592 6.737 5.778 6.737 5.778-3.022 5.778-6.737-2.592-6.744-5.778-6.744z"
+                                                          fill="#ff6900"/>
                                                 </g>
                                             </svg>
                                         </div>
@@ -165,11 +206,12 @@
                         </div>
                     </div>
                     <!-- Carousel Navigation and pagination start -->
-                    <div class="hf-carousel-control">
-                        <button class="hf-carousel-prev hf-button hf-button-left"><span>Prev</span></button>
-                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>
-                        <div class="swiper-pagination"></div>
-                    </div>
+                    <form class="hf-button" name="prev-next-form2" id="prev-next-form2" role="form"
+                          th:action="@{/NextGame}" method="POST">
+                        <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
+                            <button class="hf-button"><span>Next</span></button>
+                        </div>
+                    </form>
                     <!-- Carousel Navigation and pagination end -->
                 </div>
                 <!-- Carousel End -->
@@ -182,6 +224,7 @@
             </div>
             <!-- Carousel Wrap End -->
         </div>
+
     </main>
     <!-- Footer Start -->
     <footer class="hf-footer">
@@ -220,6 +263,25 @@
             prevEl: ".hf-carousel-prev",
         },
     });
+
+    function submitAnswer(answer) {
+        var url = "/Answer";
+        $.ajax({
+            url: url,
+            type: "POST",
+            data: {
+                "answer": answer
+            },
+            success: function (data) {
+                console.log(data);
+            },
+            error: function () {
+                console.log("There was an error");
+            }
+        });
+
+    }
+
 </script>
 </body>
 </html>

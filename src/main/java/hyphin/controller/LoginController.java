@@ -1,9 +1,6 @@
 package hyphin.controller;
 
-import hyphin.model.GameQuestions;
-import hyphin.model.Login;
-import hyphin.model.User;
-import hyphin.model.UserAudit;
+import hyphin.model.*;
 import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.GamesRepository;
@@ -44,6 +41,8 @@ public class LoginController {
     @Autowired
     GamesRepository gamesRepository;
 
+    private GameQuestions gameQuestion;
+
     @Autowired
     UserService userService;
 
@@ -52,15 +51,18 @@ public class LoginController {
         return new User();
     }
 
+    @ModelAttribute(value = "answer")
+    public Answer newAnswer() {
+        return new Answer();
+    }
+
     @ModelAttribute(value = "login")
-    public Login newLogin()
-    {
+    public Login newLogin() {
         return new Login();
     }
 
     @ModelAttribute(value = "video")
-    public Login newVideo()
-    {
+    public Login newVideo() {
         return new Login();
     }
 
@@ -543,14 +545,43 @@ public class LoginController {
         userAudit.setElementStatus("GAME MODULE STARTED");
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
         List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
-        GameQuestions gameQuestion = findRandomQuestion(gameQuestionsList);
+        gameQuestion = findRandomQuestion(gameQuestionsList);
         model.addAttribute("Question", gameQuestion);
         model.addAttribute("QuestionText", gameQuestion.getQuestionText());
         model.addAttribute("QuestionPolyMorph", gameQuestion.getQuestionPolyMorph());
         model.addAttribute("AnswerOption01", gameQuestion.getAnswerOption01());
         model.addAttribute("AnswerOption02", gameQuestion.getAnswerOption02());
         model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
-        //customAuditUserRepository.save(userAudit,gameQuestion);
+        customAuditUserRepository.save(userAudit, user, gameQuestion, null);
+        return redirectTo("10");
+    }
+
+    @PostMapping("/NextGame")
+    public ModelAndView auditNextGame(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setActivityType("IN MODULE GAME");
+        userAudit.setElementStatus("GAME MODULE STARTED");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
+        List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
+        GameQuestions gameQuestion = findRandomQuestion(gameQuestionsList);
+        model.addAttribute("GameQuestion", gameQuestion);
+        model.addAttribute("QuestionPolyMorph", gameQuestion.getQuestionPolyMorph());
+        model.addAttribute("AnswerOption01", gameQuestion.getAnswerOption01());
+        model.addAttribute("AnswerOption02", gameQuestion.getAnswerOption02());
+        model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
+        customAuditUserRepository.save(userAudit, user, gameQuestion, null);
+        return redirectTo("10");
+    }
+
+    @PostMapping("/Answer")
+    public ModelAndView auditAnswer(HttpSession session, @RequestParam String answer) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setActivityType("IN MODULE GAME");
+        userAudit.setElementStatus("GAME QUESTION ANSWERED");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
+        customAuditUserRepository.save(userAudit, user, gameQuestion, answer);
         return redirectTo("10");
     }
 

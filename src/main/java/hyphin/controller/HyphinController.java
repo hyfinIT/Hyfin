@@ -20,8 +20,6 @@ public class HyphinController {
 
     private static final Logger LOGGER = LogManager.getLogger(HyphinController.class);
 
-    private RestTemplate restTemplate;
-
     @Autowired
     CustomUserRepository customUserRepository;
 

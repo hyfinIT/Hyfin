@@ -30,9 +30,6 @@ public interface UserAuditRepository extends JpaRepository<UserAudit, Integer> {
     @Query("select mediaLocation from Elements where elementID = ?1")
     String findMedialocation(String elementID);
 
-    @Query(value = "SELECT * FROM HYFIN.PUBLIC.GameQuestions WHERE elementID = ?1", nativeQuery = true)
-    List<GameQuestions> findGameQuestions(String elementID);
-
     @Query("select learningJourneyId from LearningJourneys where modulePosition = '1' and classification = 'MVP'")
     String findLearningJourneyId();
 

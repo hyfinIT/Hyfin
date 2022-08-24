@@ -37,7 +37,7 @@ public class CustomUserAuditRepository implements UserAuditRepository {
         userAudit.setModuleId(userAuditRepository.findModuleID());
         userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
         userAudit.setElementPosition(userAudit.getElementId());
-        userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(),userAudit.getLearningJourney()));
+        userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
         userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
         userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
         userAudit.setDateTime(jdf.format(new Date()));
@@ -47,6 +47,35 @@ public class CustomUserAuditRepository implements UserAuditRepository {
         return userAudit;
     }
 
+
+    public UserAudit save(UserAudit userAudit, User user, GameQuestions gameQuestions, String answer) {
+        if (findMaxUserAudit() == 0)
+            userAudit.setId(1);
+        else
+            userAudit.setId(findMaxUserAudit() + 1);
+        if (user != null)
+            userAudit.setUid(user.getUid());
+        userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
+        userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
+        userAudit.setModuleId(userAuditRepository.findModuleID());
+        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+        userAudit.setElementPosition(userAudit.getElementId());
+        userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
+        userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
+        userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
+        userAudit.setDateTime(jdf.format(new Date()));
+        userAudit.setQuidNumber(gameQuestions.getQuidNumber());
+        if (answer != null && answer.equalsIgnoreCase(gameQuestions.getAnswerCorrect()))
+            userAudit.setQuidNumberOutcome("CORRECT");
+        else if (answer != null && !answer.equalsIgnoreCase(gameQuestions.getAnswerCorrect()))
+            userAudit.setQuidNumberOutcome("INCORRECT");
+        else
+            userAudit.setQuidNumberOutcome(null);
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAuditRepository.saveAndFlush(userAudit);
+        return userAudit;
+    }
 
 
     // Delegate other methods here ...
@@ -118,12 +147,6 @@ public class CustomUserAuditRepository implements UserAuditRepository {
     @Override
     public String findGlossaryTerm(String moduleId, String learningJourney) {
         return userAuditRepository.findGlossaryTerm(moduleId, learningJourney);
-    }
-
-
-    @Override
-    public List<GameQuestions> findGameQuestions(String elementId) {
-        return userAuditRepository.findGameQuestions(elementId);
     }
 
     public String findElementID() {
