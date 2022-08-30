@@ -60,6 +60,7 @@
                                     <h3 th class="hf-quiz-question"/>
                                     <th th:text="${QuestionText}"></th>
                                     <th th:text="${QuestionPolyMorph}"></th>
+                                    <br></br>
                                     <div class="hf-quiz-options">
                                         <ul class="hf-selectable-options">
                                             <li th:id="AnswerOption01" th:field="*{AnswerOption01}"
@@ -206,10 +207,10 @@
                         </div>
                     </div>
                     <!-- Carousel Navigation and pagination start -->
-                    <form class="hf-button" name="prev-next-form2" id="prev-next-form2" role="form"
+                    <form class="hf-button span" name="prev-next-form2" id="prev-next-form2" role="form"
                           th:action="@{/NextGame}" method="POST">
                         <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
-                            <button class="hf-button"><span>Next</span></button>
+                            <button class="hf-button span"><span>Next</span></button>
                         </div>
                     </form>
                     <!-- Carousel Navigation and pagination end -->

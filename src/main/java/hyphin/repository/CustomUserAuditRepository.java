@@ -24,14 +24,14 @@ public class CustomUserAuditRepository implements UserAuditRepository {
     @Qualifier("userAuditRepository")
     private UserAuditRepository userAuditRepository;
 
-    public UserAudit save(UserAudit userAudit, User user) {
+    public synchronized UserAudit save(UserAudit userAudit, User user) {
         //TO-DO - get it from a sequence.
-        if(findMaxUserAudit() == 0)
+        if (findMaxUserAudit() == 0)
             userAudit.setId(1);
         else
-            userAudit.setId(findMaxUserAudit() +1);
-        if(user != null)
-        userAudit.setUid(user.getUid());
+            userAudit.setId(findMaxUserAudit() + 1);
+        if (user != null)
+            userAudit.setUid(user.getUid());
         userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
         userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
         userAudit.setModuleId(userAuditRepository.findModuleID());
@@ -48,7 +48,7 @@ public class CustomUserAuditRepository implements UserAuditRepository {
     }
 
 
-    public UserAudit save(UserAudit userAudit, User user, GameQuestions gameQuestions, String answer) {
+    public synchronized UserAudit save(UserAudit userAudit, User user, GameQuestions gameQuestions, String answer) {
         if (findMaxUserAudit() == 0)
             userAudit.setId(1);
         else

@@ -72,19 +72,6 @@
         <!-- Click-Thru Type 3 End -->
         <!-- CFD SCR015 -->
         <!-- Click-Thru Type 3 Start -->
-        <div class="hf-ct3 swiper-slide">
-          <div class="hf-ct3-content">
-            <div class="hf-callout hf-callout-3-inverted hf-taupe">
-              <div class="hf-callout-top"></div>
-              <div class="hf-callout-middle"></div>
-              <div class="hf-callout-bottom"></div>
-              <p>A weakening in our home currency can boost our export sales, but at the same time can weaken our purchasing power for raw materials from abroad, increasing our manufacturing costs.</p>
-            </div>
-            <div class="hf-ct3-graph">
-              <img src="./assets/images/click-thrus/scr015.png" alt=""></a>
-            </div>
-          </div>
-        </div>
         <!-- Click-Thru Type 3 End -->
         <!-- CFD SCR016 -->
         <!-- Click-Thru Type 3 Start -->
@@ -129,7 +116,12 @@
               <p>So as you can see, FX is an interesting market, with many diverse users and factors at play.  However, participants will only ever have one of two objectives - to speculate or to manage their currency risk.</p>
             </div>
             <div class="hf-ct1-video-wrap">
-              <div style="padding:100% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/710674139?muted=1&autoplay=1&autopause=0&loop=1&background=1" frameborder="0" allow="autoplay; loop; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+              <div style="padding:100% 0 0 0;position:relative;">
+                <iframe src="https://player.vimeo.com/video/710674139?muted=1&autoplay=1&autopause=0&loop=1&background=1"
+                        frameborder="0" allow="autoplay; loop; fullscreen; picture-in-picture" allowfullscreen
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+              </div>
+              <script src="https://player.vimeo.com/api/player.js"></script>
 
             </div>
           </div>
@@ -138,14 +130,18 @@
       </div>
       <!-- Click-Thru Wrap End -->
       <!-- Click-Thru Nav Start -->
-      <form class="hf-ct-prev hf-button hf-button-left" name="prev-next-form1" id="prev-next-form1" role="form" th:action="@{/ClickThroughPrev1}" method="POST">
-        <div input type="submit" onclick="document.getElementById('prev-next-form1').submit()">
-          <button class="hf-ct-prev hf-button hf-button-left"> <span>Prev</span></button>
+      <form class="hf-ct-nav" name="prev-next-form1" id="prev-next-form1" role="form" th:action="@{/ClickThroughPrev16}"
+            method="POST">
+        <div input type="submit" class="hf-form-row hf-fr-submit"
+             onclick="document.getElementById('prev-next-form1').submit()">
+          <button class="hf-ct-prev hf-button hf-button-left"><span>Prev</span></button>
         </div>
       </form>
-      <form class="hf-ct-next hf-button hf-button-right" name="prev-next-form2" id="prev-next-form2" role="form" th:action="@{/ClickThroughNext1}" method="POST">
-        <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
-          <button class="hf-ct-next hf-button hf-button-far-right"><span>Next</span></button>
+      <form class="hf-ct-nav" name="prev-next-form2" id="prev-next-form2" role="form" th:action="@{/ClickThroughNext16}"
+            method="POST">
+        <div input type="submit" class="hf-form-row hf-fr-submit"
+             onclick="document.getElementById('prev-next-form2').submit()">
+          <button class="hf-ct-next hf-button hf-button-right"><span>Next</span></button>
         </div>
       </form>
       <!-- Click-Thru Nav End -->

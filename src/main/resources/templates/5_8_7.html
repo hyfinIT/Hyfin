@@ -54,16 +54,21 @@
         <!-- CFD SCR002 -->
         <!-- Click-Thru Type 1 Start -->
 
-        <!-- Click-Thru Type 1 End -->
-        <!-- CFD SCR003 -->
-        <!-- Click-Thru Type 3 Start -->
-        <!-- Click-Thru Type 3 End -->
-        <!-- CFD SCR005 -->
-        <!-- Click-Thru Type 3 Start -->
-        <!-- Click-Thru Type 3 End -->
-        <!-- CFD SCR008 -->
-        <!-- Click-Thru Type 1 - video Start -->
-        <div class="hf-ct1 hf-ct1-video swiper-slide">
+          <!-- Click-Thru Type 1 End -->
+          <!-- CFD SCR003 -->
+          <!-- Click-Thru Type 3 Start -->
+          <!-- Click-Thru Type 3 End -->
+          <!-- CFD SCR005 -->
+          <!-- Click-Thru Type 3 Start -->
+          <!-- Click-Thru Type 3 End -->
+          <!-- CFD SCR008 -->
+          <!-- Click-Thru Type 1 - video Start -->
+
+          <!-- Click-Thru Type 3 End -->
+          <!-- CFD SCR007 -->
+          <!-- Click-Thru Type 3 Start -->
+
+          <div class="hf-ct1 hf-ct1-video swiper-slide">
           <div class="hf-ct1-content hf-ct1-fco">
             <div class="hf-callout hf-callout-1-inverted hf-orange">
               <div class="hf-callout-top"></div>
@@ -231,27 +236,36 @@
               <div class="hf-callout-bottom"></div>
               <p>So as you can see, FX is an interesting market, with many diverse users and factors at play.  However, participants will only ever have one of two objectives - to speculate or to manage their currency risk.</p>
             </div>
-            <div class="hf-ct1-video-wrap">
-              <div style="padding:100% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/710674139?muted=1&autoplay=1&autopause=0&loop=1&background=1" frameborder="0" allow="autoplay; loop; fullscreen; picture-in-picture" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+              <div class="hf-ct1-video-wrap">
+                  <div style="padding:100% 0 0 0;position:relative;">
+                      <iframe src="https://player.vimeo.com/video/710674139?muted=1&autoplay=1&autopause=0&loop=1&background=1"
+                              frameborder="0" allow="autoplay; loop; fullscreen; picture-in-picture" allowfullscreen
+                              style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                  </div>
+                  <script src="https://player.vimeo.com/api/player.js"></script>
 
-            </div>
+              </div>
           </div>
         </div>
-        <!-- Click-Thru Type 1 - video End -->
+          <!-- Click-Thru Type 1 - video End -->
       </div>
-      <!-- Click-Thru Wrap End -->
-      <!-- Click-Thru Nav Start -->
-      <form class="hf-ct-prev hf-button hf-button-left" name="prev-next-form1" id="prev-next-form1" role="form" th:action="@{/ClickThroughPrev1}" method="POST">
-        <div input type="submit" onclick="document.getElementById('prev-next-form1').submit()">
-          <button class="hf-ct-prev hf-button hf-button-left"> <span>Prev</span></button>
-        </div>
-      </form>
-      <form class="hf-ct-next hf-button hf-button-right" name="prev-next-form2" id="prev-next-form2" role="form" th:action="@{/ClickThroughNext1}" method="POST">
-        <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
-          <button class="hf-ct-next hf-button hf-button-far-right"><span>Next</span></button>
-        </div>
-      </form>
-      <!-- Click-Thru Nav End -->
+        <!-- Click-Thru Wrap End -->
+        <!-- Click-Thru Nav Start -->
+        <form class="hf-ct-nav" name="prev-next-form1" id="prev-next-form1" role="form"
+              th:action="@{/ClickThroughPrev8}" method="POST">
+            <div input type="submit" class="hf-form-row hf-fr-submit"
+                 onclick="document.getElementById('prev-next-form1').submit()">
+                <button class="hf-ct-prev hf-button hf-button-left"><span>Prev</span></button>
+            </div>
+        </form>
+        <form class="hf-ct-nav" name="prev-next-form2" id="prev-next-form2" role="form"
+              th:action="@{/ClickThroughNext8}" method="POST">
+            <div input type="submit" class="hf-form-row hf-fr-submit"
+                 onclick="document.getElementById('prev-next-form2').submit()">
+                <button class="hf-ct-next hf-button hf-button-right"><span>Next</span></button>
+            </div>
+        </form>
+        <!-- Click-Thru Nav End -->
     </div>
   </main>
   <!-- Left Panel Start -->
