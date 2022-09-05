@@ -1,0 +1,8 @@
+server:
+#  port: 9098
+  ssl:
+    key-store: classpath:springboot.jks
+    key-store-password: ASdks47fjdf838esjf38fn
+    key-store-type: JKS
+#    key-alias: springboot
+    key-password: ASdks47fjdf838esjf38fn
