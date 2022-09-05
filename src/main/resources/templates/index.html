@@ -11,6 +11,7 @@
   <!-- For Js Library -->
   <script src="assets/vendor.js?v=4"></script>
   <script src="assets/theme.js?v=4"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
   <!-- Header -->
@@ -633,34 +634,34 @@
           <div class="contact__image"><img src="assets/images/contact-hyfin.webp" alt="Contact image" /></div>
           <!-- End image -->
           <!-- Form -->
-          <form class="contact__form" method="post">
+          <form class="contact__form" id="feedbackform" th:action="@{/feedback}" method="POST">
             <!-- Row -->
             <div class="row">
               <div class="col-12 col-md-6">
                 <!-- Form group -->
                 <div class="form-group">
-                  <input type="text" name="name" class="form-group__input" placeholder="Name*">
+                  <input type="text" name="name" class="form-group__input" placeholder="Name*" required>
                 </div>
                 <!-- End form group -->
               </div>
               <div class="col-12 col-md-6">
                 <!-- Form group -->
                 <div class="form-group">
-                  <input type="email" name="email" class="form-group__input" placeholder="Email*">
+                  <input type="email" name="email" class="form-group__input" placeholder="Email*" required>
                 </div>
                 <!-- End form group -->
               </div>
               <div class="col-12 col-md-6">
                 <!-- Form group -->
                 <div class="form-group">
-                  <input type="text" name="organisation" class="form-group__input" placeholder="Organisation">
+                  <input type="text" name="organization" class="form-group__input" placeholder="Organization">
                 </div>
                 <!-- End form group -->
               </div>
               <div class="col-12 col-md-6">
                 <!-- Form group -->
                 <div class="form-group">
-                  <input type="text" name="phone" class="form-group__input" placeholder="Telephone">
+                  <input type="tel" name="phone" class="form-group__input" placeholder="Telephone">
                 </div>
                 <!-- End form group -->
               </div>
@@ -674,6 +675,8 @@
               <div class="col-12">
                 <!-- Action -->
                 <div class="form__action">
+                  <div class="g-recaptcha" data-sitekey="6LekCdYhAAAAAOstRAOmSFE9xral5y-5hhxJLpQO"></div>
+                  <br/>
                   <button type="submit" class="form-button">Submit</button>
                 </div>
                 <!-- End action -->
