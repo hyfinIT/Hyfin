@@ -4902,3 +4902,7 @@ body.small-bg {
 .th-loop-li{
     margin-bottom: 13px !important;
 }
+
+div.hf-icons-group form{
+    width:78px
+}
