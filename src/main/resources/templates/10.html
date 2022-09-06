@@ -62,19 +62,13 @@
                                     <th th:text="${QuestionPolyMorph}"></th>
                                     <br></br>
                                     <div class="hf-quiz-options">
-                                        <ul class="hf-selectable-options">
-                                            <li th:id="AnswerOption01" th:field="*{AnswerOption01}"
-                                                th:onclick="'submitAnswer(\''+${AnswerOption01}+ '\');'"
-                                                name="AnswerOption01" class="hf-flag-cyprus"><span><th
-                                                    th:text="${AnswerOption01}"></th> </span></li>
-                                            <li th:id="AnswerOption02" th:field="*{AnswerOption02}"
-                                                th:onclick="'submitAnswer(\''+${AnswerOption02}+ '\');'"
-                                                name="AnswerOption02" class="hf-flag-congo"><span><th
-                                                    th:text="${AnswerOption02}"></th></span></li>
-                                            <li th:id="AnswerCorrect" th:field="*{AnswerCorrect}"
-                                                th:onclick="'submitAnswer(\''+${AnswerCorrect}+ '\');'"
-                                                name="AnswerCorrect" class="hf-flag-china"><span><th
-                                                    th:text="${AnswerCorrect}"></th></span></li>
+                                        <ul th:each="answer : ${answers}" class="hf-selectable-options">
+                                            <ul class="hf-selectable-options">
+                                                <li th:id="${answer}" th:field="*{answer}"
+                                                    th:onclick="'submitAnswer(\''+${answer}+ '\');'"
+                                                    name="${answer}" class="hf-flag-cyprus th-loop-li"><span><th
+                                                        th:text="${answer}"></th> </span></li>
+                                            </ul>
                                         </ul>
                                     </div>
                                 </div>

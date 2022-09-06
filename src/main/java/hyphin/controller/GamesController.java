@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -71,13 +73,29 @@ public class GamesController {
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
         List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
         gameQuestion = findRandomQuestion(gameQuestionsList);
+
+        String[] answers = {gameQuestion.getAnswerOption01(), gameQuestion.getAnswerOption02(),
+                gameQuestion.getAnswerCorrect()};
+        List<String> list = Arrays.asList(answers);
+        Collections.shuffle(list);
+        model.addAttribute("answers", list);
+
         model.addAttribute("Question", gameQuestion);
         model.addAttribute("QuestionText", gameQuestion.getQuestionText());
         model.addAttribute("QuestionPolyMorph", gameQuestion.getQuestionPolyMorph());
         model.addAttribute("AnswerOption01", gameQuestion.getAnswerOption01());
         model.addAttribute("AnswerOption02", gameQuestion.getAnswerOption02());
         model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
-        customAuditUserRepository.save(userAudit, user, gameQuestion, null);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                customAuditUserRepository.save(userAudit, user, gameQuestion, null);
+            }
+        });
+
+        thread.start();
+
         return redirectTo("10");
     }
 
@@ -91,13 +109,27 @@ public class GamesController {
         userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
         List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
         GameQuestions gameQuestion = findRandomQuestion(gameQuestionsList);
-        model.addAttribute("GameQuestion", gameQuestion);
+        String[] answers = {gameQuestion.getAnswerOption01(), gameQuestion.getAnswerOption02(),
+                gameQuestion.getAnswerCorrect() + "Correct"};
+        List<String> list = Arrays.asList(answers);
+        Collections.shuffle(list);
+        model.addAttribute("answers", list);
+
+        model.addAttribute("Question", gameQuestion);
         model.addAttribute("QuestionText", gameQuestion.getQuestionText());
         model.addAttribute("QuestionPolyMorph", gameQuestion.getQuestionPolyMorph());
         model.addAttribute("AnswerOption01", gameQuestion.getAnswerOption01());
         model.addAttribute("AnswerOption02", gameQuestion.getAnswerOption02());
         model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
-        customAuditUserRepository.save(userAudit, user, gameQuestion, null);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                customAuditUserRepository.save(userAudit, user, gameQuestion, null);
+            }
+        });
+        thread.start();
+
         return redirectTo("10");
     }
 
