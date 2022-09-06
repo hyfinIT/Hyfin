@@ -110,7 +110,7 @@ public class GamesController {
         List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
         GameQuestions gameQuestion = findRandomQuestion(gameQuestionsList);
         String[] answers = {gameQuestion.getAnswerOption01(), gameQuestion.getAnswerOption02(),
-                gameQuestion.getAnswerCorrect() + "Correct"};
+                gameQuestion.getAnswerCorrect()};
         List<String> list = Arrays.asList(answers);
         Collections.shuffle(list);
         model.addAttribute("answers", list);
