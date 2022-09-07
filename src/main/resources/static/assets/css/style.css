@@ -3373,6 +3373,8 @@ body.small-bg {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    margin-right: 50px;
+    float: left
 }
 
 .hf-ct-nav .hf-button.swiper-button-disabled {
