@@ -2506,6 +2506,10 @@ body.small-bg {
     background-color: #999;
 }
 
+.hf-bb-icon.hf-blue::after {
+    background-color: #1BA0E3;
+}
+
 .hf-tp1-content {
     display: -webkit-box;
     display: -ms-flexbox;
