@@ -469,11 +469,20 @@ public class ClickThroughController {
         return redirectTo("5_8_16");
     }
 
+    @PostMapping("/ClickThroughDone")
+    public ModelAndView auditClickThroughDone(HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        UserAudit userAudit = new UserAudit();
+        userAudit.setElementStatus("ON PAGE 18 OUT OF 18");
+        userAudit.setModuleProgressPosition("COMPLETE, ALL DONE !!");
+        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "CLICKTHROUGH"));
+        customAuditUserRepository.save(userAudit, user);
+        return redirectTo("4");
+    }
 
     public ModelAndView redirectTo(String pageTo) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName(pageTo);
         return mav;
     }
-
 }
