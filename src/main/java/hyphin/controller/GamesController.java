@@ -22,6 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
@@ -49,6 +50,10 @@ public class GamesController {
     @Autowired
     UserService userService;
 
+    private static final String GAMES_ELEMENT_ID = "3";
+
+    private List<GameQuestions> gameQuestionsList;
+
     @ModelAttribute(value = "register")
     public User newUser() {
         return new User();
@@ -72,6 +77,7 @@ public class GamesController {
 
     @PostMapping("/Games")
     public ModelAndView auditGames(HttpSession session, Model model) {
+        gameQuestionsList = gamesRepository.findAll();
         gameService.dropCounter(session.getId());
         gameService.getOrCreateAnswersCounter(session.getId());
         User user = (User) session.getAttribute("User-entity");
@@ -79,8 +85,7 @@ public class GamesController {
         userAudit.setActivityType("IN MODULE GAME");
         userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + ++counter + "" + " ASKED");
         userAudit.setElementStatus("GAME QUESTION NO " + counter + "" + " ASKED");
-        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
-        List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
+        userAudit.setElementId(GAMES_ELEMENT_ID);
         gameQuestion = findRandomQuestion(gameQuestionsList);
 
         String[] answers = {gameQuestion.getAnswerOption01(), gameQuestion.getAnswerOption02(),
@@ -111,15 +116,33 @@ public class GamesController {
 
     @PostMapping("/NextGame")
     public ModelAndView auditNextGame(HttpSession session, Model model, String answer, String questionId) {
+        User user = (User) session.getAttribute("User-entity");
+
         if (Objects.nonNull(answer)) {
             gameService.increaseAnswersCounter(session.getId());
-            Optional<GameQuestions> question = gamesRepository.findByQuidNumber(questionId);
-            question.ifPresent(q -> {
-                if (q.getAnswerCorrect().equals(answer)) {
-                    gameService.increaseCorrectAnswersCounter(session.getId());
-                }
+
+            int counterValue = counter;
+
+            Thread thread = new Thread(() -> {
+                Optional<GameQuestions> question = gamesRepository.findByQuidNumber(questionId);
+                question.ifPresent(q -> {
+                    UserAudit userAuditAnswer = new UserAudit();
+                    userAuditAnswer.setActivityType("IN MODULE GAME");
+                    userAuditAnswer.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + counterValue + "" + " ANSWERED");
+                    userAuditAnswer.setElementStatus("GAME QUESTION NO " + counterValue + "" + " ANSWERED");
+                    userAuditAnswer.setElementId(GAMES_ELEMENT_ID);
+
+                    customAuditUserRepository.save(userAuditAnswer, user, q, answer);
+
+                    if (q.getAnswerCorrect().equals(answer)) {
+                        gameService.increaseCorrectAnswersCounter(session.getId());
+                    }
+                });
             });
+
+            thread.start();
         }
+
         int round = gameService.getRound(session.getId());
         int answeredQuestionsCounter = gameService.getOrCreateAnswersCounter(session.getId());
         if (answeredQuestionsCounter == 10 && round < 3) {
@@ -129,7 +152,6 @@ public class GamesController {
         } else if (answeredQuestionsCounter == 10 && round == 3) {
             return finalTotalResult(gameService.getCorrectAnswersCounter(session.getId()));
         } else {
-            List<GameQuestions> gameQuestionsList = gamesRepository.findAll();
             GameQuestions gameQuestion = findRandomQuestion(gameQuestionsList);
             String[] answers = {gameQuestion.getAnswerOption01(), gameQuestion.getAnswerOption02(),
                     gameQuestion.getAnswerCorrect()};
@@ -144,37 +166,15 @@ public class GamesController {
             model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
             model.addAttribute("questionId", gameQuestion.getQuidNumber());
 
-            User user = (User) session.getAttribute("User-entity");
             UserAudit userAudit = new UserAudit();
             userAudit.setActivityType("IN MODULE GAME");
             userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + ++counter + "" + " ASKED");
             userAudit.setElementStatus("GAME QUESTION NO " + counter + "" + " ASKED");
-            userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
-
-            Thread thread = new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    customAuditUserRepository.save(userAudit, user, gameQuestion, null);
-                }
-            });
-            thread.start();
+            userAudit.setElementId(GAMES_ELEMENT_ID);
+            customAuditUserRepository.save(userAudit, user, gameQuestion, null);
 
             return redirectTo("10");
         }
-
-
-    }
-
-    @PostMapping("/Answer")
-    public ModelAndView auditAnswer(HttpSession session, @RequestParam String answer) {
-        User user = (User) session.getAttribute("User-entity");
-        UserAudit userAudit = new UserAudit();
-        userAudit.setActivityType("IN MODULE GAME");
-        userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + counter + "" + " ANSWERED");
-        userAudit.setElementStatus("GAME QUESTION NO " + counter + "" + " ANSWERED");
-        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "IN MODULE GAME"));
-        customAuditUserRepository.save(userAudit, user, gameQuestion, answer);
-        return redirectTo("10");
     }
 
     @GetMapping("/ready")
