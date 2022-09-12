@@ -64,7 +64,7 @@
                                     <div class="hf-quiz-options">
                                         <ul class="hf-selectable-options">
                                                 <li th:each="answer : ${answers}" th:id="${answer}" th:field="*{answer}"
-                                                    th:onclick="'submitAnswer(\''+${answer}+ '\'); setData(\''+${questionId}+ '\', \''+${answer}+ '\');'"
+                                                    th:onclick="'setData(\''+${questionId}+ '\', \''+${answer}+ '\');'"
                                                     name="${answer}" class="th-loop-li"><span><th
                                                         th:text="${answer}"></th> </span></li>
 
@@ -204,9 +204,7 @@
                           th:action="@{/NextGame}" method="POST">
                         <input hidden="true" name="answer" id="answerInput" value="default">
                         <input hidden="true" name="questionId" id="questionIdInput" value="default">
-                        <div input type="submit" onclick="document.getElementById('prev-next-form2').submit()">
-                            <button class="hf-button span"><span>Next</span></button>
-                        </div>
+                        <button id="submitButton" class="hf-button" onclick="document.getElementById('submitButton').setAttribute('disabled', 'true'); document.getElementById('submitButton').; document.getElementById('prev-next-form2').submit()"><span>Next</span></button>
                     </form>
                     <!-- Carousel Navigation and pagination end -->
                 </div>
