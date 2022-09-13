@@ -203,7 +203,7 @@
                     <form class="hf-button span" name="prev-next-form2" id="prev-next-form2" role="form"
                           th:action="@{/NextGame}" method="POST">
                         <input hidden="true" name="answer" id="answerInput" value="default">
-                        <input hidden="true" name="questionId" id="questionIdInput" value="default">
+                        <input hidden="true" name="questionId" id="questionIdInput" th:value="${questionId}">
                         <button id="submitButton" class="hf-button" onclick="document.getElementById('submitButton').setAttribute('disabled', 'true'); document.getElementById('submitButton').; document.getElementById('prev-next-form2').submit()"><span>Next</span></button>
                     </form>
                     <!-- Carousel Navigation and pagination end -->

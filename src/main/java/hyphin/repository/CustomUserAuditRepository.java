@@ -67,12 +67,16 @@ public class CustomUserAuditRepository implements UserAuditRepository {
         userAudit.setQuidNumber(gameQuestions.getQuidNumber());
         if (answer != null && answer.equalsIgnoreCase(gameQuestions.getAnswerCorrect()))
             userAudit.setQuidNumberOutcome("CORRECT");
+        else if ("default".equals(answer)) {
+            userAudit.setQuidNumberOutcome("NO ANSWER");
+        }
         else if (answer != null && !answer.equalsIgnoreCase(gameQuestions.getAnswerCorrect()))
             userAudit.setQuidNumberOutcome("INCORRECT");
-        else
+         else
             userAudit.setQuidNumberOutcome(null);
         userAudit.setDifficulty(null);
         userAudit.setCompletionTime(null);
+        userAudit.setQuidAnswer(answer);
         userAuditRepository.saveAndFlush(userAudit);
         return userAudit;
     }

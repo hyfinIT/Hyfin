@@ -33,11 +33,11 @@ public class UserAudit {
     String elementPosition;
     String quidNumber;
     String quidNumberOutcome;
+    String quidAnswer;
     String difficulty;
     String screenIdNumber;
     String mediaDuration;
     String mediaCompletionStatus;
-    String mediaScore;
 
 }
 
