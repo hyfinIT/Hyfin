@@ -83,8 +83,8 @@ public class GamesController {
         User user = (User) session.getAttribute("User-entity");
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("IN MODULE GAME");
-        userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + ++counter + "" + " ASKED");
-        userAudit.setElementStatus("GAME QUESTION NO " + counter + "" + " ASKED");
+        userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + gameService.getQuestionNumber(session.getId()) + "" + " ASKED");
+        userAudit.setElementStatus("GAME QUESTION NO " + gameService.getQuestionNumber(session.getId()) + "" + " ASKED");
         userAudit.setElementId(GAMES_ELEMENT_ID);
         gameQuestion = findRandomQuestion(gameQuestionsList);
 
@@ -118,7 +118,7 @@ public class GamesController {
     public ModelAndView auditNextGame(HttpSession session, Model model, String answer, String questionId) {
         User user = (User) session.getAttribute("User-entity");
 
-        if (Objects.nonNull(answer)) {
+        if (Objects.nonNull(questionId)) {
             gameService.increaseAnswersCounter(session.getId());
 
             int counterValue = counter;
@@ -128,8 +128,13 @@ public class GamesController {
                 question.ifPresent(q -> {
                     UserAudit userAuditAnswer = new UserAudit();
                     userAuditAnswer.setActivityType("IN MODULE GAME");
-                    userAuditAnswer.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + counterValue + "" + " ANSWERED");
-                    userAuditAnswer.setElementStatus("GAME QUESTION NO " + counterValue + "" + " ANSWERED");
+                    if (!"default".equals(answer)) {
+                        userAuditAnswer.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + (gameService.getQuestionNumber(session.getId()) - 1) + "" + " ANSWERED");
+                        userAuditAnswer.setElementStatus("GAME QUESTION NO " + (gameService.getQuestionNumber(session.getId()) - 1) + "" + " ANSWERED");
+                    } else {
+                        userAuditAnswer.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + (gameService.getQuestionNumber(session.getId()) - 1) + "" + " SKIPPED");
+                        userAuditAnswer.setElementStatus("GAME QUESTION NO " + (gameService.getQuestionNumber(session.getId()) - 1) + "" + " SKIPPED");
+                    }
                     userAuditAnswer.setElementId(GAMES_ELEMENT_ID);
 
                     customAuditUserRepository.save(userAuditAnswer, user, q, answer);
@@ -168,8 +173,8 @@ public class GamesController {
 
             UserAudit userAudit = new UserAudit();
             userAudit.setActivityType("IN MODULE GAME");
-            userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + ++counter + "" + " ASKED");
-            userAudit.setElementStatus("GAME QUESTION NO " + counter + "" + " ASKED");
+            userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + gameService.getQuestionNumber(session.getId()) + "" + " ASKED");
+            userAudit.setElementStatus("GAME QUESTION NO " + gameService.getQuestionNumber(session.getId()) + "" + " ASKED");
             userAudit.setElementId(GAMES_ELEMENT_ID);
             customAuditUserRepository.save(userAudit, user, gameQuestion, null);
 

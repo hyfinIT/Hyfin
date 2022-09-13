@@ -72,4 +72,13 @@ public class GameService {
     public void dropCounter(String sessionId) {
         userGames.remove(sessionId);
     }
+
+    public int getQuestionNumber(String sessionId) {
+        if (userGames.containsKey(sessionId)) {
+            UserGame userGame = userGames.get(sessionId);
+            return userGame.getRound() * 10 - 10 + (userGame.getAnswersCounter() + 1);
+        } else {
+            throw new RuntimeException("Get question number error");
+        }
+    }
 }
