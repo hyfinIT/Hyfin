@@ -1,4 +1,4 @@
-package hyphin.model;
+package hyphin.model.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,4 +21,8 @@ public class User {
     String email;
     String password;
     String dateTime;
+
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }

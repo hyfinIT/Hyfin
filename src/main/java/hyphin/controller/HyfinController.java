@@ -1,7 +1,7 @@
 package hyphin.controller;
 
 import hyphin.model.Login;
-import hyphin.model.User;
+import hyphin.model.user.User;
 import hyphin.repository.CustomUserRepository;
 import hyphin.service.UserService;
 import org.apache.logging.log4j.LogManager;

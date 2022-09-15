@@ -1,7 +1,6 @@
 package hyphin.repository;
 
-import hyphin.model.User;
-import hyphin.model.UserAudit;
+import hyphin.model.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
@@ -68,6 +67,10 @@ public class CustomUserRepository implements UserRepository {
         return userRepository.findMax();
     }
 
+    @Override
+    public User getByEmail(String email) {
+        return userRepository.getByEmail(email);
+    }
 
 
     @Override

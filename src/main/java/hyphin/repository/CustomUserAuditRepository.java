@@ -1,7 +1,7 @@
 package hyphin.repository;
 
 import hyphin.model.GameQuestions;
-import hyphin.model.User;
+import hyphin.model.user.User;
 import hyphin.model.UserAudit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

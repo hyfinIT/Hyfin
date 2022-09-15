@@ -2,6 +2,7 @@ package hyphin.controller;
 
 
 import hyphin.model.*;
+import hyphin.model.user.User;
 import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;

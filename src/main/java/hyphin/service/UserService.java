@@ -1,6 +1,6 @@
 package hyphin.service;
 
-import hyphin.model.User;
+import hyphin.model.user.User;
 import hyphin.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

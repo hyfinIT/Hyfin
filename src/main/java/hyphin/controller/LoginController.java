@@ -1,6 +1,8 @@
 package hyphin.controller;
 
 import hyphin.model.*;
+import hyphin.model.user.Role;
+import hyphin.model.user.User;
 import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;
@@ -9,6 +11,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +37,9 @@ public class LoginController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @ModelAttribute(value = "register")
     public User newUser() {
@@ -79,8 +85,15 @@ public class LoginController {
         if(bindingResult.hasErrors()){
             LOGGER.log(Level.ERROR,"There was a form binding error " + bindingResult);
         }
+        user.setRole(Role.USER);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         customUserRepository.save(user);
         return redirectTo("RegistrationSuccess");
+    }
+
+    @GetMapping("/access_denied")
+    public ModelAndView accessDenied() {
+        return redirectTo("access_denied");
     }
 
     public ModelAndView redirectTo(String pageTo) {

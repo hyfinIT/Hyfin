@@ -56,7 +56,7 @@
                 <!-- Login/Registration Wrap Start -->
                 <div class="hf-login-regi">
                     <!-- Login Form Start -->
-                    <form class="hf-form hf-login-form" id="login-form" role="form" th:action="@{/Login}" method="POST" th:object="${login}">
+                    <form class="hf-form hf-login-form" id="login-form" role="form" th:action="@{/loginprocessing}" method="POST">
                         <div class="hf-form-inner">
                             <header class="hf-form-header">
                                 <div class="hf-form-header-text">
@@ -68,9 +68,9 @@
                             </header>
                             <div class="hf-form-row hf-fr-col1">
                                 <div class="hf-form-field">
-                                    <label for="email1">Email</label>
+                                    <label for="username">Email</label>
                                     <!--/*@thymesVar id="email1" type=""*/-->
-                                     <input type="email" id="email1" field="*{email}" name="email">
+                                     <input type="email" id="username" field="*{email}" name="username">
 
                                 </div>
                             </div>

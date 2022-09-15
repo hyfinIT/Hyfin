@@ -1,6 +1,7 @@
 package hyphin.controller;
 
 import hyphin.model.*;
+import hyphin.model.user.User;
 import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.GamesRepository;
@@ -8,21 +9,21 @@ import hyphin.repository.UserRepository;
 import hyphin.service.GameService;
 import hyphin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadLocalRandom;
 
 @RestController
@@ -181,7 +182,6 @@ public class GamesController {
             return redirectTo("10");
         }
     }
-
     @GetMapping("/ready")
     public ModelAndView ready() {
         return redirectTo("ready");
