@@ -40,7 +40,7 @@ public class CurrencyService {
         CCY_PAIRS_DICTIONARY.put(2, "USD/JPY");
     }
 
-    @Scheduled(fixedRate = 5 * (1000 * 60))
+    @Scheduled(cron = "0 0 1 * * *")
     public void scheduledMethod() {
         OperationAudit operationAudit = new OperationAudit();
         operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
