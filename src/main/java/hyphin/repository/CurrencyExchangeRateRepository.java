@@ -14,6 +14,6 @@ public interface CurrencyExchangeRateRepository extends JpaRepository<CurrencyEx
     @Query("SELECT max(id) FROM CurrencyExchangeRate")
     Optional<Long> maxId();
 
-    @Query("select cer from CurrencyExchangeRate cer where cer.date = ?1")
-    List<CurrencyExchangeRate> getYesterdayEntry(String date);
+    @Query("select cer from CurrencyExchangeRate cer where cer.date = ?1 and sourceRef = ?2")
+    List<CurrencyExchangeRate> getYesterdayEntry(String date, String sourceRef);
 }
