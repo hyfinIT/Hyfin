@@ -1,4 +1,4 @@
-package hyphin.repository;
+package hyphin.repository.currency;
 
 import hyphin.model.currency.CurrencyExchangeRate;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -15,5 +15,8 @@ public interface CurrencyExchangeRateRepository extends JpaRepository<CurrencyEx
     Optional<Long> maxId();
 
     @Query("select cer from CurrencyExchangeRate cer where cer.date = ?1 and sourceRef = ?2")
-    List<CurrencyExchangeRate> getYesterdayEntry(String date, String sourceRef);
+    List<CurrencyExchangeRate> getEntriesByDateAndSource(String date, String sourceRef);
+
+    @Query("select cer from CurrencyExchangeRate cer where cer.date = ?1")
+    List<CurrencyExchangeRate> getEntriesByDate(String date);
 }

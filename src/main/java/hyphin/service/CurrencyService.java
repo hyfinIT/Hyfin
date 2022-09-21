@@ -2,8 +2,8 @@ package hyphin.service;
 
 import hyphin.model.currency.CurrencyExchangeRate;
 import hyphin.model.currency.OperationAudit;
-import hyphin.repository.CurrencyExchangeRateRepository;
-import hyphin.repository.OperationAuditRepository;
+import hyphin.repository.currency.CurrencyExchangeRateRepository;
+import hyphin.repository.currency.OperationAuditRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -50,13 +49,14 @@ public class CurrencyService {
 
     @Scheduled(cron = "0 0 1 * * *")
     public void scheduledMethod() {
+        log.info("Fetching currency rates.................");
         OperationAudit operationAudit = new OperationAudit();
         operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("Currency exchange rates fetching");
         operationAudit.setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
-        List<CurrencyExchangeRate> yahooYesterdayEntry = currencyExchangeRateRepository.getYesterdayEntry(LocalDate.now().minusDays(1L).toString(), "yahoo");
-        List<CurrencyExchangeRate> mwYesterdayEntry = currencyExchangeRateRepository.getYesterdayEntry(LocalDate.now().minusDays(1L).toString(), "marketwatch");
+        List<CurrencyExchangeRate> yahooYesterdayEntry = currencyExchangeRateRepository.getEntriesByDateAndSource(LocalDate.now().minusDays(1L).toString(), "yahoo");
+        List<CurrencyExchangeRate> mwYesterdayEntry = currencyExchangeRateRepository.getEntriesByDateAndSource(LocalDate.now().minusDays(1L).toString(), "marketwatch");
 
         if (!yahooYesterdayEntry.isEmpty() && !mwYesterdayEntry.isEmpty()) {
             operationAudit.setStatus("ALREADY UP TO DATE");
