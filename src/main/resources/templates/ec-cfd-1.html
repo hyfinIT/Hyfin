@@ -223,8 +223,11 @@
                     </div>
                     <!-- Carousel Navigation and pagination start -->
                     <div class="hf-carousel-control">
-                        <button class="hf-carousel-prev hf-button hf-button-left"><span>Prev</span></button>
-                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>
+<!--                        <button class="hf-carousel-prev hf-button hf-button-left"><span>Prev</span></button>-->
+<!--                        <form role="form" th:action="@{/end-challenge/start}" method="GET">-->
+                            <button type="button" onclick="swiper.disable(); location.href='/ec-cfd-2'" class=" hf-button hf-button-right "><span>Next</span></button>
+<!--                        </form>-->
+<!--                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>-->
                         <div class="swiper-pagination"></div>
                     </div>
                     <!-- Carousel Navigation and pagination end -->

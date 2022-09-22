@@ -193,8 +193,14 @@ function getDataPointsFromCSV(csv) {
                     </div>
                     <!-- Carousel Navigation and pagination start -->
                     <div class="hf-carousel-control">
-                        <button class="hf-carousel-prev hf-button hf-button-left hf-carousel-active"><span>Prev</span></button>
-                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>
+<!--                        <button class="hf-carousel-prev hf-button hf-button-left hf-carousel-active"><span>Prev</span></button>-->
+                        <form role="form" th:action="@{/ec-cfd-1}" method="GET">
+                            <button  class="hf-button hf-button-left  "><span>Prev</span></button>
+                        </form>
+                        <form role="form" th:action="@{/#}" method="GET">
+                            <button  class="hf-button hf-button-right "><span>Next</span></button>
+                        </form>
+<!--                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>-->
                         <div class="swiper-pagination"></div>
                     </div>
                     <!-- Carousel Navigation and pagination end -->
