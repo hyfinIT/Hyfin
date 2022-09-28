@@ -64,7 +64,7 @@
                                     <h3 class="trade-currency__title">What currency pair do you want to trade?</h3>
                                     <div class="trade-currency__description">Choose a pair and select next to continue</div>
                                     <div class="trade-currency__currencies">
-                                        <div class="trade-currency__currency">
+                                        <div onclick="enableNext()" class="trade-currency__currency">
                                             <input type="radio" name="currency" id="currency1" class="currency__input" />
                                             <label for="currency1">
                                                 <div class="currency">
@@ -91,7 +91,7 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="trade-currency__currency">
+                                        <div onclick="disableNext()" class="trade-currency__currency disabled_currency">
                                             <input type="radio" name="currency" id="currency2" class="currency__input" />
                                             <label for="currency2">
                                                 <div class="currency">
@@ -118,7 +118,7 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="trade-currency__currency">
+                                        <div onclick="disableNext()" class="trade-currency__currency disabled_currency">
                                             <input type="radio" name="currency" id="currency3" class="currency__input" />
                                             <label for="currency3">
                                                 <div class="currency">
@@ -225,7 +225,7 @@
                     <div class="hf-carousel-control">
 <!--                        <button class="hf-carousel-prev hf-button hf-button-left"><span>Prev</span></button>-->
 <!--                        <form role="form" th:action="@{/end-challenge/start}" method="GET">-->
-                            <button type="button" onclick="swiper.disable(); location.href='/ec-cfd-2'" class=" hf-button hf-button-right "><span>Next</span></button>
+                            <button id="dis-button" disabled type="button" onclick="swiper.disable(); location.href='/ec-cfd-2'" class="disabled-button hf-button hf-button-right"><span>Next</span></button>
 <!--                        </form>-->
 <!--                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>-->
                         <div class="swiper-pagination"></div>
@@ -281,6 +281,18 @@
             prevEl: ".hf-carousel-prev",
         },
     });
+
+    function enableNext(){
+        console.log('function enableNext()');
+        document.getElementById('dis-button').removeAttribute("disabled");
+        document.getElementById('dis-button').classList.remove("disabled-button");
+    }
+
+    function disableNext(){
+        console.log('function enableNext()');
+        document.getElementById('dis-button').setAttribute("disabled", "disabled");
+        document.getElementById('dis-button').classList.add("disabled-button");
+    }
 </script>
 
 </body>
