@@ -97,6 +97,11 @@
 	color:  #fff;
 }
 
+.trade-currency__currency.disabled_currency input:checked + label .currency__label{
+	background: #e9e9e9;
+	color:  black;
+}
+
 .trade-currency__currency input:checked + label .currency__label svg path {
 	stroke:  #fff !important;
 }
@@ -484,6 +489,14 @@
 .spot-trader__item input:checked + label .spot-trader__label {
 	background: #FE6800;
 	color:  #fff;
+	border-radius: 15px;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+}
+
+.spot-trader__item.disabled-item input:checked + label .spot-trader__label {
+	background: #e9e9e9;
+    	color:  black;
 	border-radius: 15px;
 	-webkit-border-radius: 15px;
 	-moz-border-radius: 15px;
