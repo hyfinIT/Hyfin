@@ -50,6 +50,7 @@ public class CurrencyBlendService {
         if (yesterdayEntries.size() < 6) {
             operationAudit.setStatus("FAIL. (NO DATA FOR BLENDING)");
             operationAuditRepository.save(operationAudit);
+            return;
         }
 
         try {
