@@ -289,6 +289,27 @@ public class HyfinController {
         return mav;
     }
 
+    @GetMapping("/ec-cfd-5d_01")
+    public ModelAndView ECCFD5d01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-5d_01");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-7a_01")
+    public ModelAndView ECCFD7a01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-7a_01");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-8a_01")
+    public ModelAndView ECCFD8a01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-8a_01");
+        return mav;
+    }
+
     @GetMapping("/ec-cfd-5e")
     public ModelAndView ECCFD5() {
         ModelAndView mav = new ModelAndView();

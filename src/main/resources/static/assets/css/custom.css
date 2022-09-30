@@ -1074,7 +1074,7 @@
 .table-item {
 	padding:  0px 4px;
 	width: 134px;
-	width: 90px;
+	width: 82px;
 	min-width: 10%;
 }
 
@@ -1124,8 +1124,8 @@
 	transform:  translateY(-50%);
 	-webkit-transform:  translateY(-50%);
 	-moz-transform:  translateY(-50%);
-	font-size: 14px;
-	line-height: 18px;
+	font-size: 12px;
+	line-height: 13px;
 	font-weight: 600;
 	margin: 0px;
 }
@@ -1156,14 +1156,14 @@
 .table-item__content {
 	padding:  11px 7px 11px 7px;
 	text-align: right;
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 18px;
 }
 
 @media (max-width:  1298px) {
 
 	.table-item__content {
-		font-size: 12px;
+		font-size: 11px;
 		line-height: 16px;
 	}
 }
