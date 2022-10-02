@@ -8,10 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="/assets/lib/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
     <!-- Link Main CSS -->
-    <link rel="stylesheet" href="/assets/css/style.css?ver=1.1">
-    <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
+    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FKDQB9FNV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8FKDQB9FNV');
+    </script>
 </head>
     <body class="hf-bg-solid">
     <div class="hf-wrap">
@@ -19,7 +28,7 @@
         <header class="hf-header">
             <div class="hf-logo-wrap">
                 <div class="hf-logo">
-                    <img src="/assets/images/hyfin-logo.svg" alt="">
+                    <img src="./assets/images/hyfin-logo.svg" alt="">
                 </div>
                 <div class="hf-current-screen">
                     <span class="hf-current-screen-title">End Challenge</span>
@@ -32,8 +41,8 @@
                     <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
                 </ul>
                 <div class="hf-header-icons">
-                    <a class="hf-hicon-search" href="../search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
-                    <a class="hf-hicon-profile" href="../account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
+                    <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
+                    <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
                     <div class="hf-hicon-menu">
                         <div class="hf-menu-btn" id="hf-menu-trigger">
                             <span></span>
@@ -72,7 +81,7 @@
                                 <div class="table-item__title"><p>USD</p></div>
                                 <div class="table-item__content">-300,000.00</div>
                             </div>
-                            <div class="table-item">
+                            <div class="table-item d-none">
                                 <div class="table-item__title"><p>GBP</p></div>
                                 <div class="table-item__content"></div>
                             </div>
@@ -129,9 +138,71 @@
                         </div>
                         <hr />
                     </div>
+                    <div class="your-account__orders">
+                        <div class="orders__title">Orders</div>
+                        <div class="table__d-flex">
+                            <div class="table-item table-item--type-2">
+                                <div class="table-item__title"><p>CCY Pair</p></div>
+                                <div class="table-item__content text-left">EUR/USD</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title"><p>Buy/Sell</p></div>
+                                <div class="table-item__content text-left">Sell</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title"><p>Base Amount</p></div>
+                                <div class="table-item__content">-273,697.66</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title"><p>Term Amount</p></div>
+                                <div class="table-item__content">298,330.45</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title"><p>Order Rate</p></div>
+                                <div class="table-item__content">1.0900</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title"><p>Order Type</p></div>
+                                <div class="table-item__content text-left"><span>STOP-LOSS</span></div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title"><p>Status</p></div>
+                                <div class="table-item__content text-left">OCO TP</div>
+                            </div>
+                        </div>
+                        <div class="table__d-flex">
+                            <div class="table-item table-item--type-2">
+                                <div class="table-item__title d-none-desktop"><p>CCY Pair</p></div>
+                                <div class="table-item__content text-left">EUR/USD</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title d-none-desktop"><p>Buy/Sell</p></div>
+                                <div class="table-item__content text-left">Sell</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title d-none-desktop"><p>Base Amount</p></div>
+                                <div class="table-item__content">-273,697.66</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title d-none-desktop"><p>Term Amount</p></div>
+                                <div class="table-item__content">305,172.89</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title d-none-desktop"><p>Order Rate</p></div>
+                                <div class="table-item__content">1.1150</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title d-none-desktop"><p>Order Type</p></div>
+                                <div class="table-item__content text-left"><span>TAKE-PROFIT</span></div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__title d-none-desktop"><p>Status</p></div>
+                                <div class="table-item__content text-left">OCO SL</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="your-account__action">
-                        <a href="/ec-cfd-5d_01"><span>See what the market did</span></a>
-                        <a href="/ec-cfd-6_01"><span>Manage your risk position</span></a>
+                        <a href="/ec-cfd-7b_01"><span>See what the markets did</span></a>
                     </div>
                 </div>
                 <!-- Carousel End -->
@@ -155,16 +226,16 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="../4.html"><img src="/assets/images/close.svg" alt=""></a>
+            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="/assets/lib/jquery-3.6.0.min.js"></script>
-<script src="/assets/js/script.js?ver=1.1"></script>
-<script src="/assets/js/custom.js?ver=1.1"></script>
+<script src="./assets/lib/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/script.js?ver=1.1"></script>
+<script src="./assets/js/custom.js?ver=1.1"></script>
 <!-- Swiper JS -->
-<script src="/assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".swiper", {
         slidesPerView: 1,

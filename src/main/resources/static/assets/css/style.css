@@ -4919,8 +4919,8 @@ div.hf-icons-group form{
 }
 
 .disabled-button{
-    border: 2px solid grey;
-    color: grey;
+    border: 2px solid grey !important;
+    color: grey !important;
 }
 
 .disabled-button::before {

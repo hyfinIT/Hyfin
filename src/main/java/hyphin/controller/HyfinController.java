@@ -268,6 +268,13 @@ public class HyfinController {
         return mav;
     }
 
+    @GetMapping("/ec-cfd-4c_01")
+    public ModelAndView viewCFD4c01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-4c_01");
+        return mav;
+    }
+
     @GetMapping("/ec-cfd-5a")
     public ModelAndView ECCFD5a() {
         ModelAndView mav = new ModelAndView();
@@ -289,10 +296,38 @@ public class HyfinController {
         return mav;
     }
 
+    @GetMapping("/ec-cfd-5d_01")
+    public ModelAndView ECCFD5d01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-5d_01");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-7a_01")
+    public ModelAndView ECCFD7a01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-7a_01");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-8a_01")
+    public ModelAndView ECCFD8a01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-8a_01");
+        return mav;
+    }
+
     @GetMapping("/ec-cfd-5e")
     public ModelAndView ECCFD5() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("ec-cfd-5e");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-5e_01")
+    public ModelAndView ECCFD501() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-5e_01");
         return mav;
     }
 
@@ -303,10 +338,24 @@ public class HyfinController {
         return mav;
     }
 
+    @GetMapping("/ec-cfd-6_01")
+    public ModelAndView ECCFD601() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-6_01");
+        return mav;
+    }
+
     @GetMapping("/ec-cfd-6a")
     public ModelAndView ECCFD6a() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("ec-cfd-6a");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-6a_01")
+    public ModelAndView ECCFD6a01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-6a_01");
         return mav;
     }
 
@@ -321,6 +370,13 @@ public class HyfinController {
     public ModelAndView viewECCFD7b() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("ec-cfd-7b");
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-7b_01")
+    public ModelAndView viewECCFD7b01() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-7b_01");
         return mav;
     }
 
