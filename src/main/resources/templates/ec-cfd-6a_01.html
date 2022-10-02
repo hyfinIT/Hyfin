@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Template 10</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <!-- Link Main CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FKDQB9FNV"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-8FKDQB9FNV');
+    </script>
+</head>
+    <body class="hf-bg-solid">
+    <div class="hf-wrap">
+        <!-- Header Start -->
+        <header class="hf-header">
+            <div class="hf-logo-wrap">
+                <div class="hf-logo">
+                    <img src="./assets/images/hyfin-logo.svg" alt="">
+                </div>
+                <div class="hf-current-screen">
+                    <span class="hf-current-screen-title">End Challenge</span>
+                </div>
+            </div>
+            <div class="hf-main-menu-wrap">
+                <ul class="hf-main-menu">
+                    <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="../1.html">Courses</a></li>
+                    <li class="hf-menu-item hf-menu-item-help"><a href="../faqs.html">FAQs</a></li>
+                    <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
+                </ul>
+                <div class="hf-header-icons">
+                    <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
+                    <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                    <div class="hf-hicon-menu">
+                        <div class="hf-menu-btn" id="hf-menu-trigger">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header End -->
+    <main class="hf-main">
+        <div class="hf-main-inner">
+            <!-- Carousel Wrap Start -->
+            <div class="hf-carousel-wrap your-account">
+                <!-- Carousel Start -->
+                <div class="hf-carousel">
+                    <div class="order-rate">
+                        <div class="order-rate__title">Set a Take Profit Order</div>
+                        <div class="order-rate__d-flex">
+                            <div class="order-rate__left">
+                                <div class="order-rate__item">
+                                    <div class="order-rate-item__title">Order Entry</div>
+                                    <div class="order-rate-item__content">EUR/USD</div>
+                                </div>
+                                <div class="order-rate__item">
+                                    <div class="order-rate-item__title">Order Type</div>
+                                    <div class="order-rate-item__content">Take Profit</div>
+                                </div>
+                                <div class="order-rate__item">
+                                    <div class="order-rate-item__title">Traded Rate</div>
+                                    <div class="order-rate-item__content">1.0961</div>
+                                </div>
+                                <div class="order-rate__item">
+                                    <div class="order-rate-item__title">Current Mid Rate</div>
+                                    <div class="order-rate-item__content">1.0960</div>
+                                </div>
+                            </div>
+                            <div class="order-rate__right">
+                                <div class="order-rate__description">
+                                    Select order rate in pips above current spot rate, and submit:
+                                </div>
+                                <div class="row">
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount25" class="spot-trader__amount-input" />
+                                            <label for="amount25">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    25<br>
+                                                    (1.0985)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount50" class="spot-trader__amount-input" />
+                                            <label for="amount50">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    50<br>
+                                                    (1.1010)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount75" class="spot-trader__amount-input" />
+                                            <label for="amount75">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    75<br>
+                                                    (1.1035)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount100" class="spot-trader__amount-input" />
+                                            <label for="amount100">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    100<br>
+                                                    (1.1060)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount125" class="spot-trader__amount-input" />
+                                            <label for="amount125">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    125<br>
+                                                    (1.1085)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount150" class="spot-trader__amount-input" />
+                                            <label for="amount150">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    150<br>
+                                                    (1.1110)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount175" class="spot-trader__amount-input" />
+                                            <label for="amount175">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    175<br>
+                                                    (1.1135)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount200" class="spot-trader__amount-input" />
+                                            <label for="amount200">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    200<br>
+                                                    (1.1160)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount225" class="spot-trader__amount-input" />
+                                            <label for="amount225">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    225<br>
+                                                    (1.1185)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount250" class="spot-trader__amount-input" />
+                                            <label for="amount250">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    250<br>
+                                                    (1.1210)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount275" class="spot-trader__amount-input" />
+                                            <label for="amount275">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    275<br>
+                                                    (1.1235)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-125 mobile-col-6">
+                                        <div class="spot-trader__amount-item">
+                                            <input type="radio" name="amount" id="amount300" class="spot-trader__amount-input" />
+                                            <label for="amount300">
+                                                <div onclick="enableButton()" class="spot-trader__amount-label">
+                                                    300<br>
+                                                    (1.1260)
+                                                </div>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="your-account__action">
+                        <a style="margin-right: 60%" href="/ec-cfd-4c_01"><span>Skip</span></a>
+                        <a id="dis-button" class="disabled-button" href="#"><span>Submit Order</span></a>
+                    </div>
+                </div>
+                <!-- Carousel End -->
+                <!-- Carousel frames start -->
+                <span class="hf-carousel-frame-tl"></span>
+                <span class="hf-carousel-frame-tr"></span>
+                <span class="hf-carousel-frame-bl"></span>
+                <span class="hf-carousel-frame-br"></span>
+                <!-- Carousel frames end -->
+            </div>
+            <!-- Carousel Wrap End -->
+        </div>
+    </main>
+    <!-- Footer Start -->
+    <footer class="hf-footer">
+        <div class="hf-footer-inner">
+            <p class="hp-copy">Copyright © 2022 Hyfin. All Rights Reserved</p>
+        </div>
+    </footer>
+    <!-- Footer End -->
+    <!-- Left Panel Start -->
+    <div class="hf-left-menu-wrap">
+        <button class="hf-lm-close">
+            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+        </button>
+    </div>
+    <!-- Left Panel End -->
+</div>
+<script src="./assets/lib/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/script.js?ver=1.1"></script>
+<script src="./assets/js/custom.js?ver=1.1"></script>
+<!-- Swiper JS -->
+<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script>
+    var swiper = new Swiper(".swiper", {
+        slidesPerView: 1,
+        spaceBetween: 0,
+        autoHeight: true,
+        allowTouchMove: false,
+        keyboard: {
+            enabled: false,
+        },
+        pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+        },
+        navigation: {
+            nextEl: ".hf-carousel-next",
+            prevEl: ".hf-carousel-prev",
+        },
+    });
+
+    function enableButton(){
+        console.log('function enableNext()');
+        document.getElementById('dis-button').classList.remove("disabled-button");
+        document.getElementById('dis-button').setAttribute("href", "/ec-cfd-4c_01");
+    }
+</script>
+</body>
+</html>
