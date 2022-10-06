@@ -49,14 +49,12 @@ public class StandardDeviationService {
     }
 
     @Scheduled(cron = "0 0 3 * * *")
-    @PostConstruct
     public void createStandardDeviation() {
         log.info("Standard deviation calculation..................");
         OperationAudit operationAudit = new OperationAudit();
         operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("Standard deviation calculation");
         operationAudit.setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
-
 
 
         standardDeviationRepository.findAll();
@@ -1004,7 +1002,7 @@ public class StandardDeviationService {
         return Math.sqrt(standardDev / (length - 1));
     }
 
-    private Double calculateFiveDayHigh(StandardDeviation standardDeviation){
+    private Double calculateFiveDayHigh(StandardDeviation standardDeviation) {
         Double[] numArray = new Double[5];
 
         numArray[0] = standardDeviation.getPos001();
@@ -1026,7 +1024,7 @@ public class StandardDeviationService {
         return max;
     }
 
-    private Double calculateFiveDayLow(StandardDeviation standardDeviation){
+    private Double calculateFiveDayLow(StandardDeviation standardDeviation) {
         Double[] numArray = new Double[5];
 
         numArray[0] = standardDeviation.getPos001();
@@ -1048,7 +1046,7 @@ public class StandardDeviationService {
         return min;
     }
 
-    private Double calculateOneMonthHigh(StandardDeviation standardDeviation){
+    private Double calculateOneMonthHigh(StandardDeviation standardDeviation) {
         Double[] numArray = new Double[23];
 
         numArray[0] = standardDeviation.getPos001();
@@ -1088,7 +1086,7 @@ public class StandardDeviationService {
         return max;
     }
 
-    private Double calculateOneMonthLow(StandardDeviation standardDeviation){
+    private Double calculateOneMonthLow(StandardDeviation standardDeviation) {
         Double[] numArray = new Double[23];
 
         numArray[0] = standardDeviation.getPos001();
@@ -1128,7 +1126,7 @@ public class StandardDeviationService {
         return min;
     }
 
-    private Double calculateOneMonthRvol(StandardDeviation standardDeviation){
+    private Double calculateOneMonthRvol(StandardDeviation standardDeviation) {
         return standardDeviation.getOneMthStdDev() * Math.sqrt(252);
     }
 }
