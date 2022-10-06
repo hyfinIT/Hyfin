@@ -57,16 +57,24 @@ public class StandardDeviationService {
         operationAudit.setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
 
-        standardDeviationRepository.findAll();
+       try {
+           standardDeviationRepository.findAll();
 
 
-        List<BlendEurUsd> eurUsdAll = eurUsdRepository.findAll();
-        List<BlendGbpUsd> gbpUsdAll = gbpUsdRepository.findAll();
-        List<BlendUsdJpy> usdJpyAll = usdJpyRepository.findAll();
+           List<BlendEurUsd> eurUsdAll = eurUsdRepository.findAll();
+           List<BlendGbpUsd> gbpUsdAll = gbpUsdRepository.findAll();
+           List<BlendUsdJpy> usdJpyAll = usdJpyRepository.findAll();
 
-        processBlends(eurUsdAll);
-        processBlends(gbpUsdAll);
-        processBlends(usdJpyAll);
+           processBlends(eurUsdAll);
+           processBlends(gbpUsdAll);
+           processBlends(usdJpyAll);
+
+           operationAudit.setStatus("SUCCESS");
+           operationAuditRepository.save(operationAudit);
+       } catch (Exception e) {
+           operationAudit.setStatus("FAIL");
+           operationAuditRepository.save(operationAudit);
+       }
     }
 
     private void processBlends(List<? extends Blend> eurUsdAll) {
