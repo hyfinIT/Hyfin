@@ -10,9 +10,6 @@ import java.util.Optional;
 @Repository
 public interface StandardDeviationRepository extends JpaRepository<StandardDeviation, Long> {
 
-        @Query("SELECT max(id) FROM StandartDeviation")
-//    @Query(
-//            value = "select max(id) from PUBLIC.BLEND_STDDEV",
-//            nativeQuery = true)
+    @Query("SELECT max(id) FROM StandardDeviation")
     Optional<Long> maxId();
 }

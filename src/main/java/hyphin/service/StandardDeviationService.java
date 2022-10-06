@@ -16,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -59,7 +58,6 @@ public class StandardDeviationService {
 
        try {
            standardDeviationRepository.findAll();
-
 
            List<BlendEurUsd> eurUsdAll = eurUsdRepository.findAll();
            List<BlendGbpUsd> gbpUsdAll = gbpUsdRepository.findAll();
