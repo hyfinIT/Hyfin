@@ -6,6 +6,8 @@ import hyphin.repository.currency.CurrencyExchangeRateRepository;
 import hyphin.repository.currency.OperationAuditRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -26,6 +28,9 @@ import java.util.Optional;
 public class CurrencyService {
 
     // TODO: 20.09.22 add logging, add flexible exceptions handling logic
+
+    @Value("${schedule.currency.retry.count}")
+    private int retryCount;
 
     private final RestTemplate restTemplate = new RestTemplate();
     private final CurrencyExchangeRateRepository currencyExchangeRateRepository;
@@ -65,13 +70,13 @@ public class CurrencyService {
         }
 
         try {
-            ResponseEntity<String> yahooEurUsdResult = restTemplate.getForEntity(YAHOO_EUR_USD_URL, String.class);
-            ResponseEntity<String> yahooGbpUsdResult = restTemplate.getForEntity(YAHOO_GBP_USD_URL, String.class);
-            ResponseEntity<String> yahooUsdIpyResult = restTemplate.getForEntity(YAHOO_USD_JPY_URL, String.class);
+            ResponseEntity<String> yahooEurUsdResult = getResponse(YAHOO_EUR_USD_URL);
+            ResponseEntity<String> yahooGbpUsdResult = getResponse(YAHOO_GBP_USD_URL);
+            ResponseEntity<String> yahooUsdIpyResult = getResponse(YAHOO_USD_JPY_URL);
 
-            ResponseEntity<String> mwEurUsdResult = restTemplate.getForEntity(MW_EUR_USD_URL, String.class);
-            ResponseEntity<String> mwGbpUsdResult = restTemplate.getForEntity(MW_GBP_USD_URL, String.class);
-            ResponseEntity<String> mwUsdJpyResult = restTemplate.getForEntity(MW_USD_JPY_URL, String.class);
+            ResponseEntity<String> mwEurUsdResult = getResponse(MW_EUR_USD_URL);
+            ResponseEntity<String> mwGbpUsdResult = getResponse(MW_GBP_USD_URL);
+            ResponseEntity<String> mwUsdJpyResult = getResponse(MW_USD_JPY_URL);
 
 
             List<CurrencyExchangeRate> currencyExchangeRates = new ArrayList<>();
@@ -103,9 +108,30 @@ public class CurrencyService {
             operationAuditRepository.save(operationAudit);
         } catch (Exception e) {
             log.error("Operation error: " + e);
+            e.printStackTrace();
             operationAudit.setStatus("FAIL");
             operationAuditRepository.save(operationAudit);
         }
+    }
+
+    private ResponseEntity<String> getResponse(String url) {
+        int counter = 0;
+        ResponseEntity<String> result = restTemplate.getForEntity(url, String.class);
+        while (result.getStatusCode() != HttpStatus.OK) {
+            counter++;
+            if (counter > retryCount) {
+                log.error("No data after " + retryCount + "attempts. Url: " + url);
+                throw new RuntimeException("No data after " + retryCount + "attempts. Url: " + url);
+            }
+            try {
+                Thread.sleep(1000 * 60 * 5);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            result = restTemplate.getForEntity(url, String.class);
+        }
+
+        return result;
     }
 
     private List<CurrencyExchangeRate> processMwResults(String... rates) {
