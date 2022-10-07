@@ -20,7 +20,7 @@ public class UserService{
         List<User> users = (List<User>) userRepository.findAll();
         for (User user : users) {
             if(user != null && user.getEmail() != null && user.getEmail().equalsIgnoreCase(userName) && user.getPassword() != null &&
-                    (user.getPassword().equals(password) || user.getPassword().equals(passwordEncoder.encode(password))))
+                    (user.getPassword().equals(password) || passwordEncoder.matches(password, user.getPassword())))
                 return user;
         }
         return null;
