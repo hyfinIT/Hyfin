@@ -83,6 +83,11 @@ public class LoginController {
         return redirectTo("RegistrationSuccess");
     }
 
+    @GetMapping("/access-denied")
+    public ModelAndView accessDenied(){
+        return redirectTo("access-denied");
+    }
+
     public ModelAndView redirectTo(String pageTo) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName(pageTo);

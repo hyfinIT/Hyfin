@@ -39,7 +39,7 @@ public class RequestsHandler implements HandlerInterceptor {
         String requestURI = httpServletRequest.getRequestURI();
 
         if (!publicUriSet.contains(requestURI) && Objects.isNull(httpServletRequest.getSession().getAttribute("User-entity"))) {
-            modelAndView.setViewName("ready");
+            modelAndView.setViewName("access-denied");
         }
     }
 
