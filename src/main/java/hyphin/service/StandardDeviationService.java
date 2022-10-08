@@ -63,9 +63,9 @@ public class StandardDeviationService {
            List<BlendGbpUsd> gbpUsdAll = gbpUsdRepository.findAll();
            List<BlendUsdJpy> usdJpyAll = usdJpyRepository.findAll();
 
-           processBlends(eurUsdAll);
-           processBlends(gbpUsdAll);
-           processBlends(usdJpyAll);
+           processBlends("EUR/USD",  eurUsdAll);
+           processBlends("GBP/USD", gbpUsdAll);
+           processBlends("USD/JPY", usdJpyAll);
 
            operationAudit.setStatus("SUCCESS");
            operationAuditRepository.save(operationAudit);
@@ -75,7 +75,7 @@ public class StandardDeviationService {
        }
     }
 
-    private void processBlends(List<? extends Blend> eurUsdAll) {
+    private void processBlends(String pairName, List<? extends Blend> eurUsdAll) {
         eurUsdAll.sort(Comparator.comparing(Blend::getPosition));
 
         Blend firstPositionBlend = eurUsdAll
@@ -86,7 +86,7 @@ public class StandardDeviationService {
 
         for (int i = 0; i < rateTypes.size(); i++) {
             StandardDeviation standardDeviation = new StandardDeviation();
-            standardDeviation.setCcyPair("EUR/USD");
+            standardDeviation.setCcyPair(pairName);
             standardDeviation.setDate(firstPositionBlend.getDate());
             standardDeviation.setRateType(rateTypes.get(i));
 
