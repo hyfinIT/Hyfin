@@ -52,7 +52,7 @@ public class CurrencyService {
         CCY_PAIRS_DICTIONARY.put(2, "USD/JPY");
     }
 
-    @Scheduled(cron = "0 0 1 * * *")
+    @Scheduled(cron = "0 0 4 * * *")
     public void scheduledMethod() {
         log.info("Fetching currency rates.................");
         OperationAudit operationAudit = new OperationAudit();

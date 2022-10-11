@@ -65,16 +65,16 @@
                             <div style="width: 100%; height: 120px; justify-content: center; display: flex;">
                                 <div style="width: 70%; height: 150px; justify-content: space-between; display: flex;">
                                     <div style="float: left">
-                                        <form role="form" th:action="@{/Games}" method="POST">
-                                            <span style="font-size: 23pt;">Good luck!</span>
-                                            <button style="margin-left: 20px;" class="hf-button"><span>Start</span>
-                                            </button>
+                                        <!--                                    <form role="form" th:action="@{/ready}" method="GET">-->
+                                        <form action="/4">
+                                            <span style="font-size: 23pt; margin-right: 25px;">Good luck!</span>
+                                            <button class="hf-button"><span>Quit</span></button>
                                         </form>
                                     </div>
                                     <div style="float: left">
-                                        <!--                                    <form role="form" th:action="@{/ready}" method="GET">-->
-                                        <form action="/4">
-                                            <button class="hf-button"><span>Quit</span></button>
+                                        <form role="form" th:action="@{/Games}" method="POST">
+                                            <button style="margin-left: 20px;" class="hf-button"><span>Start</span>
+                                            </button>
                                         </form>
                                     </div>
                                 </div>
