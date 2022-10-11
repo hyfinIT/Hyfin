@@ -38,7 +38,8 @@ public class RequestsHandler implements HandlerInterceptor {
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         String requestURI = httpServletRequest.getRequestURI();
 
-        if (!publicUriSet.contains(requestURI) && Objects.isNull(httpServletRequest.getSession().getAttribute("User-entity"))) {
+        if (!publicUriSet.contains(requestURI) && Objects.isNull(httpServletRequest.getSession().getAttribute("User-entity"))
+                && Objects.nonNull(modelAndView)) {
             modelAndView.setViewName("access-denied");
         }
     }

@@ -37,7 +37,7 @@ public class CurrencyBlendService {
     private final BlendGbpUsdRepository blendGbpUsdRepository;
     private final BlendUsdJpyRepository blendUsdJpyRepository;
 
-    @Scheduled(cron = "0 5 2 * * *")
+    @Scheduled(cron = "0 5 5 * * *")
     public void produceBlends(){
         log.info("Blending..................");
         OperationAudit operationAudit = new OperationAudit();
