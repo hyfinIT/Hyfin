@@ -48,7 +48,6 @@ public class StandardDeviationService {
         rateTypes.add("LOGCHANGE");
     }
 
-    @Scheduled(cron = "0 0 6 * * *")
     public void createStandardDeviation() {
         log.info("Standard deviation calculation..................");
         OperationAudit operationAudit = new OperationAudit();

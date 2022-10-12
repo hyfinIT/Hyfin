@@ -15,9 +15,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -37,8 +35,7 @@ public class CurrencyBlendService {
     private final BlendGbpUsdRepository blendGbpUsdRepository;
     private final BlendUsdJpyRepository blendUsdJpyRepository;
 
-    @Scheduled(cron = "0 5 5 * * *")
-    public void produceBlends(){
+    public void produceBlends() {
         log.info("Blending..................");
         OperationAudit operationAudit = new OperationAudit();
         operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
@@ -91,7 +88,7 @@ public class CurrencyBlendService {
             }
         }
 
-        List<BlendEurUsd> shiftedBlends = (List<BlendEurUsd>)shiftPositions(eurUsdBlends);
+        List<BlendEurUsd> shiftedBlends = (List<BlendEurUsd>) shiftPositions(eurUsdBlends);
 
         Blend blendEurUsd = new BlendEurUsd();
         blendEurUsd.setCcyPair("EUR/USD");
@@ -133,7 +130,7 @@ public class CurrencyBlendService {
             }
         }
 
-        List<BlendGbpUsd> shiftedBlends = (List<BlendGbpUsd>)shiftPositions(gbpUsdBlends);
+        List<BlendGbpUsd> shiftedBlends = (List<BlendGbpUsd>) shiftPositions(gbpUsdBlends);
 
         Blend blend = new BlendGbpUsd();
         blend.setCcyPair("GBP/USD");
@@ -175,7 +172,7 @@ public class CurrencyBlendService {
             }
         }
 
-        List<BlendUsdJpy> shiftedBlends = (List<BlendUsdJpy>)shiftPositions(usdJpyBlends);
+        List<BlendUsdJpy> shiftedBlends = (List<BlendUsdJpy>) shiftPositions(usdJpyBlends);
 
         Blend blendUsdJpy = new BlendUsdJpy();
         blendUsdJpy.setCcyPair("USD/JPY");
@@ -198,7 +195,7 @@ public class CurrencyBlendService {
         blendUsdJpyRepository.save(shiftedBlends);
     }
 
-    private List<? extends Blend> shiftPositions(List<? extends Blend> blendsList){
+    private List<? extends Blend> shiftPositions(List<? extends Blend> blendsList) {
         blendsList.sort(Comparator.comparing(Blend::getPosition));
 
         for (int i = 0; i < blendsList.size(); i++) {
