@@ -62,7 +62,7 @@ public class CurrencyService {
         return operationAuditRepository.findOperationByDateAndName(LocalDate.now().toString(), "Currency exchange rates fetching");
     }
 
-    @Scheduled(cron = "0 0 */3 * * ?")
+//    @Scheduled(cron = "0 0 */3 * * ?")
     public void scheduledMethod() {
 
         if ("SUCCESS".equalsIgnoreCase(todayOperationStatus())) {
@@ -73,7 +73,7 @@ public class CurrencyService {
         OperationAudit operationAudit = new OperationAudit();
         operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("Currency exchange rates fetching");
-        operationAudit.setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+        operationAudit.setDateTime(LocalDateTime.now().plusSeconds(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
         List<CurrencyExchangeRate> yahooYesterdayEntry = currencyExchangeRateRepository.getEntriesByDateAndSource(LocalDate.now().minusDays(1L).toString(), "yahoo");
         List<CurrencyExchangeRate> mwYesterdayEntry = currencyExchangeRateRepository.getEntriesByDateAndSource(LocalDate.now().minusDays(1L).toString(), "marketwatch");

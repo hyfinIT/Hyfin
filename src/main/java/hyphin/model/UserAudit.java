@@ -5,7 +5,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Data
@@ -16,6 +19,8 @@ import javax.persistence.Table;
 
 public class UserAudit {
     @Id
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "id_Sequence")
+    @SequenceGenerator(name = "id_Sequence", sequenceName = "userAuditSequence")
     int id;
     int uid;
     String activityType;
@@ -38,7 +43,7 @@ public class UserAudit {
     String screenIdNumber;
     String mediaDuration;
     String mediaCompletionStatus;
-
+    String text1;
 }
 
 
