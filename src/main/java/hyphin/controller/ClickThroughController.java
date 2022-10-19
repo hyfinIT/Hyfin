@@ -55,22 +55,6 @@ public class ClickThroughController {
         return redirectTo("5_8");
     }
 
-
-    @PostMapping("/Video")
-    public ModelAndView auditVideos(HttpSession session) {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime now = LocalDateTime.now();
-        System.out.println(dtf.format(now));
-        User user = (User) session.getAttribute("User-entity");
-        UserAudit userAudit = new UserAudit();
-        userAudit.setModuleId(customAuditUserRepository.findModuleID());
-        userAudit.setElementId(customAuditUserRepository.findElementID(customAuditUserRepository.findModuleID(), "VIDEO"));
-        customAuditUserRepository.save(userAudit, user);
-        System.out.println(dtf.format(LocalDateTime.now()));
-        return redirectTo("9");
-
-    }
-
     @PostMapping("/ClickThroughNext1")
     public ModelAndView auditClickThroughNext1(HttpSession session) {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");

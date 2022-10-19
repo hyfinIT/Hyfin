@@ -485,13 +485,6 @@ public class HyfinController {
         return mav;
     }
 
-
-    @PostMapping("/Done") public ModelAndView viewDone() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("4");
-        return mav;
-    }
-
     @GetMapping("/investment-strategy")
     public ModelAndView viewInvestmentStrategy() {
         ModelAndView mav = new ModelAndView();
