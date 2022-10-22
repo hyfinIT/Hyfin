@@ -1,6 +1,6 @@
 package hyphin.controller;
 
-import hyphin.enums.VideoEventType;
+import hyphin.enums.AuditEventType;
 import hyphin.service.VideoService;
 import hyphin.util.HyfinUtils;
 import lombok.RequiredArgsConstructor;
@@ -25,12 +25,12 @@ public class VideoController {
     @GetMapping
     public ModelAndView video(HttpSession session) throws InterruptedException {
         videoService.startVideoSession(session);
-        videoService.handleEvent(VideoEventType.START_SESSION, session, null);
+        videoService.handleEvent(AuditEventType.START_SESSION, session, null);
         return modelAndView("9");
     }
 
     @PostMapping
-    public void videoEvent(@RequestParam VideoEventType eventType, @RequestParam(required = false) String position, HttpSession session) {
+    public void videoEvent(@RequestParam AuditEventType eventType, @RequestParam(required = false) String position, HttpSession session) {
         videoService.handleEvent(eventType, session, position);
     }
 
@@ -41,7 +41,7 @@ public class VideoController {
 
     @GetMapping("/complete")
     public ModelAndView complete(HttpSession session) {
-        videoService.handleEvent(VideoEventType.COMPLETE, session, null);
+        videoService.handleEvent(AuditEventType.COMPLETE, session, null);
         return HyfinUtils.modelAndView("4");
     }
 }

@@ -232,7 +232,7 @@ public class CurrencyService {
             } else if (Integer.valueOf(split[7].substring(0, 2)).equals(LocalDate.now().getDayOfMonth() - 1)) {
                 arrayStartIndex = 8;
             } else {
-                continue;
+                continue; // HERE WE SHOULD THROW EXCEPTION I gUESS. oR ADD CHECK IF LIST.SIZE = 6
             }
 
             CurrencyExchangeRate currencyExchangeRate = new CurrencyExchangeRate();

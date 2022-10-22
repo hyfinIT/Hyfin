@@ -1,10 +1,9 @@
 package hyphin.service;
 
-import hyphin.enums.VideoEventType;
+import hyphin.enums.AuditEventType;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import hyphin.model.video.UserVideoSession;
-import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.UserAuditRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +24,6 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class VideoService {
     private final UserAuditRepository userAuditRepository;
-    private final CustomUserAuditRepository customUserAuditRepository;
 
     private static final SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
@@ -102,8 +100,8 @@ public class VideoService {
         return System.currentTimeMillis() - userVideoSession.getPauseEventTime() > SESSION_LIVE_TIME;
     }
 
-    public void handleEvent(VideoEventType eventType, HttpSession session, String additionalInfo) {
-        if (eventType.equals(VideoEventType.START_SESSION)) {
+    public void handleEvent(AuditEventType eventType, HttpSession session, String additionalInfo) {
+        if (eventType.equals(AuditEventType.START_SESSION)) {
             addAuditToList(eventType, session, additionalInfo);
         }
 
@@ -111,24 +109,24 @@ public class VideoService {
             return;
         }
 
-        if (eventType.equals(VideoEventType.PLAY)) {
+        if (eventType.equals(AuditEventType.PLAY)) {
             addAuditToList(eventType, session, additionalInfo);
             play(session);
         }
-        if (eventType.equals(VideoEventType.PAUSE)) {
+        if (eventType.equals(AuditEventType.PAUSE)) {
             addAuditToList(eventType, session, additionalInfo);
             pause(session);
         }
-        if (eventType.equals(VideoEventType.LEAVE)) {
+        if (eventType.equals(AuditEventType.LEAVE)) {
             addAuditToList(eventType, session, additionalInfo);
             finish(session);
         }
 
-        if (eventType.equals(VideoEventType.COMPLETE)) {
+        if (eventType.equals(AuditEventType.COMPLETE)) {
             addAuditToList(eventType, session, additionalInfo);
         }
 
-        if (eventType.equals(VideoEventType.REWIND)) {
+        if (eventType.equals(AuditEventType.REWIND)) {
             addAuditToList(eventType, session, additionalInfo);
         }
     }
@@ -141,7 +139,7 @@ public class VideoService {
         return userVideoSessions.get(getVideoSessionId(session)).isExpired();
     }
 
-    private void addAuditToList(VideoEventType eventType, HttpSession session, String additionalInfo) {
+    private void addAuditToList(AuditEventType eventType, HttpSession session, String additionalInfo) {
         if (!userVideoSessions.containsKey(getVideoSessionId(session))) {
             return;
         }

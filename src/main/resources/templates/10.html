@@ -263,6 +263,19 @@
         document.getElementById('answerInput').value = answer;
     }
 
+    window.addEventListener("beforeunload", function (e) {
+        console.log('beforeunload');
+        console.log($(e.target).attr('id'));
+        console.log(e);
+        var confirmationMessage = "\o/";
+
+        const rawResponse = fetch('/game/event?eventType=LEAVE',
+            {
+                method: 'POST',
+            }
+        );
+    });
+
     function submitAnswer(answer) {
         var url = "/Answer";
         $.ajax({
