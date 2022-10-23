@@ -48,8 +48,38 @@
     <!-- Header End -->
     <main class="hf-main">
         <div class="hf-main-inner">
+            <div hidden id="expired" class="hf-myacc-wrap hf-frame">
+                <!-- My account form Wrap Start -->
+                <div class="hf-myacc">
+                    <!-- My account Form Start -->
+                    <div class="hf-form hf-myacc-form">
+                        <div class="hf-form-inner">
+                            <header class="hf-form-header" style="justify-content: center; display: flex;">
+                                <div style="margin-top: 100px" class="hf-form-header-text">
+                                    <h3 class="hf-form-title" style="text-align: left">Your session is expired. Reload
+                                        page to try again</h3>
+                                </div>
+                                <a href="/rules">
+                                    <div style="height: 128px; width: 128px; margin-top: 20px; background-size: cover; background-image: url('./assets/images/refresh.png')"
+                                         class="hf-form-header-text">
+                                    </div>
+                                </a>
+                            </header>
+                        </div>
+                    </div>
+                    <!-- My account Form End -->
+                </div>
+                <!-- My account form Wrap End -->
+
+                <!-- frames start -->
+                <span class="hf-frame-tl"></span>
+                <span class="hf-frame-tr"></span>
+                <span class="hf-frame-bl"></span>
+                <span class="hf-frame-br"></span>
+                <!-- frames end -->
+            </div>
             <!-- Carousel Wrap Start -->
-            <div class="hf-carousel-wrap">
+            <div id="gameBlock" class="hf-carousel-wrap">
                 <!-- Carousel Start -->
                 <div class="hf-carousel">
                     <div class="swiper">
@@ -204,7 +234,7 @@
                           th:action="@{/NextGame}" method="POST">
                         <input hidden="true" name="answer" id="answerInput" value="default">
                         <input hidden="true" name="questionId" id="questionIdInput" th:value="${questionId}">
-                        <button id="submitButton" class="hf-button" onclick="document.getElementById('submitButton').setAttribute('disabled', 'true'); document.getElementById('submitButton').; document.getElementById('prev-next-form2').submit()"><span>Next</span></button>
+                        <button id="submitButton" class="hf-button" onclick="setClicked(); document.getElementById('submitButton').setAttribute('disabled', 'true'); document.getElementById('prev-next-form2').submit()"><span>Next</span></button>
                     </form>
                     <!-- Carousel Navigation and pagination end -->
                 </div>
@@ -263,17 +293,26 @@
         document.getElementById('answerInput').value = answer;
     }
 
-    window.addEventListener("beforeunload", function (e) {
-        console.log('beforeunload');
-        console.log($(e.target).attr('id'));
-        console.log(e);
-        var confirmationMessage = "\o/";
 
-        const rawResponse = fetch('/game/event?eventType=LEAVE',
-            {
-                method: 'POST',
-            }
-        );
+    var nextButtonClicked = false;
+
+    function setClicked(){
+        console.log('setClicked func()');
+
+        nextButtonClicked = true;
+    }
+
+    window.addEventListener("beforeunload", function (e) {
+        if (nextButtonClicked == false) {
+            console.log('nextButton NOT clicked, LEAVE event sent');
+            const rawResponse = fetch('/game/event?eventType=LEAVE',
+                {
+                    method: 'POST',
+                }
+            );
+        } else {
+            console.log('nextButton clicked');
+        }
     });
 
     function submitAnswer(answer) {
@@ -295,5 +334,30 @@
     }
 
 </script>
+<script>
+    let intervalId = window.setInterval(function(){
+        fetch('/game/session/expired', {
+            method: 'GET',
+        })
+        .then(
+            function(response) {
+                response.json().then(function(data) {
+                    console.log(data);
+                    if (data == true) {
+                    console.log('EXPIRED!!!!!!!!!');
+                        document.getElementById('gameBlock').setAttribute('hidden', 'hidden')
+                        document.getElementById('expired').removeAttribute('hidden')
+                        window.clearInterval(intervalId);
+                    } else {
+                                            console.log('session is ok))))))))');
+                    }
+                })
+            }
+        );
+    }, 2000);
+
+</script>
+
+
 </body>
 </html>

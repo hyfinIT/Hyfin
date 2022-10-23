@@ -56,7 +56,7 @@ public class VideoService {
                 log.info("session count before cleaning: {}", userVideoSessions.size());
                 for (UserVideoSession userVideoSession : userVideoSessions.values()) {
                     if (userVideoSession.isExpired() && isSessionLiveTimeOut(userVideoSession)) {
-                        userVideoSessions.remove(userVideoSession);
+                        userVideoSessions.remove(userVideoSession.getVideoSessionId());
                     }
                 }
                 log.info("session count after cleaning: {}", userVideoSessions.size());

@@ -18,8 +18,7 @@ public class UserGame {
 
     private User user;
 
-    private boolean paused = true;
-    private long pauseEventTime = System.currentTimeMillis();
+    private long lastActivityTime = System.currentTimeMillis();
     private boolean expired = false;
 
     public UserGame(String gameSessionId, User user) {

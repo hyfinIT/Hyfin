@@ -93,6 +93,9 @@ public class GamesController {
         gameService.dropCounter(session);
         User user = (User) session.getAttribute("User-entity");
         gameService.getOrCreateAnswersCounter(session, user);
+
+        gameService.handleEvent(AuditEventType.START_SESSION, session);
+
         UserAudit userAudit = new UserAudit();
         userAudit.setActivityType("IN MODULE GAME");
         userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + gameService.getQuestionNumber(session) + "" + " ASKED");
@@ -136,6 +139,8 @@ public class GamesController {
 
     @PostMapping("/NextGame")
     public ModelAndView auditNextGame(HttpSession session, Model model, String answer, String questionId) {
+        gameService.touch(session);
+        String answerTime = jdf.format(new Date());
         User user = (User) session.getAttribute("User-entity");
 
         if (Objects.nonNull(questionId)) {
@@ -166,7 +171,7 @@ public class GamesController {
                     userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
                     userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
                     userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
-                    userAudit.setDateTime(jdf.format(new Date()));
+                    userAudit.setDateTime(answerTime);
                     userAudit.setQuidNumber(q.getQuidNumber());
                     if (answer != null && answer.equalsIgnoreCase(q.getAnswerCorrect()))
                         userAudit.setQuidNumberOutcome("CORRECT");
@@ -216,39 +221,42 @@ public class GamesController {
             model.addAttribute("AnswerCorrect", gameQuestion.getAnswerCorrect());
             model.addAttribute("questionId", gameQuestion.getQuidNumber());
 
-            UserAudit userAudit = new UserAudit();
-            userAudit.setActivityType("IN MODULE GAME");
-            userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + gameService.getQuestionNumber(session) + "" + " ASKED");
-            userAudit.setElementStatus("GAME QUESTION NO " + gameService.getQuestionNumber(session) + "" + " ASKED");
-            userAudit.setElementId(GAMES_ELEMENT_ID);
+            Thread thread = new Thread(() -> {
+                UserAudit userAudit = new UserAudit();
+                userAudit.setActivityType("IN MODULE GAME");
+                userAudit.setModuleProgressPosition("INCOMPLETE," + "GAME QUESTION NO " + gameService.getQuestionNumber(session) + "" + " ASKED");
+                userAudit.setElementStatus("GAME QUESTION NO " + gameService.getQuestionNumber(session) + "" + " ASKED");
+                userAudit.setElementId(GAMES_ELEMENT_ID);
 
-            if (user != null) {
-                userAudit.setUid(user.getUid());
-            }
-            userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
-            userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
-            userAudit.setModuleId(userAuditRepository.findModuleID());
-            userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
-            userAudit.setElementPosition(userAudit.getElementId());
-            userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
-            userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
-            userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
-            userAudit.setDateTime(jdf.format(new Date()));
-            userAudit.setQuidNumber(gameQuestion.getQuidNumber());
-            if (answer != null && answer.equalsIgnoreCase(gameQuestion.getAnswerCorrect()))
-                userAudit.setQuidNumberOutcome("CORRECT");
-            else if ("default".equals(answer)) {
-                userAudit.setQuidNumberOutcome("NO ANSWER");
-            }
-            else if (answer != null && !answer.equalsIgnoreCase(gameQuestion.getAnswerCorrect()))
-                userAudit.setQuidNumberOutcome("INCORRECT");
-            else
-                userAudit.setQuidNumberOutcome(null);
-            userAudit.setDifficulty(null);
-            userAudit.setCompletionTime(null);
-            userAudit.setQuidAnswer(answer);
+                if (user != null) {
+                    userAudit.setUid(user.getUid());
+                }
+                userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
+                userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
+                userAudit.setModuleId(userAuditRepository.findModuleID());
+                userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+                userAudit.setElementPosition(userAudit.getElementId());
+                userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
+                userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
+                userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
+                userAudit.setDateTime(jdf.format(new Date()));
+                userAudit.setQuidNumber(gameQuestion.getQuidNumber());
+                if (answer != null && answer.equalsIgnoreCase(gameQuestion.getAnswerCorrect()))
+                    userAudit.setQuidNumberOutcome("CORRECT");
+                else if ("default".equals(answer)) {
+                    userAudit.setQuidNumberOutcome("NO ANSWER");
+                } else if (answer != null && !answer.equalsIgnoreCase(gameQuestion.getAnswerCorrect()))
+                    userAudit.setQuidNumberOutcome("INCORRECT");
+                else
+                    userAudit.setQuidNumberOutcome(null);
+                userAudit.setDifficulty(null);
+                userAudit.setCompletionTime(null);
+                userAudit.setQuidAnswer(answer);
 
-            gameService.addAuditToList(session, userAudit);
+                gameService.addAuditToList(session, userAudit);
+            });
+
+            thread.start();
 
 
             return redirectTo("10");
@@ -271,6 +279,11 @@ public class GamesController {
         log.info("eventType: {}", eventType);
         log.info("<========================================================================================");
         gameService.handleEvent(eventType, session);
+    }
+
+    @GetMapping("/game/session/expired")
+    public String isSessionExpired(HttpSession session) {
+        return gameService.isSessionExpired(session).toString();
     }
 
     public ModelAndView totalResult(int correctAnswersCounter) {

@@ -4,6 +4,7 @@ import hyphin.enums.AuditEventType;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import hyphin.model.game.UserGame;
+import hyphin.model.video.UserVideoSession;
 import hyphin.repository.UserAuditRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,10 +12,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 
@@ -25,10 +23,9 @@ public class GameService {
     private final UserAuditRepository userAuditRepository;
 
     private static final SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    private static final String GAMES_ELEMENT_ID = "3";
     private static final long SESSION_LIVE_TIME = 1000 * 60 * 60;
     private static final long GAME_TIMEOUT_MILLIS = 1000 * 60 * 4;
-    private static final String MODULE_ID = "???????????????";
-    private static final String ELEMENT_ID = "???????????????";
     private ConcurrentHashMap<String, UserGame> userGames = new ConcurrentHashMap<>();
 
     Timer timer = new Timer();
@@ -41,7 +38,7 @@ public class GameService {
         timer.schedule(new TimerTask() {
             public void run() {
                 for (UserGame userGame : userGames.values()) {
-                    if (userGame.isPaused() && isTimeOut(userGame) && !userGame.isExpired()) {
+                    if (isTimeOut(userGame) && !userGame.isExpired()) {
                         userGame.setExpired(true);
                         flushToDb(userGame);
                     }
@@ -54,7 +51,7 @@ public class GameService {
                 log.info("session count before cleaning: {}", userGames.size());
                 for (UserGame userGame : userGames.values()) {
                     if (userGame.isExpired() && isSessionLiveTimeOut(userGame)) {
-                        userGames.remove(userGame);
+                        userGames.remove(userGame.getGameSessionId());
                     }
                 }
                 log.info("session count after cleaning: {}", userGames.size());
@@ -125,7 +122,7 @@ public class GameService {
         if (Objects.isNull(userGames.get(getGameSessionId(session)))) {
             return;
         }
-        userGames.get(getGameSessionId(session)).setExpired(true);
+        userGames.get(getGameSessionId(session)).   setExpired(true);
     }
 
     public int getQuestionNumber(HttpSession session) {
@@ -141,7 +138,7 @@ public class GameService {
         if (Objects.isNull(userGames.get(getGameSessionId(session)))) {
             return;
         }
-        userGames.get(getGameSessionId(session)).setPauseEventTime(System.currentTimeMillis());
+        userGames.get(getGameSessionId(session)).setLastActivityTime(System.currentTimeMillis());
     }
 
     public void addAuditToList(HttpSession session, UserAudit userAudit) {
@@ -150,11 +147,6 @@ public class GameService {
         }
 
         userGames.get(getGameSessionId(session)).getUserAudits().add(userAudit);
-
-        log.info("Audit count: {}", userGames.get(getGameSessionId(session)).getUserAudits().size());
-
-        userGames.get(getGameSessionId(session)).getUserAudits().forEach(System.out::println);
-
     }
 
     private String getGameSessionId(HttpSession session) {
@@ -166,11 +158,11 @@ public class GameService {
     }
 
     private boolean isTimeOut(UserGame userGame) {
-        return System.currentTimeMillis() - userGame.getPauseEventTime() > GAME_TIMEOUT_MILLIS;
+        return System.currentTimeMillis() - userGame.getLastActivityTime() > GAME_TIMEOUT_MILLIS;
     }
 
     private boolean isSessionLiveTimeOut(UserGame userGame) {
-        return System.currentTimeMillis() - userGame.getPauseEventTime() > SESSION_LIVE_TIME;
+        return System.currentTimeMillis() - userGame.getLastActivityTime() > SESSION_LIVE_TIME;
     }
 
     private void flushToDb(UserGame userGame) {
@@ -186,17 +178,59 @@ public class GameService {
 
     public void handleEvent(AuditEventType eventType, HttpSession session) {
         if (!userGames.containsKey(getGameSessionId(session))) {
-            return;
+                return;
         }
 
-//        if (eventType.equals(AuditEventType.LEAVE)) {
-//            addAuditToList(session, userAudit);
-//            play(session);
-//        }
-//
-//        if (eventType.equals(AuditEventType.COMPLETE)) {
-//            addAuditToList(session, userAudit);
-//            play(session);
-//        }
+        User user = (User) session.getAttribute("User-entity");
+
+        UserAudit userAudit = new UserAudit();
+        userAudit.setActivityType("IN MODULE GAME");
+        userAudit.setElementId(GAMES_ELEMENT_ID);
+        if (user != null)
+            userAudit.setUid(user.getUid());
+        userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
+        userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
+        userAudit.setModuleId(userAuditRepository.findModuleID());
+        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+        userAudit.setElementPosition(userAudit.getElementId());
+        userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
+        userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
+        userAudit.setActivityType(userAuditRepository.findElementType(userAudit.getElementId()));
+        userAudit.setDateTime(jdf.format(new Date()));
+        userAudit.setQuidNumber(null);
+        userAudit.setQuidNumberOutcome(null);
+        userAudit.setDifficulty(null);
+        userAudit.setCompletionTime(null);
+        userAudit.setQuidAnswer(null);
+
+        if (eventType.equals(AuditEventType.LEAVE)) {
+            userAudit.setModuleProgressPosition("INCOMPLETE, ROUND: " + getRound(session) +  ", GAME QUESTION NO " + getQuestionNumber(session) + "" + " ASKED");
+            userAudit.setElementStatus(eventType.name());
+            addAuditToList(session, userAudit);
+            userGames.get(getGameSessionId(session)).setExpired(true);
+            flushToDb(userGames.get(getGameSessionId(session)));
+        }
+
+        if (eventType.equals(AuditEventType.COMPLETE)) {
+            userAudit.setModuleProgressPosition("Complete");
+            userAudit.setElementStatus(eventType.name());
+            addAuditToList(session, userAudit);
+            userGames.get(getGameSessionId(session)).setExpired(true);
+            flushToDb(userGames.get(getGameSessionId(session)));
+        }
+
+        if (eventType.equals(AuditEventType.START_SESSION)) {
+            userAudit.setModuleProgressPosition("INCOMPLETE, Game session started");
+            userAudit.setElementStatus(eventType.name());
+            addAuditToList(session, userAudit);
+        }
+    }
+
+    public Boolean isSessionExpired(HttpSession session) {
+        UserGame userGame = userGames.get(getGameSessionId(session));
+        if (Objects.isNull(userGame)) {
+            return true;
+        }
+        return userGames.get(getGameSessionId(session)).isExpired();
     }
 }
