@@ -62,7 +62,7 @@ public class CurrencyService {
         return operationAuditRepository.findOperationByDateAndName(LocalDate.now().toString(), "Currency exchange rates fetching");
     }
 
-//    @Scheduled(cron = "0 0 */3 * * ?")
+    @Scheduled(cron = "0 0 */3 * * ?")
     public void scheduledMethod() {
 
         if ("SUCCESS".equalsIgnoreCase(todayOperationStatus())) {

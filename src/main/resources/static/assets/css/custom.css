@@ -1,4 +1,20 @@
 /* 1 */
+
+@media (min-width: 1024px){
+.hf-logo {
+	width: 200px;}
+}
+
+@media (max-width: 1023px){
+.hf-logo {
+	width: 150px;
+	margin-bottom: 15px;}
+}
+
+.hf-carousel-wrap{
+	width:100% !important
+}
+
 .trade-currency {
 	max-width: 1080px;
 }
