@@ -25,7 +25,7 @@ public class GameService {
     private static final SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     private static final String GAMES_ELEMENT_ID = "3";
     private static final long SESSION_LIVE_TIME = 1000 * 60 * 60;
-    private static final long GAME_TIMEOUT_MILLIS = 1000 * 60 * 4;
+    private static final long GAME_TIMEOUT_MILLIS = 1000 * 45;
     private ConcurrentHashMap<String, UserGame> userGames = new ConcurrentHashMap<>();
 
     Timer timer = new Timer();

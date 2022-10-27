@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Hyfin: click-through</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap"
+          rel="stylesheet">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <!-- Link Main CSS -->
+    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
+</head>
+<body class="hf-bg-solid small-bg">
+<div class="hf-wrap">
+    <!-- Header Start -->
+    <header class="hf-header">
+        <div class="hf-logo-wrap">
+            <div class="hf-logo">
+                <img src="./assets/images/hyfin-logo.svg" alt="">
+            </div>
+            <div class="hf-current-screen">
+                <span class="hf-current-screen-title">FX CFD Click-Thru</span>
+            </div>
+        </div>
+        <div class="hf-main-menu-wrap">
+            <ul class="hf-main-menu">
+                <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="1.html">Courses</a></li>
+                <li class="hf-menu-item hf-menu-item-help"><a href="faqs.html">FAQs</a></li>
+                <li class="hf-menu-item hf-menu-item-glossary"><a href="glossary.html">Glossary</a></li>
+            </ul>
+            <div class="hf-header-icons">
+                <a class="hf-hicon-search" href="search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
+                <a class="hf-hicon-profile" href="account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                <div class="hf-hicon-menu">
+                    <div class="hf-menu-btn" id="hf-menu-trigger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header End -->
+    <main class="hf-main">
+        <div class="hf-main-inner swiper">
+            <!-- Click-Thru Wrap Start -->
+            <div class="hf-ct-wrap swiper-wrapper">
+                <div hidden id="expired" class="hf-myacc-wrap hf-frame">
+                    <!-- My account form Wrap Start -->
+                    <div class="hf-myacc">
+                        <!-- My account Form Start -->
+                        <div class="hf-form hf-myacc-form">
+                            <div class="hf-form-inner">
+                                <header class="hf-form-header" style="justify-content: center; display: flex;">
+                                    <div style="margin-top: 100px" class="hf-form-header-text">
+                                        <h5 style="font-size: 21px; text-align: center">Your session is expired. Press
+                                            button below to start again</h5>
+                                    </div>
+                                    <a href="/click?type=start" onclick="setClicked()">
+                                        <div style="height: 128px; width: 128px; margin-top: 20px; background-size: cover; background-image: url('./assets/images/refresh.png')"
+                                             class="hf-form-header-text">
+                                        </div>
+                                    </a>
+                                </header>
+                            </div>
+                        </div>
+                        <!-- My account Form End -->
+                    </div>
+                    <!-- My account form Wrap End -->
+
+                    <!-- frames start -->
+                    <span class="hf-frame-tl"></span>
+                    <span class="hf-frame-tr"></span>
+                    <span class="hf-frame-bl"></span>
+                    <span class="hf-frame-br"></span>
+                    <!-- frames end -->
+                </div>
+
+
+                <!--                Animated-->
+                <!--                Animated-->
+                <!--                Animated-->
+                <div id="style3" hidden class="hf-ct1 hf-ct1-video swiper-slide">
+                    <div class="hf-ct1-content hf-ct1-fco">
+                        <div class="hf-callout hf-callout-1-inverted hf-orange">
+                            <div class="hf-callout-top"></div>
+                            <div class="hf-callout-middle"></div>
+                            <div class="hf-callout-bottom"></div>
+                            <p id="text3"></p>
+                        </div>
+                        <div class="hf-ct1-video-wrap">
+                            <div style="padding:100% 0 0 0;position:relative;">
+                                <iframe id="image3" src=""
+                                        frameborder="0" allow="autoplay; loop; fullscreen; picture-in-picture"
+                                        allowfullscreen
+                                        style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+                            </div>
+                            <script src="https://player.vimeo.com/api/player.js"></script>
+                        </div>
+                    </div>
+                </div>
+                <!--                Animated-->
+                <!--                Animated-->
+                <!--                Animated-->
+
+
+                <!--                Style1-->
+                <!--                Style1-->
+                <!--                Style1-->
+                <div id="style2" hidden class="hf-ct3 swiper-slide">
+                    <div class="hf-ct3-content">
+                        <div class="hf-callout hf-callout-3-inverted hf-taupe">
+                            <div class="hf-callout-top"></div>
+                            <div class="hf-callout-middle"></div>
+                            <div class="hf-callout-bottom"></div>
+                            <p id="text2">Sample</p>
+                        </div>
+                        <div class="hf-ct3-graph">
+                            <img id="image2" src="" alt=""></a>
+                        </div>
+                    </div>
+                </div>
+                <!--                Style1-->
+                <!--                Style1-->
+                <!--                Style1-->
+
+
+                <div id="style1" hidden class="hf-ct1 swiper-slide">
+                    <div class="hf-ct1-content hf-ct1-fco">
+                        <div class="hf-callout hf-callout-1-inverted hf-orange">
+                            <div class="hf-callout-top"></div>
+                            <div class="hf-callout-middle"></div>
+                            <div class="hf-callout-bottom"></div>
+                            <p id="text1"></p>
+                        </div>
+                        <figure class="hf-ct1-character1">
+                            <img id="image1" src="" alt="">
+                        </figure>
+                    </div>
+                </div>
+
+
+                <!-- Click-Thru Type 1 - video End -->
+            </div>
+            <!-- Click-Thru Wrap End -->
+            <!-- Click-Thru Nav Start -->
+            <!-- Click-Thru Nav End -->
+        </div>
+    </main>
+    <div style="width: 50%" class="hf-carousel-control">
+        <form id="prev" role="form" th:action="@{/click}" method="GET">
+            <input type="hidden" name="type" value="prev"/>
+            <button onclick="setClicked()" class="hf-button hf-button-left  "><span>Prev</span></button>
+        </form>
+        <form id="next" role="form" th:action="@{/click}" method="GET">
+            <input type="hidden" name="type" value="next"/>
+            <button onclick="setClicked()" class="hf-button hf-button-right "><span>Next</span></button>
+        </form>
+        <form id="done" hidden role="form" th:action="@{/click/done}" method="POST">
+            <button onclick="setClicked()" class="hf-button hf-button-right "><span>Done</span></button>
+        </form>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- Left Panel Start -->
+    <div class="hf-left-menu-wrap">
+        <button class="hf-lm-close">
+            <a href="4.html"><img src="./assets/images/close.svg" alt=""></a>
+        </button>
+    </div>
+    <!-- Left Panel End -->
+</div>
+<script src="./assets/lib/jquery-3.6.0.min.js"></script>
+<script src="./assets/js/script.js?ver=1.1"></script><!-- Swiper JS -->
+
+<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper(".swiper", {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    autoHeight: true,
+    allowTouchMove: false,
+    keyboard: {
+      enabled: false,
+    },
+    pagination: {
+      el: ".swiper-pagination",
+      clickable: true,
+    },
+    navigation: {
+      nextEl: ".hf-ct-next",
+      prevEl: ".hf-ct-prev",
+    },
+  });
+
+
+
+</script>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
+
+
+    var item = /*[[${clickItem}]]*/ 'default';
+
+    console.log(item);
+
+    document.getElementById('text1').innerText = item.text;
+    document.getElementById('image1').setAttribute('src', item.imageData);
+    document.getElementById('text2').innerText = item.text;
+    document.getElementById('image2').setAttribute('src', item.imageData);
+    document.getElementById('text3').innerText = item.text;
+    document.getElementById('image3').setAttribute('src', item.imageData);
+
+
+
+
+    if (item.style == '1') {
+        document.getElementById('style1').removeAttribute('hidden')
+    }
+    if (item.style == '2') {
+            document.getElementById('style2').removeAttribute('hidden')
+    }
+    if (item.style == '3') {
+       document.getElementById('style3').removeAttribute('hidden')
+    }
+    if (item.isFirst == true) {
+       document.getElementById('prev').setAttribute('hidden', 'hidden')
+    }
+    if (item.isLast == true) {
+       document.getElementById('next').setAttribute('hidden', 'hidden')
+       document.getElementById('done').removeAttribute('hidden')
+    }
+
+    if (item.isSessionExpired == true) {
+                        document.getElementById('style1').setAttribute('hidden', 'hidden');
+                        document.getElementById('style2').setAttribute('hidden', 'hidden');
+                        document.getElementById('style3').setAttribute('hidden', 'hidden');
+                        document.getElementById('prev').setAttribute('hidden', 'hidden');
+                        document.getElementById('next').setAttribute('hidden', 'hidden');
+                        document.getElementById('done').setAttribute('hidden', 'hidden');
+                        document.getElementById('expired').removeAttribute('hidden');
+    }
+
+
+
+/*]]>*/
+
+
+
+</script>
+
+<script>
+        var nextButtonClicked = false;
+
+        function setClicked(){
+            console.log('setClicked func()');
+
+            nextButtonClicked = true;
+        }
+
+
+        window.addEventListener("beforeunload", function (e) {
+            console.log('beforeunload');
+            console.log($(e.target).attr('id'));
+            console.log(e);
+            var confirmationMessage = "\o/";
+
+            if (nextButtonClicked == false) {
+
+                const rawResponse = fetch('/click?eventType=LEAVE',
+                    {
+                        method: 'POST',
+                    }
+                );
+            }
+        });
+
+</script>
+
+<script>
+    let intervalId = window.setInterval(function(){
+        fetch('/click/session/expired', {
+            method: 'GET',
+        })
+        .then(
+            function(response) {
+                response.json().then(function(data) {
+                    console.log(data);
+                    if (data == true) {
+                        document.getElementById('style1').setAttribute('hidden', 'hidden');
+                        document.getElementById('style2').setAttribute('hidden', 'hidden');
+                        document.getElementById('style3').setAttribute('hidden', 'hidden');
+                        document.getElementById('prev').setAttribute('hidden', 'hidden');
+                        document.getElementById('next').setAttribute('hidden', 'hidden');
+                        document.getElementById('done').setAttribute('hidden', 'hidden');
+                        document.getElementById('expired').removeAttribute('hidden');
+                        window.clearInterval(intervalId);
+                    }
+                })
+            }
+        );
+    }, 2000);
+
+
+</script>
+
+</body>
+</html>
