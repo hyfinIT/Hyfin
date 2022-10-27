@@ -33,6 +33,9 @@ public class CurrencyService {
     @Value("${schedule.currency.retry.count}")
     private int retryCount;
 
+    @Value("${scheduling.disable:false}")
+    private Boolean disabled;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     private final CurrencyBlendService currencyBlendService;
@@ -64,6 +67,9 @@ public class CurrencyService {
 
     @Scheduled(cron = "0 0 */3 * * ?")
     public void scheduledMethod() {
+        if (disabled) {
+            return;
+        }
 
         if ("SUCCESS".equalsIgnoreCase(todayOperationStatus())) {
             return;
