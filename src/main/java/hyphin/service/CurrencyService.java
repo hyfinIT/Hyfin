@@ -33,6 +33,9 @@ public class CurrencyService {
     @Value("${schedule.currency.retry.count}")
     private int retryCount;
 
+    @Value("${scheduling.disable:false}")
+    private Boolean disabled;
+
     private final RestTemplate restTemplate = new RestTemplate();
 
     private final CurrencyBlendService currencyBlendService;
@@ -64,6 +67,9 @@ public class CurrencyService {
 
     @Scheduled(cron = "0 0 */3 * * ?")
     public void scheduledMethod() {
+        if (disabled) {
+            return;
+        }
 
         if ("SUCCESS".equalsIgnoreCase(todayOperationStatus())) {
             return;
@@ -232,7 +238,7 @@ public class CurrencyService {
             } else if (Integer.valueOf(split[7].substring(0, 2)).equals(LocalDate.now().getDayOfMonth() - 1)) {
                 arrayStartIndex = 8;
             } else {
-                continue;
+                continue; // HERE WE SHOULD THROW EXCEPTION I gUESS. oR ADD CHECK IF LIST.SIZE = 6
             }
 
             CurrencyExchangeRate currencyExchangeRate = new CurrencyExchangeRate();
