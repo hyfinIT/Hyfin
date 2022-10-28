@@ -114,6 +114,8 @@ public class CurrencyService {
 
             if (currencyExchangeRates.isEmpty()) {
                 operationAudit.setStatus("NO YESTERDAY_DATA");
+            } else if (currencyExchangeRates.size() < 6) {
+                operationAudit.setStatus("DATA IS INCOMPLETE");
             } else {
                 currencyExchangeRateRepository.save(currencyExchangeRates);
                 operationAudit.setStatus("SUCCESS");
