@@ -235,9 +235,17 @@ public class CurrencyService {
 
             int arrayStartIndex = 0;
 
-            if (Integer.valueOf(split[1].substring(0, 2)).equals(LocalDate.now().getDayOfMonth() - 1)) {
+            int yesterdayDate = 0;
+
+            if ((LocalDate.now().getDayOfMonth() - 1) == 0) {
+                yesterdayDate = LocalDate.now().minusDays(1L).getDayOfMonth();
+            } else {
+                yesterdayDate = LocalDate.now().getDayOfMonth() - 1;
+            }
+
+            if (Integer.valueOf(split[1].substring(0, 2)).equals(yesterdayDate)) {
                 arrayStartIndex = 2;
-            } else if (Integer.valueOf(split[7].substring(0, 2)).equals(LocalDate.now().getDayOfMonth() - 1)) {
+            } else if (Integer.valueOf(split[7].substring(0, 2)).equals(yesterdayDate)) {
                 arrayStartIndex = 8;
             } else {
                 continue; // HERE WE SHOULD THROW EXCEPTION I gUESS. oR ADD CHECK IF LIST.SIZE = 6
