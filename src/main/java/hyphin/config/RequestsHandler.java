@@ -1,5 +1,6 @@
 package hyphin.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +13,9 @@ import java.util.Set;
 
 @Component
 public class RequestsHandler implements HandlerInterceptor {
+
+    @Value("${disable.security:false}")
+    private Boolean disable;
 
     private static final Set<String> publicUriSet;
 
@@ -32,6 +36,10 @@ public class RequestsHandler implements HandlerInterceptor {
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+        if (disable) {
+            return;
+        }
+
         String requestURI = httpServletRequest.getRequestURI();
 
         if (!publicUriSet.contains(requestURI) && Objects.isNull(httpServletRequest.getSession().getAttribute("User-entity"))

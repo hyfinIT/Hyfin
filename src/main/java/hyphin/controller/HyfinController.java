@@ -1,14 +1,18 @@
 package hyphin.controller;
 
 import hyphin.model.Login;
+import hyphin.model.UpdateUserRequest;
 import hyphin.model.User;
 import hyphin.repository.CustomUserRepository;
+import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 
 /**
@@ -21,6 +25,9 @@ public class HyfinController {
 
     @Autowired
     CustomUserRepository customUserRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     @Autowired
     UserService userService;
@@ -157,9 +164,29 @@ public class HyfinController {
     }
 
     @GetMapping("/account")
-    public ModelAndView viewAccountPage() {
+    public ModelAndView viewAccountPage(HttpSession session) {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("account");
+        mav.getModel().put("firstName", ((User)session.getAttribute("User-entity")).getFirstName());
+        mav.getModel().put("surname", ((User)session.getAttribute("User-entity")).getSurName());
+        mav.getModel().put("email", ((User)session.getAttribute("User-entity")).getEmail());
+        return mav;
+    }
+
+    @PostMapping("/account")
+    public ModelAndView updateAccount(ModelAndView mav, HttpSession session, UpdateUserRequest userRequest) {
+        User user = (User) session.getAttribute("User-entity");
+        user.setFirstName(userRequest.getFirstName());
+        user.setSurName(userRequest.getSurname());
+        user.setEmail(userRequest.getEmail());
+        if (!userRequest.getPassword().isEmpty()) {
+            user.setPassword(userRequest.getPassword());
+        }
+        mav.getModel().put("firstName", ((User)session.getAttribute("User-entity")).getFirstName());
+        mav.getModel().put("surname", ((User)session.getAttribute("User-entity")).getSurName());
+        mav.getModel().put("email", ((User)session.getAttribute("User-entity")).getEmail());
+
+        userRepository.save(user);
         return mav;
     }
 

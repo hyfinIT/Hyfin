@@ -55,7 +55,7 @@
                 <!-- My account form Wrap Start -->
                 <div class="hf-myacc">
                     <!-- My account Form Start -->
-                    <form class="hf-form hf-myacc-form">
+                    <form class="hf-form hf-myacc-form" id="upd" th:action="@{/account}" method="POST">
                         <div class="hf-form-inner">
                             <header class="hf-form-header">
                                 <div class="hf-form-header-text">
@@ -65,28 +65,28 @@
                             <div class="hf-form-row hf-fr-col2">
                                 <div class="hf-form-field">
                                     <label for="hf-lf-fname">First name</label>
-                                    <input type="text" id="hf-lf-fname" name="hf_lf_fname" value="">
+                                    <input type="text" id="hf-lf-fname" name="firstName" th:value="${firstName}">
                                 </div>
                                 <div class="hf-form-field">
                                     <label for="hf-lf-lname">Surname</label>
-                                    <input type="text" id="hf-lf-lname" name="hf_lf_lname" value="">
+                                    <input type="text" id="hf-lf-lname" name="surname" th:value="${surname}">
                                 </div>
                             </div>
                             <div class="hf-form-row hf-fr-col2">
                                 <div class="hf-form-field">
                                     <label for="hf-lf-email">Email</label>
-                                    <input type="email" id="hf-lf-email" name="hf_lf_email" value="">
+                                    <input type="email" id="hf-lf-email" name="email" th:value="${email}">
                                 </div>
                                 <div class="hf-form-field">
                                     <label for="hf-lf-pass">Create Password</label>
-                                    <input type="password" id="hf-lf-pass" name="hf_lf_pass" value="***********">
+                                    <input type="password" id="hf-lf-pass" name="password" autocomplete="new-password" value="">
                                 </div>
                             </div>
                             <div class="hf-form-row hf-fr-submit">
                                 <p class="hf-form-instr">
                                     <a href="cancel.html" class="hf-cancell-account">Cancel my account</a>
                                 </p>
-                                <button class="hf-button hf-button-right"><span>Update</span></button>
+                                <button type="submit" class="hf-button hf-button-right"><span>Update</span></button>
                             </div>
                         </div>
                     </form>
