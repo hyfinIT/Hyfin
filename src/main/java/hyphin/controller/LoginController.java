@@ -5,6 +5,7 @@ import hyphin.repository.CustomUserAuditRepository;
 import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
+import hyphin.util.HyfinUtils;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -65,7 +66,15 @@ public class LoginController {
         User user = userService.findByUserNameAndPassword(login.getEmail(),login.getPassword());
         if (user != null) {
             session.setAttribute("User-entity",user);
-            return redirectTo("1");
+            if (user.getActive()) {
+                return redirectTo("1");
+            } else {
+                if (HyfinUtils.canRestoreAccount(user)) {
+                    return HyfinUtils.modelAndView("restore");
+                } else {
+                    return HyfinUtils.modelAndView("access-denied");
+                }
+            }
         }
         else {
             return redirectTo("LoginFailure");

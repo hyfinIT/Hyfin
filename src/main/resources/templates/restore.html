@@ -48,12 +48,12 @@
                     </div>
                 </div>
                 <div class="txtContent hf-tp2-contet-wrap">
-                    <h1>Sorry to see you go</h1>
-                    <p>Thanks for trying us out.</p>
-                    <p>Selecting cancel account below will remove all your details from our database.</p>
+                    <h1>Your account is deleted</h1>
+                    <p>You are still able to restore it</p>
+                    <p>This opportunity is available for 90 days from the date of deletion</p>
 
-                    <form name="del" id="del" th:action="@{/account}" th:method="DELETE">
-                        <button type="submit" class="hf-button hf-button-right"><span>Cancel account</span>
+                    <form name="del" id="del" th:action="@{/account/restore}" th:method="POST">
+                        <button type="submit" class="hf-button hf-button-right"><span>Restore account</span>
                         </button>
                     </form>
 

@@ -190,6 +190,33 @@ public class HyfinController {
         return mav;
     }
 
+    @DeleteMapping("/account")
+    public ModelAndView deleteAccount(ModelAndView mav, HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        user.setActive(false);
+        user.setDeletionDate(System.currentTimeMillis());
+        userRepository.save(user);
+        session.removeAttribute("User-entity");
+        mav.setViewName("start");
+
+        return mav;
+    }
+
+    @PostMapping("/account/restore")
+    public ModelAndView restoreAccount(ModelAndView mav, HttpSession session) {
+        User user = (User) session.getAttribute("User-entity");
+        user.setActive(true);
+        user.setDeletionDate(null);
+        userRepository.save(user);
+
+        mav.getModel().put("firstName", ((User)session.getAttribute("User-entity")).getFirstName());
+        mav.getModel().put("surname", ((User)session.getAttribute("User-entity")).getSurName());
+        mav.getModel().put("email", ((User)session.getAttribute("User-entity")).getEmail());
+        mav.setViewName("account");
+
+        return mav;
+    }
+
     @GetMapping("/assets")
     public ModelAndView viewAssetsPage() {
         ModelAndView mav = new ModelAndView();
