@@ -3,7 +3,6 @@ package hyphin.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
 
 import javax.persistence.*;
 
@@ -21,4 +20,7 @@ public class User {
     String email;
     String password;
     String dateTime;
+    private Boolean active;
+    @Column(name = "DELETION_DATE")
+    private Long deletionDate;
 }

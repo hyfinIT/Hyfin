@@ -1,5 +1,7 @@
 package hyphin.config;
 
+import hyphin.model.User;
+import hyphin.util.HyfinUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -41,10 +43,19 @@ public class RequestsHandler implements HandlerInterceptor {
         }
 
         String requestURI = httpServletRequest.getRequestURI();
+        User user = (User) httpServletRequest.getSession().getAttribute("User-entity");
 
-        if (!publicUriSet.contains(requestURI) && Objects.isNull(httpServletRequest.getSession().getAttribute("User-entity"))
+        if (!publicUriSet.contains(requestURI) && Objects.isNull(user)
                 && Objects.nonNull(modelAndView)) {
             modelAndView.setViewName("access-denied");
+        }
+
+        if (!publicUriSet.contains(requestURI) && Objects.nonNull(user) && user.getActive().equals(false)) {
+            if (HyfinUtils.canRestoreAccount(user)) {
+                modelAndView.setViewName("restore");
+            } else {
+                modelAndView.setViewName("access-denied");
+            }
         }
     }
 

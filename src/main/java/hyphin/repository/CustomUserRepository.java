@@ -1,7 +1,6 @@
 package hyphin.repository;
 
 import hyphin.model.User;
-import hyphin.model.UserAudit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.domain.Example;
@@ -31,6 +30,7 @@ public class CustomUserRepository implements UserRepository {
         else
             user.setUid(findMax() +1);
         user.setDateTime(jdf.format(new Date()));
+        user.setActive(true);
         userRepository.saveAndFlush(user);
         return user;
     }
