@@ -3,9 +3,7 @@ package hyphin.controller;
 import hyphin.model.Login;
 import hyphin.model.UpdateUserRequest;
 import hyphin.model.User;
-import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;
-import hyphin.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +22,7 @@ public class HyfinController {
     private static final Logger LOGGER = LogManager.getLogger(HyfinController.class);
 
     @Autowired
-    CustomUserRepository customUserRepository;
-
-    @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    UserService userService;
 
     @ModelAttribute(value = "register")
     public User newUser()

@@ -3,12 +3,10 @@ package hyphin.controller;
 import hyphin.enums.AuditEventType;
 import hyphin.model.*;
 import hyphin.repository.CustomUserAuditRepository;
-import hyphin.repository.CustomUserRepository;
 import hyphin.repository.GamesRepository;
 import hyphin.repository.UserAuditRepository;
 import hyphin.repository.UserRepository;
 import hyphin.service.GameService;
-import hyphin.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +33,6 @@ import java.util.concurrent.ThreadLocalRandom;
 @Slf4j
 public class GamesController {
 
-    CustomUserRepository customUserRepository;
-
     @Autowired
     private GameService gameService;
 
@@ -57,9 +53,6 @@ public class GamesController {
     private GameQuestions gameQuestion;
 
     private volatile static int counter;
-
-    @Autowired
-    UserService userService;
 
     private static final String GAMES_ELEMENT_ID = "3";
 

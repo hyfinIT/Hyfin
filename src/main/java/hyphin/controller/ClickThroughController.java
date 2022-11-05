@@ -3,9 +3,6 @@ package hyphin.controller;
 
 import hyphin.model.*;
 import hyphin.repository.CustomUserAuditRepository;
-import hyphin.repository.CustomUserRepository;
-import hyphin.repository.UserRepository;
-import hyphin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,16 +19,7 @@ import java.time.format.DateTimeFormatter;
 public class ClickThroughController {
 
     @Autowired
-    CustomUserRepository customUserRepository;
-
-    @Autowired
     CustomUserAuditRepository customAuditUserRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    UserService userService;
 
     @ModelAttribute(value = "video")
     public Login newVideo() {
