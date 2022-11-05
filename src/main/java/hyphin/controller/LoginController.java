@@ -1,8 +1,9 @@
 package hyphin.controller;
 
-import hyphin.model.*;
+import hyphin.model.Answer;
+import hyphin.model.Login;
+import hyphin.model.User;
 import hyphin.repository.CustomUserAuditRepository;
-import hyphin.repository.CustomUserRepository;
 import hyphin.repository.UserRepository;
 import hyphin.service.UserService;
 import hyphin.util.HyfinUtils;
@@ -11,7 +12,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -25,16 +29,13 @@ public class LoginController {
     private static final Logger LOGGER = LogManager.getLogger(LoginController.class);
 
     @Autowired
-    CustomUserRepository customUserRepository;
+    UserService userService;
 
     @Autowired
     CustomUserAuditRepository customAuditUserRepository;
 
     @Autowired
     UserRepository userRepository;
-
-    @Autowired
-    UserService userService;
 
     @ModelAttribute(value = "register")
     public User newUser() {
@@ -88,7 +89,7 @@ public class LoginController {
         if(bindingResult.hasErrors()){
             LOGGER.log(Level.ERROR,"There was a form binding error " + bindingResult);
         }
-        customUserRepository.save(user);
+        userService.save(user);
         return redirectTo("RegistrationSuccess");
     }
 
