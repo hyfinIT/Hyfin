@@ -6,6 +6,7 @@ import hyphin.repository.UserRepository;
 import hyphin.repository.currency.OperationAuditRepository;
 import hyphin.util.HyfinUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserOperationService {
 
     private final UserRepository userRepository;
@@ -21,6 +23,7 @@ public class UserOperationService {
 
     @Scheduled(cron = "0 0 3 * * ?")
     public void scheduledMethod() {
+        log.info("Users processing.............................");
         List<User> inactiveUsers = userRepository.findByActive(false);
         inactiveUsers
                 .stream()
@@ -28,6 +31,7 @@ public class UserOperationService {
                 .map(this::clearPersonalData)
                 .forEach(userRepository::save);
         OperationAudit operationAudit = new OperationAudit();
+        operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("DELETED_USERS_PROCESSING");
         operationAudit.setStatus("SUCCESS");
         operationAudit.setDateTime(LocalDateTime.now().toString());
