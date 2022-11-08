@@ -84,13 +84,14 @@ public class LoginController {
 
 
     @PostMapping("/Register")
-    public ModelAndView registerUsers(@ModelAttribute("register") User user, BindingResult bindingResult)
+    public ModelAndView registerUsers(HttpSession session, @ModelAttribute("register") User user, BindingResult bindingResult)
     {
         if(bindingResult.hasErrors()){
             LOGGER.log(Level.ERROR,"There was a form binding error " + bindingResult);
         }
         userService.save(user);
-        return redirectTo("RegistrationSuccess");
+        session.setAttribute("User-entity", user);
+        return HyfinUtils.modelAndView("RegistrationSuccess");
     }
 
     @GetMapping("/access-denied")
@@ -103,7 +104,4 @@ public class LoginController {
         mav.setViewName(pageTo);
         return mav;
     }
-
 }
-
-

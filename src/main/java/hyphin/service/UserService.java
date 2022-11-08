@@ -39,6 +39,11 @@ public class UserService {
             user.setUid(userRepository.findMax() + 1);
         user.setDateTime(jdf.format(new Date()));
         user.setActive(true);
+        user.setRegion("EMEA");
+        user.setPreferenceType("Global");
+        user.setDisplayPriority("Default");
+
+
         userRepository.saveAndFlush(user);
         return user;
     }
