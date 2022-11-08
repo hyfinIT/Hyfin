@@ -23,4 +23,9 @@ public class User {
     private Boolean active;
     @Column(name = "DELETION_DATE")
     private Long deletionDate;
+    private String region;
+    @Column(name = "PREFERENCE_TYPE")
+    private String preferenceType;
+    @Column(name = "DISPLAY_PRIORITY")
+    private String displayPriority;
 }
