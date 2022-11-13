@@ -1,10 +1,11 @@
 package hyphin.controller;
 
 import hyphin.model.currency.Blend;
+import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.endchallenge.EndChallengeTrade;
-import hyphin.repository.currency.BlendEurUsdRepository;
-import hyphin.repository.currency.BlendGbpUsdRepository;
-import hyphin.repository.currency.BlendUsdJpyRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.service.EndChallengeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,9 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EndChallengeController {
 
-    private final BlendEurUsdRepository blendEurUsdRepository;
-    private final BlendGbpUsdRepository blendGbpUsdRepository;
-    private final BlendUsdJpyRepository blendUsdJpyRepository;
+    private final CurrencyRatesBlendRepository currencyRatesBlendRepository;
 
     private final EndChallengeService endChallengeService;
 
@@ -58,8 +57,8 @@ public class EndChallengeController {
     }
 
     @GetMapping("/get-chart-data")
-    public List<? extends Blend> getChartData(){
-        return endChallengeService.getChartData();
+    public List<CurrencyRatesBlend> getChartData(){
+        return endChallengeService.getChartData("EUR/USD");
     }
 
     public ModelAndView redirectTo(String pageTo) {

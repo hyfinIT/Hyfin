@@ -1,9 +1,10 @@
 package hyphin.service;
 
 import hyphin.model.currency.Blend;
-import hyphin.repository.currency.BlendEurUsdRepository;
-import hyphin.repository.currency.BlendGbpUsdRepository;
-import hyphin.repository.currency.BlendUsdJpyRepository;
+import hyphin.model.currency.CurrencyRatesBlend;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -18,21 +19,19 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class EndChallengeService {
 
-    private final BlendEurUsdRepository blendEurUsdRepository;
-    private final BlendGbpUsdRepository blendGbpUsdRepository;
-    private final BlendUsdJpyRepository blendUsdJpyRepository;
+    private final CurrencyRatesBlendRepository currencyRatesBlendRepository;
 
-    NumberFormat formatter = new DecimalFormat("#0.00");
+    public List<CurrencyRatesBlend> getChartData(String pair) {
+        return currencyRatesBlendRepository.findAll().stream()
+                .filter(currencyRatesBlend -> currencyRatesBlend.getCcyPair().equals(pair))
+                .map(blend -> {
+                    blend.setBlendOpen(trimDigits(blend.getBlendOpen()));
+                    blend.setBlendHigh(trimDigits(blend.getBlendHigh()));
+                    blend.setBlendLow(trimDigits(blend.getBlendLow()));
+                    blend.setBlendClose(trimDigits(blend.getBlendClose()));
 
-    public List<? extends Blend> getChartData() {
-        return blendEurUsdRepository.findAll().stream().map(blend -> {
-            blend.setBlendOpen(trimDigits(blend.getBlendOpen()));
-            blend.setBlendHigh(trimDigits(blend.getBlendHigh()));
-            blend.setBlendLow(trimDigits(blend.getBlendLow()));
-            blend.setBlendClose(trimDigits(blend.getBlendClose()));
-
-            return blend;
-        }).collect(Collectors.toList());
+                    return blend;
+                }).collect(Collectors.toList());
     }
 
     private Double trimDigits(Double arg) {
