@@ -1,22 +1,15 @@
 package hyphin.service;
 
-import hyphin.model.currency.Blend;
-import hyphin.model.currency.CurrencyRatesBlend;
-import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.currency.OperationAudit;
 import hyphin.model.currency.StandardDeviation;
-import hyphin.repository.currency.CurrencyRatesBlendRepository;
-import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.repository.currency.OperationAuditRepository;
 import hyphin.repository.currency.StandardDeviationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

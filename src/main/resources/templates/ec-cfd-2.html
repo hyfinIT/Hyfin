@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/lib/swiper/swiper-bundle.min.css"/>
     <!-- Link Main CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
-    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
 
 
 
@@ -23,7 +23,7 @@
     <header class="hf-header">
         <div class="hf-logo-wrap">
             <div class="hf-logo">
-                <img src="./assets/images/hyfin-logo.svg" alt="">
+                <img src="/assets/images/hyfin-logo.svg" alt="">
             </div>
             <div class="hf-current-screen">
                 <span class="hf-current-screen-title">End Challenge</span>
@@ -36,8 +36,8 @@
                 <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
             </ul>
             <div class="hf-header-icons">
-                <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
-                <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                <a class="hf-hicon-search" href="../search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
+                <a class="hf-hicon-profile" href="../account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
                 <div class="hf-hicon-menu">
                     <div class="hf-menu-btn" id="hf-menu-trigger">
                         <span></span>
@@ -66,7 +66,7 @@
                                     <div class="chosen-currency">
                                         <div class="chosen-currency__country">
                                             <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="assets/images/flag-europa.svg" alt="Flag" /></div>
+                                                <div class="country__flag"><img src="/assets/images/flag-europa.svg" alt="Flag" /></div>
                                                 <div class="country__title">Eurozone</div>
                                             </div>
                                             <div class="country__description">
@@ -87,13 +87,13 @@
                                                     5.8%
                                                 </p>
                                                 <p>
-                                                    Inflation Trend: <img src="assets/images/icon-top-right.svg" alt="Icon" />
+                                                    Inflation Trend: <img src="/assets/images/icon-top-right.svg" alt="Icon" />
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="chosen-currency__country">
                                             <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="assets/images/flag-usa.svg" alt="Flag" /></div>
+                                                <div class="country__flag"><img src="/assets/images/flag-usa.svg" alt="Flag" /></div>
                                                 <div class="country__title">US</div>
                                             </div>
                                             <div class="country__description">
@@ -114,7 +114,7 @@
                                                     7.9%
                                                 </p>
                                                 <p>
-                                                    Inflation Trend: <img src="assets/images/icon-top.svg" alt="Icon" />
+                                                    Inflation Trend: <img src="/assets/images/icon-top.svg" alt="Icon" />
                                                 </p>
                                             </div>
                                         </div>
@@ -133,7 +133,7 @@
                     <!-- Carousel Navigation and pagination start -->
                     <div class="hf-carousel-control">
 <!--                        <button class="hf-carousel-prev hf-button hf-button-left hf-carousel-active"><span>Prev</span></button>-->
-                        <form role="form" th:action="@{/ec-cfd-1}" method="GET">
+                        <form role="form" th:action="@{/end-challenge/ec-cfd-1}" method="GET">
                             <button  class="hf-button hf-button-left  "><span>Prev</span></button>
                         </form>
                         <form role="form" th:action="@{/ec-cfd-3}" method="GET">
@@ -165,16 +165,16 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+            <a href="../4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="./assets/lib/jquery-3.6.0.min.js"></script>
-<script src="./assets/js/script.js?ver=1.1"></script>
-<script src="./assets/js/custom.js?ver=1.1"></script>
+<script src="/assets/lib/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/script.js?ver=1.1"></script>
+<script src="/assets/js/custom.js?ver=1.1"></script>
 <!-- Swiper JS -->
-<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script src="/assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".swiper", {
         slidesPerView: 1,
@@ -293,11 +293,7 @@
                         };
                         var chart = new ApexCharts(document.querySelector("#chartContainerEURUSD"), options);
                         chart.render();
-
-
-
                     }
-
                 );
             }
         )
@@ -308,7 +304,7 @@
     }
 </script>
 
-<script src="./assets/js/canvasjs.min.js"></script>
+<script src="/assets/js/canvasjs.min.js"></script>
 
 </body>
 </html>
