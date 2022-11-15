@@ -15,4 +15,6 @@ public interface CurrencyRatesBlendRepository extends JpaRepository<CurrencyRate
     Optional<CurrencyRatesBlend> findByDateAndCcyPair(String date, String ccyPair);
 
     CurrencyRatesBlend findByPositionAndCcyPair(String position, String ccyPair);
+
+    List<CurrencyRatesBlend> getAllByCcyPair(String ccyPair);
 }

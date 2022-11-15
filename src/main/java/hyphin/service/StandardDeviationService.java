@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -23,9 +24,7 @@ import java.util.Objects;
 public class StandardDeviationService {
 
     private final StandardDeviationRepository standardDeviationRepository;
-    private final CurrencyRatesBlendRepository eurUsdRepository;
-    private final CurrencyRatesBlendRepository gbpUsdRepository;
-    private final CurrencyRatesBlendRepository usdJpyRepository;
+    private final CurrencyRatesBlendRepository currencyRatesBlendRepository;
 
     private final OperationAuditRepository operationAuditRepository;
 
@@ -52,9 +51,9 @@ public class StandardDeviationService {
        try {
            standardDeviationRepository.findAll();
 
-           List<CurrencyRatesBlend> eurUsdAll = eurUsdRepository.findAll();
-           List<CurrencyRatesBlend> gbpUsdAll = gbpUsdRepository.findAll();
-           List<CurrencyRatesBlend> usdJpyAll = usdJpyRepository.findAll();
+           List<CurrencyRatesBlend> eurUsdAll = currencyRatesBlendRepository.getAllByCcyPair("EUR/USD");
+           List<CurrencyRatesBlend> gbpUsdAll = currencyRatesBlendRepository.getAllByCcyPair("GBP/USD");
+           List<CurrencyRatesBlend> usdJpyAll = currencyRatesBlendRepository.getAllByCcyPair("USD/JPY");
 
            processBlends("EUR/USD",  eurUsdAll);
            processBlends("GBP/USD", gbpUsdAll);
