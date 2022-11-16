@@ -19,7 +19,7 @@ public class EndChallengeSession {
 
     private ConcurrentLinkedQueue<UserAudit> userAudits = new ConcurrentLinkedQueue<>();
     private List<CcyPairDto> pairs = new ArrayList<>();
-    private String chosenPair;
+    private CcyPairDto chosenPair;
 
     private User user;
 

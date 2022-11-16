@@ -35,15 +35,16 @@ public class EndChallengeController {
     public ModelAndView viewCFD1(HttpSession session) {
         endChallengeService.start(session);
         ModelAndView mav = HyfinUtils.modelAndView("ec-cfd-1");
-        mav.getModel().put("pairs", endChallengeService.getPairs(session));
+        mav.getModel().put("pairs", endChallengeService.getAllPairs(session));
         return mav;
     }
 
     @GetMapping("/chosen-pair")
-    public ModelAndView chosenPair(HttpSession session, String pair){
-        endChallengeService.chosePair(session, pair);
+    public ModelAndView chosenPair(HttpSession session, String chosenPair){
+        System.out.println("Chosen Pair: " + chosenPair);
+        endChallengeService.chosePair(session, chosenPair);
         ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-2");
-
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
         return modelAndView;
     }
 

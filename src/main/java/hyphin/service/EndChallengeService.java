@@ -12,6 +12,7 @@ import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -57,7 +59,15 @@ public class EndChallengeService {
     private static final long SESSION_LIVE_TIME = 1000 * 60 * 60;
     private static final long GAME_TIMEOUT_MILLIS = 1000 * 45;
     private ConcurrentHashMap<String, EndChallengeSession> sessions = new ConcurrentHashMap<>();
-    List<CcyPairDto> pairs = new ArrayList<>();
+    List<CcyPairDto> allPairs = new ArrayList<>();
+
+//    @PostConstruct
+//    private void init(){
+//        System.out.println("initPairs.....");
+//        allPairs = StreamSupport.stream(ccyPairRepository.findAll().spliterator(), false)
+//                .map(ccyPairMapper::mapToDto).collect(Collectors.toList());
+//        System.out.println("initPairs..... finished");
+//    }
 
     public void start(HttpSession session) {
         User user = (User) session.getAttribute("User-entity");
@@ -78,11 +88,16 @@ public class EndChallengeService {
 
     public void chosePair(HttpSession session, String pair) {
         EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
-        endChallengeSession.setChosenPair(pair);
+        endChallengeSession.setChosenPair(endChallengeSession.getPairs().stream().filter(ccyPairDto -> ccyPairDto.getCurrencyPairFormatted().equals(pair)).findAny().orElseThrow(RuntimeException::new));
+    }
+
+    public CcyPairDto getChosenPair(HttpSession session) {
+        EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
+        return endChallengeSession.getChosenPair();
     }
 
 
-    public List<CcyPairDto> getPairs(HttpSession session) {
+    public List<CcyPairDto> getAllPairs(HttpSession session) {
         return sessions.get(getEndChallengeSessionId(session)).getPairs();
     }
 

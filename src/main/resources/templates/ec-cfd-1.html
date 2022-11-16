@@ -38,7 +38,7 @@
             </ul>
             <div class="hf-header-icons">
                 <a class="hf-hicon-search" href="./search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
-                <a class="hf-hicon-profile" href="./account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
+                <a class="hf-hicon-profile" href="/account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
                 <div class="hf-hicon-menu">
                     <div class="hf-menu-btn" id="hf-menu-trigger">
                         <span></span>
@@ -69,8 +69,8 @@
                                             <label for="currency1">
                                                 <div class="currency">
                                                     <div class="currency__top">
-                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[0].flagUrl1}}" alt="Flag" /></div>
-                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[0].flagUrl2}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[0].currency1.flagUrl}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[0].currency2.flagUrl}}" alt="Flag" /></div>
                                                         <div class="currency__title-and-value">
                                                             <div id="pair1" class="currency__title" th:text="${pairs[0].currencyPairFormatted}"></div>
                                                             <div class="currency__value">Spot FX Mid Rate: <span th:text="${pairs[0].spotFxMidRate}"></span></div>
@@ -93,13 +93,13 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="disableNext()" class="trade-currency__currency disabled_currency">
+                                        <div onclick="enableNext(); setPair(document.getElementById('pair2'))" class="trade-currency__currency">
                                             <input type="radio" name="currency" id="currency2" class="currency__input" />
                                             <label for="currency2">
                                                 <div class="currency">
                                                     <div class="currency__top">
-                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[1].flagUrl1}}" alt="Flag" /></div>
-                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[1].flagUrl2}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[1].currency1.flagUrl}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[1].currency2.flagUrl}}" alt="Flag" /></div>
                                                         <div class="currency__title-and-value">
                                                             <div id="pair2" class="currency__title" th:text="${pairs[1].currencyPairFormatted}"></div>
                                                             <div class="currency__value">Spot FX Mid Rate: <span th:text="${pairs[1].spotFxMidRate}"></span></div>
@@ -122,13 +122,13 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="disableNext()" class="trade-currency__currency disabled_currency">
+                                        <div onclick="enableNext(); setPair(document.getElementById('pair3'))" class="trade-currency__currency">
                                             <input type="radio" name="currency" id="currency3" class="currency__input" />
                                             <label for="currency3">
                                                 <div class="currency">
                                                     <div class="currency__top">
-                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[2].flagUrl1}}" alt="Flag" /></div>
-                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[2].flagUrl2}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[2].currency1.flagUrl}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[2].currency2.flagUrl}}" alt="Flag" /></div>
                                                         <div class="currency__title-and-value">
                                                             <div id="pair3" class="currency__title" th:text="${pairs[2].currencyPairFormatted}"></div>
                                                             <div class="currency__value">Spot FX Mid Rate: <span th:text="${pairs[2].spotFxMidRate}"></span></div>
@@ -258,7 +258,7 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="./4.html"><img src="/assets/images/close.svg" alt=""></a>
+            <a href="/4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
@@ -294,7 +294,7 @@
     }
 
     function disableNext(){
-        console.log('function enableNext()');
+        console.log('function disableNext()');
         document.getElementById('dis-button').setAttribute("disabled", "disabled");
         document.getElementById('dis-button').classList.add("disabled-button");
     }
@@ -302,7 +302,7 @@
 
 <script>
     function setPair(pair){
-        document.getElementById('chosenPair').value = pair;
+        document.getElementById('chosenPair').value = pair.textContent;
     }
 </script>
 
