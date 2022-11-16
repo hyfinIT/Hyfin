@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/lib/swiper/swiper-bundle.min.css"/>
     <!-- Link Main CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
-    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
 
 
 
@@ -23,7 +23,7 @@
     <header class="hf-header">
         <div class="hf-logo-wrap">
             <div class="hf-logo">
-                <img src="./assets/images/hyfin-logo.svg" alt="">
+                <img src="/assets/images/hyfin-logo.svg" alt="">
             </div>
             <div class="hf-current-screen">
                 <span class="hf-current-screen-title">End Challenge</span>
@@ -36,8 +36,8 @@
                 <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
             </ul>
             <div class="hf-header-icons">
-                <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
-                <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                <a class="hf-hicon-search" href="../search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
+                <a class="hf-hicon-profile" href="../account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
                 <div class="hf-hicon-menu">
                     <div class="hf-menu-btn" id="hf-menu-trigger">
                         <span></span>
@@ -61,65 +61,65 @@
                             <!-- Carousel Item 2 Start -->
                             <div class="swiper-slide">
                                 <div class="trade-currency__content">
-                                    <h3 class="trade-currency__title">You have chosen EUR/USD</h3>
+                                    <h3 class="trade-currency__title">You have chosen <span th:text="${chosenPair.currencyPairFormatted}"></span></h3>
                                     <div class="trade-currency__description">Here is some market relevant information</div>
                                     <div class="chosen-currency">
                                         <div class="chosen-currency__country">
                                             <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="assets/images/flag-europa.svg" alt="Flag" /></div>
-                                                <div class="country__title">Eurozone</div>
+                                                <div class="country__flag"><img th:src="@{${'/assets/images/' + chosenPair.currency1.flagUrl}}" alt="Flag" /></div>
+                                                <div class="country__title"><span th:text="${chosenPair.currency1.country}"></span></div>
                                             </div>
                                             <div class="country__description">
                                                 <p>
                                                     Data Release:<br>
-                                                    German Inflation Data
+                                                    <span th:text="${chosenPair.currency1.atmospherics.dataRelease}"></span>
                                                 </p>
                                                 <p>
                                                     Central Bank:<br>
-                                                    ECB Chair Lagarde speaking
+                                                    <span th:text="${chosenPair.currency1.atmospherics.centralBank}"></span>
                                                 </p>
                                                 <p>
                                                     Macro/Politics:<br>
-                                                    Russia lays siege to Kiyv
+                                                    <span th:text="${chosenPair.currency1.atmospherics.macroPolitics}"></span>
                                                 </p>
                                                 <p>
                                                     Current Inflation: <br>
-                                                    5.8%
+                                                    <span th:text="${chosenPair.currency1.inflationRate.infRate}"></span>
                                                 </p>
                                                 <p>
-                                                    Inflation Trend: <img src="assets/images/icon-top-right.svg" alt="Icon" />
+                                                    Inflation Trend: <img id="trend1" src="#" alt="Icon" />
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="chosen-currency__country">
                                             <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="assets/images/flag-usa.svg" alt="Flag" /></div>
-                                                <div class="country__title">US</div>
+                                                <div class="country__flag"><img th:src="@{${'/assets/images/' + chosenPair.currency2.flagUrl}}" alt="Flag" /></div>
+                                                <div class="country__title"><span th:text="${chosenPair.currency2.country}"></span></div>
                                             </div>
                                             <div class="country__description">
                                                 <p>
                                                     Data Release:<br>
-                                                    Retail Sales
+                                                    <span th:text="${chosenPair.currency2.atmospherics.dataRelease}"></span>
                                                 </p>
                                                 <p>
                                                     Central Bank:<br>
-                                                    Fed Chair Powell speaking
+                                                    <span th:text="${chosenPair.currency2.atmospherics.centralBank}"></span>
                                                 </p>
                                                 <p>
                                                     Macro/Politics:<br>
-                                                    Oil trades over $140 a barrel
+                                                    <span th:text="${chosenPair.currency2.atmospherics.macroPolitics}"></span>
                                                 </p>
                                                 <p>
-                                                    Current Inflation:<br>
-                                                    7.9%
+                                                    Current Inflation: <br>
+                                                    <span th:text="${chosenPair.currency2.inflationRate.infRate}"></span>
                                                 </p>
                                                 <p>
-                                                    Inflation Trend: <img src="assets/images/icon-top.svg" alt="Icon" />
+                                                    Inflation Trend: <img id="trend2" src="#" alt="Icon" />
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="chosen-currency__chart">
-                                            <div class="chart__title">EUR/USD – Spot Chart</div>
+                                            <div class="chart__title"><span th:text="${chosenPair.currencyPairFormatted}"></span> – Spot Chart</div>
                                             <div class="chart__live-graph">
                                                 <div id="chartContainerEURUSD" style="height: 100%; width: 100%;"></div>
                                             </div>
@@ -133,7 +133,7 @@
                     <!-- Carousel Navigation and pagination start -->
                     <div class="hf-carousel-control">
 <!--                        <button class="hf-carousel-prev hf-button hf-button-left hf-carousel-active"><span>Prev</span></button>-->
-                        <form role="form" th:action="@{/ec-cfd-1}" method="GET">
+                        <form role="form" th:action="@{/end-challenge/ec-cfd-1}" method="GET">
                             <button  class="hf-button hf-button-left  "><span>Prev</span></button>
                         </form>
                         <form role="form" th:action="@{/ec-cfd-3}" method="GET">
@@ -165,16 +165,16 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+            <a href="../4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="./assets/lib/jquery-3.6.0.min.js"></script>
-<script src="./assets/js/script.js?ver=1.1"></script>
-<script src="./assets/js/custom.js?ver=1.1"></script>
+<script src="/assets/lib/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/script.js?ver=1.1"></script>
+<script src="/assets/js/custom.js?ver=1.1"></script>
 <!-- Swiper JS -->
-<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script src="/assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".swiper", {
         slidesPerView: 1,
@@ -196,11 +196,38 @@
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-<script>
+
+
+
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+
     window.onload = function() {
+    var chosenPair = /*[[${chosenPair}]]*/ 'default';
+
+    console.log('chosenPair');
+    console.log(chosenPair);
+
+
+    console.log(chosenPair.currency1.inflationRate);
+
+    if (chosenPair.currency1.inflationRate.infTrend == 'UP') {
+        document.getElementById('trend1').setAttribute('src', '/assets/images/icon-top.svg')
+    } else {
+        document.getElementById('trend1').setAttribute('src', '/assets/images/icon-top-right.svg')
+    }
+
+    if (chosenPair.currency2.inflationRate.infTrend == 'UP') {
+        document.getElementById('trend2').setAttribute('src', '/assets/images/icon-top.svg')
+    } else {
+        document.getElementById('trend2').setAttribute('src', '/assets/images/icon-top-right.svg')
+    }
+
+
     var dataPoints = [];
 
-    fetch('/end-challenge/get-chart-data')
+    fetch('/end-challenge/get-chart-data?pair=' + chosenPair.currencyPairFormatted)
         .then(
             function(response) {
                 if (response.status !== 200) {
@@ -293,11 +320,7 @@
                         };
                         var chart = new ApexCharts(document.querySelector("#chartContainerEURUSD"), options);
                         chart.render();
-
-
-
                     }
-
                 );
             }
         )
@@ -306,9 +329,10 @@
         });
 
     }
+/*]]>*/
 </script>
 
-<script src="./assets/js/canvasjs.min.js"></script>
+<script src="/assets/js/canvasjs.min.js"></script>
 
 </body>
 </html>

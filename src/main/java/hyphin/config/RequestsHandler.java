@@ -1,7 +1,9 @@
 package hyphin.config;
 
 import hyphin.model.User;
+import hyphin.repository.UserRepository;
 import hyphin.util.HyfinUtils;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -14,10 +16,14 @@ import java.util.Objects;
 import java.util.Set;
 
 @Component
+@RequiredArgsConstructor
 public class RequestsHandler implements HandlerInterceptor {
+
+    private final UserRepository userRepository;
 
     @Value("${disable.security:false}")
     private Boolean disable;
+
 
     private static final Set<String> publicUriSet;
 
@@ -33,15 +39,17 @@ public class RequestsHandler implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
+        if (disable) {
+            if (Objects.isNull(httpServletRequest.getSession().getAttribute("User-entity"))) {
+                User user = userRepository.findOne(51);
+                httpServletRequest.getSession().setAttribute("User-entity", user);
+            }
+        }
         return true;
     }
 
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
-        if (disable) {
-            return;
-        }
-
         String requestURI = httpServletRequest.getRequestURI();
         User user = (User) httpServletRequest.getSession().getAttribute("User-entity");
 

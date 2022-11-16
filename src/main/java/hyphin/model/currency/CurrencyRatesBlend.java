@@ -1,23 +1,22 @@
 package hyphin.model.currency;
 
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
-@Data
+@Getter
+@Setter
 @Entity
-@Inheritance( strategy = InheritanceType.TABLE_PER_CLASS )
+@Table(name = "CURRENCYRATESBLEND", schema="PUBLIC", catalog = "HYFIN")
 @NoArgsConstructor
-@AllArgsConstructor
-public class Blend {
+public class CurrencyRatesBlend{
+
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_cur_rates_blend")
+    @SequenceGenerator(name = "id_cur_rates_blend", sequenceName = "CURRENCYRATESBLENDSEQUENCE")
+
     private Long id;
 
     @Column(name = "CCYPAIR")
@@ -47,4 +46,5 @@ public class Blend {
 
     @Column(name = "SOURCEREF")
     private String sourceRef;
+
 }

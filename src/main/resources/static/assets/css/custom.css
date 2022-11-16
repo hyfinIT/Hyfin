@@ -350,7 +350,6 @@
 .chart__live-graph {
 	margin: 11px 0px 0px 0px;
 	flex: 1;
-	min-height: 210px;
 	display:flex;
 	align-items: stretch;
 }

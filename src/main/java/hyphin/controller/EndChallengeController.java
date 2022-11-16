@@ -1,18 +1,15 @@
 package hyphin.controller;
 
-import hyphin.model.currency.Blend;
+import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.endchallenge.EndChallengeTrade;
-import hyphin.repository.currency.BlendEurUsdRepository;
-import hyphin.repository.currency.BlendGbpUsdRepository;
-import hyphin.repository.currency.BlendUsdJpyRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.service.EndChallengeService;
+import hyphin.util.HyfinUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -20,9 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class EndChallengeController {
 
-    private final BlendEurUsdRepository blendEurUsdRepository;
-    private final BlendGbpUsdRepository blendGbpUsdRepository;
-    private final BlendUsdJpyRepository blendUsdJpyRepository;
+    private final CurrencyRatesBlendRepository currencyRatesBlendRepository;
 
     private final EndChallengeService endChallengeService;
 
@@ -34,6 +29,23 @@ public class EndChallengeController {
     @GetMapping("/start")
     public ModelAndView start() {
         return redirectTo("end_challenge/start");
+    }
+
+    @GetMapping("/ec-cfd-1")
+    public ModelAndView viewCFD1(HttpSession session) {
+        endChallengeService.start(session);
+        ModelAndView mav = HyfinUtils.modelAndView("ec-cfd-1");
+        mav.getModel().put("pairs", endChallengeService.getAllPairs(session));
+        return mav;
+    }
+
+    @GetMapping("/chosen-pair")
+    public ModelAndView chosenPair(HttpSession session, String chosenPair){
+        System.out.println("Chosen Pair: " + chosenPair);
+        endChallengeService.chosePair(session, chosenPair);
+        ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-2");
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        return modelAndView;
     }
 
     @PostMapping("/send-trade")
@@ -58,8 +70,10 @@ public class EndChallengeController {
     }
 
     @GetMapping("/get-chart-data")
-    public List<? extends Blend> getChartData(){
-        return endChallengeService.getChartData();
+    public List<CurrencyRatesBlend> getChartData(
+            @RequestParam String pair
+    ){
+        return endChallengeService.getChartData(pair);
     }
 
     public ModelAndView redirectTo(String pageTo) {

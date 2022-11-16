@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/lib/swiper/swiper-bundle.min.css"/>
     <!-- Link Main CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
-    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
 
 
 
@@ -24,7 +24,7 @@
     <header class="hf-header">
         <div class="hf-logo-wrap">
             <div class="hf-logo">
-                <img src="./assets/images/hyfin-logo.svg" alt="">
+                <img src="/assets/images/hyfin-logo.svg" alt="">
             </div>
             <div class="hf-current-screen">
                 <span class="hf-current-screen-title">End Challenge</span>
@@ -32,13 +32,13 @@
         </div>
         <div class="hf-main-menu-wrap">
             <ul class="hf-main-menu">
-                <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="../1.html">Courses</a></li>
-                <li class="hf-menu-item hf-menu-item-help"><a href="../faqs.html">FAQs</a></li>
-                <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
+                <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="./1.html">Courses</a></li>
+                <li class="hf-menu-item hf-menu-item-help"><a href="./faqs.html">FAQs</a></li>
+                <li class="hf-menu-item hf-menu-item-glossary"><a href="./glossary.html">Glossary</a></li>
             </ul>
             <div class="hf-header-icons">
-                <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
-                <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                <a class="hf-hicon-search" href="./search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
+                <a class="hf-hicon-profile" href="/account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
                 <div class="hf-hicon-menu">
                     <div class="hf-menu-btn" id="hf-menu-trigger">
                         <span></span>
@@ -64,20 +64,22 @@
                                     <h3 class="trade-currency__title">What currency pair do you want to trade?</h3>
                                     <div class="trade-currency__description">Choose a pair and select next to continue</div>
                                     <div class="trade-currency__currencies">
-                                        <div onclick="enableNext()" class="trade-currency__currency">
+                                        <div onclick="enableNext(); setPair(document.getElementById('pair1'))" class="trade-currency__currency">
                                             <input type="radio" name="currency" id="currency1" class="currency__input" />
                                             <label for="currency1">
                                                 <div class="currency">
                                                     <div class="currency__top">
-                                                        <div class="currency__flag"><img src="assets/images/flag-europa.svg" alt="Flag" /></div>
-                                                        <div class="currency__flag"><img src="assets/images/flag-usa.svg" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[0].currency1.flagUrl}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[0].currency2.flagUrl}}" alt="Flag" /></div>
                                                         <div class="currency__title-and-value">
-                                                            <div class="currency__title">EUR/USD</div>
-                                                            <div class="currency__value">Spot FX Mid Rate: 1.0960</div>
+                                                            <div id="pair1" class="currency__title" th:text="${pairs[0].currencyPairFormatted}"></div>
+                                                            <div class="currency__value">Spot FX Mid Rate: <span th:text="${pairs[0].spotFxMidRate}"></span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="currency__graph">
-														 <img src="assets/images/trending-up.svg">
+                                                    <div style="height: 150px" class="chart__live-graph">
+<!--                                                   oldstyle     currency__graph-->
+<!--                                                   newStyle     chart__live-graph-->
+                                                        <div id="chartContainer1" style="height: 100%; width: 100%;"></div>
                                                     </div>
                                                     <div class="currency__label">
                                                         <svg width="29.917969px" height="29.917969px" viewBox="0 0 29.917969 29.917969" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
@@ -86,25 +88,27 @@
                                                             <path d="M20.2763 10.6206L11.9089 18.3447L7.72461 14.4832L11.9089 18.3447L20.2763 10.6206Z" id="Stroke-27-Copy" fill="none" fill-rule="evenodd" stroke="#B7B7B7" stroke-width="1.7728486" />
                                                           </g>
                                                         </svg>
-                                                        <p>Select EUR/USD to trade</p>
+                                                        <p>Select <span th:text="${pairs[0].currencyPairFormatted}"></span> to trade</p>
                                                     </div>
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="disableNext()" class="trade-currency__currency disabled_currency">
+                                        <div onclick="enableNext(); setPair(document.getElementById('pair2'))" class="trade-currency__currency">
                                             <input type="radio" name="currency" id="currency2" class="currency__input" />
                                             <label for="currency2">
                                                 <div class="currency">
                                                     <div class="currency__top">
-                                                        <div class="currency__flag"><img src="assets/images/flag-uk.svg" alt="Flag" /></div>
-                                                        <div class="currency__flag"><img src="assets/images/flag-usa.svg" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[1].currency1.flagUrl}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[1].currency2.flagUrl}}" alt="Flag" /></div>
                                                         <div class="currency__title-and-value">
-                                                            <div class="currency__title">GBP/USD</div>
-                                                            <div class="currency__value">Spot FX Mid Rate: 1.3086</div>
+                                                            <div id="pair2" class="currency__title" th:text="${pairs[1].currencyPairFormatted}"></div>
+                                                            <div class="currency__value">Spot FX Mid Rate: <span th:text="${pairs[1].spotFxMidRate}"></span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="currency__graph">
-                                                        <img src="assets/images/trending-down.svg">
+                                                    <div style="height: 150px" class="chart__live-graph">
+                                                        <!--                                                   oldstyle     currency__graph-->
+                                                        <!--                                                   newStyle     chart__live-graph-->
+                                                        <div id="chartContainer2" style="height: 100%; width: 100%;"></div>
                                                     </div>
                                                     <div class="currency__label">
                                                         <svg width="29.917969px" height="29.917969px" viewBox="0 0 29.917969 29.917969" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
@@ -113,25 +117,27 @@
                                                             <path d="M20.2763 10.6206L11.9089 18.3447L7.72461 14.4832L11.9089 18.3447L20.2763 10.6206Z" id="Stroke-27-Copy" fill="none" fill-rule="evenodd" stroke="#B7B7B7" stroke-width="1.7728486" />
                                                           </g>
                                                         </svg>
-                                                        <p>Select GBP/USD to trade</p>
+                                                        <p>Select <span th:text="${pairs[1].currencyPairFormatted}"></span> to trade</p>
                                                     </div>
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="disableNext()" class="trade-currency__currency disabled_currency">
+                                        <div onclick="enableNext(); setPair(document.getElementById('pair3'))" class="trade-currency__currency">
                                             <input type="radio" name="currency" id="currency3" class="currency__input" />
                                             <label for="currency3">
                                                 <div class="currency">
                                                     <div class="currency__top">
-                                                        <div class="currency__flag"><img src="assets/images/flag-usa.svg" alt="Flag" /></div>
-                                                        <div class="currency__flag"><img src="assets/images/flag-japan.svg" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[2].currency1.flagUrl}}" alt="Flag" /></div>
+                                                        <div class="currency__flag"><img th:src="@{${'/assets/images/' + pairs[2].currency2.flagUrl}}" alt="Flag" /></div>
                                                         <div class="currency__title-and-value">
-                                                            <div class="currency__title">USD/JPY</div>
-                                                            <div class="currency__value">Spot FX Mid Rate: 116.90</div>
+                                                            <div id="pair3" class="currency__title" th:text="${pairs[2].currencyPairFormatted}"></div>
+                                                            <div class="currency__value">Spot FX Mid Rate: <span th:text="${pairs[2].spotFxMidRate}"></span></div>
                                                         </div>
                                                     </div>
-                                                    <div class="currency__graph">
-                                                        <img src="assets/images/trending-up.svg">
+                                                    <div style="height: 150px" class="chart__live-graph">
+                                                        <!--                                                   oldstyle     currency__graph-->
+                                                        <!--                                                   newStyle     chart__live-graph-->
+                                                        <div id="chartContainer3" style="height: 100%; width: 100%;"></div>
                                                     </div>
                                                     <div class="currency__label">
                                                         <svg width="29.917969px" height="29.917969px" viewBox="0 0 29.917969 29.917969" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
@@ -140,7 +146,7 @@
                                                             <path d="M20.2763 10.6206L11.9089 18.3447L7.72461 14.4832L11.9089 18.3447L20.2763 10.6206Z" id="Stroke-27-Copy" fill="none" fill-rule="evenodd" stroke="#B7B7B7" stroke-width="1.7728486" />
                                                           </g>
                                                         </svg>
-                                                        <p>Select USD/JPY to trade</p>
+                                                        <p>Select <span th:text="${pairs[2].currencyPairFormatted}"></span> to trade</p>
                                                     </div>
                                                 </div>
                                             </label>
@@ -157,7 +163,7 @@
                                     <div class="chosen-currency">
                                         <div class="chosen-currency__country">
                                             <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="assets/images/flag-europa.svg" alt="Flag" /></div>
+                                                <div class="country__flag"><img src="/assets/images/flag-europa.svg" alt="Flag" /></div>
                                                 <div class="country__title">Eurozone</div>
                                             </div>
                                             <div class="country__description">
@@ -178,13 +184,13 @@
                                                     5.8%
                                                 </p>
                                                 <p>
-                                                    Inflation Trend: <img src="assets/images/icon-top-right.svg" alt="Icon" />
+                                                    Inflation Trend: <img src="/assets/images/icon-top-right.svg" alt="Icon" />
                                                 </p>
                                             </div>
                                         </div>
                                         <div class="chosen-currency__country">
                                             <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="assets/images/flag-usa.svg" alt="Flag" /></div>
+                                                <div class="country__flag"><img src="/assets/images/flag-usa.svg" alt="Flag" /></div>
                                                 <div class="country__title">US</div>
                                             </div>
                                             <div class="country__description">
@@ -205,7 +211,7 @@
                                                     7.9%
                                                 </p>
                                                 <p>
-                                                    Inflation Trend: <img src="assets/images/icon-top.svg" alt="Icon" />
+                                                    Inflation Trend: <img src="/assets/images/icon-top.svg" alt="Icon" />
                                                 </p>
                                             </div>
                                         </div>
@@ -223,11 +229,10 @@
                     </div>
                     <!-- Carousel Navigation and pagination start -->
                     <div class="hf-carousel-control">
-<!--                        <button class="hf-carousel-prev hf-button hf-button-left"><span>Prev</span></button>-->
-<!--                        <form role="form" th:action="@{/end-challenge/start}" method="GET">-->
-                            <button id="dis-button" disabled type="button" onclick="swiper.disable(); location.href='/ec-cfd-2'" class="disabled-button hf-button hf-button-right"><span>Next</span></button>
-<!--                        </form>-->
-<!--                        <button class="hf-carousel-next hf-button hf-button-right"><span>Next</span></button>-->
+                        <form role="form" id="formId" name="formName"  th:action="@{/end-challenge/chosen-pair}" method="GET">
+                            <input hidden="true" name="chosenPair" id="chosenPair">
+                            <button id="dis-button" disabled type="submit" onclick="swiper.disable();" class="disabled-button hf-button hf-button-right"><span>Next</span></button>
+                        </form>
                         <div class="swiper-pagination"></div>
                     </div>
                     <!-- Carousel Navigation and pagination end -->
@@ -253,16 +258,16 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+            <a href="/4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="./assets/lib/jquery-3.6.0.min.js"></script>
-<script src="./assets/js/script.js?ver=1.1"></script>
-<script src="./assets/js/custom.js?ver=1.1"></script>
+<script src="/assets/lib/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/script.js?ver=1.1"></script>
+<script src="/assets/js/custom.js?ver=1.1"></script>
 <!-- Swiper JS -->
-<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script src="/assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".swiper", {
         slidesPerView: 1,
@@ -289,9 +294,330 @@
     }
 
     function disableNext(){
-        console.log('function enableNext()');
+        console.log('function disableNext()');
         document.getElementById('dis-button').setAttribute("disabled", "disabled");
         document.getElementById('dis-button').classList.add("disabled-button");
+    }
+</script>
+
+<script>
+    function setPair(pair){
+        document.getElementById('chosenPair').value = pair.textContent;
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script>
+    window.onload = function() {
+    var dataPoints = [];
+
+    fetch('/end-challenge/get-chart-data?pair=' + document.getElementById('pair1').textContent)
+        .then(
+            function(response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+
+                response.json().then(function(data) {
+                        for (let i in data) {
+                            var date = data[i].date.split("-");
+
+                            dataPoints.push({
+                                x: new Date(
+                                    parseInt(date[0]), //Year
+                                    parseInt(date[1]) - 1, // In JS month starts from 0(January)
+                                    parseInt(date[2]) // Day
+                                ),
+                                y: [
+                                    data[i].blendOpen,
+                                    data[i].blendHigh,
+                                    data[i].blendLow,
+                                    data[i].blendClose
+                                ]
+                            });
+                        }
+
+
+                        var options = {
+                            series: [{
+                                data: dataPoints
+                            }],
+                            chart: {
+                                type: 'candlestick',
+                                height: '100%',
+                                toolbar: {
+                                    show: false
+                                }
+                            },
+                            legend: {
+                                show: false
+                            },
+                            plotOptions: {
+                                candlestick: {
+                                    colors: {
+                                        upward: '#1b1b3c',
+                                        downward: '#fe6800'
+                                    }
+                                }
+                            },
+                            grid: {
+                                show: true,
+                                borderColor: '#bdc6d5',
+                                xaxis: {
+                                    lines: {
+                                        show: false,
+                                    }
+                                },
+                                yaxis: {
+                                    lines: {
+                                        show: true,
+                                    }
+                                }
+                            },
+                            annotations2: {
+
+                            },
+                            xaxis: {
+                                type: 'datetime',
+                                axisTicks: {
+                                    color: '#bdc6d5'
+                                },
+                                labels: {
+                                    rotate: 0,
+                                    rotateAlways: false,
+                                    showDuplicates: false,
+                                    datetimeFormatter: {
+                                        year: 'yyyy',
+                                        month: 'MMM \'yy',
+                                        day: 'dd MMM',
+                                        hour: 'HH:mm'
+                                    }
+                                }
+                            },
+                            yaxis: {
+                                tooltip: {
+                                    enabled: true
+                                }
+                            }
+                        };
+                        var chart = new ApexCharts(document.querySelector("#chartContainer1"), options);
+                        chart.render();
+                    }
+                );
+            }
+        )
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+
+             var dataPoints2 = [];
+
+    fetch('/end-challenge/get-chart-data?pair=' + document.getElementById('pair2').textContent)
+        .then(
+            function(response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+
+                response.json().then(function(data) {
+                        for (let i in data) {
+                            var date = data[i].date.split("-");
+
+                            dataPoints2.push({
+                                x: new Date(
+                                    parseInt(date[0]), //Year
+                                    parseInt(date[1]) - 1, // In JS month starts from 0(January)
+                                    parseInt(date[2]) // Day
+                                ),
+                                y: [
+                                    data[i].blendOpen,
+                                    data[i].blendHigh,
+                                    data[i].blendLow,
+                                    data[i].blendClose
+                                ]
+                            });
+                        }
+
+
+                        var options2 = {
+                            series: [{
+                                data: dataPoints2
+                            }],
+                            chart: {
+                                type: 'candlestick',
+                                height: '100%',
+                                toolbar: {
+                                    show: false
+                                }
+                            },
+                            legend: {
+                                show: false
+                            },
+                            plotOptions: {
+                                candlestick: {
+                                    colors: {
+                                        upward: '#1b1b3c',
+                                        downward: '#fe6800'
+                                    }
+                                }
+                            },
+                            grid: {
+                                show: true,
+                                borderColor: '#bdc6d5',
+                                xaxis: {
+                                    lines: {
+                                        show: false,
+                                    }
+                                },
+                                yaxis: {
+                                    lines: {
+                                        show: true,
+                                    }
+                                }
+                            },
+                            annotations2: {
+
+                            },
+                            xaxis: {
+                                type: 'datetime',
+                                axisTicks: {
+                                    color: '#bdc6d5'
+                                },
+                                labels: {
+                                    rotate: 0,
+                                    rotateAlways: false,
+                                    showDuplicates: false,
+                                    datetimeFormatter: {
+                                        year: 'yyyy',
+                                        month: 'MMM \'yy',
+                                        day: 'dd MMM',
+                                        hour: 'HH:mm'
+                                    }
+                                }
+                            },
+                            yaxis: {
+                                tooltip: {
+                                    enabled: true
+                                }
+                            }
+                        };
+                        var chart2 = new ApexCharts(document.querySelector("#chartContainer2"), options2);
+                        chart2.render();
+                    }
+                );
+            }
+        )
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+
+         var dataPoints3 = [];
+
+    fetch('/end-challenge/get-chart-data?pair=' + document.getElementById('pair3').textContent)
+        .then(
+            function(response) {
+                if (response.status !== 200) {
+                    console.log('Looks like there was a problem. Status Code: ' +
+                        response.status);
+                    return;
+                }
+
+                response.json().then(function(data) {
+                        for (let i in data) {
+                            var date = data[i].date.split("-");
+
+                            dataPoints3.push({
+                                x: new Date(
+                                    parseInt(date[0]), //Year
+                                    parseInt(date[1]) - 1, // In JS month starts from 0(January)
+                                    parseInt(date[2]) // Day
+                                ),
+                                y: [
+                                    data[i].blendOpen,
+                                    data[i].blendHigh,
+                                    data[i].blendLow,
+                                    data[i].blendClose
+                                ]
+                            });
+                        }
+
+
+                        var options3 = {
+                            series: [{
+                                data: dataPoints3
+                            }],
+                            chart: {
+                                type: 'candlestick',
+                                height: '100%',
+                                toolbar: {
+                                    show: false
+                                }
+                            },
+                            legend: {
+                                show: false
+                            },
+                            plotOptions: {
+                                candlestick: {
+                                    colors: {
+                                        upward: '#1b1b3c',
+                                        downward: '#fe6800'
+                                    }
+                                }
+                            },
+                            grid: {
+                                show: true,
+                                borderColor: '#bdc6d5',
+                                xaxis: {
+                                    lines: {
+                                        show: false,
+                                    }
+                                },
+                                yaxis: {
+                                    lines: {
+                                        show: true,
+                                    }
+                                }
+                            },
+                            annotations2: {
+
+                            },
+                            xaxis: {
+                                type: 'datetime',
+                                axisTicks: {
+                                    color: '#bdc6d5'
+                                },
+                                labels: {
+                                    rotate: 0,
+                                    rotateAlways: false,
+                                    showDuplicates: false,
+                                    datetimeFormatter: {
+                                        year: 'yyyy',
+                                        month: 'MMM \'yy',
+                                        day: 'dd MMM',
+                                        hour: 'HH:mm'
+                                    }
+                                }
+                            },
+                            yaxis: {
+                                tooltip: {
+                                    enabled: true
+                                }
+                            }
+                        };
+                        var chart3 = new ApexCharts(document.querySelector("#chartContainer3"), options3);
+                        chart3.render();
+                    }
+                );
+            }
+        )
+        .catch(function(err) {
+            console.log('Fetch Error :-S', err);
+        });
+
     }
 </script>
 

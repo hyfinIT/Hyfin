@@ -1,28 +1,21 @@
 package hyphin.service;
 
-import hyphin.model.currency.Blend;
-import hyphin.model.currency.BlendEurUsd;
-import hyphin.model.currency.BlendGbpUsd;
-import hyphin.model.currency.BlendUsdJpy;
+import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.currency.CurrencyExchangeRate;
 import hyphin.model.currency.OperationAudit;
-import hyphin.repository.currency.BlendEurUsdRepository;
-import hyphin.repository.currency.BlendGbpUsdRepository;
-import hyphin.repository.currency.BlendUsdJpyRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.repository.currency.CurrencyExchangeRateRepository;
 import hyphin.repository.currency.OperationAuditRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -31,9 +24,10 @@ public class CurrencyBlendService {
 
     private final CurrencyExchangeRateRepository currencyExchangeRateRepository;
     private final OperationAuditRepository operationAuditRepository;
-    private final BlendEurUsdRepository blendEurUsdRepository;
-    private final BlendGbpUsdRepository blendGbpUsdRepository;
-    private final BlendUsdJpyRepository blendUsdJpyRepository;
+    private final CurrencyRatesBlendRepository currencyRatesBlendRepository;
+
+    private Set<String> activeCcyPairNames = Stream.of("EUR/USD", "GBP/USD", "USD/JPY")
+            .collect(Collectors.toCollection(HashSet::new));
 
     public void produceBlends() {
         log.info("Blending..................");
@@ -50,15 +44,15 @@ public class CurrencyBlendService {
             return;
         }
 
+//        Map<String, List<CurrencyRatesBlend>> collect = currencyRatesBlendRepository.findAll()
+//                .stream()
+//                .collect(Collectors.groupingBy(CurrencyRatesBlend::getCcyPair));
+
+        List<CurrencyRatesBlend> allBlends = currencyRatesBlendRepository.findAll();
+
         try {
-            if (!blendEurUsdRepository.findByDate(LocalDate.now().toString()).isPresent()) {
-                eurUsdProcess(yesterdayEntries);
-            }
-            if (!blendGbpUsdRepository.findByDate(LocalDate.now().toString()).isPresent()) {
-                gbpUsdProcess(yesterdayEntries);
-            }
-            if (!blendUsdJpyRepository.findByDate(LocalDate.now().toString()).isPresent()) {
-                usdJpyProcess(yesterdayEntries);
+            if (!currencyRatesBlendRepository.findByDate(LocalDate.now().toString()).isPresent()) {
+                pairProcess(yesterdayEntries, allBlends);
             }
             operationAudit.setStatus("SUCCESS");
             operationAuditRepository.save(operationAudit);
@@ -69,134 +63,54 @@ public class CurrencyBlendService {
         }
     }
 
-    private void eurUsdProcess(List<CurrencyExchangeRate> yesterdayEntries) {
-        List<CurrencyExchangeRate> todayEurUsdList = yesterdayEntries
-                .stream()
-                .filter(currencyExchangeRate -> currencyExchangeRate.getCcyPair().equals("EUR/USD"))
-                .collect(Collectors.toList());
+    private void pairProcess(List<CurrencyExchangeRate> yesterdayEntries, List<CurrencyRatesBlend> allBlends){
+        for (String ccyPair : activeCcyPairNames) {
+            List<CurrencyExchangeRate> todayExchangeListByPair = yesterdayEntries
+                    .stream()
+                    .filter(currencyExchangeRate -> currencyExchangeRate.getCcyPair().equals(ccyPair))
+                    .collect(Collectors.toList());
 
-        List<? extends Blend> eurUsdBlends = blendEurUsdRepository.findAll();
 
-        Blend yesterdayBlend = null;
+            List<CurrencyRatesBlend> allBlendsByPair = allBlends.stream()
+                    .filter(currencyRatesBlend -> currencyRatesBlend.getCcyPair().equals(ccyPair))
+                    .collect(Collectors.toList());
 
-        for (Blend eurUsdBlend : eurUsdBlends) {
-            if (eurUsdBlend.getPosition().equals("030")) {
-                blendEurUsdRepository.delete(eurUsdBlend.getId());
+            CurrencyRatesBlend yesterdayBlend = null;
+
+            for (CurrencyRatesBlend currencyRatesBlend : allBlendsByPair) {
+                if (currencyRatesBlend.getPosition().equals("030")) {
+                    currencyRatesBlendRepository.delete(currencyRatesBlend.getId());
+                }
+                if (currencyRatesBlend.getPosition().equals("001")) {
+                    yesterdayBlend = currencyRatesBlend;
+                }
             }
-            if (eurUsdBlend.getPosition().equals("001")) {
-                yesterdayBlend = eurUsdBlend;
+
+            List<CurrencyRatesBlend> shiftedBlends = shiftPositions(allBlendsByPair);
+
+            CurrencyRatesBlend blendEurUsd = new CurrencyRatesBlend();
+            blendEurUsd.setCcyPair(ccyPair);
+            blendEurUsd.setDate(LocalDate.now().toString());
+            blendEurUsd.setPosition("001");
+            blendEurUsd.setBlendOpen((todayExchangeListByPair.get(0).getOpen() + todayExchangeListByPair.get(1).getOpen()) / 2);
+            blendEurUsd.setBlendHigh((todayExchangeListByPair.get(0).getHigh() + todayExchangeListByPair.get(1).getHigh()) / 2);
+            blendEurUsd.setBlendLow((todayExchangeListByPair.get(0).getLow() + todayExchangeListByPair.get(1).getLow()) / 2);
+            blendEurUsd.setBlendClose((todayExchangeListByPair.get(0).getClose() + todayExchangeListByPair.get(1).getClose()) / 2);
+            blendEurUsd.setDailyRange(blendEurUsd.getBlendHigh() - blendEurUsd.getBlendLow());
+            blendEurUsd.setSourceRef("blend");
+
+            if (Objects.nonNull(yesterdayBlend)) {
+                blendEurUsd.setLogChance(Math.log(blendEurUsd.getBlendClose() / yesterdayBlend.getBlendClose()));
             }
+
+            shiftedBlends.add(blendEurUsd);
+
+            currencyRatesBlendRepository.save(shiftedBlends);
         }
-
-        List<BlendEurUsd> shiftedBlends = (List<BlendEurUsd>) shiftPositions(eurUsdBlends);
-
-        Blend blendEurUsd = new BlendEurUsd();
-        blendEurUsd.setCcyPair("EUR/USD");
-        blendEurUsd.setId(blendEurUsdRepository.maxId().orElse(0L) + 1);
-        blendEurUsd.setDate(LocalDate.now().toString());
-        blendEurUsd.setPosition("001");
-        blendEurUsd.setBlendOpen((todayEurUsdList.get(0).getOpen() + todayEurUsdList.get(1).getOpen()) / 2);
-        blendEurUsd.setBlendHigh((todayEurUsdList.get(0).getHigh() + todayEurUsdList.get(1).getHigh()) / 2);
-        blendEurUsd.setBlendLow((todayEurUsdList.get(0).getLow() + todayEurUsdList.get(1).getLow()) / 2);
-        blendEurUsd.setBlendClose((todayEurUsdList.get(0).getClose() + todayEurUsdList.get(1).getClose()) / 2);
-        blendEurUsd.setDailyRange(blendEurUsd.getBlendHigh() - blendEurUsd.getBlendLow());
-        blendEurUsd.setSourceRef("blend");
-
-        if (Objects.nonNull(yesterdayBlend)) {
-            blendEurUsd.setLogChance(Math.log(blendEurUsd.getBlendClose() / yesterdayBlend.getBlendClose()));
-        }
-
-        shiftedBlends.add((BlendEurUsd) blendEurUsd);
-
-        blendEurUsdRepository.save(shiftedBlends);
     }
 
-    private void gbpUsdProcess(List<CurrencyExchangeRate> yesterdayEntries) {
-        List<CurrencyExchangeRate> todayList = yesterdayEntries
-                .stream()
-                .filter(currencyExchangeRate -> currencyExchangeRate.getCcyPair().equals("GBP/USD"))
-                .collect(Collectors.toList());
-
-        List<? extends Blend> gbpUsdBlends = blendGbpUsdRepository.findAll();
-
-        Blend yesterdayBlend = null;
-
-        for (Blend gbpUsdBlend : gbpUsdBlends) {
-            if (gbpUsdBlend.getPosition().equals("030")) {
-                blendGbpUsdRepository.delete(gbpUsdBlend.getId());
-            }
-            if (gbpUsdBlend.getPosition().equals("001")) {
-                yesterdayBlend = gbpUsdBlend;
-            }
-        }
-
-        List<BlendGbpUsd> shiftedBlends = (List<BlendGbpUsd>) shiftPositions(gbpUsdBlends);
-
-        Blend blend = new BlendGbpUsd();
-        blend.setCcyPair("GBP/USD");
-        blend.setId(blendGbpUsdRepository.maxId().orElse(0L) + 1);
-        blend.setDate(LocalDate.now().toString());
-        blend.setPosition("001");
-        blend.setBlendOpen((todayList.get(0).getOpen() + todayList.get(1).getOpen()) / 2);
-        blend.setBlendHigh((todayList.get(0).getHigh() + todayList.get(1).getHigh()) / 2);
-        blend.setBlendLow((todayList.get(0).getLow() + todayList.get(1).getLow()) / 2);
-        blend.setBlendClose((todayList.get(0).getClose() + todayList.get(1).getClose()) / 2);
-        blend.setDailyRange(blend.getBlendHigh() - blend.getBlendLow());
-        blend.setSourceRef("blend");
-
-        if (Objects.nonNull(yesterdayBlend)) {
-            blend.setLogChance(Math.log(blend.getBlendClose() / yesterdayBlend.getBlendClose()));
-        }
-
-        shiftedBlends.add((BlendGbpUsd) blend);
-
-        blendGbpUsdRepository.save(shiftedBlends);
-    }
-
-    private void usdJpyProcess(List<CurrencyExchangeRate> yesterdayEntries) {
-        List<CurrencyExchangeRate> todayList = yesterdayEntries
-                .stream()
-                .filter(currencyExchangeRate -> currencyExchangeRate.getCcyPair().equals("USD/JPY"))
-                .collect(Collectors.toList());
-
-        List<? extends Blend> usdJpyBlends = blendUsdJpyRepository.findAll();
-
-        Blend yesterdayBlend = null;
-
-        for (Blend usdJpyBlend : usdJpyBlends) {
-            if (usdJpyBlend.getPosition().equals("030")) {
-                blendUsdJpyRepository.delete(usdJpyBlend.getId());
-            }
-            if (usdJpyBlend.getPosition().equals("001")) {
-                yesterdayBlend = usdJpyBlend;
-            }
-        }
-
-        List<BlendUsdJpy> shiftedBlends = (List<BlendUsdJpy>) shiftPositions(usdJpyBlends);
-
-        Blend blendUsdJpy = new BlendUsdJpy();
-        blendUsdJpy.setCcyPair("USD/JPY");
-        blendUsdJpy.setId(blendUsdJpyRepository.maxId().orElse(0L) + 1);
-        blendUsdJpy.setDate(LocalDate.now().toString());
-        blendUsdJpy.setPosition("001");
-        blendUsdJpy.setBlendOpen((todayList.get(0).getOpen() + todayList.get(1).getOpen()) / 2);
-        blendUsdJpy.setBlendHigh((todayList.get(0).getHigh() + todayList.get(1).getHigh()) / 2);
-        blendUsdJpy.setBlendLow((todayList.get(0).getLow() + todayList.get(1).getLow()) / 2);
-        blendUsdJpy.setBlendClose((todayList.get(0).getClose() + todayList.get(1).getClose()) / 2);
-        blendUsdJpy.setDailyRange(blendUsdJpy.getBlendHigh() - blendUsdJpy.getBlendLow());
-        blendUsdJpy.setSourceRef("blend");
-
-        if (Objects.nonNull(yesterdayBlend)) {
-            blendUsdJpy.setLogChance(Math.log(blendUsdJpy.getBlendClose() / yesterdayBlend.getBlendClose()));
-        }
-
-        shiftedBlends.add((BlendUsdJpy) blendUsdJpy);
-
-        blendUsdJpyRepository.save(shiftedBlends);
-    }
-
-    private List<? extends Blend> shiftPositions(List<? extends Blend> blendsList) {
-        blendsList.sort(Comparator.comparing(Blend::getPosition));
+    private List<CurrencyRatesBlend> shiftPositions(List<CurrencyRatesBlend> blendsList) {
+        blendsList.sort(Comparator.comparing(CurrencyRatesBlend::getPosition));
 
         for (int i = 0; i < blendsList.size(); i++) {
             String newPosition = String.valueOf(Integer.parseInt(blendsList.get(i).getPosition()) + 1);

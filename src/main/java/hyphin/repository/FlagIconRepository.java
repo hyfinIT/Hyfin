@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FlagIconRepository extends JpaRepository<FlagIcon, Long> {
+
+    public FlagIcon getByCcyMnemonic(String ccyMnemonic);
 }

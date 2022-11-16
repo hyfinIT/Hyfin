@@ -1,19 +1,13 @@
 package hyphin.service;
 
-import hyphin.model.currency.Blend;
-import hyphin.model.currency.BlendEurUsd;
-import hyphin.model.currency.BlendGbpUsd;
-import hyphin.model.currency.BlendUsdJpy;
+import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.currency.OperationAudit;
 import hyphin.model.currency.StandardDeviation;
-import hyphin.repository.currency.BlendEurUsdRepository;
-import hyphin.repository.currency.BlendGbpUsdRepository;
-import hyphin.repository.currency.BlendUsdJpyRepository;
+import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.repository.currency.OperationAuditRepository;
 import hyphin.repository.currency.StandardDeviationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -30,9 +24,7 @@ import java.util.Objects;
 public class StandardDeviationService {
 
     private final StandardDeviationRepository standardDeviationRepository;
-    private final BlendEurUsdRepository eurUsdRepository;
-    private final BlendGbpUsdRepository gbpUsdRepository;
-    private final BlendUsdJpyRepository usdJpyRepository;
+    private final CurrencyRatesBlendRepository currencyRatesBlendRepository;
 
     private final OperationAuditRepository operationAuditRepository;
 
@@ -59,9 +51,9 @@ public class StandardDeviationService {
        try {
            standardDeviationRepository.findAll();
 
-           List<BlendEurUsd> eurUsdAll = eurUsdRepository.findAll();
-           List<BlendGbpUsd> gbpUsdAll = gbpUsdRepository.findAll();
-           List<BlendUsdJpy> usdJpyAll = usdJpyRepository.findAll();
+           List<CurrencyRatesBlend> eurUsdAll = currencyRatesBlendRepository.getAllByCcyPair("EUR/USD");
+           List<CurrencyRatesBlend> gbpUsdAll = currencyRatesBlendRepository.getAllByCcyPair("GBP/USD");
+           List<CurrencyRatesBlend> usdJpyAll = currencyRatesBlendRepository.getAllByCcyPair("USD/JPY");
 
            processBlends("EUR/USD",  eurUsdAll);
            processBlends("GBP/USD", gbpUsdAll);
@@ -75,10 +67,10 @@ public class StandardDeviationService {
        }
     }
 
-    private void processBlends(String pairName, List<? extends Blend> eurUsdAll) {
-        eurUsdAll.sort(Comparator.comparing(Blend::getPosition));
+    private void processBlends(String pairName, List<CurrencyRatesBlend> eurUsdAll) {
+        eurUsdAll.sort(Comparator.comparing(CurrencyRatesBlend::getPosition));
 
-        Blend firstPositionBlend = eurUsdAll
+        CurrencyRatesBlend firstPositionBlend = eurUsdAll
                 .stream()
                 .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
                 .findAny()
@@ -105,167 +97,167 @@ public class StandardDeviationService {
         }
     }
 
-    private static void setPosition(List<? extends Blend> eurUsdAll, int i, StandardDeviation standardDeviation) {
+    private static void setPosition(List<CurrencyRatesBlend> eurUsdAll, int i, StandardDeviation standardDeviation) {
         switch (rateTypes.get(i)) {
             case "BLENDOPEN": {
                 standardDeviation.setPos001(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos002(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("002"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos003(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("003"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos004(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("004"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos005(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("005"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos006(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("006"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos007(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("007"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos008(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("008"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos009(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("009"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos010(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("010"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos011(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("011"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos012(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("012"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos013(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("013"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos014(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("014"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos015(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("015"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos016(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("016"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos017(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("017"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos018(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("018"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos019(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("019"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos020(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("020"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos021(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("021"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos022(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("022"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos023(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("023"))
-                        .map(Blend::getBlendOpen)
+                        .map(CurrencyRatesBlend::getBlendOpen)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
             }
@@ -276,161 +268,161 @@ public class StandardDeviationService {
                 standardDeviation.setPos001(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos002(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("002"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos003(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("003"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos004(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("004"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos005(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("005"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos006(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("006"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos007(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("007"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos008(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("008"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos009(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("009"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos010(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("010"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos011(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("011"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos012(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("012"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos013(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("013"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos014(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("014"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos015(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("015"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos016(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("016"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos017(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("017"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos018(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("018"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos019(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("019"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos020(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("020"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos021(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("021"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos022(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("022"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos023(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("023"))
-                        .map(Blend::getBlendHigh)
+                        .map(CurrencyRatesBlend::getBlendHigh)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
             }
@@ -441,161 +433,161 @@ public class StandardDeviationService {
                 standardDeviation.setPos001(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos002(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("002"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos003(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("003"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos004(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("004"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos005(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("005"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos006(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("006"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos007(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("007"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos008(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("008"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos009(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("009"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos010(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("010"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos011(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("011"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos012(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("012"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos013(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("013"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos014(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("014"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos015(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("015"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos016(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("016"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos017(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("017"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos018(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("018"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos019(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("019"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos020(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("020"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos021(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("021"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos022(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("022"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos023(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("023"))
-                        .map(Blend::getBlendLow)
+                        .map(CurrencyRatesBlend::getBlendLow)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
             }
@@ -606,161 +598,161 @@ public class StandardDeviationService {
                 standardDeviation.setPos001(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos002(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("002"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos003(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("003"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos004(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("004"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos005(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("005"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos006(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("006"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos007(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("007"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos008(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("008"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos009(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("009"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos010(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("010"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos011(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("011"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos012(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("012"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos013(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("013"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos014(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("014"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos015(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("015"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos016(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("016"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos017(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("017"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos018(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("018"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos019(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("019"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos020(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("020"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos021(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("021"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos022(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("022"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos023(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("023"))
-                        .map(Blend::getBlendClose)
+                        .map(CurrencyRatesBlend::getBlendClose)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
             }
@@ -771,161 +763,161 @@ public class StandardDeviationService {
                 standardDeviation.setPos001(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos002(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("002"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos003(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("003"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos004(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("004"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos005(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("005"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos006(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("006"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos007(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("007"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos008(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("008"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos009(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("009"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos010(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("010"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos011(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("011"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos012(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("012"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos013(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("013"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos014(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("014"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos015(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("015"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos016(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("016"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos017(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("017"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos018(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("018"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos019(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("019"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos020(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("020"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos021(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("021"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos022(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("022"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos023(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("023"))
-                        .map(Blend::getDailyRange)
+                        .map(CurrencyRatesBlend::getDailyRange)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
             }
@@ -936,161 +928,161 @@ public class StandardDeviationService {
                 standardDeviation.setPos001(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("001"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos002(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("002"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos003(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("003"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos004(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("004"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos005(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("005"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos006(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("006"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos007(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("007"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos008(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("008"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos009(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("009"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos010(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("010"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos011(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("011"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos012(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("012"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos013(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("013"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos014(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("014"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos015(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("015"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos016(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("016"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos017(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("017"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos018(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("018"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos019(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("019"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos020(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("020"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos021(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("021"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos022(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("022"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
 
                 standardDeviation.setPos023(eurUsdAll
                         .stream()
                         .filter(blendEurUsd -> blendEurUsd.getPosition().equals("023"))
-                        .map(Blend::getLogChance)
+                        .map(CurrencyRatesBlend::getLogChance)
                         .filter(Objects::nonNull)
                         .findAny().orElse(null));
             }
