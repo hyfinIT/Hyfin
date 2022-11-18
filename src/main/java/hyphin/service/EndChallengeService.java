@@ -1,12 +1,17 @@
 package hyphin.service;
 
 import hyphin.dto.CcyPairDto;
+import hyphin.dto.EcStaticDataDailyDto;
 import hyphin.dto.mappers.CcyPairMapper;
+import hyphin.dto.mappers.EcStaticDataDailyMapper;
+import hyphin.enums.Sentiment;
 import hyphin.model.CcyPair;
+import hyphin.model.EcStaticDataDaily;
 import hyphin.model.User;
 import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.endchallenge.EndChallengeSession;
 import hyphin.repository.CcyPairRepository;
+import hyphin.repository.EcStaticDataDailyRepository;
 import hyphin.repository.UserAuditRepository;
 import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import lombok.RequiredArgsConstructor;
@@ -51,8 +56,11 @@ public class EndChallengeService {
 
     private final UserAuditRepository userAuditRepository;
     private final CcyPairRepository ccyPairRepository;
+    private final EcStaticDataDailyRepository ecStaticDataDailyRepository;
+
 
     private final CcyPairMapper ccyPairMapper;
+    private final EcStaticDataDailyMapper ecStaticDataDailyMapper;
 
     private static final SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
     private static final String END_CHALLENGE_ELEMENT_ID = "?";
@@ -91,9 +99,18 @@ public class EndChallengeService {
         endChallengeSession.setChosenPair(endChallengeSession.getPairs().stream().filter(ccyPairDto -> ccyPairDto.getCurrencyPairFormatted().equals(pair)).findAny().orElseThrow(RuntimeException::new));
     }
 
+    public void choseSentiment(HttpSession session, Sentiment sentiment) {
+        EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
+        endChallengeSession.setSentiment(sentiment);
+    }
+
     public CcyPairDto getChosenPair(HttpSession session) {
         EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
         return endChallengeSession.getChosenPair();
+    }
+    public EcStaticDataDailyDto getEcStatciDataDaily(HttpSession session) {
+        EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
+        return ecStaticDataDailyMapper.mapToDto(ecStaticDataDailyRepository.getByCcyPair(endChallengeSession.getChosenPair().getCurrencyPair()));
     }
 
 

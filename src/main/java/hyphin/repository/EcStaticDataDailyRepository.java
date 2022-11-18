@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EcStaticDataDailyRepository extends CrudRepository<EcStaticDataDaily, Long> {
+
+    EcStaticDataDaily getByCcyPair(String currencyPair);
+
 }

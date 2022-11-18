@@ -1,6 +1,7 @@
 package hyphin.model.endchallenge;
 
 import hyphin.dto.CcyPairDto;
+import hyphin.enums.Sentiment;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import lombok.Data;
@@ -20,6 +21,7 @@ public class EndChallengeSession {
     private ConcurrentLinkedQueue<UserAudit> userAudits = new ConcurrentLinkedQueue<>();
     private List<CcyPairDto> pairs = new ArrayList<>();
     private CcyPairDto chosenPair;
+    private Sentiment sentiment;
 
     private User user;
 

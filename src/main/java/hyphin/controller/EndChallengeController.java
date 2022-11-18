@@ -1,7 +1,9 @@
 package hyphin.controller;
 
+import hyphin.dto.EcStaticDataDailyDto;
+import hyphin.enums.Sentiment;
 import hyphin.model.currency.CurrencyRatesBlend;
-import hyphin.model.endchallenge.EndChallengeTrade;
+import hyphin.dto.EndChallengeTradeDto;
 import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import hyphin.service.EndChallengeService;
 import hyphin.util.HyfinUtils;
@@ -41,28 +43,40 @@ public class EndChallengeController {
 
     @GetMapping("/chosen-pair")
     public ModelAndView chosenPair(HttpSession session, String chosenPair){
-        System.out.println("Chosen Pair: " + chosenPair);
         endChallengeService.chosePair(session, chosenPair);
         ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-2");
         modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
         return modelAndView;
     }
 
+    @GetMapping("/ec-cfd-3")
+    public ModelAndView sentiment(HttpSession session){
+        System.out.println("AAAAAAAkdsajsfkadsf");
+        ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-3");
+
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStatciDataDaily(session));
+        return modelAndView;
+    }
+
     @PostMapping("/send-trade")
-    public ModelAndView sendTrade(EndChallengeTrade endChallengeTrade){
+    public ModelAndView sendTrade(EndChallengeTradeDto endChallengeTradeDto){
+
+//        endChallengeService.choseSentiment(session, sentiment);
+
 
         System.out.println("Hey");
-        System.out.println(endChallengeTrade);
+        System.out.println(endChallengeTradeDto);
 
-        if (endChallengeTrade.getCapitalPercent() == 100) {
+        if (endChallengeTradeDto.getCapitalPercent() == 100) {
             return redirectTo("ec-cfd-5b");
         }
 
-        if (endChallengeTrade.getCapitalPercent() > 20) {
+        if (endChallengeTradeDto.getCapitalPercent() > 20) {
             return redirectTo("ec-cfd-5a");
         }
 
-        if (endChallengeTrade.getDirection().equalsIgnoreCase("Bullish") && endChallengeTrade.getPrice() == 59) {
+        if (endChallengeTradeDto.getSentiment().equals(Sentiment.BULLISH) && endChallengeTradeDto.getPrice() == 59) {
             return redirectTo("ec-cfd-5c");
         }
 
