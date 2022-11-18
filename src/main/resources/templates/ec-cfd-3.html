@@ -9,10 +9,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap"
           rel="stylesheet">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/lib/swiper/swiper-bundle.min.css"/>
     <!-- Link Main CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
-    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
 </head>
 <body class="hf-bg-solid">
 <div class="hf-wrap">
@@ -20,7 +20,7 @@
     <header class="hf-header">
         <div class="hf-logo-wrap">
             <div class="hf-logo">
-                <img src="./assets/images/hyfin-logo.svg" alt="">
+                <img src="/assets/images/hyfin-logo.svg" alt="">
             </div>
             <div class="hf-current-screen">
                 <span class="hf-current-screen-title">End Challenge</span>
@@ -33,8 +33,8 @@
                 <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
             </ul>
             <div class="hf-header-icons">
-                <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
-                <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg"
+                <a class="hf-hicon-search" href="../search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
+                <a class="hf-hicon-profile" href="../account.html"><img src="/assets/images/icon-profile.svg"
                                                                         alt=""></a>
                 <div class="hf-hicon-menu">
                     <div class="hf-menu-btn" id="hf-menu-trigger">
@@ -51,7 +51,7 @@
         <div class="hf-main-inner">
             <form role="form" th:action="@{/end-challenge/send-trade}" method="POST">
                 <input type="text" hidden name="capitalPercent" id="capitalPercent">
-                <input type="text" hidden name="direction" id="direction">
+                <input type="text" hidden name="sentiment" id="direction">
                 <input type="text" hidden name="price" id="price">
                 <!-- Carousel Wrap Start -->
                 <div class="hf-carousel-wrap spot-trader">
@@ -64,7 +64,7 @@
                                     <div class="spot-trader__content">
                                         <h3 class="spot-trader__title">Hyfin FX SpotTrader</h3>
                                         <div class="spot-trader__description">What is your sentiment?</div>
-                                        <div onclick="setDirection('bullish'); enableSentimentChecked()" class="spot-trader__item">
+                                        <div onclick="setSentiment('BULLISH'); enableSentimentChecked()" class="spot-trader__item">
                                             <input type="radio" name="currency" id="currency1"
                                                    class="spot-trader__input"/>
                                             <label for="currency1">
@@ -92,15 +92,15 @@
                                                             </g>
                                                         </g>
                                                     </svg>
-                                                    <p>Bullish EUR/USD</p>
+                                                    <p>Bullish <span th:text="${chosenPair.currencyPairFormatted}"></span></p>
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="spot-trader__item disabled-item">
+                                        <div onclick="setSentiment('BEARISH'); enableSentimentChecked()" class="spot-trader__item">
                                             <input type="radio" name="currency" id="currency2"
                                                    class="spot-trader__input"/>
                                             <label for="currency2">
-                                                <div onclick="setDirection('bearish'); disableSentimentChecked()" class="spot-trader__label">
+                                                <div class="spot-trader__label">
                                                     <svg width="46.970703px" height="48.308105px"
                                                          viewBox="0 0 46.970703 48.308105" version="1.1"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -124,7 +124,7 @@
                                                                   stroke-linecap="round" stroke-linejoin="round"/>
                                                         </g>
                                                     </svg>
-                                                    <p>Bearish EUR/USD</p>
+                                                    <p>Bearish <span th:text="${chosenPair.currencyPairFormatted}"></span></p>
                                                 </div>
                                             </label>
                                         </div>
@@ -152,7 +152,7 @@
                                                             <label for="amount5">
                                                                 <div onclick="setCapitalPercent(5)"
                                                                      class="spot-trader__amount-label">
-                                                                    5%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable01}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -164,7 +164,7 @@
                                                             <label for="amount10">
                                                                 <div onclick="setCapitalPercent(10)"
                                                                      class="spot-trader__amount-label">
-                                                                    10%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable02}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -176,7 +176,7 @@
                                                             <label for="amount15">
                                                                 <div onclick="setCapitalPercent(15)"
                                                                      class="spot-trader__amount-label">
-                                                                    15%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable03}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -188,7 +188,7 @@
                                                             <label for="amount20">
                                                                 <div onclick="setCapitalPercent(20)"
                                                                      class="spot-trader__amount-label">
-                                                                    20%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable04}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -200,7 +200,7 @@
                                                             <label for="amount25">
                                                                 <div onclick="setCapitalPercent(25)"
                                                                      class="spot-trader__amount-label">
-                                                                    25%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable05}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -212,7 +212,7 @@
                                                             <label for="amount50">
                                                                 <div onclick="setCapitalPercent(50)"
                                                                      class="spot-trader__amount-label">
-                                                                    50%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable06}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -224,7 +224,7 @@
                                                             <label for="amount75">
                                                                 <div onclick="setCapitalPercent(75)"
                                                                      class="spot-trader__amount-label">
-                                                                    75%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable07}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -236,7 +236,7 @@
                                                             <label for="amount100">
                                                                 <div onclick="setCapitalPercent(100)"
                                                                      class="spot-trader__amount-label">
-                                                                    100%
+                                                                    <span th:text="${ecStaticDataDaily.mrgSizeVariable08}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
@@ -249,20 +249,20 @@
                                                     <div class="your-trading-account__item">
                                                         <div class="your-trading-account-item__left">Available margin:
                                                         </div>
-                                                        <div class="your-trading-account-item__right">USD 100,000.00
+                                                        <div class="your-trading-account-item__right"><span th:text="${chosenPair.currency2.name}"></span> <span th:text="${ecStaticDataDaily.userMargin}"></span>
                                                         </div>
                                                     </div>
                                                     <div class="your-trading-account__item">
                                                         <div class="your-trading-account-item__left">Leverage:</div>
-                                                        <div class="your-trading-account-item__right">30x</div>
+                                                        <div class="your-trading-account-item__right"><span th:text="${ecStaticDataDaily.brokerLeverage}"></span></div>
                                                     </div>
                                                     <div class="your-trading-account__item">
                                                         <div class="your-trading-account-item__left">Max position
                                                             size:
                                                         </div>
                                                         <div class="your-trading-account-item__right">
-                                                            EUR 2,737,226.28<br>
-                                                            USD 3,000,000.00
+                                                            <span th:text="${chosenPair.currency1.name}"></span> <span th:text="${ecStaticDataDaily.maxPosSizeBase}"></span><br>
+                                                            <span th:text="${chosenPair.currency2.name}"></span> <span th:text="${ecStaticDataDaily.maxPosSizeTerm}"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -277,10 +277,10 @@
                                         <h3 class="spot-trader__title">Hyfin FX SpotTrader</h3>
                                         <div class="spot-trader__action">Choose bid or ask and select trade to continue</div>
                                         <div class="flags-currency">
-                                            <div class="flag"><img src="assets/images/flag-europa.svg" alt="Flag"/>
+                                            <div class="flag"><img th:src="@{${'/assets/images/' + chosenPair.currency1.flagUrl}}" alt="Flag" />
                                             </div>
-                                            <div class="flag"><img src="assets/images/flag-usa.svg" alt="Flag"/></div>
-                                            <div class="selected-currency">EUR/USD</div>
+                                            <div class="flag"><img th:src="@{${'/assets/images/' + chosenPair.currency2.flagUrl}}" alt="Flag" /></div>
+                                            <div class="selected-currency"><span th:text="${chosenPair.currencyPairFormatted}"></span></div>
                                         </div>
                                         <div class="bid-ask">
                                             <div class="bid-ask__value">1.09</div>
@@ -353,16 +353,16 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+            <a href="../4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="./assets/lib/jquery-3.6.0.min.js"></script>
-<script src="./assets/js/script.js?ver=1.1"></script>
-<script src="./assets/js/custom.js?ver=1.1"></script>
+<script src="/assets/lib/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/script.js?ver=1.1"></script>
+<script src="/assets/js/custom.js?ver=1.1"></script>
 <!-- Swiper JS -->
-<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script src="/assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".swiper", {
         slidesPerView: 1,
@@ -387,7 +387,7 @@
         console.log(amount)
     }
 
-    function setDirection (direction) {
+    function setSentiment (direction) {
         document.getElementById('direction').value = direction;
         console.log(direction)
     }

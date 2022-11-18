@@ -1,5 +1,6 @@
-package hyphin.model.endchallenge;
+package hyphin.dto;
 
+import hyphin.enums.Sentiment;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class EndChallengeTrade {
+public class EndChallengeTradeDto {
 
-    private String direction;
+    private Sentiment sentiment;
     private int capitalPercent;
     private int price;
 }

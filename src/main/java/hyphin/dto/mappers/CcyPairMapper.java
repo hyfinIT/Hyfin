@@ -35,26 +35,18 @@ public abstract class CcyPairMapper {
     InflationRateMapper inflationRateMapper;
 
     @Autowired
-    AtmosphericsMapper atmosphericsMapper;
-
-    @Autowired
     protected CurrencyRatesBlendRepository currencyRatesBlendRepository;
 
     @Mapping(source = "currencyPair", target = "currency1.flagUrl", qualifiedByName = "flag1")
     @Mapping(source = "currencyPair", target = "currency2.flagUrl", qualifiedByName = "flag2")
     @Mapping(source = "currencyPair", target = "currency1.country", qualifiedByName = "country1")
     @Mapping(source = "currencyPair", target = "currency2.country", qualifiedByName = "country2")
-//    @Mapping(source = "currencyPair", target = "currency1.atmospherics", qualifiedByName = "atmospherics1")
-//    @Mapping(source = "currencyPair", target = "currency2.atmospherics", qualifiedByName = "atmospherics2")
     @Mapping(source = "currencyPair", target = "currency1.inflationRate", qualifiedByName = "inflationRate1")
     @Mapping(source = "currencyPair", target = "currency2.inflationRate", qualifiedByName = "inflationRate2")
-
-
     @Mapping(source = "currencyPair", target = "currency1.atmospherics", qualifiedByName = "atmospherics1")
     @Mapping(source = "currencyPair", target = "currency2.atmospherics", qualifiedByName = "atmospherics2")
-
-
-
+    @Mapping(source = "currencyPair", target = "currency1.name", qualifiedByName = "currency1Name")
+    @Mapping(source = "currencyPair", target = "currency2.name", qualifiedByName = "currency2Name")
     @Mapping(source = "currencyPair", target = "currencyPairFormatted", qualifiedByName = "currencyPairFormatted")
     @Mapping(source = "currencyPair", target = "spotFxMidRate", qualifiedByName = "spotFxMidRate")
     public abstract CcyPairDto mapToDto(CcyPair entity);
@@ -79,6 +71,16 @@ public abstract class CcyPairMapper {
     @Named("country2")
     String country2(String currencyPair) {
         return flagIconRepository.getByCcyMnemonic(currencyPair.substring(3, 6)).getCountry();
+    }
+
+    @Named("currency1Name")
+    String currency1Name(String currencyPair) {
+        return currencyPair.substring(0, 3);
+    }
+
+    @Named("currency2Name")
+    String currency2Name(String currencyPair) {
+        return currencyPair.substring(3, 6);
     }
 
     @Named("atmospherics1")
