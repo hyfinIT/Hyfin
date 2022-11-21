@@ -6,7 +6,6 @@ import hyphin.dto.mappers.CcyPairMapper;
 import hyphin.dto.mappers.EcStaticDataDailyMapper;
 import hyphin.enums.Sentiment;
 import hyphin.model.CcyPair;
-import hyphin.model.EcStaticDataDaily;
 import hyphin.model.User;
 import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.endchallenge.EndChallengeSession;
@@ -17,7 +16,6 @@ import hyphin.repository.currency.CurrencyRatesBlendRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -25,7 +23,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 @Service
 @RequiredArgsConstructor
@@ -108,7 +105,7 @@ public class EndChallengeService {
         EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
         return endChallengeSession.getChosenPair();
     }
-    public EcStaticDataDailyDto getEcStatciDataDaily(HttpSession session) {
+    public EcStaticDataDailyDto getEcStaticDataDaily(HttpSession session) {
         EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
         return ecStaticDataDailyMapper.mapToDto(ecStaticDataDailyRepository.getByCcyPair(endChallengeSession.getChosenPair().getCurrencyPair()));
     }
