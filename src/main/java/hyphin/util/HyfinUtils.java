@@ -27,7 +27,13 @@ public class HyfinUtils {
         return String.format("%." + digits + "f", n * 100) + "%";
     }
 
-    public static String formatDecimal(Double d) {
-        return new DecimalFormat("#.##").format(d);
+    public static String formatDecimal(Double d, int decimalLength) {
+        String pattern = "#.";
+
+        for (int i = 0; i < decimalLength; i++) {
+            pattern = pattern.concat("#");
+        }
+
+        return new DecimalFormat(pattern).format(d);
     }
 }

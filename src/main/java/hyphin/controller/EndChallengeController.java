@@ -1,6 +1,5 @@
 package hyphin.controller;
 
-import hyphin.dto.EcStaticDataDailyDto;
 import hyphin.enums.Sentiment;
 import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.dto.EndChallengeTradeDto;
@@ -55,7 +54,7 @@ public class EndChallengeController {
         ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-3");
 
         modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
-        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStatciDataDaily(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
         return modelAndView;
     }
 
