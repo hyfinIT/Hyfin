@@ -1,6 +1,9 @@
 package hyphin.model.endchallenge;
 
+import hyphin.dto.Amounts;
 import hyphin.dto.CcyPairDto;
+import hyphin.dto.EcStaticDataDailyDto;
+import hyphin.dto.Trade;
 import hyphin.enums.Sentiment;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
@@ -21,7 +24,11 @@ public class EndChallengeSession {
     private ConcurrentLinkedQueue<UserAudit> userAudits = new ConcurrentLinkedQueue<>();
     private List<CcyPairDto> pairs = new ArrayList<>();
     private CcyPairDto chosenPair;
+    private EcStaticDataDailyDto ecStaticDataDailyDto;
     private Sentiment sentiment;
+    private Integer capitalPercent;
+    private Trade trade;
+    private Amounts amounts;
 
     private User user;
 

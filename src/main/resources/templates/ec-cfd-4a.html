@@ -55,46 +55,46 @@
                         <div class="your-account__title">Your Orders</div>
                         <div class="your-account__capital">
                             <span>Available Capital</span>
-                            <p>USD 90,000.00</p>
+                            <p><span style="padding: 0; display: inline; font-size: 32px; font-weight: 600;" th:text="${chosenPair.currency2.name}"></span> <span style="padding: 0; display: inline; font-size: 32px; font-weight: 600;" th:text="${ecStaticDataDaily.userCapitalPosSize}"></span></p>
                         </div>
                     </div>
                     <div class="your-account__table">
                         <div class="table__d-flex">
                             <div class="table-item">
                                 <div class="table-item__title"><p>Trade ID</p></div>
-                                <div class="table-item__content">747482</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${trade.id}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>EUR</p></div>
-                                <div class="table-item__content">+273,697.66</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.eur}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>USD</p></div>
-                                <div class="table-item__content">-300,000.00</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.usd}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>GBP</p></div>
-                                <div class="table-item__content"></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.gbp}"></span></div>
                             </div>
                             <div class="table-item d-none">
                                 <div class="table-item__title"><p>JPY</p></div>
-                                <div class="table-item__content"></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.jpy}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Traded Rate</p></div>
-                                <div class="table-item__content">1.0961</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.ccyPairTradedRate}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Current Mid Rate</p></div>
-                                <div class="table-item__content">1.0960</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.ccyPairMid}"></span></div>
                             </div>
                             <div class="table-item">
-                                <div class="table-item__title"><p>P/L USD</p></div>
-                                <div class="table-item__content">-27.37</div>
+                                <div class="table-item__title"><p>P/L <span style="font-size: 11px; color: white" th:text="${chosenPair.currency2.name}"></span></p></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.pnl}"></span></div>
                             </div>
                             <div class="table-item">
-                                <div class="table-item__title"><p>Allocated Margin USD</p></div>
-                                <div class="table-item__content">10,000.00</div>
+                                <div class="table-item__title"><p>Allocated Margin <span style="font-size: 11px; color: white" th:text="${chosenPair.currency2.name}"></span></p></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.mrgSize}"></span></div>
                             </div>
                         </div>
                         <hr />
@@ -104,27 +104,27 @@
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Net position EUR</p></div>
-                                <div class="table-item__content">+273,697.66</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.eur}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Net position USD</p></div>
-                                <div class="table-item__content">-300,000.00</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.usd}"></span></div>
+                            </div>
+                            <div class="table-item d-none">
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.gbp}"></span></div>
+                            </div>
+                            <div class="table-item d-none">
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.jpy}"></span></div>
                             </div>
                             <div class="table-item d-none">
                                 <div class="table-item__content"></div>
                             </div>
                             <div class="table-item d-none">
-                                <div class="table-item__content"></div>
-                            </div>
-                            <div class="table-item d-none">
-                                <div class="table-item__content"></div>
-                            </div>
-                            <div class="table-item d-none">
-                                <div class="table-item__content">1.0960</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.ccyPairMid}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>P/L USD</p></div>
-                                <div class="table-item__content">-27.37</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.pnl}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__content"></div>

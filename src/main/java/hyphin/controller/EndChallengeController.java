@@ -50,7 +50,6 @@ public class EndChallengeController {
 
     @GetMapping("/ec-cfd-3")
     public ModelAndView sentiment(HttpSession session){
-        System.out.println("AAAAAAAkdsajsfkadsf");
         ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-3");
 
         modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
@@ -59,19 +58,15 @@ public class EndChallengeController {
     }
 
     @PostMapping("/send-trade")
-    public ModelAndView sendTrade(EndChallengeTradeDto endChallengeTradeDto){
+    public ModelAndView sendTrade(HttpSession session, EndChallengeTradeDto endChallengeTradeDto){
 
-//        endChallengeService.choseSentiment(session, sentiment);
+        endChallengeService.choseSentiment(session, endChallengeTradeDto.getSentiment());
 
-
-        System.out.println("Hey");
-        System.out.println(endChallengeTradeDto);
-
-        if (endChallengeTradeDto.getCapitalPercent() == 100) {
+        if (endChallengeTradeDto.getCapitalPercent() == 8) {
             return redirectTo("ec-cfd-5b");
         }
 
-        if (endChallengeTradeDto.getCapitalPercent() > 20) {
+        if (endChallengeTradeDto.getCapitalPercent() > 4) {
             return redirectTo("ec-cfd-5a");
         }
 
@@ -79,7 +74,15 @@ public class EndChallengeController {
             return redirectTo("ec-cfd-5c");
         }
 
-        return redirectTo("ec-cfd-4a");
+        endChallengeService.chooseCapitalPercent(session, endChallengeTradeDto);
+
+        ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-4a");
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
+        modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
+        modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
+        return modelAndView;
+
     }
 
     @GetMapping("/get-chart-data")
