@@ -25,8 +25,6 @@ public interface EcStaticDataDailyMapper {
     @Mapping(source = "maxPosSizeBase", target = "maxPosSizeBase", qualifiedByName = "trimDigits")
     @Mapping(source = "maxPosSizeTerm", target = "maxPosSizeTerm", qualifiedByName = "trimDigits")
     @Mapping(source = "userMargin", target = "userMargin", qualifiedByName = "trimDigits")
-
-    @Mapping(source = "ccyPairMid", target = "ccyPairMid", qualifiedByName = "mid")
     EcStaticDataDailyDto mapToDto(EcStaticDataDaily entity);
 
     @Named("toPercentString")
@@ -37,12 +35,6 @@ public interface EcStaticDataDailyMapper {
     @Named("trimDigits")
     static String trimDigits(Double d) {
         return HyfinUtils.formatDecimal(d, 2);
-    }
-
-    @Named("mid")
-    static String trimDigit3(Double d) {
-        String s = HyfinUtils.formatDecimal(d, 3);
-        return s.substring(0, s.length() - 1);
     }
 
     @Named("trimDigits4")

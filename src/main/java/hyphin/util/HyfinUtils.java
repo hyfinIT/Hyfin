@@ -4,6 +4,8 @@ import hyphin.model.User;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class HyfinUtils {
 
@@ -19,11 +21,11 @@ public class HyfinUtils {
         return System.currentTimeMillis() - user.getDeletionDate() < RESTORE_PERIOD_MILLIS;
     }
 
-    public static String toPercentage(double n){
+    public static String toPercentage(double n) {
         return String.format("%.0f", n * 100) + "%";
     }
 
-    public static String toPercentage(double n, int digits){
+    public static String toPercentage(double n, int digits) {
         return String.format("%." + digits + "f", n * 100) + "%";
     }
 
@@ -35,5 +37,21 @@ public class HyfinUtils {
         }
 
         return new DecimalFormat(pattern).format(d);
+    }
+
+
+    public static String formatDecimalToMoney(Double d) {
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
+        DecimalFormat df = (DecimalFormat) nf;
+
+        String format = df.format(d).replaceAll("\\.", ",");
+
+        if (format.charAt(format.length() - 3) == ',') {
+            format = format.substring(0, format.length() - 3) + '.' + format.substring(format.length() - 2);
+        } else {
+            format = format + ".00";
+        }
+
+        return format;
     }
 }

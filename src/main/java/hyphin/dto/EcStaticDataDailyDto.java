@@ -27,7 +27,9 @@ public class EcStaticDataDailyDto {
     String ccyPairMid;
     Integer ccyPairBidPips;
     Integer ccyPairAskPips;
-    Double bidPosSize01;
+
+    String bidPosSize;
+    Double bidPosSize01;           // 3??????????
     Double bidPosSize02;
     Double bidPosSize03;
     Double bidPosSize04;
@@ -35,6 +37,8 @@ public class EcStaticDataDailyDto {
     Double bidPosSize06;
     Double bidPosSize07;
     Double bidPosSize08;
+
+    String askPosSize; //2
     Double askPosSize01;
     Double askPosSize02;
     Double askPosSize03;
@@ -44,11 +48,52 @@ public class EcStaticDataDailyDto {
     Double askPosSize07;
     Double askPosSize08;
 
+    String posSize; //3
     Double posSize01;
     Double posSize02;
     Double posSize03;
     Double posSize04;
 
     Double ccyPairPartRate;
+
+    String userCapitalPosSize;
+
+    Double userCapitalPosSize01;
+    Double userCapitalPosSize02;
+    Double userCapitalPosSize03;
+    Double userCapitalPosSize04;
+    Double userCapitalPosSize05;
+    Double userCapitalPosSize06;
+    Double userCapitalPosSize07;
+    Double userCapitalPosSize08;
+
+    Double ccyPairTradedRate;
+    Double ccyPairTradedRateBullish;
+    Double ccyPairTradedRateBearish;
+
+
+    Double pnl;
+    Double pnlBase01Bullish;
+    Double pnlTerm01Bullish;
+    Double pnlBase01Bearish;
+    Double pnlTerm01Bearish;
+    Double pnlBase02Bullish;
+    Double pnlTerm02Bullish;
+    Double pnlBase02Bearish;
+    Double pnlTerm02Bearish;
+    Double pnlBase03Bullish;
+    Double pnlTerm03Bullish;
+    Double pnlBase03Bearish;
+    Double pnlTerm03Bearish;
+    Double pnlBase04Bullish;
+    Double pnlTerm04Bullish;
+    Double pnlBase04Bearish;
+    Double pnlTerm04Bearish;
+
+    String mrgSize;
+    Double mrgSize01;
+    Double mrgSize02;
+    Double mrgSize03;
+    Double mrgSize04;
 
 }
