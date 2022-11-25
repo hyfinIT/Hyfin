@@ -242,6 +242,18 @@ public class EndChallengeService {
         if (endChallengeSession.getCapitalPercent().equals(4)) {
             ecStaticDataDailyDto.setPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getPosSize04()));
         }
+        if (endChallengeSession.getCapitalPercent().equals(5)) {
+            ecStaticDataDailyDto.setPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getPosSize05()));
+        }
+        if (endChallengeSession.getCapitalPercent().equals(6)) {
+            ecStaticDataDailyDto.setPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getPosSize06()));
+        }
+        if (endChallengeSession.getCapitalPercent().equals(7)) {
+            ecStaticDataDailyDto.setPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getPosSize07()));
+        }
+        if (endChallengeSession.getCapitalPercent().equals(8)) {
+            ecStaticDataDailyDto.setPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getPosSize08()));
+        }
     }
 
     private void setAskPosSize(EndChallengeSession endChallengeSession, EcStaticDataDailyDto ecStaticDataDailyDto) {
@@ -312,6 +324,18 @@ public class EndChallengeService {
         if (endChallengeSession.getCapitalPercent().equals(4)) {
             ecStaticDataDailyDto.setMrgSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getMrgSize04()));
         }
+        if (endChallengeSession.getCapitalPercent().equals(5)) {
+            ecStaticDataDailyDto.setMrgSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getMrgSize05()));
+        }
+        if (endChallengeSession.getCapitalPercent().equals(6)) {
+            ecStaticDataDailyDto.setMrgSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getMrgSize05()));
+        }
+        if (endChallengeSession.getCapitalPercent().equals(7)) {
+            ecStaticDataDailyDto.setMrgSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getMrgSize07()));
+        }
+        if (endChallengeSession.getCapitalPercent().equals(8)) {
+            ecStaticDataDailyDto.setMrgSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getMrgSize08()));
+        }
     }
 
     private void setPnl(EndChallengeSession endChallengeSession, EcStaticDataDailyDto ecStaticDataDailyDto) {
@@ -328,6 +352,18 @@ public class EndChallengeService {
             if (endChallengeSession.getCapitalPercent().equals(4)) {
                 ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm04Bullish());
             }
+            if (endChallengeSession.getCapitalPercent().equals(5)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm05Bullish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(6)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm06Bullish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(7)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm07Bullish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(8)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm08Bullish());
+            }
         }
 
         if (endChallengeSession.getSentiment().equals(Sentiment.BEARISH)) {
@@ -342,6 +378,18 @@ public class EndChallengeService {
             }
             if (endChallengeSession.getCapitalPercent().equals(4)) {
                 ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm04Bearish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(5)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm05Bearish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(6)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm06Bearish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(7)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm07Bearish());
+            }
+            if (endChallengeSession.getCapitalPercent().equals(8)) {
+                ecStaticDataDailyDto.setPnl(ecStaticDataDailyDto.getPnlTerm08Bearish());
             }
         }
     }
