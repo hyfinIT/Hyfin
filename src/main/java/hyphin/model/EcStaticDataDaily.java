@@ -295,4 +295,86 @@ public class EcStaticDataDaily {
     //    PNL_TERM_04_BEARISH
     @Column(name = "PNL_TERM_04_BEARISH")
     Double pnlTerm04Bearish;
+
+
+    @Column(name = "MRG_SIZE_05")
+    Double mrgSize05;
+    @Column(name = "POS_SIZE_05")
+    Double posSize05;
+    @Column(name = "USER_CAPITAL_POS_SIZE_05")
+    Double userCapitalPosSize05;
+    @Column(name = "MID_POS_SIZE_05")
+    Double midPosSize05;
+    @Column(name = "BID_POS_SIZE_05")
+    Double bidPosSize05;
+    @Column(name = "ASK_POS_SIZE_05")
+    Double askPosSize05;
+    @Column(name = "PNL_BASE_05_BULLISH")
+    Double pnlBase05Bullish;
+    @Column(name = "PNL_TERM_05_BULLISH")
+    Double pnlTerm05Bullish;
+    @Column(name = "PNL_BASE_05_BEARISH")
+    Double pnlBase05Bearish;
+    @Column(name = "PNL_TERM_05_BEARISH")
+    Double pnlTerm05Bearish;
+    @Column(name = "MRG_SIZE_06")
+    Double mrgSize06;
+    @Column(name = "POS_SIZE_06")
+    Double posSize06;
+    @Column(name = "USER_CAPITAL_POS_SIZE_06")
+    Double userCapitalPosSize06;
+    @Column(name = "MID_POS_SIZE_06")
+    Double midPosSize06;
+    @Column(name = "BID_POS_SIZE_06")
+    Double bidPosSize06;
+    @Column(name = "ASK_POS_SIZE_06")
+    Double askPosSize06;
+    @Column(name = "PNL_BASE_06_BULLISH")
+    Double pnlBase06Bullish;
+    @Column(name = "PNL_TERM_06_BULLISH")
+    Double pnlTerm06Bullish;
+    @Column(name = "PNL_BASE_06_BEARISH")
+    Double pnlBase06Bearish;
+    @Column(name = "PNL_TERM_06_BEARISH")
+    Double pnlTerm06Bearish;
+    @Column(name = "MRG_SIZE_07")
+    Double mrgSize07;
+    @Column(name = "POS_SIZE_07")
+    Double posSize07;
+    @Column(name = "USER_CAPITAL_POS_SIZE_07")
+    Double userCapitalPosSize07;
+    @Column(name = "MID_POS_SIZE_07")
+    Double midPosSize07;
+    @Column(name = "BID_POS_SIZE_07")
+    Double bidPosSize07;
+    @Column(name = "ASK_POS_SIZE_07")
+    Double askPosSize07;
+    @Column(name = "PNL_BASE_07_BULLISH")
+    Double pnlBase07Bullish;
+    @Column(name = "PNL_TERM_07_BULLISH")
+    Double pnlTerm07Bullish;
+    @Column(name = "PNL_BASE_07_BEARISH")
+    Double pnlBase07Bearish;
+    @Column(name = "PNL_TERM_07_BEARISH")
+    Double pnlTerm07Bearish;
+    @Column(name = "MRG_SIZE_08")
+    Double mrgSize08;
+    @Column(name = "POS_SIZE_08")
+    Double posSize08;
+    @Column(name = "USER_CAPITAL_POS_SIZE_08")
+    Double userCapitalPosSize08;
+    @Column(name = "MID_POS_SIZE_08")
+    Double midPosSize08;
+    @Column(name = "BID_POS_SIZE_08")
+    Double bidPosSize08;
+    @Column(name = "ASK_POS_SIZE_08")
+    Double askPosSize08;
+    @Column(name = "PNL_BASE_08_BULLISH")
+    Double pnlBase08Bullish;
+    @Column(name = "PNL_TERM_08_BULLISH")
+    Double pnlTerm08Bullish;
+    @Column(name = "PNL_BASE_08_BEARISH")
+    Double pnlBase08Bearish;
+    @Column(name = "PNL_TERM_08_BEARISH")
+    Double pnlTerm08Bearish;
 }

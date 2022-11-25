@@ -96,4 +96,29 @@ public class EcStaticDataDailyDto {
     Double mrgSize03;
     Double mrgSize04;
 
+    Double mrgSize05;
+    Double posSize05;
+    Double pnlBase05Bullish;
+    Double pnlTerm05Bullish;
+    Double pnlBase05Bearish;
+    Double pnlTerm05Bearish;
+    Double mrgSize06;
+    Double posSize06;
+    Double pnlBase06Bullish;
+    Double pnlTerm06Bullish;
+    Double pnlBase06Bearish;
+    Double pnlTerm06Bearish;
+    Double mrgSize07;
+    Double posSize07;
+    Double pnlBase07Bullish;
+    Double pnlTerm07Bullish;
+    Double pnlBase07Bearish;
+    Double pnlTerm07Bearish;
+    Double mrgSize08;
+    Double posSize08;
+    Double pnlBase08Bullish;
+    Double pnlTerm08Bullish;
+    Double pnlBase08Bearish;
+    Double pnlTerm08Bearish;
+
 }

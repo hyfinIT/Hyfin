@@ -516,6 +516,11 @@
 
                 document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
                 document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+
+                var posSize = /*[[${ecStaticDataDaily.posSize05}]]*/ 'default';
+
+                document.getElementById('posSize1').innerText = posSize;
+                document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 6) {
                 var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize06)
@@ -523,6 +528,11 @@
 
                 document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
                 document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+
+                var posSize = /*[[${ecStaticDataDaily.posSize06}]]*/ 'default';
+
+                document.getElementById('posSize1').innerText = posSize;
+                document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 7) {
                 var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize07)
@@ -530,6 +540,11 @@
 
                 document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
                 document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+
+                var posSize = /*[[${ecStaticDataDaily.posSize07}]]*/ 'default';
+
+                document.getElementById('posSize1').innerText = posSize;
+                document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 8) {
                 var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize08)
@@ -537,6 +552,11 @@
 
                 document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
                 document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+
+                var posSize = /*[[${ecStaticDataDaily.posSize08}]]*/ 'default';
+
+                document.getElementById('posSize1').innerText = posSize;
+                document.getElementById('posSize2').innerText = posSize;
         }
 
         var var1 = document.getElementById('mps1').textContent / 100 * amount;
