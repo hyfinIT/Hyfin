@@ -213,15 +213,15 @@
     console.log(chosenPair.currency1.inflationRate);
 
     if (chosenPair.currency1.inflationRate.infTrend == 'UP') {
-        document.getElementById('trend1').setAttribute('src', '/assets/images/icon-top.svg')
+        document.getElementById('trend1').setAttribute('src', '/assets/images/icon-up.svg')
     } else {
-        document.getElementById('trend1').setAttribute('src', '/assets/images/icon-top-right.svg')
+        document.getElementById('trend1').setAttribute('src', '/assets/images/icon-down.svg')
     }
 
     if (chosenPair.currency2.inflationRate.infTrend == 'UP') {
-        document.getElementById('trend2').setAttribute('src', '/assets/images/icon-top.svg')
+        document.getElementById('trend2').setAttribute('src', '/assets/images/icon-up.svg')
     } else {
-        document.getElementById('trend2').setAttribute('src', '/assets/images/icon-top-right.svg')
+        document.getElementById('trend2').setAttribute('src', '/assets/images/icon-down.svg')
     }
 
 

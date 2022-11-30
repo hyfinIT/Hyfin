@@ -48,10 +48,41 @@ public class HyfinUtils {
 
         if (format.charAt(format.length() - 3) == ',') {
             format = format.substring(0, format.length() - 3) + '.' + format.substring(format.length() - 2);
-        } else {
+        }
+        else if (format.charAt(format.length() - 2) == ',') {
+            format = format.substring(0, format.length() - 2) + '.' + format.substring(format.length() - 1);
+        }
+        else {
             format = format + ".00";
         }
 
         return format;
+    }
+
+    public static String formatDecimalToMoneyWithoutZeros(Double d) {
+        NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
+        DecimalFormat df = (DecimalFormat) nf;
+
+        String format = df.format(d).replaceAll("\\.", ",");
+
+        if (format.charAt(format.length() - 3) == ',') {
+            format = format.substring(0, format.length() - 3) + '.' + format.substring(format.length() - 2);
+        }
+        if (format.charAt(format.length() - 2) == ',') {
+            format = format.substring(0, format.length() - 2) + '.' + format.substring(format.length() - 1) + "0";
+        }
+
+        return format;
+    }
+
+
+    public static String dropCents(String money) {
+        if (money.charAt(money.length() - 3) == '.') {
+            return money.substring(0, money.length() - 3);
+        }
+        if (money.charAt(money.length() - 2) == '.') {
+            return money.substring(0, money.length() - 2);
+        }
+        return money;
     }
 }

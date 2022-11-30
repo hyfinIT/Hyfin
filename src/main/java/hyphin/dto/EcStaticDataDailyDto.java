@@ -121,4 +121,30 @@ public class EcStaticDataDailyDto {
     Double pnlBase08Bearish;
     Double pnlTerm08Bearish;
 
+    String posSize01Formatted;
+    String posSize02Formatted;
+    String posSize03Formatted;
+    String posSize04Formatted;
+    String posSize05Formatted;
+    String posSize06Formatted;
+    String posSize07Formatted;
+    String posSize08Formatted;
+
+    String bidPosSize01Formatted;
+    String bidPosSize02Formatted;
+    String bidPosSize03Formatted;
+    String bidPosSize04Formatted;
+    String bidPosSize05Formatted;
+    String bidPosSize06Formatted;
+    String bidPosSize07Formatted;
+    String bidPosSize08Formatted;
+
+    String askPosSize01Formatted;
+    String askPosSize02Formatted;
+    String askPosSize03Formatted;
+    String askPosSize04Formatted;
+    String askPosSize05Formatted;
+    String askPosSize06Formatted;
+    String askPosSize07Formatted;
+    String askPosSize08Formatted;
 }

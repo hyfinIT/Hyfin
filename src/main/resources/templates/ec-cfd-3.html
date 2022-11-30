@@ -15,6 +15,34 @@
     <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
 </head>
 <body class="hf-bg-solid">
+<div id="bg" onclick="bgClick()" style="z-index: 1" hidden class="overlay-bg">
+</div>
+<div hidden id="warning1" class="warning__content warning">
+    <div class="warning__icon-and-title">
+        <div class="warning__icon"><img src="/assets/images/icon-warning.svg" alt="Icon" /></div>
+        <div class="warning__title">WARNING!</div>
+    </div>
+    <div class="warning__description">Risking more than 20% of your capital on a single trade isn’t recommended. Long-term trading success involves prudent risk management.</div>
+    <div class="warning__action">
+        <a href="#" onclick="hideWarnings()">Back to order entry</a>
+        <a href="/4">Back to THE COURSE</a>
+    </div>
+</div>
+
+
+    <div hidden id="warning2" class="warning__content warning">
+        <div class="warning__icon-and-title">
+            <div class="warning__icon"><img src="/assets/images/icon-warning.svg" alt="Icon" /></div>
+            <div class="warning__title">GAME OVER</div>
+        </div>
+        <div class="warning__description">
+            You want to bet all your money in one shot, then you are better off in Las Vegas. Risking most or all of your capital on a single trade isn’t trading, its gambling.<br><br>
+            Let’s pop back quickly to the course and go over the risks of leverage again…
+        </div>
+        <div class="warning__action">
+            <a href="/4">Back to THE COURSE</a>
+        </div>
+    </div>
 <div class="hf-wrap">
     <!-- Header Start -->
     <header class="hf-header">
@@ -47,7 +75,7 @@
         </div>
     </header>
     <!-- Header End -->
-    <main class="hf-main">
+    <main id="main" class="hf-main" style="z-index: 0;">
         <div class="hf-main-inner">
             <form role="form" th:action="@{/end-challenge/send-trade}" method="POST">
                 <input type="text" hidden name="capitalPercent" id="capitalPercent">
@@ -144,8 +172,8 @@
                                                 <div class="spot-trader__amount">Choose the amount of capital you want
                                                     to risk:
                                                 </div>
-                                                <div onclick="enableCapitalAmountChecked()" class="row">
-                                                    <div class="col-3">
+                                                <div class="row">
+                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
                                                         <div class="spot-trader__amount-item">
                                                             <input type="radio" name="amount" id="amount5"
                                                                    class="spot-trader__amount-input"/>
@@ -157,7 +185,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
                                                         <div class="spot-trader__amount-item">
                                                             <input type="radio" name="amount" id="amount10"
                                                                    class="spot-trader__amount-input"/>
@@ -169,7 +197,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
                                                         <div class="spot-trader__amount-item">
                                                             <input type="radio" name="amount" id="amount15"
                                                                    class="spot-trader__amount-input"/>
@@ -181,7 +209,7 @@
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-3">
+                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
                                                         <div class="spot-trader__amount-item">
                                                             <input type="radio" name="amount" id="amount20"
                                                                    class="spot-trader__amount-input"/>
@@ -194,51 +222,43 @@
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <div class="spot-trader__amount-item">
+                                                        <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount25"
                                                                    class="spot-trader__amount-input"/>
-                                                            <label for="amount25">
-                                                                <div onclick="setCapitalPercent(5)"
+                                                                <div onclick="showWarning1()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable05}"></span>
                                                                 </div>
-                                                            </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <div class="spot-trader__amount-item">
+                                                        <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount50"
                                                                    class="spot-trader__amount-input"/>
-                                                            <label for="amount50">
-                                                                <div onclick="setCapitalPercent(6)"
+                                                                <div onclick="showWarning1()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable06}"></span>
                                                                 </div>
-                                                            </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <div class="spot-trader__amount-item">
+                                                        <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount75"
                                                                    class="spot-trader__amount-input"/>
-                                                            <label for="amount75">
-                                                                <div onclick="setCapitalPercent(8)"
+                                                                <div onclick="showWarning1()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable07}"></span>
                                                                 </div>
-                                                            </label>
                                                         </div>
                                                     </div>
                                                     <div class="col-3">
-                                                        <div class="spot-trader__amount-item">
+                                                        <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount100"
                                                                    class="spot-trader__amount-input"/>
-                                                            <label for="amount100">
-                                                                <div onclick="setCapitalPercent(8)"
+                                                                <div onclick="showWarning2()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable08}"></span>
                                                                 </div>
-                                                            </label>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -346,12 +366,12 @@
     <!-- Footer Start -->
     <footer class="hf-footer">
         <div class="hf-footer-inner">
-            <p class="hp-copy">Copyright © 2022 Hyfin. All Rights Reserved</p>
+            <p  id="footer" class="hp-copy">Copyright © 2022 Hyfin. All Rights Reserved</p>
         </div>
     </footer>
     <!-- Footer End -->
     <!-- Left Panel Start -->
-    <div class="hf-left-menu-wrap">
+    <div class="hf-left-menu-wrap" style="z-index: 0;">
         <button class="hf-lm-close">
             <a href="../4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
@@ -463,97 +483,99 @@
         var askPosSize08 = /*[[${ecStaticDataDaily.askPosSize08}]]*/ 1;
 
         if (amount == 1) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize01)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize01)
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize01Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize01Formatted}]]*/ 'default';
 
-                var posSize = /*[[${ecStaticDataDaily.posSize01}]]*/ 'default';
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
+
+                var posSize = /*[[${ecStaticDataDaily.posSize01Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 2) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize02)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize02)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize02Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize02Formatted}]]*/ 'default';
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
 
-                var posSize = /*[[${ecStaticDataDaily.posSize02}]]*/ 'default';
+                var posSize = /*[[${ecStaticDataDaily.posSize02Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 3) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize03)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize03)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize03Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize03Formatted}]]*/ 'default';
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
 
-                var posSize = /*[[${ecStaticDataDaily.posSize03}]]*/ 'default';
+                var posSize = /*[[${ecStaticDataDaily.posSize03Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 4) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize04)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize04)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize04Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize04Formatted}]]*/ 'default';
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
 
-                var posSize = /*[[${ecStaticDataDaily.posSize04}]]*/ 'default';
+                var posSize = /*[[${ecStaticDataDaily.posSize04Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 5) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize05)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize05)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize05Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize05Formatted}]]*/ 'default';
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
 
-                var posSize = /*[[${ecStaticDataDaily.posSize05}]]*/ 'default';
+                var posSize = /*[[${ecStaticDataDaily.posSize05Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 6) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize06)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize06)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize06Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize06Formatted}]]*/ 'default';
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
 
-                var posSize = /*[[${ecStaticDataDaily.posSize06}]]*/ 'default';
+                var posSize = /*[[${ecStaticDataDaily.posSize06Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 7) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize07)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize07)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize07Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize07Formatted}]]*/ 'default';
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
 
-                var posSize = /*[[${ecStaticDataDaily.posSize07}]]*/ 'default';
+                var posSize = /*[[${ecStaticDataDaily.posSize07Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
         }
         if (amount == 8) {
-                var strBid = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(bidPosSize08)
-                var strAsk = new Intl.NumberFormat('de-DE', { style: 'currency', currency: 'EUR' }).format(askPosSize08)
 
-                document.getElementById('bidValue').innerText = strBid.substring(0, strBid.length - 5)
-                document.getElementById('askValue').innerText = strAsk.substring(0, strAsk.length - 5)
+                var bidPosSizeFormatted = /*[[${ecStaticDataDaily.bidPosSize08Formatted}]]*/ 'default';
+                var askPosSizeFormatted = /*[[${ecStaticDataDaily.askPosSize08Formatted}]]*/ 'default';
 
-                var posSize = /*[[${ecStaticDataDaily.posSize08}]]*/ 'default';
+                document.getElementById('bidValue').innerText = bidPosSizeFormatted;
+                document.getElementById('askValue').innerText = askPosSizeFormatted;
+
+                var posSize = /*[[${ecStaticDataDaily.posSize08Formatted}]]*/ 'default';
 
                 document.getElementById('posSize1').innerText = posSize;
                 document.getElementById('posSize2').innerText = posSize;
@@ -570,4 +592,42 @@
         document.getElementById('capitalPercent').value = amount;
     }
     /*]]>*/
+</script>
+
+<script>
+
+    var activeWarningNumber;
+
+    function bgClick(){
+        if (activeWarningNumber == 1) {
+           hideWarnings();
+        }
+    }
+
+    function hideWarnings(){
+<!--        document.getElementById('main').removeAttribute('hidden');-->
+<!--         document.getElementById('footer').removeAttribute('hidden');-->
+         document.getElementById('bg').setAttribute('hidden', 'hidden');
+         document.getElementById('warning1').setAttribute('hidden', 'hidden');
+         document.getElementById('warning2').setAttribute('hidden', 'hidden');
+    }
+
+    function showWarning1() {
+        document.getElementById('bg').style.cursor = "pointer";
+         activeWarningNumber = 1;
+<!--         document.getElementById('main').setAttribute('hidden', 'hidden');-->
+<!--         document.getElementById('footer').setAttribute('hidden', 'hidden');-->
+         document.getElementById('bg').removeAttribute('hidden');
+         document.getElementById('warning1').removeAttribute('hidden');
+   }
+
+   function showWarning2() {
+         document.getElementById('bg').style.cursor = "default";
+         activeWarningNumber = 2;
+<!--         document.getElementById('main').setAttribute('hidden', 'hidden');-->
+<!--         document.getElementById('footer').setAttribute('hidden', 'hidden');-->
+         document.getElementById('bg').removeAttribute('hidden');
+         document.getElementById('warning2').removeAttribute('hidden');
+   }
+</script>
 </script>
