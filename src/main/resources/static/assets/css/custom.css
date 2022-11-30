@@ -629,6 +629,14 @@
 	color:  #fff;
 }
 
+.spot-trader__amount-item-inactive{
+}
+
+.spot-trader__amount-item-inactive input:checked + label .spot-trader__amount-label {
+	background: white;
+	color: black;
+}
+
 .spot-trader__right {
 	width: 380px;
 	border-left:  1px solid #ECDCC4;
@@ -1716,4 +1724,22 @@
 	.summary__description h4 {
 		font-size: 18px;
 	}
+}
+
+.main-content {
+	height: 800px;
+	width: 1000px;
+	margin: 0 auto;
+}
+
+.overlay-bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height:100%;
+	width: 100%;
+	cursor: pointer;
+	z-index: 2; /* high z-index */
+	background: #000; /* fallback */
+	background: rgba(0,0,0,0.75);
 }
