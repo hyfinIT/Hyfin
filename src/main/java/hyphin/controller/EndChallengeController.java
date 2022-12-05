@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("end-challenge")
@@ -83,6 +84,57 @@ public class EndChallengeController {
         modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
         return modelAndView;
 
+    }
+
+    @GetMapping("/ec-cfd-6_01")
+    public ModelAndView stopLoss(HttpSession session) {
+        ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-6_01");
+
+
+
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
+        modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
+        modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
+
+        return modelAndView;
+    }
+
+    @PostMapping("/ec-cfd-6a_01")
+    public ModelAndView takeProfit(Integer slOptionNumber, HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        if (Objects.nonNull(slOptionNumber) && slOptionNumber > 6) {
+            modelAndView.setViewName("ec-cfd-5e_01");
+            return modelAndView;
+        }
+
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
+        modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
+        modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
+
+        modelAndView.setViewName("ec-cfd-6a_01");
+
+        return modelAndView;
+    }
+
+    @GetMapping("/ec-cfd-6a_01")
+    public ModelAndView getTakeProfit(HttpSession session) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
+        modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
+        modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
+        modelAndView.setViewName("ec-cfd-6a_01");
+        return modelAndView;
+    }
+
+    @PostMapping("/ec-cfd-4c_01")
+    public ModelAndView viewCFD4c01(Integer tpOptionNumber, HttpSession session) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("ec-cfd-4c_01");
+        return mav;
     }
 
     @GetMapping("/get-chart-data")
