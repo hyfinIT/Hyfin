@@ -8,10 +8,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
     <!-- Link Swiper's CSS -->
-    <link rel="stylesheet" href="./assets/lib/swiper/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/assets/lib/swiper/swiper-bundle.min.css"/>
     <!-- Link Main CSS -->
-    <link rel="stylesheet" href="./assets/css/style.css?ver=1.1">
-    <link rel="stylesheet" href="./assets/css/custom.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" href="/assets/css/custom.css?ver=1.1">
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-8FKDQB9FNV"></script>
     <script>
@@ -28,7 +28,7 @@
         <header class="hf-header">
             <div class="hf-logo-wrap">
                 <div class="hf-logo">
-                    <img src="./assets/images/hyfin-logo.svg" alt="">
+                    <img src="/assets/images/hyfin-logo.svg" alt="">
                 </div>
                 <div class="hf-current-screen">
                     <span class="hf-current-screen-title">End Challenge</span>
@@ -41,8 +41,8 @@
                     <li class="hf-menu-item hf-menu-item-glossary"><a href="../glossary.html">Glossary</a></li>
                 </ul>
                 <div class="hf-header-icons">
-                    <a class="hf-hicon-search" href="../search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
-                    <a class="hf-hicon-profile" href="../account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                    <a class="hf-hicon-search" href="../search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
+                    <a class="hf-hicon-profile" href="../account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
                     <div class="hf-hicon-menu">
                         <div class="hf-menu-btn" id="hf-menu-trigger">
                             <span></span>
@@ -66,7 +66,7 @@
                             <div class="order-rate__left">
                                 <div class="order-rate__item">
                                     <div class="order-rate-item__title">Order Entry</div>
-                                    <div class="order-rate-item__content">EUR/USD</div>
+                                    <div class="order-rate-item__content"> <span th:text="${chosenPair.currencyPairFormatted}"></span></div>
                                 </div>
                                 <div class="order-rate__item">
                                     <div class="order-rate-item__title">Order Type</div>
@@ -74,11 +74,11 @@
                                 </div>
                                 <div class="order-rate__item">
                                     <div class="order-rate-item__title">Traded Rate</div>
-                                    <div class="order-rate-item__content">1.0961</div>
+                                    <div class="order-rate-item__content"><span th:text="${ecStaticDataDaily.ccyPairTradedRate}"></span></div>
                                 </div>
                                 <div class="order-rate__item">
                                     <div class="order-rate-item__title">Current Mid Rate</div>
-                                    <div class="order-rate-item__content">1.0960</div>
+                                    <div class="order-rate-item__content"><span th:text="${ecStaticDataDaily.ccyPairMid}"></span></div>
                                 </div>
                             </div>
                             <div class="order-rate__right">
@@ -90,9 +90,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount25" class="spot-trader__amount-input" />
                                             <label for="amount25">
-                                                <div onclick="setUpperRowSelectedTrue(); enableButton()" class="spot-trader__amount-label">
-                                                    25<br>
-                                                    (1.0935)
+                                                <div onclick="setParam(1); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable01}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable01Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -101,9 +101,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount50" class="spot-trader__amount-input" />
                                             <label for="amount50">
-                                                <div onclick="setUpperRowSelectedTrue(); enableButton()" class="spot-trader__amount-label">
-                                                    50<br>
-                                                    (1.0910)
+                                                <div onclick="setParam(2);  enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable02}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable02Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -112,9 +112,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount75" class="spot-trader__amount-input" />
                                             <label for="amount75">
-                                                <div onclick="setUpperRowSelectedTrue(); enableButton()" class="spot-trader__amount-label">
-                                                    75<br>
-                                                    (1.0885)
+                                                <div onclick="setParam(3); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable03}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable03Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -123,9 +123,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount100" class="spot-trader__amount-input" />
                                             <label for="amount100">
-                                                <div onclick="setUpperRowSelectedTrue(); enableButton()" class="spot-trader__amount-label">
-                                                    100<br>
-                                                    (1.0860)
+                                                <div onclick="setParam(4);  enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable04}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable04Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -134,9 +134,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount125" class="spot-trader__amount-input" />
                                             <label for="amount125">
-                                                <div onclick="setUpperRowSelectedTrue(); enableButton()" class="spot-trader__amount-label">
-                                                    125<br>
-                                                    (1.0835)
+                                                <div onclick="setParam(5); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable05}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable05Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -145,9 +145,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount150" class="spot-trader__amount-input" />
                                             <label for="amount150">
-                                                <div onclick="setUpperRowSelectedTrue(); enableButton()" class="spot-trader__amount-label">
-                                                    150<br>
-                                                    (1.0810)
+                                                <div onclick="setParam(6); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable06}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable06Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -156,9 +156,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount175" class="spot-trader__amount-input" />
                                             <label for="amount175">
-                                                <div onclick="setUpperRowSelectedFalse(); enableButton()" class="spot-trader__amount-label">
-                                                    175<br>
-                                                    (1.0785)
+                                                <div onclick="setParam(7); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable07}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable07Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -167,9 +167,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount200" class="spot-trader__amount-input" />
                                             <label for="amount200">
-                                                <div onclick="setUpperRowSelectedFalse(); enableButton()" class="spot-trader__amount-label">
-                                                    200<br>
-                                                    (1.0760)
+                                                <div onclick="setParam(8); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable08}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable08Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -178,9 +178,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount225" class="spot-trader__amount-input" />
                                             <label for="amount225">
-                                                <div onclick="setUpperRowSelectedFalse(); enableButton()" class="spot-trader__amount-label">
-                                                    225<br>
-                                                    (1.0735)
+                                                <div onclick="setParam(9);  enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable09}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable09Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -189,9 +189,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount250" class="spot-trader__amount-input" />
                                             <label for="amount250">
-                                                <div onclick="setUpperRowSelectedFalse(); enableButton()" class="spot-trader__amount-label">
-                                                    250<br>
-                                                    (1.0710)
+                                                <div onclick="setParam(10); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable10}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable10Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -200,9 +200,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount275" class="spot-trader__amount-input" />
                                             <label for="amount275">
-                                                <div onclick="setUpperRowSelectedFalse(); enableButton()" class="spot-trader__amount-label">
-                                                    275<br>
-                                                    (1.0685)
+                                                <div onclick="setParam(11);  enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable11}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable11Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -211,9 +211,9 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount300" class="spot-trader__amount-input" />
                                             <label for="amount300">
-                                                <div onclick="setUpperRowSelectedFalse(); enableButton()" class="spot-trader__amount-label">
-                                                    300<br>
-                                                    (1.0660)
+                                                <div onclick="setParam(12); enableButton()" class="spot-trader__amount-label">
+                                                    <span th:text="${ecStaticDataDaily.slSizeVariable12}"></span><br>
+                                                    (<span th:text="${ecStaticDataDaily.slSizeVariable12Rate}"></span>)
                                                 </div>
                                             </label>
                                         </div>
@@ -224,10 +224,18 @@
                     </div>
 
                     <div class="your-account__action">
-                        <a style="margin-right: 60%" href="/ec-cfd-6a_01"><span>Skip</span></a>
+                        <div style="width: 100%; display: flex; justify-content: space-between;">
+                        <form style="position: relative;" action="/end-challenge/ec-cfd-6a_01" method="post">
+                            <button style="margin-top: 30px;" class="hf-button"><span>Skip</span></button>
+                        </form>
+                        <!--                        <a style="margin-right: 60%" href="/end-challenge/ec-cfd-6a_01"><span>Skip</span></a>-->
 <!--                        <button id="dis-button" style="padding: 0px 20px;" disabled type="button" onclick="location.href='/ec-cfd-2'" class="disabled-button hf-button"><span>Submit Order</span></button>-->
-
-                        <a id="dis-button" class="disabled-button" href="#"><span>Submit Order1</span></a>
+                            <form style="position: relative;" action="/end-challenge/ec-cfd-6a_01" method="post">
+                            <input hidden="true" name="slOptionNumber" id="slOptionNumber">
+                            <button id="dis-button" style="margin-top: 30px;" disabled class="hf-button disabled-button"><span>Trade</span></button>
+                        </form>
+                        </div>
+<!--                        <a id="dis-button" class="disabled-button" href="#"><span>Submit Order</span></a>-->
                     </div>
                 </div>
                 <!-- Carousel End -->
@@ -251,16 +259,16 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-close">
-            <a href="../4.html"><img src="./assets/images/close.svg" alt=""></a>
+            <a href="../4.html"><img src="/assets/images/close.svg" alt=""></a>
         </button>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="./assets/lib/jquery-3.6.0.min.js"></script>
-<script src="./assets/js/script.js?ver=1.1"></script>
-<!--<script src="./assets/js/custom.js?ver=1.1"></script>-->
+<script src="/assets/lib/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/script.js?ver=1.1"></script>
+<!--<script src="/assets/js/custom.js?ver=1.1"></script>-->
 <!-- Swiper JS -->
-<script src="./assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
+<script src="/assets/lib/swiper/swiper-bundle.min.js"></script><!-- Initialize Swiper -->
 <script>
     var swiper = new Swiper(".swiper", {
         slidesPerView: 1,
@@ -293,6 +301,12 @@
         upperRowSelected = false;
     }
 
+    function setParam(param) {
+        document.getElementById('slOptionNumber').value = param;
+    }
+
+
+
     function enableButton(){
         console.log('function enableNext()');
         console.log("upperRowSelected");
@@ -300,11 +314,12 @@
         document.getElementById('dis-button').removeAttribute("disabled");
         document.getElementById('dis-button').classList.remove("disabled-button");
 
-        if (upperRowSelected == true) {
-            document.getElementById('dis-button').setAttribute("href", "/ec-cfd-6a_01");
-        } else {
-            document.getElementById('dis-button').setAttribute("href", "ec-cfd-5e_01");
-        }
+
+<!--        if (upperRowSelected == true) {-->
+<!--            document.getElementById('dis-button').setAttribute("href", "/end-challenge/ec-cfd-6a_01");-->
+<!--        } else {-->
+<!--            document.getElementById('dis-button').setAttribute("href", "/ec-cfd-5e_01");-->
+<!--        }-->
 
     }
 

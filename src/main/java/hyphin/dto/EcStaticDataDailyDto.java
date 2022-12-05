@@ -67,7 +67,7 @@ public class EcStaticDataDailyDto {
     Double userCapitalPosSize07;
     Double userCapitalPosSize08;
 
-    Double ccyPairTradedRate;
+    String ccyPairTradedRate;
     Double ccyPairTradedRateBullish;
     Double ccyPairTradedRateBearish;
 
@@ -147,4 +147,109 @@ public class EcStaticDataDailyDto {
     String askPosSize06Formatted;
     String askPosSize07Formatted;
     String askPosSize08Formatted;
+
+    Integer slSizeVariable01;
+    Integer slSizeVariable02;
+    Integer slSizeVariable03;
+    Integer slSizeVariable04;
+    Integer slSizeVariable05;
+    Integer slSizeVariable06;
+    Integer slSizeVariable07;
+    Integer slSizeVariable08;
+    Integer slSizeVariable09;
+    Integer slSizeVariable10;
+    Integer slSizeVariable11;
+    Integer slSizeVariable12;
+
+    Double slSizeVariable01Bullish;
+    Double slSizeVariable02Bullish;
+    Double slSizeVariable03Bullish;
+    Double slSizeVariable04Bullish;
+    Double slSizeVariable05Bullish;
+    Double slSizeVariable06Bullish;
+    Double slSizeVariable07Bullish;
+    Double slSizeVariable08Bullish;
+    Double slSizeVariable09Bullish;
+    Double slSizeVariable10Bullish;
+    Double slSizeVariable11Bullish;
+    Double slSizeVariable12Bullish;
+    Double slSizeVariable01Bearish;
+    Double slSizeVariable02Bearish;
+    Double slSizeVariable03Bearish;
+    Double slSizeVariable04Bearish;
+    Double slSizeVariable05Bearish;
+    Double slSizeVariable06Bearish;
+    Double slSizeVariable07Bearish;
+    Double slSizeVariable08Bearish;
+    Double slSizeVariable09Bearish;
+    Double slSizeVariable10Bearish;
+    Double slSizeVariable11Bearish;
+    Double slSizeVariable12Bearish;
+
+    String slSizeVariable01Rate;
+    String slSizeVariable02Rate;
+    String slSizeVariable03Rate;
+    String slSizeVariable04Rate;
+    String slSizeVariable05Rate;
+    String slSizeVariable06Rate;
+    String slSizeVariable07Rate;
+    String slSizeVariable08Rate;
+    String slSizeVariable09Rate;
+    String slSizeVariable10Rate;
+    String slSizeVariable11Rate;
+    String slSizeVariable12Rate;
+
+
+
+
+    Integer tpSizeVariable01;
+    Integer tpSizeVariable02;
+    Integer tpSizeVariable03;
+    Integer tpSizeVariable04;
+    Integer tpSizeVariable05;
+    Integer tpSizeVariable06;
+    Integer tpSizeVariable07;
+    Integer tpSizeVariable08;
+    Integer tpSizeVariable09;
+    Integer tpSizeVariable10;
+    Integer tpSizeVariable11;
+    Integer tpSizeVariable12;
+
+    Double tpSizeVariable01Bullish;
+    Double tpSizeVariable02Bullish;
+    Double tpSizeVariable03Bullish;
+    Double tpSizeVariable04Bullish;
+    Double tpSizeVariable05Bullish;
+    Double tpSizeVariable06Bullish;
+    Double tpSizeVariable07Bullish;
+    Double tpSizeVariable08Bullish;
+    Double tpSizeVariable09Bullish;
+    Double tpSizeVariable10Bullish;
+    Double tpSizeVariable11Bullish;
+    Double tpSizeVariable12Bullish;
+    Double tpSizeVariable01Bearish;
+    Double tpSizeVariable02Bearish;
+    Double tpSizeVariable03Bearish;
+    Double tpSizeVariable04Bearish;
+    Double tpSizeVariable05Bearish;
+    Double tpSizeVariable06Bearish;
+    Double tpSizeVariable07Bearish;
+    Double tpSizeVariable08Bearish;
+    Double tpSizeVariable09Bearish;
+    Double tpSizeVariable10Bearish;
+    Double tpSizeVariable11Bearish;
+    Double tpSizeVariable12Bearish;
+
+    String tpSizeVariable01Rate;
+    String tpSizeVariable02Rate;
+    String tpSizeVariable03Rate;
+    String tpSizeVariable04Rate;
+    String tpSizeVariable05Rate;
+    String tpSizeVariable06Rate;
+    String tpSizeVariable07Rate;
+    String tpSizeVariable08Rate;
+    String tpSizeVariable09Rate;
+    String tpSizeVariable10Rate;
+    String tpSizeVariable11Rate;
+    String tpSizeVariable12Rate;
 }

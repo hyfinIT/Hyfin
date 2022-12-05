@@ -101,6 +101,107 @@ public class EndChallengeService {
     public void choseSentiment(HttpSession session, Sentiment sentiment) {
         EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
         endChallengeSession.setSentiment(sentiment);
+
+
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable01Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable01Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable01Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable02Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable02Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable02Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable03Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable03Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable03Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable04Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable04Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable04Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable05Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable05Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable05Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable06Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable06Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable06Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable07Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable07Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable07Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable08Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable08Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable08Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable09Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable09Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable09Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable10Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable10Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable10Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable11Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable11Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable11Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setSlSizeVariable12Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable12Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable12Bearish()));
+
+
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable01Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable01Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable01Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable02Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable02Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable02Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable03Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable03Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable03Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable04Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable04Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable04Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable05Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable05Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable05Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable06Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable06Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable06Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable07Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable07Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable07Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable08Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable08Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable08Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable09Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable09Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable09Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable10Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable10Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable10Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable11Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable11Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable11Bearish()));
+        endChallengeSession.getEcStaticDataDailyDto()
+                .setTpSizeVariable12Rate(endChallengeSession.getSentiment().equals(Sentiment.BULLISH) ?
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable12Bullish()) :
+                        HyfinUtils.formatDecimal(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable12Bearish()));
+
     }
 
     private void setAmounts(EndChallengeSession endChallengeSession) {
@@ -396,10 +497,10 @@ public class EndChallengeService {
 
     private void setCcyPairTradedRate(EndChallengeSession endChallengeSession, EcStaticDataDailyDto ecStaticDataDailyDto) {
         if (endChallengeSession.getSentiment().equals(Sentiment.BULLISH)) {
-            ecStaticDataDailyDto.setCcyPairTradedRate(ecStaticDataDailyDto.getCcyPairTradedRateBullish());
+            ecStaticDataDailyDto.setCcyPairTradedRate(HyfinUtils.formatDecimal(ecStaticDataDailyDto.getCcyPairTradedRateBullish()));
         }
         if (endChallengeSession.getSentiment().equals(Sentiment.BEARISH)) {
-            ecStaticDataDailyDto.setCcyPairTradedRate(ecStaticDataDailyDto.getCcyPairTradedRateBearish());
+            ecStaticDataDailyDto.setCcyPairTradedRate(HyfinUtils.formatDecimal(ecStaticDataDailyDto.getCcyPairTradedRateBearish()));
         }
     }
 

@@ -29,16 +29,39 @@ public class HyfinUtils {
         return String.format("%." + digits + "f", n * 100) + "%";
     }
 
+    /**
+     * If you need to skip zeros at the end, use "#" instead of "0"
+     */
     public static String formatDecimal(Double d, int decimalLength) {
         String pattern = "#.";
 
         for (int i = 0; i < decimalLength; i++) {
-            pattern = pattern.concat("#");
+            pattern = pattern.concat("0");
         }
 
-        return new DecimalFormat(pattern).format(d);
+        return new DecimalFormat(pattern).format(d).replace(",", ".");
     }
 
+    public static String formatDecimal(Double d) {
+
+        int indexOfFloatingPoint = d.toString().indexOf('.');
+
+        StringBuilder pattern = new StringBuilder();
+
+        int i = 0;
+
+        for (; i < indexOfFloatingPoint; i++) {
+            pattern.append("#");
+        }
+
+        pattern.append(".");
+
+        for (; i < 5; i++) {
+            pattern.append("0");
+        }
+
+        return new DecimalFormat(pattern.toString()).format(d).replace(",", ".");
+    }
 
     public static String formatDecimalToMoney(Double d) {
         NumberFormat nf = NumberFormat.getNumberInstance(Locale.GERMAN);
