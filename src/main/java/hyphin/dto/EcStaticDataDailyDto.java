@@ -55,6 +55,7 @@ public class EcStaticDataDailyDto {
     Double posSize04;
 
     Double ccyPairPartRate;
+    String ccyPairPartRateFormatted;
 
     String userCapitalPosSize;
 

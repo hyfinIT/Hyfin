@@ -51,6 +51,7 @@ public interface EcStaticDataDailyMapper {
     @Mapping(source = "askPosSize07", target = "askPosSize07Formatted", qualifiedByName = "toMoneyDropCents")
     @Mapping(source = "askPosSize08", target = "askPosSize08Formatted", qualifiedByName = "toMoneyDropCents")
     @Mapping(source = "ccyPairMid", target = "ccyPairMid", qualifiedByName = "ccyPairMid")
+    @Mapping(source = "ccyPairPartRate", target = "ccyPairPartRateFormatted", qualifiedByName = "ccyPairPartRateFormatted")
 
 
     EcStaticDataDailyDto mapToDto(EcStaticDataDaily entity);
@@ -75,5 +76,9 @@ public interface EcStaticDataDailyMapper {
     @Named("ccyPairMid")
     static String ccyPairMid(Double d) {
         return HyfinUtils.formatDecimal(d);
+    }
+    @Named("ccyPairPartRateFormatted")
+    static String ccyPairPartRateFormatted(Double d) {
+        return HyfinUtils.formatDecimal(d, 2);
     }
 }
