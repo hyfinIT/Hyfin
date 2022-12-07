@@ -71,8 +71,18 @@ public class EndChallengeController {
             return redirectTo("ec-cfd-5a");
         }
 
-        if (endChallengeTradeDto.getSentiment().equals(Sentiment.BULLISH) && endChallengeTradeDto.getPrice() == 59) {
-            return redirectTo("ec-cfd-5c");
+        if (endChallengeTradeDto.getSentiment().equals(Sentiment.BULLISH) && endChallengeTradeDto.getPrice().equalsIgnoreCase("BID")) {
+            ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-5c");
+            modelAndView.getModel().put("var1", "bullish");
+            modelAndView.getModel().put("var2", "sold");
+            return modelAndView;
+        }
+
+        if (endChallengeTradeDto.getSentiment().equals(Sentiment.BEARISH) && endChallengeTradeDto.getPrice().equalsIgnoreCase("ASK")) {
+            ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-5c");
+            modelAndView.getModel().put("var1", "bearish");
+            modelAndView.getModel().put("var2", "bought");
+            return modelAndView;
         }
 
         endChallengeService.chooseCapitalPercent(session, endChallengeTradeDto);
