@@ -12,5 +12,5 @@ public class EndChallengeTradeDto {
 
     private Sentiment sentiment;
     private int capitalPercent;
-    private int price;
+    private String price;
 }

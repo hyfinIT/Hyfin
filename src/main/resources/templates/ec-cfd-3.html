@@ -303,7 +303,7 @@
                                             <div class="selected-currency"><span th:text="${chosenPair.currencyPairFormatted}"></span></div>
                                         </div>
                                         <div class="bid-ask">
-                                            <div class="bid-ask__value"><span th:text="${ecStaticDataDaily.ccyPairPartRate}"></span></div>
+                                            <div class="bid-ask__value"><span th:text="${ecStaticDataDaily.ccyPairPartRateFormatted}"></span></div>
                                             <div class="bid-ask__item">
                                                 <span>BID</span>
                                                 <p th:text="${ecStaticDataDaily.ccyPairBidPips}"></p>
@@ -315,20 +315,20 @@
                                         </div>
                                         <div onclick="enablePriceChecked()" class="select-price">
                                             <div class="select-price__item">
-                                                <input type="radio" name="price" id="price1"
+                                                <input type="radio" name="priceLabel" id="price1"
                                                        class="select-price__item-input"/>
                                                 <label for="price1">
-                                                    <div onclick="setPrice(59)" class="select-price__item-label">
+                                                    <div onclick="setPrice('BID')" class="select-price__item-label">
                                                         -<span style="color: black" th:text="${chosenPair.currency1.name}"></span> <span id="bidValue" style="color: black"></span><br>
                                                         <span>+<span th:text="${chosenPair.currency2.name}"></span></span> <span id="posSize1"></span>
                                                     </div>
                                                 </label>
                                             </div>
                                             <div class="select-price__item">
-                                                <input type="radio" name="price" id="price2"
+                                                <input type="radio" name="priceLabel" id="price2"
                                                        class="select-price__item-input"/>
                                                 <label for="price2">
-                                                    <div onclick="setPrice(61)" class="select-price__item-label">
+                                                    <div onclick="setPrice('ASK')" class="select-price__item-label">
                                                         +<span style="color: black" th:text="${chosenPair.currency1.name}"></span> <span id="askValue" style="color: black"></span><br>
                                                         <span>-<span th:text="${chosenPair.currency2.name}"></span></span> <span id="posSize2"></span>
                                                     </div>
@@ -407,9 +407,10 @@
         console.log(direction)
     }
 
-    function setPrice (price) {
+    function setPrice(price) {
         document.getElementById('price').value = price;
         console.log(price)
+        console.log(document.getElementById('price').value)
     }
 
     var sentimentChecked = false;
