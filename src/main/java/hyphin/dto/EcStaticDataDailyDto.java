@@ -49,6 +49,7 @@ public class EcStaticDataDailyDto {
     Double askPosSize08;
 
     String posSize; //3
+    Double posSizeDouble; //3
     Double posSize01;
     Double posSize02;
     Double posSize03;

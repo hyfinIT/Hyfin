@@ -11,4 +11,7 @@ public class Amounts {
     String usd;
     String gbp;
     String jpy;
+    String baseAmount;
+    String termAmountSl;
+    String termAmountTp;
 }

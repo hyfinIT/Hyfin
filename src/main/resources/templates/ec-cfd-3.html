@@ -606,8 +606,6 @@
     }
 
     function hideWarnings(){
-<!--        document.getElementById('main').removeAttribute('hidden');-->
-<!--         document.getElementById('footer').removeAttribute('hidden');-->
          document.getElementById('bg').setAttribute('hidden', 'hidden');
          document.getElementById('warning1').setAttribute('hidden', 'hidden');
          document.getElementById('warning2').setAttribute('hidden', 'hidden');
@@ -616,8 +614,6 @@
     function showWarning1() {
         document.getElementById('bg').style.cursor = "pointer";
          activeWarningNumber = 1;
-<!--         document.getElementById('main').setAttribute('hidden', 'hidden');-->
-<!--         document.getElementById('footer').setAttribute('hidden', 'hidden');-->
          document.getElementById('bg').removeAttribute('hidden');
          document.getElementById('warning1').removeAttribute('hidden');
    }

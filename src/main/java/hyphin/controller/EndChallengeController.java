@@ -24,7 +24,8 @@ public class EndChallengeController {
     private final EndChallengeService endChallengeService;
 
     @GetMapping("/ready")
-    public ModelAndView ready(){
+    public ModelAndView ready(HttpSession session){
+        endChallengeService.start(session);
         return redirectTo("end_challenge/ready");
     }
 
@@ -35,7 +36,6 @@ public class EndChallengeController {
 
     @GetMapping("/ec-cfd-1")
     public ModelAndView viewCFD1(HttpSession session) {
-        endChallengeService.start(session);
         ModelAndView mav = HyfinUtils.modelAndView("ec-cfd-1");
         mav.getModel().put("pairs", endChallengeService.getAllPairs(session));
         return mav;
@@ -112,13 +112,8 @@ public class EndChallengeController {
 
     @PostMapping("/ec-cfd-6a_01")
     public ModelAndView takeProfit(Integer slOptionNumber, HttpSession session) {
+        endChallengeService.setSlOptionNumber(slOptionNumber, session);
         ModelAndView modelAndView = new ModelAndView();
-
-        if (Objects.nonNull(slOptionNumber) && slOptionNumber > 6) {
-            modelAndView.setViewName("ec-cfd-5e_01");
-            return modelAndView;
-        }
-
         modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
         modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
         modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
@@ -142,9 +137,26 @@ public class EndChallengeController {
 
     @PostMapping("/ec-cfd-4c_01")
     public ModelAndView viewCFD4c01(Integer tpOptionNumber, HttpSession session) {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("ec-cfd-4c_01");
-        return mav;
+        endChallengeService.setTpOptionNumber(tpOptionNumber, session);
+        endChallengeService.calculateOcoTermAmounts(session);
+        ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-4c_01");
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
+        modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
+        modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
+        modelAndView.getModel().put("sl", endChallengeService.getEndChallengeSession(session).getSlOptionNumber());
+        modelAndView.getModel().put("tp", endChallengeService.getEndChallengeSession(session).getTpOptionNumber());
+        modelAndView.getModel().put("slTermAmount", 666);
+        modelAndView.getModel().put("tpTermAmount", 666);
+
+        String orderType = "buy";
+
+        if (endChallengeService.getEndChallengeSession(session).getSentiment().equals(Sentiment.BEARISH)) {
+            orderType = "sell";
+        }
+
+        modelAndView.getModel().put("orderType", orderType);
+        return modelAndView;
     }
 
     @GetMapping("/get-chart-data")

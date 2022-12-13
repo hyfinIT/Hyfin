@@ -26,6 +26,10 @@ public class EndChallengeSession {
     private CcyPairDto chosenPair;
     private EcStaticDataDailyDto ecStaticDataDailyDto;
     private Sentiment sentiment;
+    private Integer slOptionNumber;
+    private Integer tpOptionNumber;
+    private Double slTermAmount;
+    private Double tpTermAmount;
     private Integer capitalPercent;
     private Trade trade;
     private Amounts amounts;
