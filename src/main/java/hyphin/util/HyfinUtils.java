@@ -98,7 +98,6 @@ public class HyfinUtils {
         return format;
     }
 
-
     public static String dropCents(String money) {
         if (money.charAt(money.length() - 3) == '.') {
             return money.substring(0, money.length() - 3);
@@ -107,5 +106,9 @@ public class HyfinUtils {
             return money.substring(0, money.length() - 2);
         }
         return money;
+    }
+
+    public static Double round(Double d) {
+        return Math.round(d * 100.0) / 100.0;
     }
 }

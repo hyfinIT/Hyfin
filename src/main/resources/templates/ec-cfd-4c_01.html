@@ -71,39 +71,39 @@
                         <div class="table__d-flex">
                             <div class="table-item">
                                 <div class="table-item__title"><p>Trade ID</p></div>
-                                <div class="table-item__content">747482</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${trade.id}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>EUR</p></div>
-                                <div class="table-item__content">+273,697.66</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.eur}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>USD</p></div>
-                                <div class="table-item__content">-300,000.00</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.usd}"></span></div>
                             </div>
-                            <div class="table-item d-none">
+                            <div class="table-item">
                                 <div class="table-item__title"><p>GBP</p></div>
-                                <div class="table-item__content"></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.gbp}"></span></div>
                             </div>
                             <div class="table-item d-none">
                                 <div class="table-item__title"><p>JPY</p></div>
-                                <div class="table-item__content"></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.jpy}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Traded Rate</p></div>
-                                <div class="table-item__content">1.0961</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.ccyPairTradedRate}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Current Mid Rate</p></div>
-                                <div class="table-item__content">1.0960</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.ccyPairMid}"></span></div>
                             </div>
                             <div class="table-item">
-                                <div class="table-item__title"><p>P/L USD</p></div>
-                                <div class="table-item__content">-27.37</div>
+                                <div class="table-item__title"><p>P/L <span style="font-size: 11px; color: white" th:text="${chosenPair.currency2.name}"></span></p></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.pnl}"></span></div>
                             </div>
                             <div class="table-item">
-                                <div class="table-item__title"><p>Allocated Margin USD</p></div>
-                                <div class="table-item__content">10,000.00</div>
+                                <div class="table-item__title"><p>Allocated Margin <span style="font-size: 11px; color: white" th:text="${chosenPair.currency2.name}"></span></p></div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.mrgSize}"></span></div>
                             </div>
                         </div>
                         <hr />
@@ -113,27 +113,27 @@
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Net position EUR</p></div>
-                                <div class="table-item__content">+273,697.66</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.eur}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Net position USD</p></div>
-                                <div class="table-item__content">-300,000.00</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.usd}"></span></div>
+                            </div>
+                            <div class="table-item d-none">
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.gbp}"></span></div>
+                            </div>
+                            <div class="table-item d-none">
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${amounts.jpy}"></span></div>
                             </div>
                             <div class="table-item d-none">
                                 <div class="table-item__content"></div>
                             </div>
                             <div class="table-item d-none">
-                                <div class="table-item__content"></div>
-                            </div>
-                            <div class="table-item">
-                                <div class="table-item__content"></div>
-                            </div>
-                            <div class="table-item d-none">
-                                <div class="table-item__content">1.0960</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.ccyPairMid}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>P/L USD</p></div>
-                                <div class="table-item__content">-27.37</div>
+                                <div class="table-item__content"><span style="font-size: 11px; color: white" th:text="${ecStaticDataDaily.pnl}"></span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__content"></div>
@@ -146,49 +146,65 @@
                         <div class="table__d-flex">
                             <div class="table-item table-item--type-2">
                                 <div class="table-item__title"><p>CCY Pair</p></div>
-                                <div class="table-item__content text-left">EUR/USD</div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Buy/Sell</p></div>
-                                <div class="table-item__content text-left">Sell</div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Base Amount</p></div>
-                                <div class="table-item__content">-273,697.66</div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Term Amount</p></div>
-                                <div class="table-item__content">298,330.45</div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Order Rate</p></div>
-                                <div class="table-item__content">1.0900</div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Order Type</p></div>
-                                <div class="table-item__content text-left"><span>STOP-LOSS</span></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title"><p>Status</p></div>
+                            </div>
+                        </div>
+                        <div id="sl" class="table__d-flex" hidden>
+                            <div class="table-item table-item--type-2">
+                                <div class="table-item__content text-left" th:text="${chosenPair.currencyPairFormatted}"></div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__content text-left" th:text="${orderType}"></div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__content" th:text="${amounts.baseAmount}"></div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__content" th:text="${amounts.termAmountSl}"></div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__content">1.0900</div>
+                            </div>
+                            <div class="table-item">
+                                <div class="table-item__content text-left"><span>STOP-LOSS</span></div>
+                            </div>
+                            <div class="table-item">
                                 <div class="table-item__content text-left">OCO TP</div>
                             </div>
                         </div>
-                        <div class="table__d-flex">
+                        <div id="tp" class="table__d-flex" hidden>
                             <div class="table-item table-item--type-2">
                                 <div class="table-item__title d-none-desktop"><p>CCY Pair</p></div>
-                                <div class="table-item__content text-left">EUR/USD</div>
+                                <div class="table-item__content text-left" th:text="${chosenPair.currencyPairFormatted}"></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Buy/Sell</p></div>
-                                <div class="table-item__content text-left">Sell</div>
+                                <div class="table-item__content text-left" th:text="${orderType}"></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Base Amount</p></div>
-                                <div class="table-item__content">-273,697.66</div>
+                                <div class="table-item__content" th:text="${amounts.baseAmount}"></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Term Amount</p></div>
-                                <div class="table-item__content">305,172.89</div>
+                                <div class="table-item__content" th:text="${amounts.termAmountTp}"></div>
                             </div>
                             <div class="table-item">
                                 <div class="table-item__title d-none-desktop"><p>Order Rate</p></div>
@@ -257,6 +273,30 @@
             prevEl: ".hf-carousel-prev",
         },
     });
+
+
 </script>
+
+<script th:inline="javascript">
+ /*<![CDATA[*/
+    window.onload = function() {
+        var slIsPresent = /*[[${sl}]]*/ 'default';
+        var tpIsPresent = /*[[${tp}]]*/ 'default';
+
+        if (slIsPresent != null) {
+            document.getElementById('sl').removeAttribute('hidden');
+        }
+        if (tpIsPresent != null) {
+            document.getElementById('tp').removeAttribute('hidden');
+        }
+
+        console.log(slIsPresent);
+        console.log(tpIsPresent);
+    }
+
+    /*]]>*/
+</script>
+
+
 </body>
 </html>

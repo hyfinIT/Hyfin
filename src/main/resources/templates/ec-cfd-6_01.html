@@ -23,6 +23,20 @@
     </script>
 </head>
     <body class="hf-bg-solid">
+    <div id="bg" onclick="hideWarnings()" style="z-index: 1" hidden class="overlay-bg"></div>
+    <div hidden id="warning1" class="warning__content warning">
+        <div class="warning__icon-and-title">
+            <div class="warning__icon"><img src="/assets/images/icon-warning.svg" alt="Icon" /></div>
+            <div class="warning__title">WARNING!</div>
+        </div>
+        <div class="warning__description">
+            Your Stop Loss Order is so far away you will lose your margin before it is triggered. You might want to go back and revise it …
+        </div>
+        <div class="warning__action">
+            <a href="/4">Return to the course</a>
+            <a href="#" onclick="hideWarnings()">Revise my stop loss</a>
+        </div>
+    </div>
     <div class="hf-wrap">
         <!-- Header Start -->
         <header class="hf-header">
@@ -54,7 +68,7 @@
             </div>
         </header>
         <!-- Header End -->
-    <main class="hf-main">
+    <main class="hf-main" style="z-index: 0;">
         <div class="hf-main-inner">
             <!-- Carousel Wrap Start -->
             <div class="hf-carousel-wrap your-account">
@@ -134,7 +148,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount125" class="spot-trader__amount-input" />
                                             <label for="amount125">
-                                                <div onclick="setParam(5); enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable05}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable05Rate}"></span>)
                                                 </div>
@@ -145,7 +159,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount150" class="spot-trader__amount-input" />
                                             <label for="amount150">
-                                                <div onclick="setParam(6); enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable06}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable06Rate}"></span>)
                                                 </div>
@@ -156,7 +170,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount175" class="spot-trader__amount-input" />
                                             <label for="amount175">
-                                                <div onclick="setParam(7); enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable07}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable07Rate}"></span>)
                                                 </div>
@@ -167,7 +181,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount200" class="spot-trader__amount-input" />
                                             <label for="amount200">
-                                                <div onclick="setParam(8); enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable08}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable08Rate}"></span>)
                                                 </div>
@@ -178,7 +192,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount225" class="spot-trader__amount-input" />
                                             <label for="amount225">
-                                                <div onclick="setParam(9);  enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable09}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable09Rate}"></span>)
                                                 </div>
@@ -189,7 +203,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount250" class="spot-trader__amount-input" />
                                             <label for="amount250">
-                                                <div onclick="setParam(10); enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable10}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable10Rate}"></span>)
                                                 </div>
@@ -200,7 +214,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount275" class="spot-trader__amount-input" />
                                             <label for="amount275">
-                                                <div onclick="setParam(11);  enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable11}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable11Rate}"></span>)
                                                 </div>
@@ -211,7 +225,7 @@
                                         <div class="spot-trader__amount-item">
                                             <input type="radio" name="amount" id="amount300" class="spot-trader__amount-input" />
                                             <label for="amount300">
-                                                <div onclick="setParam(12); enableButton()" class="spot-trader__amount-label">
+                                                <div onclick="showWarning1()" class="spot-trader__amount-label">
                                                     <span th:text="${ecStaticDataDaily.slSizeVariable12}"></span><br>
                                                     (<span th:text="${ecStaticDataDaily.slSizeVariable12Rate}"></span>)
                                                 </div>
@@ -313,15 +327,18 @@
         console.log(upperRowSelected);
         document.getElementById('dis-button').removeAttribute("disabled");
         document.getElementById('dis-button').classList.remove("disabled-button");
-
-
-<!--        if (upperRowSelected == true) {-->
-<!--            document.getElementById('dis-button').setAttribute("href", "/end-challenge/ec-cfd-6a_01");-->
-<!--        } else {-->
-<!--            document.getElementById('dis-button').setAttribute("href", "/ec-cfd-5e_01");-->
-<!--        }-->
-
     }
+
+    function hideWarnings(){
+         document.getElementById('bg').setAttribute('hidden', 'hidden');
+         document.getElementById('warning1').setAttribute('hidden', 'hidden');
+    }
+
+    function showWarning1() {
+        document.getElementById('bg').style.cursor = "pointer";
+         document.getElementById('bg').removeAttribute('hidden');
+         document.getElementById('warning1').removeAttribute('hidden');
+   }
 
 </script>
 </body>

@@ -70,7 +70,7 @@
                                 </div>
                                 <div class="order-rate__item">
                                     <div class="order-rate-item__title">Order Type</div>
-                                    <div class="order-rate-item__content">Stop Loss</div>
+                                    <div class="order-rate-item__content">Take Profit</div>
                                 </div>
                                 <div class="order-rate__item">
                                     <div class="order-rate-item__title">Traded Rate</div>
@@ -230,7 +230,7 @@
                             <!--                        <a style="margin-right: 60%" href="/end-challenge/ec-cfd-6a_01"><span>Skip</span></a>-->
                             <!--                        <button id="dis-button" style="padding: 0px 20px;" disabled type="button" onclick="location.href='/ec-cfd-2'" class="disabled-button hf-button"><span>Submit Order</span></button>-->
                             <form style="position: relative;" action="/end-challenge/ec-cfd-4c_01" method="post">
-                                <input hidden="true" name="tpOptionNumber" id="slOptionNumber">
+                                <input hidden="true" name="tpOptionNumber" id="tpOptionNumber">
                                 <button id="dis-button" style="margin-top: 30px;" disabled class="hf-button disabled-button"><span>Trade</span></button>
                             </form>
                         </div>
@@ -287,6 +287,7 @@
     });
 
     function setParam(param) {
+    console.log(param)
         document.getElementById('tpOptionNumber').value = param;
     }
 
