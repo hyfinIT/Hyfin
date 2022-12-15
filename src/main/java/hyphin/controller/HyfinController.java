@@ -391,13 +391,6 @@ public class HyfinController {
         return mav;
     }
 
-    @GetMapping("/ec-cfd-7b_01")
-    public ModelAndView viewECCFD7b01() {
-        ModelAndView mav = new ModelAndView();
-        mav.setViewName("ec-cfd-7b_01");
-        return mav;
-    }
-
     @GetMapping("/ec-cfd-7c")
     public ModelAndView viewECCFD7() {
         ModelAndView mav = new ModelAndView();

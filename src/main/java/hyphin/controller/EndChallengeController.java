@@ -146,8 +146,6 @@ public class EndChallengeController {
         modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
         modelAndView.getModel().put("sl", endChallengeService.getEndChallengeSession(session).getSlOptionNumber());
         modelAndView.getModel().put("tp", endChallengeService.getEndChallengeSession(session).getTpOptionNumber());
-        modelAndView.getModel().put("slTermAmount", 666);
-        modelAndView.getModel().put("tpTermAmount", 666);
 
         String orderType = "buy";
 
@@ -157,6 +155,24 @@ public class EndChallengeController {
 
         modelAndView.getModel().put("orderType", orderType);
         return modelAndView;
+    }
+
+    @GetMapping("/ec-cfd-7a_01")
+    public ModelAndView ECCFD7a01(HttpSession session) {
+        endChallengeService.calculateTradeResult(session);
+        ModelAndView mav = HyfinUtils.modelAndView("ec-cfd-7a_01");
+        mav.getModel().put("tradeResult", endChallengeService.getEndChallengeSession(session).getTradeResult());
+
+        return mav;
+    }
+
+    @GetMapping("/ec-cfd-7b_01")
+    public ModelAndView viewECCFD7b01(HttpSession session) {
+        endChallengeService.calculateTradeResult(session);
+        ModelAndView mav = HyfinUtils.modelAndView("ec-cfd-7b_01");
+        mav.getModel().put("tradeResult", endChallengeService.getEndChallengeSession(session).getTradeResult());
+
+        return mav;
     }
 
     @GetMapping("/get-chart-data")

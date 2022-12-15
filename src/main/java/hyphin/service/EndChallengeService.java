@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -670,5 +671,59 @@ public class EndChallengeService {
                     break;
             }
         }
+    }
+
+    public void calculateTradeResult(HttpSession session){
+        EndChallengeSession endChallengeSession = getEndChallengeSession(session);
+        TradeResult tradeResult = new TradeResult();
+        tradeResult.setCcyPairMid("Test 2049");
+
+        double oldCcyPairMid = Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getCcyPairMid());
+        double newCcyPairMid = 0;
+
+        Random random = new Random();
+
+        //no risk management
+        if (Objects.isNull(endChallengeSession.getSlOptionNumber()) && Objects.isNull(endChallengeSession.getTpOptionNumber())) {
+            if (endChallengeSession.getSentiment().equals(Sentiment.BULLISH)) {
+                newCcyPairMid = oldCcyPairMid * 0.96;
+            }
+
+            if (endChallengeSession.getSentiment().equals(Sentiment.BEARISH)) {
+                newCcyPairMid = oldCcyPairMid * 1.04;
+            }
+        }
+
+        //tp only
+        if (Objects.isNull(endChallengeSession.getSlOptionNumber()) && Objects.nonNull(endChallengeSession.getTpOptionNumber())) {
+            if (endChallengeSession.getSentiment().equals(Sentiment.BULLISH)) {
+                newCcyPairMid = oldCcyPairMid * 0.965;
+            }
+
+            if (endChallengeSession.getSentiment().equals(Sentiment.BEARISH)) {
+                newCcyPairMid = oldCcyPairMid * 1.035;
+            }
+        }
+
+        //sl only
+        if (Objects.nonNull(endChallengeSession.getSlOptionNumber()) && Objects.isNull(endChallengeSession.getTpOptionNumber())) {
+            if (random.nextBoolean()) {
+                newCcyPairMid = oldCcyPairMid * 0.993;
+            } else {
+                newCcyPairMid = oldCcyPairMid * 1.007;
+            }
+        }
+
+        //sl and tp
+        if (Objects.nonNull(endChallengeSession.getSlOptionNumber()) && Objects.nonNull(endChallengeSession.getTpOptionNumber())) {
+            if (random.nextBoolean()) {
+                newCcyPairMid = oldCcyPairMid * 0.997;
+            } else {
+                newCcyPairMid = oldCcyPairMid * 1.003;
+            }
+        }
+
+        tradeResult.setCcyPairMid(HyfinUtils.formatDecimal(newCcyPairMid));
+        endChallengeSession.setTradeResult(tradeResult);
     }
 }
