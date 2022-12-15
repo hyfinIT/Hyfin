@@ -565,82 +565,110 @@ public class EndChallengeService {
         Integer slOptionNumber = endChallengeSession.getSlOptionNumber();
         Integer tpOptionNumber = endChallengeSession.getTpOptionNumber();
 
-        switch (slOptionNumber) {
-            case 1: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable01Rate()))));
-                break;
-            case 2: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable02Rate()))));
-                break;
-            case 3: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable03Rate()))));
-                break;
-            case 4: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable04Rate()))));
-                break;
-            case 5: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable05Rate()))));
-                break;
-            case 6: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable06Rate()))));
-                break;
-            case 7: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable07Rate()))));
-                break;
-            case 8: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable08Rate()))));
-                break;
-            case 9: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable09Rate()))));
-                break;
-            case 10: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable10Rate()))));
-                break;
-            case 11: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable11Rate()))));
-                break;
-            case 12: amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable12Rate()))));
-                break;
+        if (Objects.nonNull(slOptionNumber)) {
+            switch (slOptionNumber) {
+                case 1:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable01Rate()))));
+                    break;
+                case 2:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable02Rate()))));
+                    break;
+                case 3:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable03Rate()))));
+                    break;
+                case 4:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable04Rate()))));
+                    break;
+                case 5:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable05Rate()))));
+                    break;
+                case 6:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable06Rate()))));
+                    break;
+                case 7:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable07Rate()))));
+                    break;
+                case 8:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable08Rate()))));
+                    break;
+                case 9:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable09Rate()))));
+                    break;
+                case 10:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable10Rate()))));
+                    break;
+                case 11:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable11Rate()))));
+                    break;
+                case 12:
+                    amounts.setTermAmountSl(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getSlSizeVariable12Rate()))));
+                    break;
+            }
         }
 
-        switch (tpOptionNumber) {
-            case 1: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable01Rate()))));
-                break;
-            case 2: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable02Rate()))));
-                break;
-            case 3: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable03Rate()))));
-                break;
-            case 4: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable04Rate()))));
-                break;
-            case 5: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable05Rate()))));
-                break;
-            case 6: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable06Rate()))));
-                break;
-            case 7: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable07Rate()))));
-                break;
-            case 8: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable08Rate()))));
-                break;
-            case 9: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable09Rate()))));
-                break;
-            case 10: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable10Rate()))));
-                break;
-            case 11: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable11Rate()))));
-                break;
-            case 12: amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
-                    Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable12Rate()))));
-                break;
+        if (Objects.nonNull(tpOptionNumber)) {
+            switch (tpOptionNumber) {
+                case 1:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable01Rate()))));
+                    break;
+                case 2:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable02Rate()))));
+                    break;
+                case 3:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable03Rate()))));
+                    break;
+                case 4:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable04Rate()))));
+                    break;
+                case 5:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable05Rate()))));
+                    break;
+                case 6:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable06Rate()))));
+                    break;
+                case 7:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable07Rate()))));
+                    break;
+                case 8:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable08Rate()))));
+                    break;
+                case 9:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable09Rate()))));
+                    break;
+                case 10:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable10Rate()))));
+                    break;
+                case 11:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable11Rate()))));
+                    break;
+                case 12:
+                    amounts.setTermAmountTp(HyfinUtils.formatDecimalToMoney(HyfinUtils.round(Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getAskPosSize().replace(",", "")) *
+                            Double.parseDouble(endChallengeSession.getEcStaticDataDailyDto().getTpSizeVariable12Rate()))));
+                    break;
+            }
         }
     }
 }
