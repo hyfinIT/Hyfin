@@ -64,8 +64,8 @@
                         </div>
                     </div>
                     <div class="your-account__action">
-                        <a href="/4"><span>Back to the course</span></a>
-                        <a href="/ec-cfd-1"><span>Trade again</span></a>
+                        <a onclick="fireEvent('M01')" href="/4"><span>Back to the course</span></a>
+                        <a onclick="fireEvent('M02')" href="/end-challenge/ec-cfd-1"><span>Trade again</span></a>
                     </div>
                 </div>
                 <!-- Carousel End -->
@@ -120,3 +120,20 @@
 </script>
 </body>
 </html>
+
+<script>
+    window.onload = function() {
+        fetch('/end-challenge/event?stage=' + 'M', {
+            method: 'POST',
+        });
+    }
+</script>
+
+
+<script>
+    function fireEvent(stage) {
+            fetch('/end-challenge/event?stage=' + stage, {
+            method: 'POST',
+        });
+    }
+</script>

@@ -3,9 +3,11 @@ package hyphin.service;
 import hyphin.dto.*;
 import hyphin.dto.mappers.CcyPairMapper;
 import hyphin.dto.mappers.EcStaticDataDailyMapper;
+import hyphin.enums.AuditEventType;
 import hyphin.enums.Sentiment;
 import hyphin.model.CcyPair;
 import hyphin.model.User;
+import hyphin.model.UserAudit;
 import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.model.endchallenge.EndChallengeSession;
 import hyphin.repository.CcyPairRepository;
@@ -18,10 +20,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
@@ -685,6 +684,7 @@ public class EndChallengeService {
 
         //no risk management
         if (Objects.isNull(endChallengeSession.getSlOptionNumber()) && Objects.isNull(endChallengeSession.getTpOptionNumber())) {
+            addAudit(session, "K01");
             if (endChallengeSession.getSentiment().equals(Sentiment.BULLISH)) {
                 newCcyPairMid = oldCcyPairMid * 0.96;
             }
@@ -696,6 +696,7 @@ public class EndChallengeService {
 
         //tp only
         if (Objects.isNull(endChallengeSession.getSlOptionNumber()) && Objects.nonNull(endChallengeSession.getTpOptionNumber())) {
+            addAudit(session, "K02");
             if (endChallengeSession.getSentiment().equals(Sentiment.BULLISH)) {
                 newCcyPairMid = oldCcyPairMid * 0.965;
             }
@@ -707,6 +708,7 @@ public class EndChallengeService {
 
         //sl only
         if (Objects.nonNull(endChallengeSession.getSlOptionNumber()) && Objects.isNull(endChallengeSession.getTpOptionNumber())) {
+            addAudit(session, "K03");
             if (random.nextBoolean()) {
                 newCcyPairMid = oldCcyPairMid * 0.993;
             } else {
@@ -716,6 +718,7 @@ public class EndChallengeService {
 
         //sl and tp
         if (Objects.nonNull(endChallengeSession.getSlOptionNumber()) && Objects.nonNull(endChallengeSession.getTpOptionNumber())) {
+            addAudit(session, "K04");
             if (random.nextBoolean()) {
                 newCcyPairMid = oldCcyPairMid * 0.997;
             } else {
@@ -723,7 +726,35 @@ public class EndChallengeService {
             }
         }
 
+        if (newCcyPairMid > oldCcyPairMid) {
+            addAudit(session, "L01");
+        } else {
+            addAudit(session, "L02");
+        }
+
         tradeResult.setCcyPairMid(HyfinUtils.formatDecimal(newCcyPairMid));
         endChallengeSession.setTradeResult(tradeResult);
+    }
+
+    public void addAudit(HttpSession session, String stage) {
+        Executors.newSingleThreadExecutor().submit(() -> {
+            User user = (User) session.getAttribute("User-entity");
+            UserAudit userAudit = new UserAudit();
+            if (user != null)
+                userAudit.setUid(user.getUid());
+            userAudit.setActivityType("ENDCHALLENGE");
+            userAudit.setDateTime(jdf.format(new Date()));
+            userAudit.setMediaType("ENDCHALLENGE");
+            userAudit.setModuleProgressPosition(stage);
+            userAudit.setModule("ENDCHALLENGE");
+            userAudit.setLearningJourney("HYFIN DEMO LEARNING JOURNEY");
+            userAudit.setLearningJourneyId("1");
+            userAudit.setModuleId("6");
+            userAudit.setElementId("3");
+            userAudit.setElementStatus(stage);
+            userAudit.setElementPosition("3");
+
+            userAuditRepository.save(userAudit);
+        });
     }
 }

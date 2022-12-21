@@ -1,5 +1,6 @@
 package hyphin.controller;
 
+import hyphin.dto.CcyPairDto;
 import hyphin.enums.Sentiment;
 import hyphin.model.currency.CurrencyRatesBlend;
 import hyphin.dto.EndChallengeTradeDto;
@@ -41,8 +42,38 @@ public class EndChallengeController {
         return mav;
     }
 
+    @PostMapping("/event")
+    public void event(HttpSession session, @RequestParam String stage) {
+        System.out.println("event");
+        System.out.println(stage);
+        endChallengeService.addAudit(session, stage);
+    }
+
     @GetMapping("/chosen-pair")
-    public ModelAndView chosenPair(HttpSession session, String chosenPair){
+    public ModelAndView chosenPair(HttpSession session, String chosenPair) {
+
+        List<CcyPairDto> allPairs = endChallengeService.getAllPairs(session);
+
+        int pairNumber = 0;
+
+        for (int i = 0; i < allPairs.size(); i++) {
+            if (allPairs.get(i).getCurrencyPairFormatted().equalsIgnoreCase(chosenPair)) {
+                pairNumber = i + 1;
+            }
+        }
+
+        switch (pairNumber) {
+            case 1:
+                endChallengeService.addAudit(session, "D01");
+                break;
+            case 2:
+                endChallengeService.addAudit(session, "D02");
+                break;
+            case 3:
+                endChallengeService.addAudit(session, "D03");
+                break;
+        }
+
         endChallengeService.chosePair(session, chosenPair);
         ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-2");
         modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
@@ -72,6 +103,7 @@ public class EndChallengeController {
         }
 
         if (endChallengeTradeDto.getSentiment().equals(Sentiment.BULLISH) && endChallengeTradeDto.getPrice().equalsIgnoreCase("BID")) {
+            endChallengeService.addAudit(session, "Z02");
             ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-5c");
             modelAndView.getModel().put("var1", "bullish");
             modelAndView.getModel().put("var2", "sold");
@@ -79,6 +111,7 @@ public class EndChallengeController {
         }
 
         if (endChallengeTradeDto.getSentiment().equals(Sentiment.BEARISH) && endChallengeTradeDto.getPrice().equalsIgnoreCase("ASK")) {
+            endChallengeService.addAudit(session, "Z02");
             ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-5c");
             modelAndView.getModel().put("var1", "bearish");
             modelAndView.getModel().put("var2", "bought");
@@ -93,7 +126,16 @@ public class EndChallengeController {
         modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
         modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
         return modelAndView;
+    }
 
+    @GetMapping("/ec-cfd-4a")
+    public ModelAndView viewCFD4(HttpSession session) {
+        ModelAndView modelAndView = HyfinUtils.modelAndView("ec-cfd-4a");
+        modelAndView.getModel().put("chosenPair", endChallengeService.getChosenPair(session));
+        modelAndView.getModel().put("ecStaticDataDaily", endChallengeService.getEcStaticDataDaily(session));
+        modelAndView.getModel().put("trade", endChallengeService.getTrade(session));
+        modelAndView.getModel().put("amounts", endChallengeService.getEndChallengeSession(session).getAmounts());
+        return modelAndView;
     }
 
     @GetMapping("/ec-cfd-6_01")

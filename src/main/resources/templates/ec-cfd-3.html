@@ -92,8 +92,8 @@
                                     <div class="spot-trader__content">
                                         <h3 class="spot-trader__title">Hyfin FX SpotTrader</h3>
                                         <div class="spot-trader__description">What is your sentiment?</div>
-                                        <div onclick="setSentiment('BULLISH'); enableSentimentChecked()" class="spot-trader__item">
-                                            <input type="radio" name="currency" id="currency1"
+                                        <div class="spot-trader__item">
+                                            <input onclick="fireEvent('E01'); setSentiment('BULLISH'); enableSentimentChecked()" type="radio" name="currency" id="currency1"
                                                    class="spot-trader__input"/>
                                             <label for="currency1">
                                                 <div class="spot-trader__label">
@@ -124,8 +124,8 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="setSentiment('BEARISH'); enableSentimentChecked()" class="spot-trader__item">
-                                            <input type="radio" name="currency" id="currency2"
+                                        <div  class="spot-trader__item">
+                                            <input onclick="fireEvent('E02'); setSentiment('BEARISH'); enableSentimentChecked()" type="radio" name="currency" id="currency2"
                                                    class="spot-trader__input"/>
                                             <label for="currency2">
                                                 <div class="spot-trader__label">
@@ -173,48 +173,48 @@
                                                     to risk:
                                                 </div>
                                                 <div class="row">
-                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
+                                                    <div class="col-3">
                                                         <div class="spot-trader__amount-item">
-                                                            <input type="radio" name="amount" id="amount5"
+                                                            <input onclick="fireEvent('F01'); setCapitalPercent(1); enableCapitalAmountChecked()" type="radio" name="amount" id="amount5"
                                                                    class="spot-trader__amount-input"/>
                                                             <label for="amount5">
-                                                                <div onclick="setCapitalPercent(1)"
+                                                                <div
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable01}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
+                                                    <div class="col-3">
                                                         <div class="spot-trader__amount-item">
-                                                            <input type="radio" name="amount" id="amount10"
+                                                            <input onclick="fireEvent('F02'); setCapitalPercent(2); enableCapitalAmountChecked()" type="radio" name="amount" id="amount10"
                                                                    class="spot-trader__amount-input"/>
                                                             <label for="amount10">
-                                                                <div onclick="setCapitalPercent(2)"
+                                                                <div
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable02}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
+                                                    <div class="col-3">
                                                         <div class="spot-trader__amount-item">
-                                                            <input type="radio" name="amount" id="amount15"
+                                                            <input onclick="fireEvent('F03'); setCapitalPercent(3); enableCapitalAmountChecked()" type="radio" name="amount" id="amount15"
                                                                    class="spot-trader__amount-input"/>
                                                             <label for="amount15">
-                                                                <div onclick="setCapitalPercent(3)"
+                                                                <div
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable03}"></span>
                                                                 </div>
                                                             </label>
                                                         </div>
                                                     </div>
-                                                    <div onclick="enableCapitalAmountChecked()" class="col-3">
+                                                    <div class="col-3">
                                                         <div class="spot-trader__amount-item">
-                                                            <input type="radio" name="amount" id="amount20"
+                                                            <input onclick="fireEvent('F04'); setCapitalPercent(4); enableCapitalAmountChecked()" type="radio" name="amount" id="amount20"
                                                                    class="spot-trader__amount-input"/>
                                                             <label for="amount20">
-                                                                <div onclick="setCapitalPercent(4)"
+                                                                <div
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable04}"></span>
                                                                 </div>
@@ -225,7 +225,7 @@
                                                         <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount25"
                                                                    class="spot-trader__amount-input"/>
-                                                                <div onclick="showWarning1()"
+                                                                <div onclick="fireEvent('F05'); showWarning1()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable05}"></span>
                                                                 </div>
@@ -235,7 +235,7 @@
                                                         <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount50"
                                                                    class="spot-trader__amount-input"/>
-                                                                <div onclick="showWarning1()"
+                                                                <div onclick="fireEvent('F06'); showWarning1()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable06}"></span>
                                                                 </div>
@@ -245,7 +245,7 @@
                                                         <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount75"
                                                                    class="spot-trader__amount-input"/>
-                                                                <div onclick="showWarning1()"
+                                                                <div onclick="fireEvent('F07'); showWarning1()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable07}"></span>
                                                                 </div>
@@ -255,7 +255,7 @@
                                                         <div class="spot-trader__amount-item spot-trader__amount-item-inactive">
                                                             <input type="radio" name="amount" id="amount100"
                                                                    class="spot-trader__amount-input"/>
-                                                                <div onclick="showWarning2()"
+                                                                <div onclick="fireEvent('F08'); showWarning2()"
                                                                      class="spot-trader__amount-label">
                                                                     <span th:text="${ecStaticDataDaily.mrgSizeVariable08}"></span>
                                                                 </div>
@@ -315,20 +315,20 @@
                                         </div>
                                         <div onclick="enablePriceChecked()" class="select-price">
                                             <div class="select-price__item">
-                                                <input type="radio" name="priceLabel" id="price1"
+                                                <input onclick="setPrice('BID'); fireEvent('G01')" type="radio" name="priceLabel" id="price1"
                                                        class="select-price__item-input"/>
                                                 <label for="price1">
-                                                    <div onclick="setPrice('BID')" class="select-price__item-label">
+                                                    <div class="select-price__item-label">
                                                         -<span style="color: black" th:text="${chosenPair.currency1.name}"></span> <span id="bidValue" style="color: black"></span><br>
                                                         <span>+<span th:text="${chosenPair.currency2.name}"></span></span> <span id="posSize1"></span>
                                                     </div>
                                                 </label>
                                             </div>
-                                            <div class="select-price__item">
-                                                <input type="radio" name="priceLabel" id="price2"
+                                            <div  class="select-price__item">
+                                                <input onclick="setPrice('ASK'); fireEvent('G02')" type="radio" name="priceLabel" id="price2"
                                                        class="select-price__item-input"/>
                                                 <label for="price2">
-                                                    <div onclick="setPrice('ASK')" class="select-price__item-label">
+                                                    <div class="select-price__item-label">
                                                         +<span style="color: black" th:text="${chosenPair.currency1.name}"></span> <span id="askValue" style="color: black"></span><br>
                                                         <span>-<span th:text="${chosenPair.currency2.name}"></span></span> <span id="posSize2"></span>
                                                     </div>
@@ -400,7 +400,21 @@
             nextEl: ".hf-carousel-next",
             prevEl: ".hf-carousel-prev",
         },
+        onAny(eventName, ...args) {
+            x(eventName);
+        }
     });
+
+    function x(eventName){
+        if (eventName == 'activeIndexChange' ) {
+            if (swiper.activeIndex == 1) {
+                fireEvent('F');
+            }
+             if (swiper.activeIndex == 2) {
+                fireEvent('G');
+            }
+        }
+    }
 
     function setSentiment (direction) {
         document.getElementById('direction').value = direction;
@@ -409,8 +423,6 @@
 
     function setPrice(price) {
         document.getElementById('price').value = price;
-        console.log(price)
-        console.log(document.getElementById('price').value)
     }
 
     var sentimentChecked = false;
@@ -612,6 +624,7 @@
     }
 
     function showWarning1() {
+        fireEvent('Y01');
         document.getElementById('bg').style.cursor = "pointer";
          activeWarningNumber = 1;
          document.getElementById('bg').removeAttribute('hidden');
@@ -619,6 +632,7 @@
    }
 
    function showWarning2() {
+         fireEvent('Z01');
          document.getElementById('bg').style.cursor = "default";
          activeWarningNumber = 2;
 <!--         document.getElementById('main').setAttribute('hidden', 'hidden');-->
@@ -627,4 +641,20 @@
          document.getElementById('warning2').removeAttribute('hidden');
    }
 </script>
+</script>
+
+<script>
+    window.onload = function() {
+        fetch('/end-challenge/event?stage=' + 'E', {
+            method: 'POST',
+        });
+    }
+</script>
+
+<script>
+    function fireEvent(stage) {
+            fetch('/end-challenge/event?stage=' + stage, {
+            method: 'POST',
+        });
+    }
 </script>

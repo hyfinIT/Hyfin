@@ -204,6 +204,10 @@
 /*<![CDATA[*/
 
     window.onload = function() {
+      fetch('/end-challenge/event?stage=' + 'D', {
+            method: 'POST',
+        });
+
     var chosenPair = /*[[${chosenPair}]]*/ 'default';
 
     console.log('chosenPair');

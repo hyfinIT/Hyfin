@@ -34,10 +34,18 @@
             You have no risk management in place. Do you want to set some?
         </div>
         <div class="warning__action">
-            <a href="/ec-cfd-4a">Yes please</a>
+            <a href="/end-challenge/ec-cfd-4a">Yes please</a>
             <a href="/end-challenge/ec-cfd-7a_01">No, see what the markets did</a>
         </div>
     </div>
 </div>
 </body>
 </html>
+
+<script>
+      window.onload = function() {
+      fetch('/end-challenge/event?stage=' + 'Y02', {
+            method: 'POST',
+        });
+      }
+</script>

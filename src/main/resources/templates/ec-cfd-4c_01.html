@@ -280,6 +280,10 @@
 <script th:inline="javascript">
  /*<![CDATA[*/
     window.onload = function() {
+         fetch('/end-challenge/event?stage=' + 'K', {
+            method: 'POST',
+        });
+
         var slIsPresent = /*[[${sl}]]*/ 'default';
         var tpIsPresent = /*[[${tp}]]*/ 'default';
 

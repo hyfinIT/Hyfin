@@ -133,8 +133,8 @@
                         <hr />
                     </div>
                     <div class="your-account__action">
-                        <a href="/ec-cfd-5d_01"><span>See what the market did</span></a>
-                        <a href="/end-challenge/ec-cfd-6_01"><span>Manage your risk position</span></a>
+                        <a onclick="fireEvent('H01')" href="/ec-cfd-5d_01"><span>See what the market did</span></a>
+                        <a onclick="fireEvent('H02')" href="/end-challenge/ec-cfd-6_01"><span>Manage your risk position</span></a>
                     </div>
                 </div>
                 <!-- Carousel End -->
@@ -187,5 +187,20 @@
         },
     });
 </script>
+<script>
+    window.onload = function() {
+        fetch('/end-challenge/event?stage=' + 'H', {
+            method: 'POST',
+        });
+    }
+</script>
 </body>
 </html>
+
+<script>
+    function fireEvent(stage) {
+            fetch('/end-challenge/event?stage=' + stage, {
+            method: 'POST',
+        });
+    }
+</script>

@@ -64,8 +64,8 @@
                                     <h3 class="trade-currency__title">What currency pair do you want to trade?</h3>
                                     <div class="trade-currency__description">Choose a pair and select next to continue</div>
                                     <div class="trade-currency__currencies">
-                                        <div onclick="enableNext(); setPair(document.getElementById('pair1'))" class="trade-currency__currency">
-                                            <input type="radio" name="currency" id="currency1" class="currency__input" />
+                                        <div  class="trade-currency__currency">
+                                            <input onclick="fireEvent('C01'); enableNext(); setPair(document.getElementById('pair1'))" type="radio" name="currency" id="currency1" class="currency__input" />
                                             <label for="currency1">
                                                 <div class="currency">
                                                     <div class="currency__top">
@@ -93,8 +93,8 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="enableNext(); setPair(document.getElementById('pair2'))" class="trade-currency__currency">
-                                            <input type="radio" name="currency" id="currency2" class="currency__input" />
+                                        <div  class="trade-currency__currency">
+                                            <input onclick="fireEvent('C02'); enableNext(); setPair(document.getElementById('pair2'))" type="radio" name="currency" id="currency2" class="currency__input" />
                                             <label for="currency2">
                                                 <div class="currency">
                                                     <div class="currency__top">
@@ -122,8 +122,8 @@
                                                 </div>
                                             </label>
                                         </div>
-                                        <div onclick="disableNext(); setPair(document.getElementById('pair3'))" class="trade-currency__currency disabled_currency">
-                                            <input type="radio" name="currency" id="currency3" class="currency__input" />
+                                        <div  class="trade-currency__currency disabled_currency">
+                                            <input onclick="fireEvent('C03'); disableNext(); setPair(document.getElementById('pair3'))" type="radio" name="currency" id="currency3" class="currency__input" />
                                             <label for="currency3">
                                                 <div class="currency">
                                                     <div class="currency__top">
@@ -155,76 +155,6 @@
                                 </div>
                             </div>
                             <!-- Carousel Item 1 End -->
-                            <!-- Carousel Item 2 Start -->
-                            <div class="swiper-slide">
-                                <div class="trade-currency__content">
-                                    <h3 class="trade-currency__title">You have chosen EUR/USD</h3>
-                                    <div class="trade-currency__description">You have chosen EUR/USD</div>
-                                    <div class="chosen-currency">
-                                        <div class="chosen-currency__country">
-                                            <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="/assets/images/flag-europa.svg" alt="Flag" /></div>
-                                                <div class="country__title">Eurozone</div>
-                                            </div>
-                                            <div class="country__description">
-                                                <p>
-                                                    Data Release:<br>
-                                                    German Inflation Data
-                                                </p>
-                                                <p>
-                                                    Central Bank:<br>
-                                                    ECB Chair Lagarde speaking
-                                                </p>
-                                                <p>
-                                                    Macro/Politics:<br>
-                                                    Russia lays siege to Kiyv
-                                                </p>
-                                                <p>
-                                                    Current Inflation: <br>
-                                                    5.8%
-                                                </p>
-                                                <p>
-                                                    Inflation Trend: <img src="/assets/images/icon-top-right.svg" alt="Icon" />
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="chosen-currency__country">
-                                            <div class="country__flag-and-title">
-                                                <div class="country__flag"><img src="/assets/images/flag-usa.svg" alt="Flag" /></div>
-                                                <div class="country__title">US</div>
-                                            </div>
-                                            <div class="country__description">
-                                                <p>
-                                                    Data Release:<br>
-                                                    Retail Sales
-                                                </p>
-                                                <p>
-                                                    Central Bank:<br>
-                                                    Fed Chair Powell speaking
-                                                </p>
-                                                <p>
-                                                    Macro/Politics:<br>
-                                                    Oil trades over $140 a barrel
-                                                </p>
-                                                <p>
-                                                    Current Inflation:<br>
-                                                    7.9%
-                                                </p>
-                                                <p>
-                                                    Inflation Trend: <img src="/assets/images/icon-top.svg" alt="Icon" />
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="chosen-currency__chart">
-                                            <div class="chart__title">EUR/USD – Spot Chart</div>
-                                            <div class="chart__live-graph">
-												<p><span>Directional Graph here</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Carousel Item 2 End -->
                         </div>
                     </div>
                     <!-- Carousel Navigation and pagination start -->
@@ -309,6 +239,11 @@
 <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
 <script>
     window.onload = function() {
+
+     fetch('/end-challenge/event?stage=' + 'C', {
+            method: 'POST',
+        });
+
     var dataPoints = [];
 
     fetch('/end-challenge/get-chart-data?pair=' + document.getElementById('pair1').textContent)
@@ -621,5 +556,12 @@
     }
 </script>
 
+<script>
+    function fireEvent(stage) {
+            fetch('/end-challenge/event?stage=' + stage, {
+            method: 'POST',
+        });
+    }
+</script>
 </body>
 </html>
