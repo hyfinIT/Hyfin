@@ -48,22 +48,15 @@
                     <!-- Reset password form Wrap Start -->
                     <div class="hf-reset-pass">
                         <!-- Reset password Form Start -->
-                        <form class="hf-form hf-reset-pass-form" th:action="send-reset-link" method="post">
+                        <form class="hf-form hf-reset-pass-form" th:action="start" method="get">
                             <div class="hf-form-inner">
                                 <header class="hf-form-header">
                                     <div class="hf-form-header-text">
-                                        <h3 class="hf-form-title">Reset password</h3>
-                                        <p>Please enter the email you registered with and we’ll send you a link to reset your password.</p>
+                                        <h5 class="hf-form-title">Something went wrong</h5>
                                     </div>
                                 </header>
-                                <div class="hf-form-row hf-fr-col1">
-                                    <div class="hf-form-field">
-                                        <label for="email">Email address</label>
-                                        <input required="required" type="email" id="email" name="email">
-                                    </div>
-                                </div>
-                                <div class="hf-form-row hf-fr-submit">
-                                    <button class="hf-button hf-button-right"><span>Send reset link</span></button>
+                                <div >
+                                    <button class="hf-button"><span>Login page</span></button>
                                 </div>
                             </div>
                         </form>

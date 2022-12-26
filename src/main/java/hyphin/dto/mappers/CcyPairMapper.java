@@ -147,6 +147,17 @@ public abstract class CcyPairMapper {
                 break;
             }
         }
-        return Objects.nonNull(blend) ? Double.toString((blend.getBlendLow() + blend.getBlendHigh()) / 2).substring(0, 6) : "error";
+
+        if (Objects.isNull(blend)) {
+            return "error";
+        }
+
+        String result = Double.toString((blend.getBlendLow() + blend.getBlendHigh()) / 2);
+
+        if (result.length() > 5) {
+            return result.substring(0, 6);
+        }
+
+        return result;
     }
 }

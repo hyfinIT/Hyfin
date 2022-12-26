@@ -80,17 +80,23 @@ public class EndChallengeService {
             User user = (User) session.getAttribute("User-entity");
             List<CcyPair> ccyPairs = ccyPairRepository.getCcyPairsByUserParams(user.getRegion(), user.getPreferenceType(), user.getDisplayPriority());
 
-            List<CcyPairDto> collect = ccyPairs
-                    .stream()
-                    .map(ccyPairMapper::mapToDto)
-                    .collect(Collectors.toList());
+            try {
+                List<CcyPairDto> collect = ccyPairs
+                        .stream()
+                        .map(ccyPairMapper::mapToDto)
+                        .collect(Collectors.toList());
 
-            String endChallengeSessionId = session.getId() + System.currentTimeMillis();
+                String endChallengeSessionId = session.getId() + System.currentTimeMillis();
 
-            session.setAttribute("end-challenge-session-id", endChallengeSessionId);
-            EndChallengeSession endChallengeSession = new EndChallengeSession(endChallengeSessionId, user);
-            endChallengeSession.setPairs(collect);
-            sessions.put(endChallengeSession.getEndChallengeSessionId(), endChallengeSession);
+                session.setAttribute("end-challenge-session-id", endChallengeSessionId);
+                EndChallengeSession endChallengeSession = new EndChallengeSession(endChallengeSessionId, user);
+                endChallengeSession.setPairs(collect);
+                sessions.put(endChallengeSession.getEndChallengeSessionId(), endChallengeSession);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+
         });
     }
 
@@ -539,9 +545,15 @@ public class EndChallengeService {
     }
 
     public List<CcyPairDto> getAllPairs(HttpSession session) {
+        int attemptsCounter = 0;
         while (Objects.isNull(sessions.get(getEndChallengeSessionId(session)))) {
             try {
-                Thread.sleep(200L);
+                if (attemptsCounter < 10) {
+                    attemptsCounter++;
+                    Thread.sleep(200L);
+                } else {
+                    throw new RuntimeException("getAllPairs error");
+                }
             } catch (InterruptedException e) {
                 throw new RuntimeException("getAllPairs error");
             }

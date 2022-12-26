@@ -35,6 +35,14 @@ public class RequestsHandler implements HandlerInterceptor {
         publicUriSet.add("/Login");
         publicUriSet.add("/LoginFailure");
         publicUriSet.add("/Register");
+        publicUriSet.add("/forgotten-password");
+        publicUriSet.add("/forgotten-password.html");
+        publicUriSet.add("/14");
+        publicUriSet.add("/14.html");
+        publicUriSet.add("/send-reset-link");
+        publicUriSet.add("/email-does-not-exist");
+        publicUriSet.add("/restore-password");
+        publicUriSet.add("/apply-new-password");
     }
 
     @Override

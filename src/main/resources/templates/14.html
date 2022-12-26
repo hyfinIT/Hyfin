@@ -48,7 +48,7 @@
                     <!-- Reset password form Wrap Start -->
                     <div class="hf-reset-pass">
                         <!-- Reset password Form Start -->
-                        <form class="hf-form hf-reset-pass-form">
+                        <form class="hf-form hf-reset-pass-form" id="passwordForm" method="post" action="/apply-new-password">
                             <div class="hf-form-inner">
                                 <header class="hf-form-header">
                                     <div class="hf-form-header-text">
@@ -58,18 +58,24 @@
                                 </header>
                                 <div class="hf-form-row hf-fr-col1">
                                     <div class="hf-form-field">
-                                        <label for="hf-lf-pass1">New password</label>
-                                        <input type="password" id="hf-lf-pass1" name="hf_lf_pass1" value="">
+                                        <label for="newPassword">New password</label>
+                                        <input onclick="hideWarnings()" type="password" id="newPassword" name="newPassword">
                                     </div>
                                 </div>
                                 <div class="hf-form-row hf-fr-col1">
                                     <div class="hf-form-field">
-                                        <label for="hf-lf-pass2">Confirm new password</label>
-                                        <input type="password" id="hf-lf-pass2" name="hf_lf_pass2" value="">
+                                        <label  for="confirmNewPassword">Confirm new password</label>
+                                        <input onclick="hideWarnings()" type="password" id="confirmNewPassword" name="confirmNewPassword">
                                     </div>
                                 </div>
+                                <div id="warning" hidden>
+                                    <p style="font-size: 12px; color: red;">Passwords don't match! Try again</p>
+                                </div>
+                                <div id="warning2" hidden>
+                                    <p style="font-size: 12px; color: red;">Please fill both inputs</p>
+                                </div>
                                 <div class="hf-form-row hf-fr-submit">
-                                    <button class="hf-button hf-button-right"><span><a href="account.html">Create password</a></span></button>
+                                    <button class="hf-button hf-button-right" type="button" onclick="checkPasswords()"><span>Create password</span></button>
                                 </div>
                             </div>
                         </form>
@@ -109,3 +115,36 @@
 <script src="./assets/js/script.js?ver=1.1"></script>
 </body>
 </html>
+
+<script>
+    function checkPasswords() {
+        var newPassword = document.getElementById('newPassword').value;
+        var confirmNewPassword = document.getElementById('confirmNewPassword').value;
+
+        if (newPassword == "" || confirmNewPassword == "") {
+            showWarning2();
+            return;
+        }
+
+        if (newPassword != confirmNewPassword) {
+            showWarning();
+            return;
+        }
+
+        document.getElementById('passwordForm').submit();
+    }
+
+    function showWarning(){
+        document.getElementById('warning').removeAttribute('hidden')
+    }
+
+    function showWarning2(){
+        document.getElementById('warning2').removeAttribute('hidden')
+    }
+
+    function hideWarnings(){
+        document.getElementById('warning').setAttribute('hidden', 'hidden');
+        document.getElementById('warning2').setAttribute('hidden', 'hidden');
+    }
+
+</script>

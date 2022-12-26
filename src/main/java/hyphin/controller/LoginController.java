@@ -1,5 +1,6 @@
 package hyphin.controller;
 
+import hyphin.dto.NewPasswordRequest;
 import hyphin.model.Answer;
 import hyphin.model.Login;
 import hyphin.model.User;
@@ -12,10 +13,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -59,14 +57,14 @@ public class LoginController {
 
 
     @PostMapping("/Login")
-    public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult,HttpSession session) {
-        if(bindingResult.hasErrors()){
-            System.out.println("There was a error "+bindingResult);
+    public ModelAndView loginUsers(@ModelAttribute("login") Login login, BindingResult bindingResult, HttpSession session) {
+        if (bindingResult.hasErrors()) {
+            System.out.println("There was a error " + bindingResult);
         }
 
-        User user = userService.findByUserNameAndPassword(login.getEmail(),login.getPassword());
+        User user = userService.findByUserNameAndPassword(login.getEmail(), login.getPassword());
         if (user != null) {
-            session.setAttribute("User-entity",user);
+            session.setAttribute("User-entity", user);
             if (user.getActive()) {
                 return redirectTo("1");
             } else {
@@ -76,26 +74,52 @@ public class LoginController {
                     return HyfinUtils.modelAndView("access-denied");
                 }
             }
-        }
-        else {
+        } else {
             return redirectTo("LoginFailure");
         }
     }
 
 
     @PostMapping("/Register")
-    public ModelAndView registerUsers(HttpSession session, @ModelAttribute("register") User user, BindingResult bindingResult)
-    {
-        if(bindingResult.hasErrors()){
-            LOGGER.log(Level.ERROR,"There was a form binding error " + bindingResult);
+    public ModelAndView registerUsers(HttpSession session, @ModelAttribute("register") User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            LOGGER.log(Level.ERROR, "There was a form binding error " + bindingResult);
         }
         userService.save(user);
         session.setAttribute("User-entity", user);
         return HyfinUtils.modelAndView("RegistrationSuccess");
     }
 
+    @PostMapping("/send-reset-link")
+    public ModelAndView sendResetLink(@RequestParam String email) {
+        if (userService.sendRestorePasswordLinkEmail(email)) {
+            return HyfinUtils.modelAndView("restore-password-email-was-sent");
+        } else {
+            return HyfinUtils.modelAndView("email-does-not-exist");
+        }
+    }
+
+    @GetMapping("/restore-password")
+    public ModelAndView restorePassword(HttpSession session, @RequestParam String hash) {
+        if (userService.restorePassword(session, hash)) {
+            return HyfinUtils.modelAndView("14");
+        } else {
+            return HyfinUtils.modelAndView("something-went-wrong");
+        }
+    }
+
+    @PostMapping("/apply-new-password")
+    public ModelAndView applyNewPassword(HttpSession session, NewPasswordRequest request) {
+        if (userService.applyNewPassword(session, request)) {
+            return HyfinUtils.modelAndView("restore-success");
+        } else {
+            //case when session is over or passwords don't match
+            return HyfinUtils.modelAndView("something-went-wrong");
+        }
+    }
+
     @GetMapping("/access-denied")
-    public ModelAndView accessDenied(){
+    public ModelAndView accessDenied() {
         return redirectTo("access-denied");
     }
 
