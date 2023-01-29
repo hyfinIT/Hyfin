@@ -40,19 +40,52 @@ public class EcStaticData {
     @Column(name = "MRG_SIZE_VARIABLE_08")
     private Double mrgSizeVariable08;
 
-
-//
-//    ID int,
-//    CLIENT text,
-//  "User_Margin_CCY" text,
-//            "User_Margin" int,
-//            "Broker_Leverage" int,
-//            "MrgSize_variable_01" text,
-//            "MrgSize_variable_02" text,
-//            "MrgSize_variable_03" text,
-//            "MrgSize_variable_04" text,
-//            "MrgSize_variable_05" text,
-//            "MrgSize_variable_06" text,
-//            "MrgSize_variable_07" text,
-//            "MrgSize_variable_08" text
+    @Column(name = "SL_SIZE_VARIABLE_01")
+    private Integer slSizeVariable01;
+    @Column(name = "SL_SIZE_VARIABLE_02")
+    private Integer slSizeVariable02;
+    @Column(name = "SL_SIZE_VARIABLE_03")
+    private Integer slSizeVariable03;
+    @Column(name = "SL_SIZE_VARIABLE_04")
+    private Integer slSizeVariable04;
+    @Column(name = "SL_SIZE_VARIABLE_05")
+    private Integer slSizeVariable05;
+    @Column(name = "SL_SIZE_VARIABLE_06")
+    private Integer slSizeVariable06;
+    @Column(name = "SL_SIZE_VARIABLE_07")
+    private Integer slSizeVariable07;
+    @Column(name = "SL_SIZE_VARIABLE_08")
+    private Integer slSizeVariable08;
+    @Column(name = "SL_SIZE_VARIABLE_09")
+    private Integer slSizeVariable09;
+    @Column(name = "SL_SIZE_VARIABLE_10")
+    private Integer slSizeVariable10;
+    @Column(name = "SL_SIZE_VARIABLE_11")
+    private Integer slSizeVariable11;
+    @Column(name = "SL_SIZE_VARIABLE_12")
+    private Integer slSizeVariable12;
+    @Column(name = "TP_SIZE_VARIABLE_01")
+    private Integer tpSizeVariable01;
+    @Column(name = "TP_SIZE_VARIABLE_02")
+    private Integer tpSizeVariable02;
+    @Column(name = "TP_SIZE_VARIABLE_03")
+    private Integer tpSizeVariable03;
+    @Column(name = "TP_SIZE_VARIABLE_04")
+    private Integer tpSizeVariable04;
+    @Column(name = "TP_SIZE_VARIABLE_05")
+    private Integer tpSizeVariable05;
+    @Column(name = "TP_SIZE_VARIABLE_06")
+    private Integer tpSizeVariable06;
+    @Column(name = "TP_SIZE_VARIABLE_07")
+    private Integer tpSizeVariable07;
+    @Column(name = "TP_SIZE_VARIABLE_08")
+    private Integer tpSizeVariable08;
+    @Column(name = "TP_SIZE_VARIABLE_09")
+    private Integer tpSizeVariable09;
+    @Column(name = "TP_SIZE_VARIABLE_10")
+    private Integer tpSizeVariable10;
+    @Column(name = "TP_SIZE_VARIABLE_11")
+    private Integer tpSizeVariable11;
+    @Column(name = "TP_SIZE_VARIABLE_12")
+    private Integer tpSizeVariable12;
 }

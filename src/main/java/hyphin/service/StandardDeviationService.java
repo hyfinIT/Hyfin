@@ -43,7 +43,6 @@ public class StandardDeviationService {
     public void createStandardDeviation() {
         log.info("Standard deviation calculation..................");
         OperationAudit operationAudit = new OperationAudit();
-        operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("Standard deviation calculation");
         operationAudit.setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 

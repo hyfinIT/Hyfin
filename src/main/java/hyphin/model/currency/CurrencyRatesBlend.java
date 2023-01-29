@@ -16,7 +16,6 @@ public class CurrencyRatesBlend{
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_cur_rates_blend")
     @SequenceGenerator(name = "id_cur_rates_blend", sequenceName = "CURRENCYRATESBLENDSEQUENCE")
-
     private Long id;
 
     @Column(name = "CCYPAIR")

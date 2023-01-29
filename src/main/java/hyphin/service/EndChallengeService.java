@@ -103,7 +103,8 @@ public class EndChallengeService {
     public void chosePair(HttpSession session, String pair) {
         EndChallengeSession endChallengeSession = sessions.get(getEndChallengeSessionId(session));
         endChallengeSession.setChosenPair(endChallengeSession.getPairs().stream().filter(ccyPairDto -> ccyPairDto.getCurrencyPairFormatted().equals(pair)).findAny().orElseThrow(RuntimeException::new));
-        EcStaticDataDailyDto ecStaticDataDailyDto = ecStaticDataDailyMapper.mapToDto(ecStaticDataDailyRepository.getByCcyPair(endChallengeSession.getChosenPair().getCurrencyPair()));
+
+        EcStaticDataDailyDto ecStaticDataDailyDto = ecStaticDataDailyMapper.mapToDto(ecStaticDataDailyRepository.getByCcyPairAndMaxDate(endChallengeSession.getChosenPair().getCurrencyPairFormatted()));
         endChallengeSession.setEcStaticDataDailyDto(ecStaticDataDailyDto);
     }
 
@@ -384,55 +385,55 @@ public class EndChallengeService {
 
     private void setAskPosSize(EndChallengeSession endChallengeSession, EcStaticDataDailyDto ecStaticDataDailyDto) {
         if (endChallengeSession.getCapitalPercent().equals(1)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize01()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize01()));
         }
         if (endChallengeSession.getCapitalPercent().equals(2)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize02()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize02()));
         }
         if (endChallengeSession.getCapitalPercent().equals(3)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize03()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize03()));
         }
         if (endChallengeSession.getCapitalPercent().equals(4)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize04()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize04()));
         }
         if (endChallengeSession.getCapitalPercent().equals(5)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize05()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize05()));
         }
         if (endChallengeSession.getCapitalPercent().equals(6)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize06()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize06()));
         }
         if (endChallengeSession.getCapitalPercent().equals(7)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize07()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize07()));
         }
         if (endChallengeSession.getCapitalPercent().equals(8)) {
-            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getAskPosSize08()));
+            ecStaticDataDailyDto.setAskPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getAskPosSize08()));
         }
     }
 
     private void setBidPosSize(EndChallengeSession endChallengeSession, EcStaticDataDailyDto ecStaticDataDailyDto) {
         if (endChallengeSession.getCapitalPercent().equals(1)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize01()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize01()));
         }
         if (endChallengeSession.getCapitalPercent().equals(2)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize02()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize02()));
         }
         if (endChallengeSession.getCapitalPercent().equals(3)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize03()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize03()));
         }
         if (endChallengeSession.getCapitalPercent().equals(4)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize04()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize04()));
         }
         if (endChallengeSession.getCapitalPercent().equals(5)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize05()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize05()));
         }
         if (endChallengeSession.getCapitalPercent().equals(6)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize06()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize06()));
         }
         if (endChallengeSession.getCapitalPercent().equals(7)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize07()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize07()));
         }
         if (endChallengeSession.getCapitalPercent().equals(8)) {
-            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoney(ecStaticDataDailyDto.getBidPosSize08()));
+            ecStaticDataDailyDto.setBidPosSize(HyfinUtils.formatDecimalToMoneyWithoutZeros(ecStaticDataDailyDto.getBidPosSize08()));
         }
     }
 

@@ -31,7 +31,6 @@ public class UserOperationService {
                 .map(this::clearPersonalData)
                 .forEach(userRepository::save);
         OperationAudit operationAudit = new OperationAudit();
-        operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("DELETED_USERS_PROCESSING");
         operationAudit.setStatus("SUCCESS");
         operationAudit.setDateTime(LocalDateTime.now().toString());

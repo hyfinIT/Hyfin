@@ -6,6 +6,8 @@ import hyphin.model.currency.CurrencyExchangeRate;
 import hyphin.model.currency.OperationAudit;
 import hyphin.repository.currency.CurrencyExchangeRateRepository;
 import hyphin.repository.currency.OperationAuditRepository;
+import hyphin.service.operation.EcStaticDataDailyService;
+import hyphin.util.HyfinUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,6 +27,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import static hyphin.util.HyfinUtils.CCY_PAIRS_DICTIONARY;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -39,8 +43,8 @@ public class CurrencyService {
     private final RestTemplate restTemplate = new RestTemplate();
 
     private final CurrencyBlendService currencyBlendService;
-
     private final StandardDeviationService standardDeviationService;
+    private final EcStaticDataDailyService ecStaticDataDailyService;
 
     private final CurrencyExchangeRateRepository currencyExchangeRateRepository;
     private final OperationAuditRepository operationAuditRepository;
@@ -52,14 +56,6 @@ public class CurrencyService {
     private static final String MW_EUR_USD_URL = "https://www.marketwatch.com/investing/currency/eurusd/download-data?mod=mw_quote_tab";
     private static final String MW_GBP_USD_URL = "https://www.marketwatch.com/investing/currency/gbpusd/download-data?mod=mw_quote_tab";
     private static final String MW_USD_JPY_URL = "https://www.marketwatch.com/investing/currency/usdjpy/download-data?mod=mw_quote_tab";
-
-    private static final Map<Integer, String> CCY_PAIRS_DICTIONARY = new HashMap<>();
-
-    static {
-        CCY_PAIRS_DICTIONARY.put(0, "EUR/USD");
-        CCY_PAIRS_DICTIONARY.put(1, "GBP/USD");
-        CCY_PAIRS_DICTIONARY.put(2, "USD/JPY");
-    }
 
     public String todayOperationStatus() {
         return operationAuditRepository.findOperationByDateAndName(LocalDate.now().toString(), "Currency exchange rates fetching");
@@ -77,7 +73,6 @@ public class CurrencyService {
 
         log.info("Fetching currency rates.................");
         OperationAudit operationAudit = new OperationAudit();
-        operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("Currency exchange rates fetching");
         operationAudit.setDateTime(LocalDateTime.now().plusSeconds(2).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
@@ -142,6 +137,7 @@ public class CurrencyService {
         if ("SUCCESS".equalsIgnoreCase(operationAudit.getStatus())) {
             currencyBlendService.produceBlends();
             standardDeviationService.createStandardDeviation();
+            ecStaticDataDailyService.doOperation();
         }
     }
 

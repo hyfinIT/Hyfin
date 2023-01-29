@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface EcStaticDataRepository extends JpaRepository<EcStaticData, Long> {
+
+    EcStaticData getByClient(String client);
+
 }

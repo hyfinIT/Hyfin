@@ -5,11 +5,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class HyfinUtils {
 
     private static final long RESTORE_PERIOD_MILLIS = 7776000000L;
+
+    public static final Map<Integer, String> CCY_PAIRS_DICTIONARY = new HashMap<>();
+
+    static {
+        CCY_PAIRS_DICTIONARY.put(0, "EUR/USD");
+        CCY_PAIRS_DICTIONARY.put(1, "GBP/USD");
+        CCY_PAIRS_DICTIONARY.put(2, "USD/JPY");
+    }
 
     public static ModelAndView modelAndView(String viewName) {
         ModelAndView mav = new ModelAndView();
@@ -43,24 +53,12 @@ public class HyfinUtils {
     }
 
     public static String formatDecimal(Double d) {
+        String pattern = "#.0000";
 
-        int indexOfFloatingPoint = d.toString().indexOf('.');
+        return new DecimalFormat(pattern).format(d).replace(",", ".");    }
 
-        StringBuilder pattern = new StringBuilder();
-
-        int i = 0;
-
-        for (; i < indexOfFloatingPoint; i++) {
-            pattern.append("#");
-        }
-
-        pattern.append(".");
-
-        for (; i < 5; i++) {
-            pattern.append("0");
-        }
-
-        return new DecimalFormat(pattern.toString()).format(d).replace(",", ".");
+    public static void main(String[] args) {
+        System.out.println(formatDecimal(137728.3995959967));
     }
 
     public static String formatDecimalToMoney(Double d) {
@@ -73,7 +71,7 @@ public class HyfinUtils {
             format = format.substring(0, format.length() - 3) + '.' + format.substring(format.length() - 2);
         }
         else if (format.charAt(format.length() - 2) == ',') {
-            format = format.substring(0, format.length() - 2) + '.' + format.substring(format.length() - 1);
+            format = format.substring(0, format.length() - 2) + '.' + format.substring(format.length() - 1) + "0";
         }
         else {
             format = format + ".00";

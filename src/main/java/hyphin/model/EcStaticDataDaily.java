@@ -1,15 +1,14 @@
 package hyphin.model;
 
+import hyphin.dialect.DateConverter;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "EC_STATIC_DATA_DAILY", schema = "PUBLIC", catalog = "HYFIN")
@@ -21,9 +20,14 @@ public class EcStaticDataDaily {
 
     @Id
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_ec_stat_daily")
+    @SequenceGenerator(name = "id_ec_stat_daily", sequenceName = "ECSTATDAILY")
     Long id;
+    @Column(name = "STRINGDATE")
+    String stringDate;
     @Column(name = "DATE")
-    String date;
+    @Convert(converter = DateConverter.class)
+    LocalDate date;
     @Column(name = "REGION")
     String region;
     @Column(name = "CCY_PAIR_GROUP")
@@ -59,7 +63,7 @@ public class EcStaticDataDaily {
     @Column(name = "BASE_ATMOS_DA_CTS")
     Integer baseAtmosDaCts;
     @Column(name = "BASE_ATMOS_CB_CTS")
-    Integer baseAtmosCts;
+    Integer baseAtmosCbCts;
     @Column(name = "BASE_ATMOS_MP_CTS")
     Integer baseAtmosMpCts;
     @Column(name = "BASE_ATMOS_INF_RATE")
@@ -75,7 +79,7 @@ public class EcStaticDataDaily {
     @Column(name = "TERM_ATMOS_DA_TS")
     Integer termAtmosDaTs;
     @Column(name = "TERM_ATMOS_CB_TS")
-    Integer termAtmosCbTS;
+    Integer termAtmosCbTs;
     @Column(name = "TERM_ATMOS_MP_TS")
     Integer termAtmosMpTs;
     @Column(name = "TERM_ATMOS_DA_CTS")
@@ -85,7 +89,7 @@ public class EcStaticDataDaily {
     @Column(name = "TERM_ATMOS_MP_CTS")
     Integer termAtmosMpCts;
     @Column(name = "TERM_ATMOS_INFL_RATE")
-    Double termAtmosInflationRate;
+    Double termAtmosInfRate;
     @Column(name = "TERM_ATMOS_INFL_TREND")
     String termAtmosInflTrend;
     @Column(name = "CCY_PAIR_TRADED_RATE_BULLISH")

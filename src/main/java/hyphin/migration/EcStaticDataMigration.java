@@ -1,10 +1,8 @@
 package hyphin.migration;
 
 
-import hyphin.model.EcStaticData;
 import hyphin.model.EcStaticDataDaily;
 import hyphin.repository.EcStaticDataDailyRepository;
-import hyphin.repository.EcStaticDataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.Row;
@@ -12,7 +10,6 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import java.io.FileInputStream;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -83,7 +80,7 @@ public class EcStaticDataMigration {
             }
             file.close();
 
-            list.forEach(ecStaticDataDaily -> ecStaticDataDaily.setDate("07.11.2022"));
+            list.forEach(ecStaticDataDaily -> ecStaticDataDaily.setStringDate("07.11.2022"));
 
             log.info("FINAL: list length is: {}", list.size());
             list.forEach(ecStaticDataDailyRepository::save);

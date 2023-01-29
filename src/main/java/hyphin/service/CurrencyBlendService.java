@@ -32,7 +32,6 @@ public class CurrencyBlendService {
     public void produceBlends() {
         log.info("Blending..................");
         OperationAudit operationAudit = new OperationAudit();
-        operationAudit.setId(operationAuditRepository.maxId().orElse(0L) + 1L);
         operationAudit.setName("Currency blends creation");
         operationAudit.setDateTime(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 

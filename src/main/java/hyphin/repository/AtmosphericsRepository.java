@@ -10,5 +10,6 @@ import java.util.List;
 public interface AtmosphericsRepository extends JpaRepository<Atmospherics, Long> {
 
     List<Atmospherics> getAllByCcyAndStage(String ccy, String stage);
+    Atmospherics getByCcyAndStageAndCategory(String ccy, String stage, String category);
 
 }
