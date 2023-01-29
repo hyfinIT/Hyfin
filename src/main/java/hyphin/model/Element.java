@@ -1,23 +1,20 @@
 package hyphin.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
 @Entity
 @Table(name = "ELEMENTS", schema="PUBLIC", catalog = "HYFIN")
-@NoArgsConstructor
-@AllArgsConstructor
-public class Elements {
+@Getter
+@Setter
+public class Element {
     @Id
     String elementID;
     String elementType;
-    String elementPosition;
     String mediaLocation;
     String clickThroughPosition;
     String videoPosition;

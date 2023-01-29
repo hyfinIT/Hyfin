@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Readex+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css?ver=1.1">
+    <link rel="stylesheet" type="text/css" href="/assets/css/style.css?ver=1.1">
 </head>
 <body class="hf-bg-grad">
 <div class="hf-wrap">
@@ -15,18 +15,18 @@
     <header class="hf-header">
         <div class="hf-logo-wrap">
             <div class="hf-logo">
-                <img src="./assets/images/hyfin-logo.svg" alt="">
+                <img src="/assets/images/hyfin-logo.svg" alt="">
             </div>
         </div>
         <div class="hf-main-menu-wrap">
                 <ul class="hf-main-menu">
-                    <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="1.html">Courses</a></li>
-                    <li class="hf-menu-item hf-menu-item-help"><a href="faqs.html">FAQs</a></li>
-                    <li class="hf-menu-item hf-menu-item-glossary"><a href="glossary.html">Glossary</a></li>
+                    <li class="hf-menu-item hf-menu-item-courses hf-menu-item-current"><a href="/1.html">Courses</a></li>
+                    <li class="hf-menu-item hf-menu-item-help"><a href="/faqs.html">FAQs</a></li>
+                    <li class="hf-menu-item hf-menu-item-glossary"><a href="/glossary.html">Glossary</a></li>
                 </ul>
                 <div class="hf-header-icons">
-                    <a class="hf-hicon-search" href="search.html"><img src="./assets/images/icon-search.svg" alt=""></a>
-                    <a class="hf-hicon-profile" href="account.html"><img src="./assets/images/icon-profile.svg" alt=""></a>
+                    <a class="hf-hicon-search" href="/search.html"><img src="/assets/images/icon-search.svg" alt=""></a>
+                    <a class="hf-hicon-profile" href="/account.html"><img src="/assets/images/icon-profile.svg" alt=""></a>
                     <div class="hf-hicon-menu">
                         <div class="hf-menu-btn" id="hf-menu-trigger">
                             <span></span>
@@ -43,42 +43,187 @@
             <div class="hf-tp3-content">
                 <div class="hf-tp3-characters-wrap">
                     <div class="hf-tp3-characters">
-                        <img class="hf-tp3-character-1" src="./assets/images/character1.png" alt="">
-                        <img class="hf-tp3-character-2" src="./assets/images/character2.png" alt="">
+                        <img class="hf-tp3-character-1" src="/assets/images/character1.png" alt="">
+                        <img class="hf-tp3-character-2" src="/assets/images/character2.png" alt="">
                     </div>
                 </div>
                 <div class="hf-tp3-nav-wrap">
                     <div class="hf-bread-crumbs">
-                        <a class="hf-bc-item" href="financial-literacy.html">Financial Literacy</a>
+                        <a class="hf-bc-item" href="/financial-literacy.html">Financial Literacy</a>
                         <span class="hf-bc-sep">&nbsp;</span>
-                        <a class="hf-bc-item hf-bc-item-current" href="#">Credit and Debt</a>
+                        <a class="hf-bc-item hf-bc-item-current" href="/#">Credit and Debt</a>
                     </div>
                     <h1>Credit and Debt</h1>
-                    <ul class="hf-tp3-nav">
-                        <li class="hf-inactive">
-                            <a href="#">
+                    <ul class="hf-tp4-nav hf-accordion">
+                        <li>
+                            <a href="/#" class="hf-accordion-title">
                                 <span class="hf-tp3-nav-text">Introduction</span>
                             </a>
+
+                            <div class="hf-accordion-panel">
+                                <div class="hf-icons-group">
+                                    <form class="hf-icon hf-icon-video" name="video-form" id="video-form" role="form" th:action="@{/video}" method="GET">
+                                        <a class="hf-bb-icon hf-green">
+                                            <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
+                                        </a>
+                                        <input type="hidden" name="elementId" value="5">
+                                    </form>
+                                    <form class="hf-icon hf-icon-cursor" name="click-through-form" id="click-through-form" role="form" th:action="@{/click?}" method="GET">
+                                        <input type="hidden" name="type" value="start" />
+                                        <a class="hf-bb-icon hf-orange">
+                                            <div input type="submit" class="hf-icon hf-icon-cursor" onclick="document.getElementById('click-through-form').submit()"></div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-game-play" name="game-form" id="game-form" role="form"
+                                          th:action="@{/ready}" method="GET">
+                                        <a class="hf-bb-icon hf-blue">
+                                            <div input type="submit" class="hf-icon hf-icon-game-play"
+                                                 onclick="document.getElementById('game-form').submit()"></div>
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
                         </li>
                         <li class="hf-inactive">
                             <a href="#">
                                 <span class="hf-tp3-nav-text">What drives debt (cost of money)</span>
                             </a>
+                            <div class="hf-accordion-panel">
+                                <div class="hf-icons-group">
+                                    <form class="hf-icon hf-icon-video" name="video-form" id="video-form" role="form" th:action="@{/video}" method="GET">
+                                        <a class="hf-bb-icon hf-green">
+                                            <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-cursor" name="click-through-form" id="click-through-form" role="form" th:action="@{/click?}" method="GET">
+                                        <input type="hidden" name="type" value="start" />
+                                        <a class="hf-bb-icon hf-orange">
+                                            <div input type="submit" class="hf-icon hf-icon-cursor" onclick="document.getElementById('click-through-form').submit()"></div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-game-play" name="game-form" id="game-form" role="form"
+                                          th:action="@{/ready}" method="GET">
+                                        <a class="hf-bb-icon hf-blue">
+                                            <div input type="submit" class="hf-icon hf-icon-game-play"
+                                                 onclick="document.getElementById('game-form').submit()"></div>
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
                         </li>
                         <li class="hf-inactive">
                             <a href="#">
                                 <span class="hf-tp3-nav-text">Types of debt (life events)</span>
                             </a>
+                            <div class="hf-accordion-panel">
+                                <div class="hf-icons-group">
+                                    <form class="hf-icon hf-icon-video" name="video-form" id="video-form" role="form" th:action="@{/video}" method="GET">
+                                        <a class="hf-bb-icon hf-green">
+                                            <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-cursor" name="click-through-form" id="click-through-form" role="form" th:action="@{/click?}" method="GET">
+                                        <input type="hidden" name="type" value="start" />
+                                        <a class="hf-bb-icon hf-orange">
+                                            <div input type="submit" class="hf-icon hf-icon-cursor" onclick="document.getElementById('click-through-form').submit()"></div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-game-play" name="game-form" id="game-form" role="form"
+                                          th:action="@{/ready}" method="GET">
+                                        <a class="hf-bb-icon hf-blue">
+                                            <div input type="submit" class="hf-icon hf-icon-game-play"
+                                                 onclick="document.getElementById('game-form').submit()"></div>
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
                         </li>
                         <li class="hf-inactive">
                             <a href="#">
                                 <span class="hf-tp3-nav-text">Types of debt (everyday events)</span>
                             </a>
+                            <div class="hf-accordion-panel">
+                                <div class="hf-icons-group">
+                                    <form class="hf-icon hf-icon-video" name="video-form" id="video-form" role="form" th:action="@{/video}" method="GET">
+                                        <a class="hf-bb-icon hf-green">
+                                            <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-cursor" name="click-through-form" id="click-through-form" role="form" th:action="@{/click?}" method="GET">
+                                        <input type="hidden" name="type" value="start" />
+                                        <a class="hf-bb-icon hf-orange">
+                                            <div input type="submit" class="hf-icon hf-icon-cursor" onclick="document.getElementById('click-through-form').submit()"></div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-game-play" name="game-form" id="game-form" role="form"
+                                          th:action="@{/ready}" method="GET">
+                                        <a class="hf-bb-icon hf-blue">
+                                            <div input type="submit" class="hf-icon hf-icon-game-play"
+                                                 onclick="document.getElementById('game-form').submit()"></div>
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
                         </li>
                         <li class="hf-inactive">
                             <a href="#">
                                 <span class="hf-tp3-nav-text">Managing debt (consequences)</span>
                             </a>
+                            <div class="hf-accordion-panel">
+                                <div class="hf-icons-group">
+                                    <form class="hf-icon hf-icon-video" name="video-form" id="video-form" role="form" th:action="@{/video}" method="GET">
+                                        <a class="hf-bb-icon hf-green">
+                                            <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-cursor" name="click-through-form" id="click-through-form" role="form" th:action="@{/click?}" method="GET">
+                                        <input type="hidden" name="type" value="start" />
+                                        <a class="hf-bb-icon hf-orange">
+                                            <div input type="submit" class="hf-icon hf-icon-cursor" onclick="document.getElementById('click-through-form').submit()"></div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-game-play" name="game-form" id="game-form" role="form"
+                                          th:action="@{/ready}" method="GET">
+                                        <a class="hf-bb-icon hf-blue">
+                                            <div input type="submit" class="hf-icon hf-icon-game-play"
+                                                 onclick="document.getElementById('game-form').submit()"></div>
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </li>
+                        <li class="hf-inactive">
+                            <a href="#">
+                                <span class="hf-tp3-nav-text">Bank statements <br>(and online safety)</span>
+                            </a>
+                            <div class="hf-accordion-panel">
+                                <div class="hf-icons-group">
+                                    <form class="hf-icon hf-icon-video" name="video-form" id="video-form" role="form" th:action="@{/video}" method="GET">
+                                        <a class="hf-bb-icon hf-green">
+                                            <div input type="submit" class="hf-icon hf-icon-video" onclick="document.getElementById('video-form').submit()"> </div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-cursor" name="click-through-form" id="click-through-form" role="form" th:action="@{/click?}" method="GET">
+                                        <input type="hidden" name="type" value="start" />
+                                        <a class="hf-bb-icon hf-orange">
+                                            <div input type="submit" class="hf-icon hf-icon-cursor" onclick="document.getElementById('click-through-form').submit()"></div>
+                                        </a>
+                                    </form>
+                                    <form class="hf-icon hf-icon-game-play" name="game-form" id="game-form" role="form"
+                                          th:action="@{/ready}" method="GET">
+                                        <a class="hf-bb-icon hf-blue">
+                                            <div input type="submit" class="hf-icon hf-icon-game-play"
+                                                 onclick="document.getElementById('game-form').submit()"></div>
+                                        </a>
+                                    </form>
+
+                                </div>
+                            </div>
                         </li>
                         <li class="hf-inactive">
                             <a href="#">
@@ -100,20 +245,20 @@
     <!-- Left Panel Start -->
     <div class="hf-left-menu-wrap">
         <button class="hf-lm-home">
-            <a href="1.html"><img src="./assets/images/icon-home.svg" alt=""></a>
+            <a href="/1.html"><img src="/assets/images/icon-home.svg" alt=""></a>
         </button>
         <ul class="hf-left-menu-links">
             <li class="hf-current">
-                <a href="financial-products.html"><span class="hf-icon hf-icon-financial-products"></span></a>
+                <a href="/financial-products.html"><span class="hf-icon hf-icon-financial-products"></span></a>
             </li>
             <li>
-                <a href="investment-strategy.html"><span class="hf-icon hf-icon-investment-strategy"></span></a>
+                <a href="/investment-strategy.html"><span class="hf-icon hf-icon-investment-strategy"></span></a>
             </li>
         </ul>
     </div>
     <!-- Left Panel End -->
 </div>
-<script src="./assets/lib/jquery-3.6.0.min.js"></script>
-<script src="./assets/js/script.js?ver=1.1"></script>
+<script src="/assets/lib/jquery-3.6.0.min.js"></script>
+<script src="/assets/js/script.js?ver=1.1"></script>
 </body>
 </html>

@@ -26,6 +26,10 @@ public class UserVideoSession {
 
     private boolean expired;
 
+    private String elementId;
+    private String videoLink;
+    private String doneButtonLink;
+
     public void play() {
         paused = false;
     }

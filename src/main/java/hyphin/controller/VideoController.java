@@ -1,14 +1,11 @@
 package hyphin.controller;
 
 import hyphin.enums.AuditEventType;
+import hyphin.model.video.UserVideoSession;
 import hyphin.service.VideoService;
 import hyphin.util.HyfinUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -23,10 +20,15 @@ public class VideoController {
     private final VideoService videoService;
 
     @GetMapping
-    public ModelAndView video(HttpSession session) throws InterruptedException {
-        videoService.startVideoSession(session);
+    public ModelAndView video(HttpSession session, @RequestParam String elementId) throws InterruptedException {
+        UserVideoSession userVideoSession = videoService.startVideoSession(session, elementId);
         videoService.handleEvent(AuditEventType.START_SESSION, session, null);
-        return modelAndView("9");
+
+        ModelAndView modelAndView = modelAndView("9");
+        modelAndView.getModel().put("vimeoId", userVideoSession.getVideoLink());
+        modelAndView.getModel().put("closeLink", videoService.getActiveVideoSession(session).getDoneButtonLink());
+
+        return modelAndView;
     }
 
     @PostMapping
@@ -41,7 +43,8 @@ public class VideoController {
 
     @GetMapping("/complete")
     public ModelAndView complete(HttpSession session) {
+        String doneButtonLink = videoService.getActiveVideoSession(session).getDoneButtonLink();
         videoService.handleEvent(AuditEventType.COMPLETE, session, null);
-        return HyfinUtils.modelAndView("4");
+        return HyfinUtils.modelAndView(doneButtonLink);
     }
 }

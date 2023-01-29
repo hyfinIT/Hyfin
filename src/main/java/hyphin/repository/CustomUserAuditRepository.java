@@ -116,6 +116,11 @@ public class CustomUserAuditRepository implements UserAuditRepository {
     }
 
     @Override
+    public String findModuleName(String moduleID, String elementId) {
+        return userAuditRepository.findModuleName(moduleID, elementId);
+    }
+
+    @Override
     public String findElementID(String moduleID, String elementType) {
         return userAuditRepository.findElementID(moduleID,elementType);
     }

@@ -4,17 +4,16 @@ import hyphin.enums.AuditEventType;
 import hyphin.model.User;
 import hyphin.model.UserAudit;
 import hyphin.model.video.UserVideoSession;
+import hyphin.repository.ElementRepository;
 import hyphin.repository.UserAuditRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.snowflake.client.jdbc.internal.org.checkerframework.checker.nullness.Opt;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Timer;
-import java.util.TimerTask;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executors;
@@ -24,13 +23,16 @@ import java.util.concurrent.Executors;
 @Slf4j
 public class VideoService {
     private final UserAuditRepository userAuditRepository;
+    private final ElementRepository elementRepository;
 
     private static final SimpleDateFormat jdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 
     private static final long SESSION_LIVE_TIME = 1000 * 60 * 60;
     private static final long VIDEO_TIMEOUT_MILLIS = 1000 * 60 * 4;
     private static final String MODULE_ID = "1";
-    private static final String ELEMENT_ID = "1";
+    
+    private static HashMap<String, String> doneButtonLinks = new HashMap<>();
+    
     private ConcurrentHashMap<String, UserVideoSession> userVideoSessions = new ConcurrentHashMap<>();
 
     Timer timer = new Timer();
@@ -39,6 +41,11 @@ public class VideoService {
         checkExpired();
     }
 
+    static {
+        doneButtonLinks.put("1", "4");
+        doneButtonLinks.put("5", "financial-products");
+    }
+    
     public void checkExpired() {
         timer.schedule(new TimerTask() {
             public void run() {
@@ -64,32 +71,40 @@ public class VideoService {
         }, 0, SESSION_LIVE_TIME);
     }
 
-    public void startVideoSession(HttpSession session) {
+    public UserVideoSession startVideoSession(HttpSession session, String param) {
         String videoSessionId = session.getId() + System.currentTimeMillis();
 
-        userVideoSessions.put(videoSessionId,
-                UserVideoSession
-                        .builder()
-                        .videoSessionId(videoSessionId)
-                        .paused(true)
-                        .pauseEventTime(System.currentTimeMillis())
-                        .userAudits(new ConcurrentLinkedQueue<>())
-                        .user((User) session.getAttribute("User-entity"))
-                        .build());
+        String videoLink = elementRepository.findOne(param).getMediaLocation();
+
+        UserVideoSession userVideoSession = UserVideoSession
+                .builder()
+                .videoSessionId(videoSessionId)
+                .paused(true)
+                .pauseEventTime(System.currentTimeMillis())
+                .userAudits(new ConcurrentLinkedQueue<>())
+                .user((User) session.getAttribute("User-entity"))
+                .videoLink(videoLink)
+                .elementId(param)
+                .doneButtonLink(doneButtonLinks.get(param))
+                .build();
+
+        userVideoSessions.put(videoSessionId, userVideoSession);
 
         session.setAttribute("video-session-id", videoSessionId);
+
+        return userVideoSession;
     }
 
     public void pause(HttpSession session) {
-        userVideoSessions.get(getVideoSessionId(session)).pause();
+        getActiveVideoSession(session).pause();
     }
 
     public void play(HttpSession session) {
-        userVideoSessions.get(getVideoSessionId(session)).play();
+        getActiveVideoSession(session).play();
     }
 
     public void finish(HttpSession session) {
-        flushToDb(userVideoSessions.get(getVideoSessionId(session)));
+        flushToDb(getActiveVideoSession(session));
     }
 
     private boolean isTimeOut(UserVideoSession userVideoSession) {
@@ -132,30 +147,36 @@ public class VideoService {
     }
 
     public Boolean isSessionExpired(HttpSession session) {
-        UserVideoSession userVideoSession = userVideoSessions.get(getVideoSessionId(session));
+        UserVideoSession userVideoSession = getActiveVideoSession(session);
         if (Objects.isNull(userVideoSession)) {
             return true;
         }
-        return userVideoSessions.get(getVideoSessionId(session)).isExpired();
+        return getActiveVideoSession(session).isExpired();
+    }
+    
+    public UserVideoSession getActiveVideoSession(HttpSession session) {
+        return userVideoSessions.get(getVideoSessionId(session));
     }
 
     private void addAuditToList(AuditEventType eventType, HttpSession session, String additionalInfo) {
+        String elementId = getActiveVideoSession(session).getElementId();
+
         if (!userVideoSessions.containsKey(getVideoSessionId(session))) {
             return;
         }
 
         UserAudit userAudit = new UserAudit();
         userAudit.setModuleId(MODULE_ID);
-        userAudit.setElementId(ELEMENT_ID);
+        userAudit.setElementId(elementId);
         userAudit.setElementStatus(eventType.name());
 
-        User user = userVideoSessions.get(getVideoSessionId(session)).getUser();
+        User user = getActiveVideoSession(session).getUser();
 
         if (user != null)
             userAudit.setUid(user.getUid());
         userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
         userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
-        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId(), elementId));
         userAudit.setElementPosition(userAudit.getElementId());
         userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
         userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
@@ -165,7 +186,7 @@ public class VideoService {
         userAudit.setCompletionTime(null);
         userAudit.setText1(additionalInfo);
 
-        userVideoSessions.get(getVideoSessionId(session)).getUserAudits().add(userAudit);
+        getActiveVideoSession(session).getUserAudits().add(userAudit);
     }
 
     private void flushToDb(UserVideoSession userVideoSession) {
