@@ -99,7 +99,7 @@ public class GamesController {
         userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
         userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
         userAudit.setModuleId(userAuditRepository.findModuleID());
-        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId(), userAudit.getElementId()));
         userAudit.setElementPosition(userAudit.getElementId());
         userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
         userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
@@ -159,7 +159,7 @@ public class GamesController {
                     userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
                     userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
                     userAudit.setModuleId(userAuditRepository.findModuleID());
-                    userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+                    userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId(), userAudit.getElementId()));
                     userAudit.setElementPosition(userAudit.getElementId());
                     userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
                     userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
@@ -227,7 +227,7 @@ public class GamesController {
                 userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
                 userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
                 userAudit.setModuleId(userAuditRepository.findModuleID());
-                userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+                userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId(), userAudit.getElementId()));
                 userAudit.setElementPosition(userAudit.getElementId());
                 userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
                 userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));

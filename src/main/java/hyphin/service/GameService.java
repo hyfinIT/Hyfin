@@ -191,7 +191,7 @@ public class GameService {
         userAudit.setLearningJourney(userAuditRepository.findLearningJourneyName());
         userAudit.setLearningJourneyId(userAuditRepository.findLearningJourneyId());
         userAudit.setModuleId(userAuditRepository.findModuleID());
-        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId()));
+        userAudit.setModule(userAuditRepository.findModuleName(userAudit.getModuleId(), GAMES_ELEMENT_ID));
         userAudit.setElementPosition(userAudit.getElementId());
         userAudit.setGlossaryTerm(userAuditRepository.findGlossaryTerm(userAudit.getModuleId(), userAudit.getLearningJourney()));
         userAudit.setMediaType(userAuditRepository.findElementType(userAudit.getElementId()));
