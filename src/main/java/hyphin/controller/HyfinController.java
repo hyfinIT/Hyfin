@@ -426,10 +426,10 @@ public class HyfinController {
         return mav;
     }
 
-    @GetMapping("/financial-products")
+    @GetMapping("/credit-and-debt")
     public ModelAndView viewFinancialProducts() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("financial-products");
+        mav.setViewName("credit-and-debt");
         return mav;
     }
 

@@ -43,7 +43,12 @@ public class VideoService {
 
     static {
         doneButtonLinks.put("1", "4");
-        doneButtonLinks.put("5", "financial-products");
+        doneButtonLinks.put("5", "credit-and-debt");
+        doneButtonLinks.put("8", "credit-and-debt");
+        doneButtonLinks.put("13", "credit-and-debt");
+        doneButtonLinks.put("18", "credit-and-debt");
+        doneButtonLinks.put("23", "credit-and-debt");
+        doneButtonLinks.put("29", "credit-and-debt");
     }
     
     public void checkExpired() {
