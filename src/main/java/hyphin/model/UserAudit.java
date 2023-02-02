@@ -3,6 +3,7 @@ package hyphin.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,17 +14,21 @@ import javax.persistence.Table;
 
 @Data
 @Entity
-@Table(name = "UIDAUDIT", schema="PUBLIC", catalog = "HYFIN")
+@Table(name = "UIDAUDIT", schema = "PUBLIC", catalog = "HYFIN")
 @NoArgsConstructor
 @AllArgsConstructor
-
+@ToString(onlyExplicitlyIncluded = true)
 public class UserAudit {
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "id_Sequence")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "id_Sequence")
     @SequenceGenerator(name = "id_Sequence", sequenceName = "userAuditSequence")
+    @ToString.Include
     int id;
+    @ToString.Include
     int uid;
+    @ToString.Include
     String activityType;
+    @ToString.Include
     String dateTime;
     String glossaryTerm;
     String mediaType;
@@ -32,7 +37,9 @@ public class UserAudit {
     String learningJourney;
     String learningJourneyId;
     String moduleId;
+    @ToString.Include
     String elementId;
+    @ToString.Include
     String elementStatus;
     String completionTime;
     String elementPosition;

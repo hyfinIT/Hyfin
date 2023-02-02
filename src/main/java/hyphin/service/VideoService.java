@@ -109,7 +109,9 @@ public class VideoService {
     }
 
     public void finish(HttpSession session) {
-        flushToDb(getActiveVideoSession(session));
+        UserVideoSession activeVideoSession = getActiveVideoSession(session);
+        activeVideoSession.setExpired(true);
+        flushToDb(activeVideoSession);
     }
 
     private boolean isTimeOut(UserVideoSession userVideoSession) {
@@ -121,7 +123,11 @@ public class VideoService {
     }
 
     public void handleEvent(AuditEventType eventType, HttpSession session, String additionalInfo) {
-        if (eventType.equals(AuditEventType.START_SESSION)) {
+        if (eventType.equals(AuditEventType.START_SESSION)      ||
+                eventType.equals(AuditEventType.FASTFORWARD)    ||
+                eventType.equals(AuditEventType.REWIND)         ||
+                eventType.equals(AuditEventType.COMPLETE)
+        ) {
             addAuditToList(eventType, session, additionalInfo);
         }
 
@@ -140,14 +146,6 @@ public class VideoService {
         if (eventType.equals(AuditEventType.LEAVE)) {
             addAuditToList(eventType, session, additionalInfo);
             finish(session);
-        }
-
-        if (eventType.equals(AuditEventType.COMPLETE)) {
-            addAuditToList(eventType, session, additionalInfo);
-        }
-
-        if (eventType.equals(AuditEventType.REWIND)) {
-            addAuditToList(eventType, session, additionalInfo);
         }
     }
 
@@ -201,6 +199,7 @@ public class VideoService {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
+            log.info("Saving audits, videoSessionId: {}, audits: {}", userVideoSession.getVideoSessionId(), userVideoSession.getUserAudits());
             userVideoSession.getUserAudits().forEach(userAuditRepository::saveAndFlush);
         });
     }
