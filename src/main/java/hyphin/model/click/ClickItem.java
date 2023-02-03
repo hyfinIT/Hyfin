@@ -26,5 +26,8 @@ public class ClickItem {
     private String courseId;
     @Column(name = "MODULE_ID")
     private String moduleId;
-
+    @Column(name = "ELEMENTID")
+    private String elementId;
+    @Column(name = "VERSION_REFERENCE")
+    private String versionReference;
 }
